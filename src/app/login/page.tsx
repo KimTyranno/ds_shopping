@@ -24,12 +24,14 @@ export default function LoginPage() {
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-md w-full space-y-8">
-        <Alert className="bg-yellow-600 text-white">
-          <CircleAlert />
-          <AlertDescription className="text-inherit">
-            {message}
-          </AlertDescription>
-        </Alert>
+        {message && (
+          <Alert className="bg-yellow-600 text-white">
+            <CircleAlert />
+            <AlertDescription className="text-inherit">
+              {message}
+            </AlertDescription>
+          </Alert>
+        )}
         <div className="text-center">
           <Link
             href="/"
