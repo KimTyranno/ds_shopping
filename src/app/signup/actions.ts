@@ -4,6 +4,8 @@ import { createClient } from '@/lib/server'
 import { revalidatePath } from 'next/cache'
 import { redirect } from 'next/navigation'
 
+const baseUrl = process.env.NEXT_PUBLIC_BASE_URL
+
 export async function signupAction(formData: FormData) {
   const supabase = await createClient()
 
@@ -26,7 +28,7 @@ export async function signupAction(formData: FormData) {
       data: {
         name,
       },
-      emailRedirectTo: `http://localhost:3000/login?message=${encodeURIComponent(
+      emailRedirectTo: `${baseUrl}/login?message=${encodeURIComponent(
         '이메일 인증이 완료되었습니다.',
       )}&messageType=success`,
     },
