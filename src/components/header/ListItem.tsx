@@ -28,4 +28,14 @@ const ListItem = React.forwardRef<
   )
 })
 
+/**
+ * displayName 경고 비활성화 하려면
+ * .eslintrc.js
+ *
+ * rules: {
+ *  'react/display-name': 'off',
+ * }
+ */
+ListItem.displayName = 'ListItem'
+
 export default ListItem
