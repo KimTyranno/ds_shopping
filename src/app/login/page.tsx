@@ -12,7 +12,8 @@ import {
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { Separator } from '@/components/ui/separator'
-import { CircleAlert } from 'lucide-react'
+import { cn } from '@/lib/utils'
+import { CircleAlert, MailCheck } from 'lucide-react'
 import Link from 'next/link'
 import { useSearchParams } from 'next/navigation'
 import { login } from './actions'
@@ -20,13 +21,19 @@ import { login } from './actions'
 export default function LoginPage() {
   const searchParams = useSearchParams()
   const message = searchParams.get('message')
+  const messageType = searchParams.get('messageType')
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-md w-full space-y-8">
         {message && (
-          <Alert className="bg-yellow-600 text-white">
-            <CircleAlert />
+          <Alert
+            className={cn('text-white', {
+              'bg-yellow-600': messageType === 'info',
+              'bg-green-600': messageType === 'success',
+            })}>
+            {messageType === 'success' && <MailCheck />}
+            {messageType === 'info' && <CircleAlert />}
             <AlertDescription className="text-inherit">
               {message}
             </AlertDescription>

@@ -26,6 +26,9 @@ export async function signupAction(formData: FormData) {
       data: {
         name,
       },
+      emailRedirectTo: `http://localhost:3000/login?message=${encodeURIComponent(
+        '이메일 인증이 완료되었습니다.',
+      )}&messageType=success`,
     },
   })
 
@@ -42,7 +45,8 @@ export async function signupAction(formData: FormData) {
 
   revalidatePath('/', 'layout')
   redirect(
-    '/login?message=' +
-      encodeURIComponent('이메일을 확인하여 계정을 활성화하세요'),
+    `/login?message=${encodeURIComponent(
+      '이메일을 확인하여 계정을 활성화하세요',
+    )}&messageType=info`,
   )
 }
