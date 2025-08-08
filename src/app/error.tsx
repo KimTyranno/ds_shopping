@@ -1,5 +1,6 @@
 'use client'
 
+import { Button } from '@/components/ui/button'
 import {
   Card,
   CardContent,
@@ -7,7 +8,6 @@ import {
   CardHeader,
   CardTitle,
 } from '@/components/ui/card'
-import { Button } from '@/components/ui/button'
 import { AlertCircle } from 'lucide-react'
 import Link from 'next/link'
 
@@ -26,7 +26,7 @@ export default function Error({
             </div>
             <CardTitle className="text-2xl">오류가 발생했습니다</CardTitle>
             <CardDescription>
-              {searchParams.message || '알 수 없는 오류가 발생했습니다.'}
+              {searchParams?.message || '알 수 없는 오류가 발생했습니다.'}
             </CardDescription>
           </CardHeader>
           <CardContent className="text-center">
