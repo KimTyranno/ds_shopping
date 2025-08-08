@@ -1,5 +1,6 @@
 import Footer from '@/components/Footer'
 import Header from '@/components/header'
+import { Toaster } from '@/components/ui/sonner'
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import type React from 'react'
@@ -22,6 +23,7 @@ export default function RootLayout({
     <html lang="ko">
       <body className={inter.className}>
         <AuthProvider />
+        <Toaster />
         <Header />
         <main className="min-h-screen">{children}</main>
         <Footer />

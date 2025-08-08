@@ -12,12 +12,14 @@ import {
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { Separator } from '@/components/ui/separator'
+import useStore from '@/lib/store'
 import { cn } from '@/lib/utils'
 import { CircleAlert, MailCheck } from 'lucide-react'
 import Link from 'next/link'
-import { useSearchParams } from 'next/navigation'
+import { useRouter, useSearchParams } from 'next/navigation'
 import { Suspense } from 'react'
-import { login } from './actions'
+import { toast } from 'sonner'
+import { login } from '../../components/auth/login'
 
 function LoginMessage() {
   const searchParams = useSearchParams()
@@ -39,6 +41,22 @@ function LoginMessage() {
 }
 
 export default function LoginPage() {
+  const router = useRouter()
+  const setUser = useStore(state => state.setUser)
+  const handleLogin = async (formData: FormData) => {
+    try {
+      const { user } = await login(formData)
+      if (user) {
+        setUser(user)
+        router.push('/')
+      }
+    } catch (error) {
+      toast('로그인에 실패했습니다.', {
+        position: 'top-center',
+        style: { background: '#e25c5c', color: '#fff' },
+      })
+    }
+  }
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-md w-full space-y-8">
@@ -64,7 +82,7 @@ export default function LoginPage() {
             </CardDescription>
           </CardHeader>
           <CardContent>
-            <form className="space-y-4">
+            <form className="space-y-4" action={handleLogin}>
               <div className="space-y-2">
                 <Label htmlFor="email">이메일</Label>
                 <Input
@@ -86,7 +104,7 @@ export default function LoginPage() {
                 />
               </div>
               <div className="flex flex-col space-y-2">
-                <Button formAction={login} className="w-full">
+                <Button className="w-full" type="submit">
                   로그인
                 </Button>
               </div>

@@ -1,3 +1,5 @@
+'use client'
+
 import { Button } from '@/components/ui/button'
 import {
   DropdownMenu,
@@ -6,24 +8,20 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu'
-import { createClient } from '@/lib/server'
+import { createClient } from '@/lib/client'
+import useStore from '@/lib/store'
 import { LogOut, Settings, ShoppingBag, User } from 'lucide-react'
 import Link from 'next/link'
-import { redirect } from 'next/navigation'
+import { useRouter } from 'next/navigation'
 
-export default async function AuthButton() {
-  const supabase = await createClient()
-
-  const {
-    data: { user },
-  } = await supabase.auth.getUser()
+export default function AuthButton() {
+  const user = useStore(state => state.user)
+  const router = useRouter()
 
   const signOut = async () => {
-    'use server'
-
-    const supabase = await createClient()
+    const supabase = createClient()
     await supabase.auth.signOut()
-    redirect('/login')
+    router.push('/login')
   }
 
   if (!user) {

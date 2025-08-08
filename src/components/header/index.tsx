@@ -9,18 +9,39 @@ import {
   NavigationMenuList,
   NavigationMenuTrigger,
 } from '@/components/ui/navigation-menu'
-import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet'
-import { Menu, Search, ShoppingCart } from 'lucide-react'
+import {
+  Sheet,
+  SheetContent,
+  SheetHeader,
+  SheetTitle,
+  SheetTrigger,
+} from '@/components/ui/sheet'
+import { Separator } from '@radix-ui/react-separator'
+import {
+  Award,
+  Grid3X3,
+  Headphones,
+  Home,
+  Menu,
+  Search,
+  ShoppingCart,
+  Sparkles,
+  Tag,
+} from 'lucide-react'
 import Link from 'next/link'
 import ListItem from './ListItem'
+import LogoutButton from './LogoutButton'
 import MobileSearchBar from './MobileSearchBar'
 import MobileSearchButton from './MobileSearchButton'
+import MyPage from './MyPage'
+import UserInfo from './UserInfo'
 
 const categories = [
   {
     title: '전자제품',
     href: '/categories/electronics',
     description: '스마트폰, 노트북, 태블릿 등',
+    icon: '📱',
     items: [
       { title: '스마트폰', href: '/categories/electronics/smartphones' },
       { title: '노트북', href: '/categories/electronics/laptops' },
@@ -33,6 +54,7 @@ const categories = [
     title: '패션',
     href: '/categories/fashion',
     description: '의류, 신발, 액세서리',
+    icon: '👕',
     items: [
       { title: '남성의류', href: '/categories/fashion/mens' },
       { title: '여성의류', href: '/categories/fashion/womens' },
@@ -45,6 +67,7 @@ const categories = [
     title: '홈&리빙',
     href: '/categories/home',
     description: '가구, 인테리어, 생활용품',
+    icon: '🏠',
     items: [
       { title: '가구', href: '/categories/home/furniture' },
       { title: '인테리어', href: '/categories/home/interior' },
@@ -57,6 +80,7 @@ const categories = [
     title: '도서',
     href: '/categories/books',
     description: '소설, 자기계발, 전문서적',
+    icon: '📚',
     items: [
       { title: '소설', href: '/categories/books/novel' },
       { title: '자기계발', href: '/categories/books/self-help' },
@@ -69,6 +93,7 @@ const categories = [
     title: '스포츠',
     href: '/categories/sports',
     description: '운동복, 운동화, 헬스용품',
+    icon: '⚽',
     items: [
       { title: '운동복', href: '/categories/sports/sportswear' },
       { title: '운동화', href: '/categories/sports/sneakers' },
@@ -81,6 +106,7 @@ const categories = [
     title: '뷰티',
     href: '/categories/beauty',
     description: '스킨케어, 메이크업, 향수',
+    icon: '💄',
     items: [
       { title: '스킨케어', href: '/categories/beauty/skincare' },
       { title: '메이크업', href: '/categories/beauty/makeup' },
@@ -90,6 +116,13 @@ const categories = [
     ],
   },
 ]
+
+// 더미 사용자 정보 (실제로는 인증 상태에서 가져와야 함)
+// const dummyUser = {
+//   name: '홍길동',
+//   email: 'hong@example.com',
+//   isLoggedIn: true, // 실제로는 인증 상태 확인
+// }
 
 export default function Header() {
   return (
@@ -182,51 +215,110 @@ export default function Header() {
                   <Menu className="h-5 w-5" />
                 </Button>
               </SheetTrigger>
-              <SheetContent>
-                <div className="flex flex-col space-y-4 mt-6">
-                  <div className="space-y-2">
-                    <h3 className="font-semibold text-lg">카테고리</h3>
-                    {categories.map(category => (
-                      <div key={category.title} className="pl-4">
-                        <Link
-                          href={category.href}
-                          className="block py-2 text-base hover:text-primary">
-                          {category.title}
-                        </Link>
-                        <div className="pl-4 space-y-1">
-                          {category.items.map(item => (
-                            <Link
-                              key={item.title}
-                              href={item.href}
-                              className="block py-1 text-sm text-muted-foreground hover:text-primary">
-                              {item.title}
-                            </Link>
-                          ))}
-                        </div>
+              <SheetContent className="w-[300px] sm:w-[350px]">
+                <SheetHeader>
+                  <SheetTitle className="flex items-center gap-2">
+                    <div className="h-8 w-8 bg-primary rounded-lg flex items-center justify-center">
+                      <span className="text-primary-foreground font-bold text-sm">
+                        S
+                      </span>
+                    </div>
+                    심플몰
+                  </SheetTitle>
+                </SheetHeader>
+
+                <div className="flex flex-col h-full">
+                  {/* 사용자 정보 */}
+                  <UserInfo />
+
+                  {/* 메인 메뉴 */}
+                  <div className="flex-1 mt-6">
+                    <div className="space-y-1">
+                      <Link
+                        href="/"
+                        className="flex items-center gap-3 px-3 py-3 rounded-lg hover:bg-muted transition-colors">
+                        <Home className="h-5 w-5 text-muted-foreground" />
+                        <span className="font-medium">홈</span>
+                      </Link>
+
+                      <Link
+                        href="/best"
+                        className="flex items-center gap-3 px-3 py-3 rounded-lg hover:bg-muted transition-colors">
+                        <Award className="h-5 w-5 text-muted-foreground" />
+                        <span className="font-medium">베스트</span>
+                      </Link>
+
+                      <Link
+                        href="/new"
+                        className="flex items-center gap-3 px-3 py-3 rounded-lg hover:bg-muted transition-colors">
+                        <Sparkles className="h-5 w-5 text-muted-foreground" />
+                        <span className="font-medium">신상품</span>
+                      </Link>
+
+                      <Link
+                        href="/sale"
+                        className="flex items-center gap-3 px-3 py-3 rounded-lg hover:bg-muted transition-colors">
+                        <Tag className="h-5 w-5 text-muted-foreground" />
+                        <span className="font-medium">할인상품</span>
+                      </Link>
+                    </div>
+
+                    <Separator className="my-4" />
+
+                    {/* 카테고리 */}
+                    <div className="space-y-1">
+                      <div className="flex items-center gap-3 px-3 py-2">
+                        <Grid3X3 className="h-5 w-5 text-muted-foreground" />
+                        <span className="font-semibold text-sm">카테고리</span>
                       </div>
-                    ))}
+
+                      {categories.map(category => (
+                        <div key={category.title} className="ml-2">
+                          <Link
+                            href={category.href}
+                            className="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-muted transition-colors">
+                            <span className="text-lg">{category.icon}</span>
+                            <div className="flex-1">
+                              <p className="font-medium text-sm">
+                                {category.title}
+                              </p>
+                              <p className="text-xs text-muted-foreground">
+                                {category.description}
+                              </p>
+                            </div>
+                          </Link>
+
+                          {/* 서브카테고리 */}
+                          <div className="ml-8 mt-1 space-y-1">
+                            {category.items.map(item => (
+                              <Link
+                                key={item.title}
+                                href={item.href}
+                                className="block px-3 py-1 text-sm text-muted-foreground hover:text-primary transition-colors">
+                                {item.title}
+                              </Link>
+                            ))}
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+
+                    <Separator className="my-4" />
+
+                    {/* 마이페이지 메뉴 */}
+                    <MyPage />
                   </div>
-                  <div className="border-t pt-4 space-y-2">
+
+                  {/* 하단 메뉴 */}
+                  <div className="border-t pt-4 mt-4">
                     <Link
-                      href="/best"
-                      className="block py-2 text-base font-medium hover:text-primary">
-                      베스트
+                      href="/support"
+                      className="flex items-center gap-3 px-3 py-3 rounded-lg hover:bg-muted transition-colors">
+                      <Headphones className="h-5 w-5 text-muted-foreground" />
+                      <span className="font-medium">고객지원</span>
                     </Link>
-                    <Link
-                      href="/new"
-                      className="block py-2 text-base font-medium hover:text-primary">
-                      신상품
-                    </Link>
-                    <Link
-                      href="/sale"
-                      className="block py-2 text-base font-medium hover:text-primary">
-                      할인상품
-                    </Link>
-                    <Link
-                      href="/mypage"
-                      className="block py-2 text-base font-medium hover:text-primary">
-                      마이페이지
-                    </Link>
+
+                    <LogoutButton />
                   </div>
                 </div>
               </SheetContent>
