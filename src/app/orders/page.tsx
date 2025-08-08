@@ -171,7 +171,7 @@ const getStatusIcon = (status: Order['status']) => {
 }
 
 export default function OrdersPage() {
-  const [orders, setOrders] = useState<Order[]>(dummyOrders)
+  const [orders] = useState<Order[]>(dummyOrders)
   const [searchTerm, setSearchTerm] = useState('')
   const [sortBy, setSortBy] = useState('latest')
 

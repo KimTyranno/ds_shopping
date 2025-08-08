@@ -28,7 +28,12 @@ module.exports = {
       'warn',
       { argsIgnorePattern: '^_', varsIgnorePattern: '^_' },
     ],
+    'no-unused-vars': [
+      'warn',
+      { argsIgnorePattern: '^_', varsIgnorePattern: '^_' },
+    ],
     'react/react-in-jsx-scope': 'off', // Next.js에서는 필요 없다함
+    'no-undef': 'off',
   },
   overrides: [
     {

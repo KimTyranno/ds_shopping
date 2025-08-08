@@ -35,7 +35,7 @@ export default function AuthProvider() {
     return () => {
       listener.subscription.unsubscribe()
     }
-  }, [])
+  })
 
   return null
 }

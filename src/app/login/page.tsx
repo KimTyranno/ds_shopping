@@ -50,7 +50,7 @@ export default function LoginPage() {
         setUser(user)
         router.push('/')
       }
-    } catch (error) {
+    } catch {
       toast('로그인에 실패했습니다.', {
         position: 'top-center',
         style: { background: '#e25c5c', color: '#fff' },
