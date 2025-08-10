@@ -215,7 +215,7 @@ export default function Header() {
                   <Menu className="h-5 w-5" />
                 </Button>
               </SheetTrigger>
-              <SheetContent className="w-[300px] sm:w-[350px]">
+              <SheetContent className="w-[300px] sm:w-[350px] overflow-y-auto max-h-screen">
                 <SheetHeader>
                   <SheetTitle className="flex items-center gap-2">
                     <div className="h-8 w-8 bg-primary rounded-lg flex items-center justify-center">
