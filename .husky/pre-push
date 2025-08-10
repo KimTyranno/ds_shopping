@@ -1,0 +1,11 @@
+echo "🔍 빌드 확인 중..."
+# build가 너무 느리면 yarn tsc --noEmit 로 대체고려
+yarn build
+
+# $?는 직전에 실행한 명령의 종료코드(exit code)가 0이 아니면 실패임
+if [ $? -ne 0 ]; then
+  echo "❌ 빌드 실패! Push 중단"
+  exit 1
+fi
+
+echo "✅ 빌드 성공! Push 진행 중..."
