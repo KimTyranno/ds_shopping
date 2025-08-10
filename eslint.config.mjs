@@ -1,5 +1,4 @@
 import js from '@eslint/js'
-import next from 'eslint-config-next'
 import * as tseslint from 'typescript-eslint'
 
 export default [
@@ -7,7 +6,7 @@ export default [
   js.configs.recommended,
 
   // Next.js 권장 설정
-  ...next(),
+  // ...next(),
 
   // TypeScript 권장 설정
   ...tseslint.configs.recommendedTypeChecked,
