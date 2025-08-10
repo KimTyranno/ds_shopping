@@ -5,7 +5,11 @@ import Link from 'next/link'
 import { Avatar, AvatarFallback } from '../ui/avatar'
 import { Button } from '../ui/button'
 
-const UserInfo = () => {
+type UserInfoProps = {
+  handleClose: () => void
+}
+
+const UserInfo = (props: UserInfoProps) => {
   const user = useStore(state => state.user)
 
   if (!user)
@@ -15,7 +19,9 @@ const UserInfo = () => {
           로그인하고 더 많은 혜택을 받아보세요
         </p>
         <Button asChild className="w-full">
-          <Link href="/login">로그인</Link>
+          <Link href="/login" onClick={props.handleClose}>
+            로그인
+          </Link>
         </Button>
       </div>
     )
