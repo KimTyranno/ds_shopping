@@ -1,8 +1,6 @@
-import { Database } from '@/types/supabase'
+import { Profile } from '@/types/tables'
 import type { User } from '@supabase/supabase-js'
 import { create } from 'zustand'
-
-type Profile = Database['public']['Tables']['profiles']['Row']
 
 type UserWithProfile = User & { name?: Profile['name'] }
 
@@ -10,7 +8,7 @@ type Store = {
   isMobileSearchOpen: boolean
   toggleMobileSearch: () => void
   user: UserWithProfile | null
-  setUser: (user: UserWithProfile) => void
+  setUser: (_user: UserWithProfile) => void
   clearUser: () => void
 }
 
@@ -19,7 +17,7 @@ const useStore = create<Store>()((set, get) => ({
   toggleMobileSearch: () =>
     set({ isMobileSearchOpen: !get().isMobileSearchOpen }),
   user: null,
-  setUser: (user: User) => set({ user }),
+  setUser: user => set({ user }),
   clearUser: () => set({ user: null }),
 }))
 
