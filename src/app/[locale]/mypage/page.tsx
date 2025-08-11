@@ -11,6 +11,7 @@ import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { createClient } from '@/lib/server'
 import { Mail, Package, ShoppingBag, Truck, User } from 'lucide-react'
+import { getTranslations } from 'next-intl/server'
 import Link from 'next/link'
 import { redirect } from 'next/navigation'
 
@@ -65,8 +66,15 @@ const getStatusIcon = (status: string) => {
   }
 }
 
+type UserMetadata = {
+  name?: string
+}
+
 export default async function MyPage() {
   const supabase = await createClient()
+  const t = await getTranslations('mypage')
+  const tCommon = await getTranslations('common')
+  const tUser = await getTranslations('user')
 
   const {
     data: { user },
@@ -80,10 +88,8 @@ export default async function MyPage() {
     <div className="container mx-auto px-4 py-8">
       <div className="max-w-6xl mx-auto">
         <div className="mb-8">
-          <h1 className="text-3xl font-bold mb-2">마이페이지</h1>
-          <p className="text-muted-foreground">
-            계정 정보와 주문 내역을 관리하세요
-          </p>
+          <h1 className="text-3xl font-bold mb-2">{t('title')}</h1>
+          <p className="text-muted-foreground">{t('description')}</p>
         </div>
 
         <div className="grid lg:grid-cols-3 gap-6">
@@ -93,27 +99,25 @@ export default async function MyPage() {
               <CardHeader>
                 <CardTitle className="flex items-center gap-2">
                   <User className="h-5 w-5" />
-                  프로필 정보
+                  {t('profile.title')}
                 </CardTitle>
-                <CardDescription>
-                  개인 정보를 확인하고 수정할 수 있습니다
-                </CardDescription>
+                <CardDescription>{t('profile.description')}</CardDescription>
               </CardHeader>
               <CardContent className="space-y-4">
                 <div className="space-y-2">
-                  <Label htmlFor="name">이름</Label>
+                  <Label htmlFor="name">{t('profile.name')}</Label>
                   <Input
                     id="name"
-                    value={user.user_metadata?.name || ''}
+                    value={(user.user_metadata as UserMetadata).name || ''}
                     readOnly
                   />
                 </div>
                 <div className="space-y-2">
-                  <Label htmlFor="email">이메일</Label>
+                  <Label htmlFor="email">{t('profile.email')}</Label>
                   <Input id="email" value={user.email || ''} readOnly />
                 </div>
                 <div className="space-y-2">
-                  <Label htmlFor="joined">가입일</Label>
+                  <Label htmlFor="joined">{t('profile.joined')}</Label>
                   <Input
                     id="joined"
                     value={new Date(user.created_at).toLocaleDateString(
@@ -123,7 +127,7 @@ export default async function MyPage() {
                   />
                 </div>
                 <Button className="w-full bg-transparent" variant="outline">
-                  프로필 수정
+                  {t('profile.edit')}
                 </Button>
               </CardContent>
             </Card>
@@ -135,9 +139,9 @@ export default async function MyPage() {
               <CardHeader>
                 <CardTitle className="flex items-center gap-2">
                   <ShoppingBag className="h-5 w-5" />
-                  주문 내역
+                  {t('orders.title')}
                 </CardTitle>
-                <CardDescription>최근 주문 내역을 확인하세요</CardDescription>
+                <CardDescription>{t('orders.description')}</CardDescription>
               </CardHeader>
               <CardContent>
                 <div className="space-y-4">
@@ -148,7 +152,9 @@ export default async function MyPage() {
                           <span className="font-semibold">{order.id}</span>
                           <Badge className={getStatusColor(order.status)}>
                             {getStatusIcon(order.status)}
-                            <span className="ml-1">{order.status}</span>
+                            <span className="ml-1">
+                              {t(`orders.status.${order.status}`)}
+                            </span>
                           </Badge>
                         </div>
                         <span className="text-sm text-muted-foreground">
@@ -164,15 +170,20 @@ export default async function MyPage() {
                             <span>
                               {item.name} x {item.quantity}
                             </span>
-                            <span>{item.price.toLocaleString()}원</span>
+                            <span>
+                              {item.price.toLocaleString() +
+                                tCommon('currency')}
+                            </span>
                           </div>
                         ))}
                       </div>
 
                       <div className="flex justify-between items-center mt-3 pt-3 border-t">
-                        <span className="font-semibold">총 결제금액</span>
+                        <span className="font-semibold">
+                          {t('orders.totalAmount')}
+                        </span>
                         <span className="font-bold text-primary">
-                          {order.total.toLocaleString()}원
+                          {order.total.toLocaleString() + tCommon('currency')}
                         </span>
                       </div>
                     </div>
@@ -181,7 +192,7 @@ export default async function MyPage() {
 
                 <div className="text-center mt-6">
                   <Button variant="outline" asChild className="bg-transparent">
-                    <Link href="/orders">전체 주문내역 보기</Link>
+                    <Link href="/orders">{t('orders.viewAll')}</Link>
                   </Button>
                 </div>
               </CardContent>
@@ -191,7 +202,9 @@ export default async function MyPage() {
 
         {/* 빠른 링크 */}
         <div className="mt-8">
-          <h2 className="text-xl font-semibold mb-4">빠른 링크</h2>
+          <h2 className="text-xl font-semibold mb-4">
+            {t('quickLinks.title')}
+          </h2>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
             <Button
               variant="outline"
@@ -199,7 +212,7 @@ export default async function MyPage() {
               className="h-20 flex-col bg-transparent">
               <Link href="/orders">
                 <ShoppingBag className="h-6 w-6 mb-2" />
-                주문내역
+                {tUser('orders')}
               </Link>
             </Button>
             <Button
@@ -208,7 +221,7 @@ export default async function MyPage() {
               className="h-20 flex-col bg-transparent">
               <Link href="/cart">
                 <ShoppingBag className="h-6 w-6 mb-2" />
-                장바구니
+                {tUser('cart')}
               </Link>
             </Button>
             <Button
@@ -217,7 +230,7 @@ export default async function MyPage() {
               className="h-20 flex-col bg-transparent">
               <Link href="/wishlist">
                 <User className="h-6 w-6 mb-2" />
-                찜목록
+                {tUser('wishlist')}
               </Link>
             </Button>
             <Button
@@ -226,7 +239,7 @@ export default async function MyPage() {
               className="h-20 flex-col bg-transparent">
               <Link href="/support">
                 <Mail className="h-6 w-6 mb-2" />
-                고객지원
+                {tCommon('support')}
               </Link>
             </Button>
           </div>

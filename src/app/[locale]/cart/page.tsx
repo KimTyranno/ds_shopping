@@ -5,6 +5,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Checkbox } from '@/components/ui/checkbox'
 import { Separator } from '@/components/ui/separator'
 import { ArrowLeft, Minus, Plus, ShoppingBag, Trash2 } from 'lucide-react'
+import { useTranslations } from 'next-intl'
 import Image from 'next/image'
 import Link from 'next/link'
 import { useEffect, useState } from 'react'
@@ -61,6 +62,8 @@ const dummyCartItems: CartItem[] = [
 export default function CartPage() {
   const [cartItems, setCartItems] = useState<CartItem[]>(dummyCartItems)
   const [selectAll, setSelectAll] = useState(false)
+  const t = useTranslations('cart')
+  const tCommon = useTranslations('common')
 
   // 전체 선택/해제
   const handleSelectAll = (checked: boolean) => {
@@ -126,9 +129,9 @@ export default function CartPage() {
               <ArrowLeft className="h-5 w-5" />
             </Link>
           </Button>
-          <h1 className="text-3xl font-bold">장바구니</h1>
+          <h1 className="text-3xl font-bold">{t('title')}</h1>
           <span className="text-muted-foreground">
-            ({cartItems.length}개 상품)
+            ({t('itemsCount', { count: cartItems.length })})
           </span>
         </div>
 
@@ -136,14 +139,12 @@ export default function CartPage() {
           // 빈 장바구니
           <div className="text-center py-16">
             <ShoppingBag className="h-16 w-16 mx-auto text-muted-foreground mb-4" />
-            <h2 className="text-xl font-semibold mb-2">
-              장바구니가 비어있습니다
-            </h2>
+            <h2 className="text-xl font-semibold mb-2">{t('empty.title')}</h2>
             <p className="text-muted-foreground mb-6">
-              원하는 상품을 장바구니에 담아보세요
+              {t('empty.description')}
             </p>
             <Button asChild>
-              <Link href="/">쇼핑 계속하기</Link>
+              <Link href="/">{t('empty.continue')}</Link>
             </Button>
           </div>
         ) : (
@@ -163,7 +164,12 @@ export default function CartPage() {
                       <label
                         htmlFor="select-all"
                         className="font-medium cursor-pointer">
-                        전체 선택 ({selectedItems.length}/{cartItems.length})
+                        (
+                        {t('selectAll', {
+                          selected: selectedItems.length,
+                          total: cartItems.length,
+                        })}
+                        )
                       </label>
                     </div>
                     <Button
@@ -176,7 +182,7 @@ export default function CartPage() {
                         )
                       }}
                       disabled={selectedItems.length === 0}>
-                      선택 삭제
+                      {t('deleteSelected')}
                     </Button>
                   </div>
                 </CardContent>
@@ -226,11 +232,13 @@ export default function CartPage() {
                         <div className="flex items-center justify-between">
                           <div>
                             <span className="text-lg font-bold text-primary">
-                              {item.price.toLocaleString()}원
+                              {item.price.toLocaleString() +
+                                tCommon('currency')}
                             </span>
                             {item.originalPrice && (
                               <span className="text-sm text-muted-foreground line-through ml-2">
-                                {item.originalPrice.toLocaleString()}원
+                                {item.originalPrice.toLocaleString() +
+                                  tCommon('currency')}
                               </span>
                             )}
                           </div>
@@ -280,26 +288,32 @@ export default function CartPage() {
             <div className="lg:col-span-1">
               <Card className="sticky top-24">
                 <CardHeader>
-                  <CardTitle>주문 요약</CardTitle>
+                  <CardTitle>{t('summary.title')}</CardTitle>
                 </CardHeader>
                 <CardContent className="space-y-4">
                   <div className="space-y-2">
                     <div className="flex justify-between">
-                      <span>상품금액</span>
-                      <span>{totalOriginalPrice.toLocaleString()}원</span>
+                      <span>{t('summary.productPrice')}</span>
+                      <span>
+                        {totalOriginalPrice.toLocaleString() +
+                          tCommon('currency')}
+                      </span>
                     </div>
                     {totalDiscount > 0 && (
                       <div className="flex justify-between text-red-600">
-                        <span>할인금액</span>
-                        <span>-{totalDiscount.toLocaleString()}원</span>
+                        <span>{t('summary.discount')}</span>
+                        <span>
+                          -
+                          {totalDiscount.toLocaleString() + tCommon('currency')}
+                        </span>
                       </div>
                     )}
                     <div className="flex justify-between">
-                      <span>배송비</span>
+                      <span>{t('summary.shipping')}</span>
                       <span>
                         {deliveryFee === 0
-                          ? '무료'
-                          : `${deliveryFee.toLocaleString()}원`}
+                          ? t('free')
+                          : t('price', { price: deliveryFee.toLocaleString() })}
                       </span>
                     </div>
                   </div>
@@ -307,16 +321,17 @@ export default function CartPage() {
                   <Separator />
 
                   <div className="flex justify-between text-lg font-bold">
-                    <span>총 결제금액</span>
+                    <span>{t('summary.total')}</span>
                     <span className="text-primary">
-                      {finalPrice.toLocaleString()}원
+                      {finalPrice.toLocaleString() + tCommon('currency')}
                     </span>
                   </div>
 
                   {deliveryFee > 0 && (
                     <p className="text-sm text-muted-foreground">
-                      {(50000 - totalPrice).toLocaleString()}원 더 구매하면
-                      무료배송
+                      {t('summary.freeShippingThreshold', {
+                        amount: (50000 - totalPrice).toLocaleString(),
+                      })}
                     </p>
                   )}
 
@@ -325,13 +340,13 @@ export default function CartPage() {
                       className="w-full"
                       size="lg"
                       disabled={selectedItems.length === 0}>
-                      주문하기 ({selectedItems.length}개)
+                      {t('summary.order', { count: selectedItems.length })}
                     </Button>
                     <Button
                       variant="outline"
                       className="w-full bg-transparent"
                       asChild>
-                      <Link href="/">쇼핑 계속하기</Link>
+                      <Link href="/">{t('summary.continue')}</Link>
                     </Button>
                   </div>
                 </CardContent>

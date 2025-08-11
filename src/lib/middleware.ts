@@ -1,6 +1,6 @@
 import { NextResponse, type NextRequest } from 'next/server'
 
-export function updateSession(request: NextRequest) {
+export function updateSession(request: NextRequest, response: NextResponse) {
   const token = request.cookies.get('sb-access-token')?.value
 
   const isAuthPage =
@@ -18,5 +18,5 @@ export function updateSession(request: NextRequest) {
     return NextResponse.redirect(loginUrl)
   }
 
-  return NextResponse.next()
+  return response
 }

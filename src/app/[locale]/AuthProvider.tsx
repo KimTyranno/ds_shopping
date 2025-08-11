@@ -2,6 +2,7 @@
 
 import { createClient } from '@/lib/client'
 import useStore from '@/lib/store'
+import { Profile } from '@/types/tables'
 import { useEffect } from 'react'
 
 export default function AuthProvider() {
@@ -12,17 +13,25 @@ export default function AuthProvider() {
     const supabase = createClient()
 
     // 유저정보를 상태관리에 갱신
-    supabase.auth.getUser().then(async ({ data: { user } }) => {
-      if (user) {
-        const profile = await supabase
-          .from('profiles')
-          .select('*')
-          .eq('id', user.id)
-          .single()
+    supabase.auth
+      .getUser()
+      .then(async ({ data: { user } }) => {
+        if (user) {
+          const profile = await supabase
+            .from('profiles')
+            .select('*')
+            .eq('id', user.id)
+            .single<Profile>()
 
-        setUser({ ...user, name: profile.data.name })
-      } else clearUser()
-    })
+          if (!profile.data) {
+            console.error('profile 정보없음')
+            return
+          }
+
+          setUser({ ...user, name: profile.data.name })
+        } else clearUser()
+      })
+      .catch(error => console.log(error))
 
     // 로그인/로그아웃 감지
     const { data: listener } = supabase.auth.onAuthStateChange(

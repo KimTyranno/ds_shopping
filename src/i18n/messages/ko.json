@@ -1,0 +1,334 @@
+{
+  "common": {
+    "logo": "심플몰",
+    "support": "고객지원",
+    "currency": "원",
+    "signup": "회원가입하기",
+    "faq": "자주묻는질문"
+  },
+  "metadata": {
+    "title": "심플 쇼핑몰 - 최고의 상품을 만나보세요",
+    "description": "다양한 카테고리의 상품을 합리적인 가격에 만나보세요"
+  },
+  "navigation": {
+    "home": "홈",
+    "categories": "카테고리",
+    "best": "베스트",
+    "new": "신상품",
+    "sale": "할인상품"
+  },
+  "user": {
+    "loginPrompt": "로그인하고 더 많은 혜택을 받아보세요",
+    "login": "로그인",
+    "menu": "사용자 메뉴",
+    "cart": "장바구니",
+    "logout": "로그아웃",
+    "mypage": "마이페이지",
+    "orders": "주문내역",
+    "wishlist": "찜목록"
+  },
+  "search": {
+    "placeholder": "상품을 검색해보세요..."
+  },
+  "categories": {
+    "electronics": {
+      "title": "전자제품",
+      "description": "스마트폰, 노트북, 태블릿 등",
+      "items": {
+        "smartphones": "스마트폰",
+        "laptops": "노트북",
+        "tablets": "태블릿",
+        "earphones": "이어폰",
+        "smartwatch": "스마트워치"
+      }
+    },
+    "fashion": {
+      "title": "패션",
+      "description": "의류, 신발, 액세서리",
+      "items": {
+        "mens": "남성의류",
+        "womens": "여성의류",
+        "shoes": "신발",
+        "bags": "가방",
+        "accessories": "액세서리"
+      }
+    },
+    "home": {
+      "title": "홈&리빙",
+      "description": "가구, 인테리어, 생활용품",
+      "items": {
+        "furniture": "가구",
+        "interior": "인테리어",
+        "kitchen": "주방용품",
+        "living": "생활용품",
+        "bedding": "침구"
+      }
+    },
+    "books": {
+      "title": "도서",
+      "description": "소설, 자기계발, 전문서적",
+      "items": {
+        "novel": "소설",
+        "self-help": "자기계발",
+        "computer": "컴퓨터",
+        "cooking": "요리",
+        "travel": "여행"
+      }
+    },
+    "sports": {
+      "title": "스포츠",
+      "description": "운동복, 운동화, 헬스용품",
+      "items": {
+        "sportswear": "운동복",
+        "sneakers": "운동화",
+        "fitness": "헬스용품",
+        "outdoor": "아웃도어",
+        "swimming": "수영용품"
+      }
+    },
+    "beauty": {
+      "title": "뷰티",
+      "description": "스킨케어, 메이크업, 향수",
+      "items": {
+        "skincare": "스킨케어",
+        "makeup": "메이크업",
+        "haircare": "헤어케어",
+        "perfume": "향수",
+        "mens": "남성화장품"
+      }
+    }
+  },
+  "bestProducts": {
+    "title": "베스트 상품",
+    "description": "고객들이 가장 많이 선택한 인기 상품들",
+    "details": "상세보기",
+    "addToCart": "장바구니",
+    "more": "베스트 상품 더보기"
+  },
+  "categorySection": {
+    "title": "카테고리",
+    "description": "다양한 카테고리의 상품을 둘러보세요"
+  },
+  "featuredSection": {
+    "features": {
+      "freeShipping": {
+        "title": "무료배송",
+        "description": "5만원 이상 구매시 무료배송"
+      },
+      "securePayment": {
+        "title": "안전결제",
+        "description": "100% 안전한 결제 시스템"
+      },
+      "support": {
+        "title": "24시간 고객지원",
+        "description": "언제든지 문의하세요"
+      },
+      "points": {
+        "title": "적립혜택",
+        "description": "구매금액의 1% 적립"
+      }
+    },
+    "cta": {
+      "title": "지금 가입하고 특별 혜택을 받아보세요!",
+      "description": "신규 회원 가입시 10% 할인 쿠폰과 무료배송 혜택을 드립니다",
+      "browse": "상품 둘러보기"
+    }
+  },
+  "footer": {
+    "description": "고객 만족을 최우선으로 하는 온라인 쇼핑몰입니다.",
+    "customerService": "고객 서비스",
+    "companyInfo": "회사 정보",
+    "company": {
+      "name": "상호명: 심플몰",
+      "ceo": "대표자: 홍길동",
+      "bizNumber": "사업자등록번호: 123-45-67890",
+      "license": "통신판매업신고: 제2024-서울강남-1234호",
+      "address": "주소: 서울시 강남구 테헤란로 123",
+      "customerCenter": "고객센터: 1588-1234"
+    }
+  },
+  "error": {
+    "title": "오류가 발생했습니다",
+    "backToLogin": "로그인 페이지로 돌아가기",
+    "goHome": "홈으로 가기",
+    "messages": {
+      "default": "알 수 없는 오류가 발생했습니다.",
+      "expiredToken": "세션이 만료되었습니다. 다시 로그인해주세요.",
+      "unauthorized": "접근 권한이 없습니다."
+    }
+  },
+  "notFound": {
+    "title": "존재하지 않는 페이지 입니다.",
+    "goHome": "홈으로"
+  },
+  "login": {
+    "title": "로그인",
+    "description": "이메일과 비밀번호를 입력하여 로그인하세요",
+    "email": "이메일",
+    "password": "비밀번호",
+    "emailPlaceholder": "your@email.com",
+    "passwordPlaceholder": "비밀번호를 입력하세요",
+    "submit": "로그인",
+    "noAccount": "계정이 없으신가요?",
+    "signup": "회원가입하기",
+    "loginFail": "로그인에 실패했습니다.",
+    "messages": {
+      "success": "이메일 인증이 완료되었습니다.",
+      "info": "이메일을 확인하여 계정을 활성화하세요"
+    }
+  },
+  "signup": {
+    "title": "회원가입",
+    "subtitle": "새 계정을 만들어 쇼핑을 시작하세요",
+    "name": "이름",
+    "placeholder": "홍길동",
+    "email": "이메일",
+    "password": "비밀번호",
+    "confirmPassword": "비밀번호 확인",
+    "passwordPlaceholder": "8자 이상 입력하세요",
+    "confirmPasswordPlaceholder": "비밀번호를 다시 입력하세요",
+    "submit": "회원가입",
+    "alreadyHaveAccount": "이미 계정이 있으신가요?",
+    "loginLink": "로그인하기"
+  },
+  "product": {
+    "reviews": "{count}개 리뷰",
+    "discount": "{percent}% 할인",
+    "features": "주요 특징",
+    "quantity": "수량:",
+    "stock": "재고: {count}개",
+    "totalPrice": "총 가격: {price}",
+    "addToCart": "장바구니 담기",
+    "buyNow": "바로 구매하기",
+    "freeShipping": "무료배송 (5만원 이상 구매시)",
+    "authentic": "100% 정품보장",
+    "return": "7일 무료 반품/교환",
+    "tabs": {
+      "description": "상품상세",
+      "reviews": "리뷰 ({count})",
+      "qna": "문의"
+    },
+    "details": {
+      "title": "상품 상세 정보",
+      "brand": "브랜드",
+      "stockStatus": "재고 상태",
+      "inStock": "재고 있음 ({count}개)",
+      "soldOut": "품절"
+    },
+    "related": "관련 상품"
+  },
+  "orders": {
+    "title": "주문내역",
+    "searchPlaceholder": "주문번호 또는 상품명으로 검색...",
+    "sortLatest": "최신순",
+    "sortOldest": "오래된순",
+    "emptyAll": {
+      "title": "주문 내역이 없습니다",
+      "description": "첫 주문을 시작해보세요",
+      "button": "쇼핑하러 가기"
+    },
+    "empty": {
+      "shipping": "배송중인 주문이 없습니다",
+      "completed": "완료된 주문이 없습니다",
+      "cancelled": "취소된 주문이 없습니다"
+    },
+    "tabs": {
+      "all": "전체 ({count})",
+      "shipping": "배송중 ({count})",
+      "completed": "완료 ({count})",
+      "cancelled": "취소 ({count})"
+    },
+    "card": {
+      "deliveryAddress": "배송지",
+      "trackingNumber": "운송장번호",
+      "totalAmount": "총 {amount}원",
+      "buttons": {
+        "writeReview": "리뷰 작성",
+        "reorder": "재주문",
+        "trackDelivery": "배송 조회",
+        "cancelOrder": "주문 취소",
+        "viewDetails": "상세보기"
+      }
+    },
+    "status": {
+      "주문완료": "주문완료",
+      "배송준비": "배송준비",
+      "배송중": "배송중",
+      "배송완료": "배송완료",
+      "주문취소": "주문취소",
+      "반품완료": "반품완료"
+    }
+  },
+  "mypage": {
+    "title": "마이페이지",
+    "description": "계정 정보와 주문 내역을 관리하세요",
+    "profile": {
+      "title": "프로필 정보",
+      "description": "개인 정보를 확인하고 수정할 수 있습니다",
+      "name": "이름",
+      "email": "이메일",
+      "joined": "가입일",
+      "edit": "프로필 수정"
+    },
+    "orders": {
+      "title": "주문 내역",
+      "description": "최근 주문 내역을 확인하세요",
+      "totalAmount": "총 결제금액",
+      "viewAll": "전체 주문내역 보기",
+      "status": {
+        "배송완료": "배송완료",
+        "배송중": "배송중",
+        "주문완료": "주문완료"
+      }
+    },
+    "quickLinks": {
+      "title": "빠른 링크"
+    }
+  },
+  "category": {
+    "count": "총 {count}개의 상품",
+    "filter": "필터",
+    "price": "가격",
+    "sort": "정렬",
+    "all": "전체",
+    "under-50000": "5만원 이하",
+    "50000-100000": "5-10만원",
+    "100000-500000": "10-50만원",
+    "over-500000": "50만원 이상",
+    "popular": "인기순",
+    "price-low": "가격 낮은순",
+    "price-high": "가격 높은순",
+    "rating": "평점순",
+    "newest": "최신순",
+    "viewDetail": "상세보기",
+    "addToCart": "장바구니",
+    "empty": {
+      "title": "해당 카테고리에 상품이 없습니다.",
+      "button": "홈으로 돌아가기",
+      "backToParent": "상위 카테고리로 돌아가기"
+    }
+  },
+  "cart": {
+    "title": "장바구니",
+    "itemsCount": "{count}개 상품",
+    "empty": {
+      "title": "장바구니가 비어있습니다",
+      "description": "원하는 상품을 장바구니에 담아보세요",
+      "continue": "쇼핑 계속하기"
+    },
+    "selectAll": "전체 선택 ({selected}/{total})",
+    "deleteSelected": "선택 삭제",
+    "summary": {
+      "title": "주문 요약",
+      "productPrice": "상품금액",
+      "discount": "할인금액",
+      "shipping": "배송비",
+      "freeShippingThreshold": "{amount}원 더 구매하면 무료배송",
+      "total": "총 결제금액",
+      "order": "주문하기 ({count}개)",
+      "continue": "쇼핑 계속하기"
+    },
+    "price": "{price}원",
+    "free": "무료"
+  }
+}

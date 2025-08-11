@@ -11,10 +11,12 @@ import {
 import { createClient } from '@/lib/client'
 import useStore from '@/lib/store'
 import { LogOut, Settings, ShoppingBag, User } from 'lucide-react'
+import { useTranslations } from 'next-intl'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 
 export default function AuthButton() {
+  const t = useTranslations()
   const user = useStore(state => state.user)
   const router = useRouter()
 
@@ -29,7 +31,7 @@ export default function AuthButton() {
       <Button variant="ghost" size="icon" asChild>
         <Link href="/login">
           <User className="h-5 w-5" />
-          <span className="sr-only">로그인</span>
+          <span className="sr-only">{t('user.login')}</span>
         </Link>
       </Button>
     )
@@ -40,7 +42,7 @@ export default function AuthButton() {
       <DropdownMenuTrigger asChild>
         <Button variant="ghost" size="icon">
           <User className="h-5 w-5" />
-          <span className="sr-only">사용자 메뉴</span>
+          <span className="sr-only">{t('user.menu')}</span>
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end" className="w-56">
@@ -56,21 +58,21 @@ export default function AuthButton() {
         <DropdownMenuItem asChild>
           <Link href="/mypage" className="flex items-center">
             <Settings className="mr-2 h-4 w-4" />
-            마이페이지
+            {t('user.mypage')}
           </Link>
         </DropdownMenuItem>
         <DropdownMenuItem asChild>
           <Link href="/orders" className="flex items-center">
             <ShoppingBag className="mr-2 h-4 w-4" />
-            주문내역
+            {t('user.orders')}
           </Link>
         </DropdownMenuItem>
         <DropdownMenuSeparator />
         <DropdownMenuItem asChild>
           <form action={signOut}>
-            <button className="flex w-full items-center">
+            <button className="flex items-center">
               <LogOut className="mr-2 h-4 w-4" />
-              로그아웃
+              {t('user.logout')}
             </button>
           </form>
         </DropdownMenuItem>

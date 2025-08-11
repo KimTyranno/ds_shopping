@@ -1,6 +1,7 @@
 'use client'
 
 import useStore from '@/lib/store'
+import { useTranslations } from 'next-intl'
 import Link from 'next/link'
 import { Avatar, AvatarFallback } from '../ui/avatar'
 import { Button } from '../ui/button'
@@ -10,17 +11,18 @@ type UserInfoProps = {
 }
 
 const UserInfo = (props: UserInfoProps) => {
+  const t = useTranslations()
   const user = useStore(state => state.user)
 
   if (!user)
     return (
       <div className="p-4 bg-muted/50 rounded-lg mt-6">
         <p className="text-sm text-muted-foreground mb-3">
-          로그인하고 더 많은 혜택을 받아보세요
+          {t('user.loginPrompt')}
         </p>
         <Button asChild className="w-full">
           <Link href="/login" onClick={props.handleClose}>
-            로그인
+            {t('user.login')}
           </Link>
         </Button>
       </div>

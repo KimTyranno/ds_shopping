@@ -18,6 +18,7 @@ import {
   Sparkles,
   Tag,
 } from 'lucide-react'
+import { useTranslations } from 'next-intl'
 import Link from 'next/link'
 import { useState } from 'react'
 import LogoutButton from './LogoutButton'
@@ -25,17 +26,17 @@ import MyPage from './MyPage'
 import UserInfo from './UserInfo'
 
 type category = {
-  title: string
+  key: string
   href: string
-  description: string
   icon: string
   items: {
-    title: string
+    key: string
     href: string
   }[]
 }
 
 const MobileMenus = ({ categories }: { categories: category[] }) => {
+  const t = useTranslations()
   const [isOpen, setIsOpen] = useState(false)
   const handleClose = () => {
     setIsOpen(false)
@@ -56,7 +57,7 @@ const MobileMenus = ({ categories }: { categories: category[] }) => {
                 S
               </span>
             </div>
-            심플몰
+            {t('common.logo')}
           </SheetTitle>
         </SheetHeader>
 
@@ -71,28 +72,28 @@ const MobileMenus = ({ categories }: { categories: category[] }) => {
                 href="/"
                 className="flex items-center gap-3 px-3 py-3 rounded-lg hover:bg-muted transition-colors">
                 <Home className="h-5 w-5 text-muted-foreground" />
-                <span className="font-medium">홈</span>
+                <span className="font-medium">{t('navigation.home')}</span>
               </Link>
 
               <Link
                 href="/best"
                 className="flex items-center gap-3 px-3 py-3 rounded-lg hover:bg-muted transition-colors">
                 <Award className="h-5 w-5 text-muted-foreground" />
-                <span className="font-medium">베스트</span>
+                <span className="font-medium">{t('navigation.best')}</span>
               </Link>
 
               <Link
                 href="/new"
                 className="flex items-center gap-3 px-3 py-3 rounded-lg hover:bg-muted transition-colors">
                 <Sparkles className="h-5 w-5 text-muted-foreground" />
-                <span className="font-medium">신상품</span>
+                <span className="font-medium">{t('navigation.new')}</span>
               </Link>
 
               <Link
                 href="/sale"
                 className="flex items-center gap-3 px-3 py-3 rounded-lg hover:bg-muted transition-colors">
                 <Tag className="h-5 w-5 text-muted-foreground" />
-                <span className="font-medium">할인상품</span>
+                <span className="font-medium">{t('navigation.sale')}</span>
               </Link>
             </div>
 
@@ -102,20 +103,24 @@ const MobileMenus = ({ categories }: { categories: category[] }) => {
             <div className="space-y-1">
               <div className="flex items-center gap-3 px-3 py-2">
                 <Grid3X3 className="h-5 w-5 text-muted-foreground" />
-                <span className="font-semibold text-sm">카테고리</span>
+                <span className="font-semibold text-sm">
+                  {t('navigation.categories')}
+                </span>
               </div>
 
               {categories.map(category => (
-                <div key={category.title} className="ml-2">
+                <div key={category.key} className="ml-2">
                   <Link
                     href={category.href}
                     onClick={handleClose}
                     className="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-muted transition-colors">
                     <span className="text-lg">{category.icon}</span>
                     <div className="flex-1">
-                      <p className="font-medium text-sm">{category.title}</p>
+                      <p className="font-medium text-sm">
+                        {t(`categories.${category.key}.title`)}
+                      </p>
                       <p className="text-xs text-muted-foreground">
-                        {category.description}
+                        {t(`categories.${category.key}.description`)}
                       </p>
                     </div>
                   </Link>
@@ -124,11 +129,11 @@ const MobileMenus = ({ categories }: { categories: category[] }) => {
                   <div className="ml-8 mt-1 space-y-1">
                     {category.items.map(item => (
                       <Link
-                        key={item.title}
+                        key={item.key}
                         onClick={handleClose}
                         href={item.href}
                         className="block px-3 py-1 text-sm text-muted-foreground hover:text-primary transition-colors">
-                        {item.title}
+                        {t(`categories.${category.key}.items.${item.key}`)}
                       </Link>
                     ))}
                   </div>
@@ -148,7 +153,7 @@ const MobileMenus = ({ categories }: { categories: category[] }) => {
               href="/support"
               className="flex items-center gap-3 px-3 py-3 rounded-lg hover:bg-muted transition-colors">
               <Headphones className="h-5 w-5 text-muted-foreground" />
-              <span className="font-medium">고객지원</span>
+              <span className="font-medium">{t('common.support')}</span>
             </Link>
 
             <LogoutButton handleClose={handleClose} />
