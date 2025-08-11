@@ -5,12 +5,12 @@ import { NextRequest } from 'next/server'
 
 const intlMiddleware = createIntlMiddleware(routing)
 
-export async function middleware(request: NextRequest) {
+export function middleware(request: NextRequest) {
   // next-intl 미들웨어를 먼저 적용
   const intlResponse = intlMiddleware(request)
 
   // locale 처리 결과를 기반으로 Supabase 세션 처리
-  return await updateSession(request, intlResponse)
+  return updateSession(request, intlResponse)
 }
 
 export const config = {

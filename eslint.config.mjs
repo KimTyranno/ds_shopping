@@ -3,7 +3,10 @@ import * as tseslint from 'typescript-eslint'
 
 export default [
   // 기본 JS 권장 설정
-  js.configs.recommended,
+  {
+    files: ['src/**/*.js', 'src/**/*.jsx'],
+    ...js.configs.recommended,
+  },
 
   // Next.js 권장 설정
   // ...next(),
@@ -28,12 +31,19 @@ export default [
     rules: {
       '@typescript-eslint/no-unused-vars': [
         'warn',
-        { argsIgnorePattern: '^_', varsIgnorePattern: '^_' },
+        {
+          argsIgnorePattern: '^_',
+          varsIgnorePattern: '^_',
+        },
       ],
       'no-unused-vars': [
         'warn',
-        { argsIgnorePattern: '^_', varsIgnorePattern: '^_' },
+        {
+          argsIgnorePattern: '^_',
+          varsIgnorePattern: '^_',
+        },
       ],
+      '@typescript-eslint/no-redundant-type-constituents': 'off',
     },
   },
 
