@@ -1,0 +1,334 @@
+{
+  "common": {
+    "logo": "シンプルモール",
+    "support": "カスタマーサポート",
+    "currency": "円",
+    "signup": "会員登録する",
+    "faq": "よくある質問"
+  },
+  "metadata": {
+    "title": "シンプルショッピングモール - 最高の商品をご覧ください",
+    "description": "様々なカテゴリーの商品をお得な価格でご提供します"
+  },
+  "navigation": {
+    "home": "ホーム",
+    "categories": "カテゴリー",
+    "best": "人気商品",
+    "new": "新商品",
+    "sale": "セール商品"
+  },
+  "user": {
+    "loginPrompt": "ログインしてさらに多くの特典をゲット！",
+    "login": "ログイン",
+    "menu": "ユーザーメニュー",
+    "cart": "カート",
+    "logout": "ログアウト",
+    "mypage": "マイページ",
+    "orders": "注文履歴",
+    "wishlist": "お気に入り"
+  },
+  "search": {
+    "placeholder": "商品を検索してください..."
+  },
+  "categories": {
+    "electronics": {
+      "title": "電子機器",
+      "description": "スマートフォン、ノートパソコン、タブレットなど",
+      "items": {
+        "smartphones": "スマートフォン",
+        "laptops": "ノートパソコン",
+        "tablets": "タブレット",
+        "earphones": "イヤホン",
+        "smartwatch": "スマートウォッチ"
+      }
+    },
+    "fashion": {
+      "title": "ファッション",
+      "description": "衣類、靴、アクセサリー",
+      "items": {
+        "mens": "メンズファッション",
+        "womens": "レディースファッション",
+        "shoes": "靴",
+        "bags": "バッグ",
+        "accessories": "アクセサリー"
+      }
+    },
+    "home": {
+      "title": "ホーム＆リビング",
+      "description": "家具、インテリア、生活用品",
+      "items": {
+        "furniture": "家具",
+        "interior": "インテリア",
+        "kitchen": "キッチン用品",
+        "living": "生活用品",
+        "bedding": "寝具"
+      }
+    },
+    "books": {
+      "title": "書籍",
+      "description": "小説、自己啓発、専門書",
+      "items": {
+        "novel": "小説",
+        "self-help": "自己啓発",
+        "computer": "コンピュータ",
+        "cooking": "料理",
+        "travel": "旅行"
+      }
+    },
+    "sports": {
+      "title": "スポーツ",
+      "description": "スポーツウェア、シューズ、フィットネス用品",
+      "items": {
+        "sportswear": "スポーツウェア",
+        "sneakers": "スニーカー",
+        "fitness": "フィットネス用品",
+        "outdoor": "アウトドア",
+        "swimming": "水泳用品"
+      }
+    },
+    "beauty": {
+      "title": "ビューティー",
+      "description": "スキンケア、メイク、香水",
+      "items": {
+        "skincare": "スキンケア",
+        "makeup": "メイクアップ",
+        "haircare": "ヘアケア",
+        "perfume": "香水",
+        "mens": "メンズコスメ"
+      }
+    }
+  },
+  "bestProducts": {
+    "title": "人気商品",
+    "description": "お客様に最も選ばれた人気商品",
+    "details": "詳細を見る",
+    "addToCart": "カートに追加",
+    "more": "もっと見る"
+  },
+  "categorySection": {
+    "title": "カテゴリー",
+    "description": "様々なカテゴリーの商品をご覧ください"
+  },
+  "featuredSection": {
+    "features": {
+      "freeShipping": {
+        "title": "送料無料",
+        "description": "5万円以上のご購入で送料無料"
+      },
+      "securePayment": {
+        "title": "安全な決済",
+        "description": "100%安全な決済システム"
+      },
+      "support": {
+        "title": "24時間サポート",
+        "description": "いつでもお問い合わせください"
+      },
+      "points": {
+        "title": "ポイント特典",
+        "description": "購入金額の1%をポイント還元"
+      }
+    },
+    "cta": {
+      "title": "今すぐ登録して特典をゲット！",
+      "description": "新規会員登録で10%割引クーポンと送料無料特典をプレゼント！",
+      "browse": "商品を探す"
+    }
+  },
+  "footer": {
+    "description": "お客様満足度を最優先に考えるオンラインショッピングモールです。",
+    "customerService": "カスタマーサービス",
+    "companyInfo": "会社情報",
+    "company": {
+      "name": "会社名：シンプルモール",
+      "ceo": "代表者：ホン・ギルドン",
+      "bizNumber": "事業者登録番号：123-45-67890",
+      "license": "通信販売業申告：第2024-ソウル江南-1234号",
+      "address": "住所：ソウル市江南区テヘラン路123",
+      "customerCenter": "カスタマーセンター：1588-1234"
+    }
+  },
+  "error": {
+    "title": "エラーが発生しました",
+    "backToLogin": "ログインページに戻る",
+    "goHome": "ホームに戻る",
+    "messages": {
+      "default": "不明なエラーが発生しました。",
+      "expiredToken": "セッションが切れました。再度ログインしてください。",
+      "unauthorized": "アクセス権限がありません。"
+    }
+  },
+  "notFound": {
+    "title": "存在しないページです。",
+    "goHome": "ホームに戻る"
+  },
+  "login": {
+    "title": "ログイン",
+    "description": "メールアドレスとパスワードを入力してください",
+    "email": "メールアドレス",
+    "password": "パスワード",
+    "emailPlaceholder": "your@email.com",
+    "passwordPlaceholder": "パスワードを入力してください",
+    "submit": "ログイン",
+    "noAccount": "アカウントをお持ちでないですか？",
+    "signup": "会員登録する",
+    "loginFail": "ログインに失敗しました。",
+    "messages": {
+      "success": "メール認証が完了しました。",
+      "info": "メールを確認してアカウントを有効化してください。"
+    }
+  },
+  "signup": {
+    "title": "会員登録",
+    "subtitle": "新しいアカウントを作成してショッピングを始めよう",
+    "name": "お名前",
+    "placeholder": "ホン・ギルドン",
+    "email": "メールアドレス",
+    "password": "パスワード",
+    "confirmPassword": "パスワード確認",
+    "passwordPlaceholder": "8文字以上入力してください",
+    "confirmPasswordPlaceholder": "もう一度入力してください",
+    "submit": "登録する",
+    "alreadyHaveAccount": "すでにアカウントをお持ちですか？",
+    "loginLink": "ログインする"
+  },
+  "product": {
+    "reviews": "{count}件のレビュー",
+    "discount": "{percent}%割引",
+    "features": "主な特徴",
+    "quantity": "数量：",
+    "stock": "在庫：{count}個",
+    "totalPrice": "合計金額：{price}",
+    "addToCart": "カートに追加",
+    "buyNow": "今すぐ購入",
+    "freeShipping": "送料無料（5万円以上購入時）",
+    "authentic": "100% 正規品保証",
+    "return": "7日以内の無料返品・交換",
+    "tabs": {
+      "description": "商品詳細",
+      "reviews": "レビュー（{count}）",
+      "qna": "お問い合わせ"
+    },
+    "details": {
+      "title": "商品詳細情報",
+      "brand": "ブランド",
+      "stockStatus": "在庫状況",
+      "inStock": "在庫あり（{count}個）",
+      "soldOut": "在庫切れ"
+    },
+    "related": "関連商品"
+  },
+  "orders": {
+    "title": "注文履歴",
+    "searchPlaceholder": "注文番号または商品名で検索...",
+    "sortLatest": "最新順",
+    "sortOldest": "古い順",
+    "emptyAll": {
+      "title": "注文履歴がありません",
+      "description": "初めての注文をしてみましょう",
+      "button": "ショッピングする"
+    },
+    "empty": {
+      "shipping": "配送中の注文はありません",
+      "completed": "完了した注文はありません",
+      "cancelled": "キャンセルされた注文はありません"
+    },
+    "tabs": {
+      "all": "すべて（{count}）",
+      "shipping": "配送中（{count}）",
+      "completed": "完了（{count}）",
+      "cancelled": "キャンセル（{count}）"
+    },
+    "card": {
+      "deliveryAddress": "配送先",
+      "trackingNumber": "追跡番号",
+      "totalAmount": "合計：{amount}円",
+      "buttons": {
+        "writeReview": "レビューを書く",
+        "reorder": "再注文",
+        "trackDelivery": "配送追跡",
+        "cancelOrder": "注文キャンセル",
+        "viewDetails": "詳細を見る"
+      }
+    },
+    "status": {
+      "주문완료": "注文完了",
+      "배송준비": "配送準備中",
+      "배송중": "配送中",
+      "배송완료": "配送完了",
+      "주문취소": "注文キャンセル",
+      "반품완료": "返品完了"
+    }
+  },
+  "mypage": {
+    "title": "マイページ",
+    "description": "アカウント情報と注文履歴を管理しましょう",
+    "profile": {
+      "title": "プロフィール情報",
+      "description": "個人情報の確認と編集ができます",
+      "name": "名前",
+      "email": "メールアドレス",
+      "joined": "登録日",
+      "edit": "プロフィール編集"
+    },
+    "orders": {
+      "title": "注文履歴",
+      "description": "最近の注文履歴を確認できます",
+      "totalAmount": "合計購入金額",
+      "viewAll": "すべての注文を見る",
+      "status": {
+        "배송완료": "配送完了",
+        "배송중": "配送中",
+        "주문완료": "注文完了"
+      }
+    },
+    "quickLinks": {
+      "title": "クイックリンク"
+    }
+  },
+  "category": {
+    "count": "全{count}件の商品",
+    "filter": "フィルター",
+    "price": "価格",
+    "sort": "並び替え",
+    "all": "すべて",
+    "under-50000": "5万円以下",
+    "50000-100000": "5～10万円",
+    "100000-500000": "10～50万円",
+    "over-500000": "50万円以上",
+    "popular": "人気順",
+    "price-low": "価格が安い順",
+    "price-high": "価格が高い順",
+    "rating": "評価順",
+    "newest": "新着順",
+    "viewDetail": "詳細を見る",
+    "addToCart": "カートに追加",
+    "empty": {
+      "title": "このカテゴリーには商品がありません。",
+      "button": "ホームに戻る",
+      "backToParent": "上位カテゴリーに戻る"
+    }
+  },
+  "cart": {
+    "title": "ショッピングカート",
+    "itemsCount": "{count}件の商品",
+    "empty": {
+      "title": "カートが空です",
+      "description": "お気に入りの商品をカートに追加してください",
+      "continue": "ショッピングを続ける"
+    },
+    "selectAll": "すべて選択（{selected}/{total}）",
+    "deleteSelected": "選択削除",
+    "summary": {
+      "title": "注文概要",
+      "productPrice": "商品金額",
+      "discount": "割引金額",
+      "shipping": "送料",
+      "freeShippingThreshold": "あと{amount}円で送料無料",
+      "total": "合計金額",
+      "order": "注文する（{count}件）",
+      "continue": "ショッピングを続ける"
+    },
+    "price": "{price}円",
+    "free": "無料"
+  }
+}
