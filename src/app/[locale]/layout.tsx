@@ -1,7 +1,7 @@
 import Footer from '@/components/Footer'
 import Header from '@/components/header'
 import { Toaster } from '@/components/ui/sonner'
-import { locales } from '@/lib/i18n'
+import { locales } from '@/i18n/routing'
 import { createTranslator, NextIntlClientProvider } from 'next-intl'
 import { getMessages } from 'next-intl/server'
 import { Inter } from 'next/font/google'
