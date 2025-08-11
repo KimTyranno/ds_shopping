@@ -21,6 +21,7 @@ import {
   Truck,
   XCircle,
 } from 'lucide-react'
+import { useTranslations } from 'next-intl'
 import Image from 'next/image'
 import Link from 'next/link'
 import { useState } from 'react'
@@ -174,6 +175,8 @@ export default function OrdersPage() {
   const [orders] = useState<Order[]>(dummyOrders)
   const [searchTerm, setSearchTerm] = useState('')
   const [sortBy, setSortBy] = useState('latest')
+  const t = useTranslations('orders')
+  const tCommon = useTranslations('common')
 
   // 필터링된 주문 목록
   const getFilteredOrders = (status?: Order['status']) => {
@@ -220,7 +223,7 @@ export default function OrdersPage() {
             <span className="font-semibold">{order.id}</span>
             <Badge className={getStatusColor(order.status)}>
               {getStatusIcon(order.status)}
-              <span className="ml-1">{order.status}</span>
+              <span className="ml-1">{t(`status.${order.status}`)}</span>
             </Badge>
           </div>
           <span className="text-sm text-muted-foreground">{order.date}</span>
@@ -248,7 +251,8 @@ export default function OrdersPage() {
                 )}
                 <div className="flex items-center justify-between mt-1">
                   <span className="text-sm">
-                    {item.price.toLocaleString()}원 × {item.quantity}
+                    {item.price.toLocaleString() + tCommon('currency')} ×{' '}
+                    {item.quantity}
                   </span>
                 </div>
               </div>
@@ -258,39 +262,45 @@ export default function OrdersPage() {
 
         {/* 배송 정보 */}
         <div className="text-sm text-muted-foreground">
-          <p>배송지: {order.deliveryAddress}</p>
-          {order.trackingNumber && <p>운송장번호: {order.trackingNumber}</p>}
+          <p>
+            {t('card.deliveryAddress')}: {order.deliveryAddress}
+          </p>
+          {order.trackingNumber && (
+            <p>
+              {t('card.trackingNumber')}: {order.trackingNumber}
+            </p>
+          )}
         </div>
 
         {/* 총 금액 및 액션 버튼 */}
         <div className="flex items-center justify-between pt-3 border-t">
           <span className="font-bold text-primary">
-            총 {order.total.toLocaleString()}원
+            {t('card.totalAmount', { amount: order.total.toLocaleString() })}
           </span>
 
           <div className="flex gap-2">
             {order.status === '배송완료' && (
               <>
                 <Button variant="outline" size="sm" className="bg-transparent">
-                  리뷰 작성
+                  {t('card.buttons.writeReview')}
                 </Button>
                 <Button variant="outline" size="sm" className="bg-transparent">
-                  재주문
+                  {t('card.buttons.reorder')}
                 </Button>
               </>
             )}
             {order.status === '배송중' && order.trackingNumber && (
               <Button variant="outline" size="sm" className="bg-transparent">
-                배송 조회
+                {t('card.buttons.trackDelivery')}
               </Button>
             )}
             {order.status === '주문완료' && (
               <Button variant="outline" size="sm" className="bg-transparent">
-                주문 취소
+                {t('card.buttons.cancelOrder')}
               </Button>
             )}
             <Button variant="outline" size="sm" className="bg-transparent">
-              상세보기
+              {t('card.buttons.viewDetails')}
             </Button>
           </div>
         </div>
@@ -308,7 +318,7 @@ export default function OrdersPage() {
               <ArrowLeft className="h-5 w-5" />
             </Link>
           </Button>
-          <h1 className="text-3xl font-bold">주문내역</h1>
+          <h1 className="text-3xl font-bold">{t('title')}</h1>
         </div>
 
         {/* 검색 및 정렬 */}
@@ -316,7 +326,7 @@ export default function OrdersPage() {
           <div className="relative flex-1">
             <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground h-4 w-4" />
             <Input
-              placeholder="주문번호 또는 상품명으로 검색..."
+              placeholder={t('searchPlaceholder')}
               value={searchTerm}
               onChange={e => setSearchTerm(e.target.value)}
               className="pl-10"
@@ -327,8 +337,8 @@ export default function OrdersPage() {
               <SelectValue />
             </SelectTrigger>
             <SelectContent>
-              <SelectItem value="latest">최신순</SelectItem>
-              <SelectItem value="oldest">오래된순</SelectItem>
+              <SelectItem value="latest">{t('sortLatest')}</SelectItem>
+              <SelectItem value="oldest">{t('sortOldest')}</SelectItem>
             </SelectContent>
           </Select>
         </div>
@@ -336,15 +346,17 @@ export default function OrdersPage() {
         {/* 주문 내역 탭 */}
         <Tabs defaultValue="all" className="w-full">
           <TabsList className="grid w-full grid-cols-4">
-            <TabsTrigger value="all">전체 ({allOrders.length})</TabsTrigger>
+            <TabsTrigger value="all">
+              {t('tabs.all', { count: allOrders.length })}
+            </TabsTrigger>
             <TabsTrigger value="shipping">
-              배송중 ({shippingOrders.length})
+              {t('tabs.shipping', { count: shippingOrders.length })}
             </TabsTrigger>
             <TabsTrigger value="completed">
-              완료 ({completedOrders.length})
+              {t('tabs.completed', { count: completedOrders.length })}
             </TabsTrigger>
             <TabsTrigger value="cancelled">
-              취소 ({cancelledOrders.length})
+              {t('tabs.cancelled', { count: cancelledOrders.length })}
             </TabsTrigger>
           </TabsList>
 
@@ -353,13 +365,13 @@ export default function OrdersPage() {
               <div className="text-center py-16">
                 <Package className="h-16 w-16 mx-auto text-muted-foreground mb-4" />
                 <h2 className="text-xl font-semibold mb-2">
-                  주문 내역이 없습니다
+                  {t('emptyAll.title')}
                 </h2>
                 <p className="text-muted-foreground mb-6">
-                  첫 주문을 시작해보세요
+                  {t('emptyAll.description')}
                 </p>
                 <Button asChild>
-                  <Link href="/">쇼핑하러 가기</Link>
+                  <Link href="/">{t('emptyAll.button')}</Link>
                 </Button>
               </div>
             ) : (
@@ -375,9 +387,7 @@ export default function OrdersPage() {
             {shippingOrders.length === 0 ? (
               <div className="text-center py-16">
                 <Truck className="h-16 w-16 mx-auto text-muted-foreground mb-4" />
-                <p className="text-muted-foreground">
-                  배송중인 주문이 없습니다
-                </p>
+                <p className="text-muted-foreground">{t('empty.shipping')}</p>
               </div>
             ) : (
               <div>
@@ -392,7 +402,7 @@ export default function OrdersPage() {
             {completedOrders.length === 0 ? (
               <div className="text-center py-16">
                 <CheckCircle className="h-16 w-16 mx-auto text-muted-foreground mb-4" />
-                <p className="text-muted-foreground">완료된 주문이 없습니다</p>
+                <p className="text-muted-foreground">{t('empty.completed')}</p>
               </div>
             ) : (
               <div>
@@ -407,7 +417,7 @@ export default function OrdersPage() {
             {cancelledOrders.length === 0 ? (
               <div className="text-center py-16">
                 <XCircle className="h-16 w-16 mx-auto text-muted-foreground mb-4" />
-                <p className="text-muted-foreground">취소된 주문이 없습니다</p>
+                <p className="text-muted-foreground">{t('empty.cancelled')}</p>
               </div>
             ) : (
               <div>

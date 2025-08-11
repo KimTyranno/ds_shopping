@@ -15,17 +15,18 @@ import { Separator } from '@/components/ui/separator'
 import useStore from '@/lib/store'
 import { cn } from '@/lib/utils'
 import { CircleAlert, MailCheck } from 'lucide-react'
+import { useTranslations } from 'next-intl'
 import Link from 'next/link'
 import { useRouter, useSearchParams } from 'next/navigation'
 import { Suspense } from 'react'
 import { toast } from 'sonner'
-import { login } from '../../components/auth/login'
+import { login } from '../../../components/auth/login'
 
 function LoginMessage() {
+  const t = useTranslations('login.messages')
   const searchParams = useSearchParams()
-  const message = searchParams.get('message')
   const messageType = searchParams.get('messageType')
-  if (!message) return null
+  if (!messageType) return null
 
   return (
     <Alert
@@ -35,7 +36,9 @@ function LoginMessage() {
       })}>
       {messageType === 'success' && <MailCheck />}
       {messageType === 'info' && <CircleAlert />}
-      <AlertDescription className="text-inherit">{message}</AlertDescription>
+      <AlertDescription className="text-inherit">
+        {t(messageType)}
+      </AlertDescription>
     </Alert>
   )
 }
@@ -43,6 +46,8 @@ function LoginMessage() {
 export default function LoginPage() {
   const router = useRouter()
   const setUser = useStore(state => state.setUser)
+  const tLogin = useTranslations('login')
+  const tCommon = useTranslations('common')
   const handleLogin = async (formData: FormData) => {
     try {
       const { user } = await login(formData)
@@ -51,7 +56,7 @@ export default function LoginPage() {
         router.push('/')
       }
     } catch {
-      toast('로그인에 실패했습니다.', {
+      toast(tLogin('loginFail'), {
         position: 'top-center',
         style: { background: '#e25c5c', color: '#fff' },
       })
@@ -70,21 +75,23 @@ export default function LoginPage() {
             <div className="h-10 w-10 bg-primary rounded-lg flex items-center justify-center">
               <span className="text-primary-foreground font-bold">S</span>
             </div>
-            <span className="font-bold text-2xl">심플몰</span>
+            <span className="font-bold text-2xl">{tCommon('logo')}</span>
           </Link>
         </div>
 
         <Card>
           <CardHeader className="space-y-1">
-            <CardTitle className="text-2xl text-center">로그인</CardTitle>
+            <CardTitle className="text-2xl text-center">
+              {tLogin('title')}
+            </CardTitle>
             <CardDescription className="text-center">
-              이메일과 비밀번호를 입력하여 로그인하세요
+              {tLogin('description')}
             </CardDescription>
           </CardHeader>
           <CardContent>
             <form className="space-y-4" action={handleLogin}>
               <div className="space-y-2">
-                <Label htmlFor="email">이메일</Label>
+                <Label htmlFor="email">{tLogin('email')}</Label>
                 <Input
                   id="email"
                   name="email"
@@ -94,18 +101,18 @@ export default function LoginPage() {
                 />
               </div>
               <div className="space-y-2">
-                <Label htmlFor="password">비밀번호</Label>
+                <Label htmlFor="password">{tLogin('password')}</Label>
                 <Input
                   id="password"
                   name="password"
                   type="password"
-                  placeholder="비밀번호를 입력하세요"
+                  placeholder={tLogin('emailPlaceholder')}
                   required
                 />
               </div>
               <div className="flex flex-col space-y-2">
                 <Button className="w-full" type="submit">
-                  로그인
+                  {tLogin('submit')}
                 </Button>
               </div>
             </form>
@@ -114,9 +121,9 @@ export default function LoginPage() {
               <Separator />
               <div className="text-center mt-4">
                 <p className="text-sm text-muted-foreground">
-                  계정이 없으신가요?{' '}
+                  {tLogin('noAccount')}{' '}
                   <Link href="/signup" className="text-primary hover:underline">
-                    회원가입하기
+                    {tLogin('signup')}
                   </Link>
                 </p>
               </div>

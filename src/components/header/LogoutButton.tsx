@@ -3,6 +3,7 @@
 import { createClient } from '@/lib/client'
 import useStore from '@/lib/store'
 import { LogOut } from 'lucide-react'
+import { useTranslations } from 'next-intl'
 import { useRouter } from 'next/navigation'
 
 type LogoutButtonProps = {
@@ -10,6 +11,7 @@ type LogoutButtonProps = {
 }
 
 const LogoutButton = (props: LogoutButtonProps) => {
+  const t = useTranslations()
   const user = useStore(state => state.user)
   const router = useRouter()
 
@@ -29,7 +31,7 @@ const LogoutButton = (props: LogoutButtonProps) => {
       }}
       className="flex items-center gap-3 px-3 py-3 rounded-lg hover:bg-muted transition-colors w-full text-left cursor-pointer">
       <LogOut className="h-5 w-5 text-muted-foreground" />
-      <span className="font-medium">로그아웃</span>
+      <span className="font-medium">{t('user.logout')}</span>
     </button>
   )
 }

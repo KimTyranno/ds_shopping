@@ -10,94 +10,91 @@ import {
   NavigationMenuTrigger,
 } from '@/components/ui/navigation-menu'
 import { Search, ShoppingCart } from 'lucide-react'
+import { useTranslations } from 'next-intl'
 import Link from 'next/link'
 import ListItem from './ListItem'
 import MobileMenus from './MobileMenus'
 import MobileSearchBar from './MobileSearchBar'
 import MobileSearchButton from './MobileSearchButton'
 
-const categories = [
-  {
-    title: '전자제품',
-    href: '/categories/electronics',
-    description: '스마트폰, 노트북, 태블릿 등',
-    icon: '📱',
-    items: [
-      { title: '스마트폰', href: '/categories/electronics/smartphones' },
-      { title: '노트북', href: '/categories/electronics/laptops' },
-      { title: '태블릿', href: '/categories/electronics/tablets' },
-      { title: '이어폰', href: '/categories/electronics/earphones' },
-      { title: '스마트워치', href: '/categories/electronics/smartwatch' },
-    ],
-  },
-  {
-    title: '패션',
-    href: '/categories/fashion',
-    description: '의류, 신발, 액세서리',
-    icon: '👕',
-    items: [
-      { title: '남성의류', href: '/categories/fashion/mens' },
-      { title: '여성의류', href: '/categories/fashion/womens' },
-      { title: '신발', href: '/categories/fashion/shoes' },
-      { title: '가방', href: '/categories/fashion/bags' },
-      { title: '액세서리', href: '/categories/fashion/accessories' },
-    ],
-  },
-  {
-    title: '홈&리빙',
-    href: '/categories/home',
-    description: '가구, 인테리어, 생활용품',
-    icon: '🏠',
-    items: [
-      { title: '가구', href: '/categories/home/furniture' },
-      { title: '인테리어', href: '/categories/home/interior' },
-      { title: '주방용품', href: '/categories/home/kitchen' },
-      { title: '생활용품', href: '/categories/home/living' },
-      { title: '침구', href: '/categories/home/bedding' },
-    ],
-  },
-  {
-    title: '도서',
-    href: '/categories/books',
-    description: '소설, 자기계발, 전문서적',
-    icon: '📚',
-    items: [
-      { title: '소설', href: '/categories/books/novel' },
-      { title: '자기계발', href: '/categories/books/self-help' },
-      { title: '컴퓨터', href: '/categories/books/computer' },
-      { title: '요리', href: '/categories/books/cooking' },
-      { title: '여행', href: '/categories/books/travel' },
-    ],
-  },
-  {
-    title: '스포츠',
-    href: '/categories/sports',
-    description: '운동복, 운동화, 헬스용품',
-    icon: '⚽',
-    items: [
-      { title: '운동복', href: '/categories/sports/sportswear' },
-      { title: '운동화', href: '/categories/sports/sneakers' },
-      { title: '헬스용품', href: '/categories/sports/fitness' },
-      { title: '아웃도어', href: '/categories/sports/outdoor' },
-      { title: '수영용품', href: '/categories/sports/swimming' },
-    ],
-  },
-  {
-    title: '뷰티',
-    href: '/categories/beauty',
-    description: '스킨케어, 메이크업, 향수',
-    icon: '💄',
-    items: [
-      { title: '스킨케어', href: '/categories/beauty/skincare' },
-      { title: '메이크업', href: '/categories/beauty/makeup' },
-      { title: '헤어케어', href: '/categories/beauty/haircare' },
-      { title: '향수', href: '/categories/beauty/perfume' },
-      { title: '남성화장품', href: '/categories/beauty/mens' },
-    ],
-  },
-]
-
 export default function Header() {
+  const t = useTranslations()
+
+  const categories = [
+    {
+      key: 'electronics',
+      href: '/categories/electronics',
+      description: '스마트폰, 노트북, 태블릿 등',
+      icon: '📱',
+      items: [
+        { key: 'smartphones', href: '/categories/electronics/smartphones' },
+        { key: 'laptops', href: '/categories/electronics/laptops' },
+        { key: 'tablets', href: '/categories/electronics/tablets' },
+        { key: 'earphones', href: '/categories/electronics/earphones' },
+        { key: 'smartwatch', href: '/categories/electronics/smartwatch' },
+      ],
+    },
+    {
+      key: 'fashion',
+      href: '/categories/fashion',
+      icon: '👕',
+      items: [
+        { key: 'mens', href: '/categories/fashion/mens' },
+        { key: 'womens', href: '/categories/fashion/womens' },
+        { key: 'shoes', href: '/categories/fashion/shoes' },
+        { key: 'bags', href: '/categories/fashion/bags' },
+        { key: 'accessories', href: '/categories/fashion/accessories' },
+      ],
+    },
+    {
+      key: 'home',
+      href: '/categories/home',
+      icon: '🏠',
+      items: [
+        { key: 'furniture', href: '/categories/home/furniture' },
+        { key: 'interior', href: '/categories/home/interior' },
+        { key: 'kitchen', href: '/categories/home/kitchen' },
+        { key: 'living', href: '/categories/home/living' },
+        { key: 'bedding', href: '/categories/home/bedding' },
+      ],
+    },
+    {
+      key: 'books',
+      href: '/categories/books',
+      icon: '📚',
+      items: [
+        { key: 'novel', href: '/categories/books/novel' },
+        { key: 'self-help', href: '/categories/books/self-help' },
+        { key: 'computer', href: '/categories/books/computer' },
+        { key: 'cooking', href: '/categories/books/cooking' },
+        { key: 'travel', href: '/categories/books/travel' },
+      ],
+    },
+    {
+      key: 'sports',
+      href: '/categories/sports',
+      icon: '⚽',
+      items: [
+        { key: 'sportswear', href: '/categories/sports/sportswear' },
+        { key: 'sneakers', href: '/categories/sports/sneakers' },
+        { key: 'fitness', href: '/categories/sports/fitness' },
+        { key: 'outdoor', href: '/categories/sports/outdoor' },
+        { key: 'swimming', href: '/categories/sports/swimming' },
+      ],
+    },
+    {
+      key: 'beauty',
+      href: '/categories/beauty',
+      icon: '💄',
+      items: [
+        { key: 'skincare', href: '/categories/beauty/skincare' },
+        { key: 'makeup', href: '/categories/beauty/makeup' },
+        { key: 'haircare', href: '/categories/beauty/haircare' },
+        { key: 'perfume', href: '/categories/beauty/perfume' },
+        { key: 'mens', href: '/categories/beauty/mens' },
+      ],
+    },
+  ]
   return (
     <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
       <div className="container mx-auto px-4">
@@ -109,22 +106,24 @@ export default function Header() {
                 S
               </span>
             </div>
-            <span className="font-bold text-xl">심플몰</span>
+            <span className="font-bold text-xl">{t('common.logo')}</span>
           </Link>
 
           {/* 데스크톱 네비게이션 */}
           <NavigationMenu className="hidden md:flex">
             <NavigationMenuList>
               <NavigationMenuItem>
-                <NavigationMenuTrigger>카테고리</NavigationMenuTrigger>
+                <NavigationMenuTrigger>
+                  {t('navigation.categories')}
+                </NavigationMenuTrigger>
                 <NavigationMenuContent>
                   <ul className="grid w-[600px] gap-3 p-4 md:grid-cols-2 lg:grid-cols-3">
                     {categories.map(category => (
                       <ListItem
-                        key={category.title}
-                        title={category.title}
+                        key={category.key}
+                        title={t(`categories.${category.key}.title`)}
                         href={category.href}>
-                        {category.description}
+                        {t(`categories.${category.key}.description`)}
                       </ListItem>
                     ))}
                   </ul>
@@ -135,7 +134,7 @@ export default function Header() {
                 <NavigationMenuLink
                   href="/best"
                   className="group inline-flex h-10 w-max items-center justify-center rounded-md bg-background px-4 py-2 text-sm font-medium transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground focus:outline-none disabled:pointer-events-none disabled:opacity-50 data-[active]:bg-accent/50 data-[state=open]:bg-accent/50">
-                  베스트
+                  {t('navigation.best')}
                 </NavigationMenuLink>
               </NavigationMenuItem>
 
@@ -143,7 +142,7 @@ export default function Header() {
                 <NavigationMenuLink
                   href="/new"
                   className="group inline-flex h-10 w-max items-center justify-center rounded-md bg-background px-4 py-2 text-sm font-medium transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground focus:outline-none disabled:pointer-events-none disabled:opacity-50 data-[active]:bg-accent/50 data-[state=open]:bg-accent/50">
-                  신상품
+                  {t('navigation.new')}
                 </NavigationMenuLink>
               </NavigationMenuItem>
 
@@ -151,7 +150,7 @@ export default function Header() {
                 <NavigationMenuLink
                   href="/sale"
                   className="group inline-flex h-10 w-max items-center justify-center rounded-md bg-background px-4 py-2 text-sm font-medium transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground focus:outline-none disabled:pointer-events-none disabled:opacity-50 data-[active]:bg-accent/50 data-[state=open]:bg-accent/50">
-                  할인상품
+                  {t('navigation.sale')}
                 </NavigationMenuLink>
               </NavigationMenuItem>
             </NavigationMenuList>
@@ -161,7 +160,7 @@ export default function Header() {
           <div className="hidden md:flex items-center space-x-2 flex-1 max-w-sm mx-6">
             <div className="relative flex-1">
               <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground h-4 w-4" />
-              <Input placeholder="상품을 검색해보세요..." className="pl-10" />
+              <Input placeholder={t('search.placeholder')} className="pl-10" />
             </div>
           </div>
 
@@ -174,7 +173,7 @@ export default function Header() {
             <Button variant="ghost" size="icon" asChild>
               <Link href="/cart">
                 <ShoppingCart className="h-5 w-5" />
-                <span className="sr-only">장바구니</span>
+                <span className="sr-only">{t('user.cart')}</span>
               </Link>
             </Button>
 

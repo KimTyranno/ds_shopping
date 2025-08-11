@@ -15,6 +15,7 @@ import {
   Star,
   Truck,
 } from 'lucide-react'
+import { useTranslations } from 'next-intl'
 import Image from 'next/image'
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
@@ -30,6 +31,7 @@ export default function ProductDetailPage({
   const product = getProductById(id)
   const [selectedImage, setSelectedImage] = useState(0)
   const [quantity, setQuantity] = useState(1)
+  const t = useTranslations()
 
   if (!product) {
     notFound()
@@ -52,25 +54,13 @@ export default function ProductDetailPage({
       {/* 브레드크럼 */}
       <nav className="flex items-center space-x-2 text-sm text-muted-foreground mb-6">
         <Link href="/" className="hover:text-primary">
-          홈
+          {t('navigation.home')}
         </Link>
         <span>/</span>
         <Link
           href={`/categories/${product.category}`}
           className="hover:text-primary">
-          {product.category === 'electronics'
-            ? '전자제품'
-            : product.category === 'fashion'
-            ? '패션'
-            : product.category === 'home'
-            ? '홈&리빙'
-            : product.category === 'books'
-            ? '도서'
-            : product.category === 'sports'
-            ? '스포츠'
-            : product.category === 'beauty'
-            ? '뷰티'
-            : product.category}
+          {t(`categories.${product.category}.title`)}
         </Link>
         <span>/</span>
         <span className="text-foreground">{product.name}</span>
@@ -126,7 +116,7 @@ export default function ProductDetailPage({
           {/* 평점 */}
           <div className="flex items-center gap-2">
             <div className="flex items-center">
-              {[...Array(5)].map((_, i) => (
+              {Array.from({ length: 5 }).map((_, i) => (
                 <Star
                   key={i}
                   className={`w-5 h-5 ${
@@ -138,7 +128,8 @@ export default function ProductDetailPage({
               ))}
             </div>
             <span className="text-sm text-muted-foreground">
-              {product.rating} ({product.reviews}개 리뷰)
+              {product.rating} (
+              {t('product.reviews', { count: product.reviews })})
             </span>
           </div>
 
@@ -146,22 +137,24 @@ export default function ProductDetailPage({
           <div className="space-y-2">
             <div className="flex items-center gap-3">
               <span className="text-3xl font-bold text-primary">
-                {product.price.toLocaleString()}원
+                {product.price.toLocaleString() + t('common.currency')}
               </span>
               {product.originalPrice && (
                 <span className="text-xl text-muted-foreground line-through">
-                  {product.originalPrice.toLocaleString()}원
+                  {product.originalPrice.toLocaleString() +
+                    t('common.currency')}
                 </span>
               )}
             </div>
             {product.originalPrice && (
               <div className="text-sm text-red-600">
-                {Math.round(
-                  ((product.originalPrice - product.price) /
-                    product.originalPrice) *
-                    100,
-                )}
-                % 할인
+                {t('product.discount', {
+                  percent: Math.round(
+                    ((product.originalPrice - product.price) /
+                      product.originalPrice) *
+                      100,
+                  ),
+                })}
               </div>
             )}
           </div>
@@ -171,7 +164,7 @@ export default function ProductDetailPage({
 
           {/* 주요 특징 */}
           <div>
-            <h3 className="font-semibold mb-2">주요 특징</h3>
+            <h3 className="font-semibold mb-2">{t('product.features')}</h3>
             <ul className="space-y-1">
               {product.features.map((feature, index) => (
                 <li
@@ -187,7 +180,7 @@ export default function ProductDetailPage({
           {/* 수량 선택 */}
           <div className="space-y-4">
             <div className="flex items-center gap-4">
-              <span className="font-medium">수량:</span>
+              <span className="font-medium">{t('product.quantity')}</span>
               <div className="flex items-center border rounded-lg">
                 <Button
                   variant="ghost"
@@ -208,13 +201,15 @@ export default function ProductDetailPage({
                 </Button>
               </div>
               <span className="text-sm text-muted-foreground">
-                (재고: {product.stockCount}개)
+                ({t('product.stock', { count: product.stockCount })})
               </span>
             </div>
 
             {/* 총 가격 */}
             <div className="text-xl font-bold">
-              총 가격: {(product.price * quantity).toLocaleString()}원
+              {t('product.totalPrice', {
+                price: (product.price * quantity).toLocaleString(),
+              }) + t('common.currency')}
             </div>
           </div>
 
@@ -223,7 +218,7 @@ export default function ProductDetailPage({
             <div className="flex gap-3">
               <Button size="lg" className="flex-1">
                 <ShoppingCart className="w-5 h-5 mr-2" />
-                장바구니 담기
+                {t('product.addToCart')}
               </Button>
               <Button variant="outline" size="lg">
                 <Heart className="w-5 h-5" />
@@ -233,7 +228,7 @@ export default function ProductDetailPage({
               </Button>
             </div>
             <Button size="lg" variant="secondary" className="w-full">
-              바로 구매하기
+              {t('product.buyNow')}
             </Button>
           </div>
 
@@ -241,15 +236,15 @@ export default function ProductDetailPage({
           <div className="space-y-3 pt-6 border-t">
             <div className="flex items-center gap-3 text-sm">
               <Truck className="w-5 h-5 text-muted-foreground" />
-              <span>무료배송 (5만원 이상 구매시)</span>
+              <span>{t('product.freeShipping')}</span>
             </div>
             <div className="flex items-center gap-3 text-sm">
               <Shield className="w-5 h-5 text-muted-foreground" />
-              <span>100% 정품보장</span>
+              <span>{t('product.authentic')}</span>
             </div>
             <div className="flex items-center gap-3 text-sm">
               <RotateCcw className="w-5 h-5 text-muted-foreground" />
-              <span>7일 무료 반품/교환</span>
+              <span>{t('product.return')}</span>
             </div>
           </div>
         </div>
@@ -258,30 +253,42 @@ export default function ProductDetailPage({
       {/* 상세 정보 탭 */}
       <Tabs defaultValue="description" className="mb-12">
         <TabsList className="grid w-full grid-cols-3">
-          <TabsTrigger value="description">상품상세</TabsTrigger>
-          <TabsTrigger value="reviews">리뷰 ({product.reviews})</TabsTrigger>
-          <TabsTrigger value="qna">문의</TabsTrigger>
+          <TabsTrigger value="description">
+            {t('product.tabs.description')}
+          </TabsTrigger>
+          <TabsTrigger value="reviews">
+            {t('product.tabs.description', { count: product.reviews })}
+          </TabsTrigger>
+          <TabsTrigger value="qna">{t('product.tabs.qna')}</TabsTrigger>
         </TabsList>
 
         <TabsContent value="description" className="mt-6">
           <Card>
             <CardContent className="p-6">
               <div className="space-y-4">
-                <h3 className="text-xl font-semibold">상품 상세 정보</h3>
+                <h3 className="text-xl font-semibold">
+                  {t('product.details.title')}
+                </h3>
                 <p className="text-muted-foreground leading-relaxed">
                   {product.description}
                 </p>
                 <div className="grid md:grid-cols-2 gap-4 mt-6">
                   <div>
-                    <h4 className="font-medium mb-2">브랜드</h4>
+                    <h4 className="font-medium mb-2">
+                      {t('product.details.brand')}
+                    </h4>
                     <p className="text-muted-foreground">{product.brand}</p>
                   </div>
                   <div>
-                    <h4 className="font-medium mb-2">재고 상태</h4>
+                    <h4 className="font-medium mb-2">
+                      {t('product.details.stockStatus')}
+                    </h4>
                     <p className="text-muted-foreground">
                       {product.inStock
-                        ? `재고 있음 (${product.stockCount}개)`
-                        : '품절'}
+                        ? t('product.details.inStock', {
+                            count: product.stockCount,
+                          })
+                        : t('product.details.soldOut')}
                     </p>
                   </div>
                 </div>
@@ -318,7 +325,7 @@ export default function ProductDetailPage({
       {/* 관련 상품 */}
       {relatedProducts.length > 0 && (
         <div>
-          <h2 className="text-2xl font-bold mb-6">관련 상품</h2>
+          <h2 className="text-2xl font-bold mb-6">{t('product.related')}</h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {relatedProducts.map(relatedProduct => (
               <Card
@@ -364,7 +371,8 @@ export default function ProductDetailPage({
 
                     <div className="flex items-center justify-between">
                       <span className="font-bold text-primary">
-                        {relatedProduct.price.toLocaleString()}원
+                        {relatedProduct.price.toLocaleString() +
+                          t('common.currency')}
                       </span>
                     </div>
                   </div>

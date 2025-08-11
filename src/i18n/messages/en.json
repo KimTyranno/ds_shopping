@@ -1,0 +1,334 @@
+{
+  "common": {
+    "logo": "Simple Mall",
+    "support": "Support",
+    "currency": "WON",
+    "signup": "Sign Up",
+    "faq": "FAQ"
+  },
+  "metadata": {
+    "title": "Simple Mall - Discover Top Products",
+    "description": "Explore a variety of categories at great prices"
+  },
+  "navigation": {
+    "home": "Home",
+    "categories": "Categories",
+    "best": "Best",
+    "new": "New Arrivals",
+    "sale": "On Sale"
+  },
+  "user": {
+    "loginPrompt": "Log in to enjoy more benefits",
+    "login": "Login",
+    "menu": "User Menu",
+    "cart": "Cart",
+    "logout": "Logout",
+    "mypage": "My Page",
+    "orders": "Orders",
+    "wishlist": "Wishlist"
+  },
+  "search": {
+    "placeholder": "Search for products..."
+  },
+  "categories": {
+    "electronics": {
+      "title": "Electronics",
+      "description": "Smartphones, laptops, tablets, etc.",
+      "items": {
+        "smartphones": "Smartphones",
+        "laptops": "Laptops",
+        "tablets": "Tablets",
+        "earphones": "Earphones",
+        "smartwatch": "Smartwatches"
+      }
+    },
+    "fashion": {
+      "title": "Fashion",
+      "description": "Clothing, shoes, accessories",
+      "items": {
+        "mens": "Men's Clothing",
+        "womens": "Women's Clothing",
+        "shoes": "Shoes",
+        "bags": "Bags",
+        "accessories": "Accessories"
+      }
+    },
+    "home": {
+      "title": "Home & Living",
+      "description": "Furniture, interior, daily necessities",
+      "items": {
+        "furniture": "Furniture",
+        "interior": "Interior",
+        "kitchen": "Kitchenware",
+        "living": "Living essentials",
+        "bedding": "Bedding"
+      }
+    },
+    "books": {
+      "title": "Books",
+      "description": "Novels, self-help, professional books",
+      "items": {
+        "novel": "Novels",
+        "self-help": "Self-Help",
+        "computer": "Computer",
+        "cooking": "Cooking",
+        "travel": "Travel"
+      }
+    },
+    "sports": {
+      "title": "Sports",
+      "description": "Sportswear, sneakers, fitness gear",
+      "items": {
+        "sportswear": "Sportswear",
+        "sneakers": "Sneakers",
+        "fitness": "Fitness equipment",
+        "outdoor": "Outdoor gear",
+        "swimming": "Swimming gear"
+      }
+    },
+    "beauty": {
+      "title": "Beauty",
+      "description": "Skincare, makeup, perfumes",
+      "items": {
+        "skincare": "Skincare",
+        "makeup": "Makeup",
+        "haircare": "Haircare",
+        "perfume": "Perfume",
+        "mens": "Men's Cosmetics"
+      }
+    }
+  },
+  "bestProducts": {
+    "title": "Best Products",
+    "description": "Most popular products chosen by our customers",
+    "details": "View Details",
+    "addToCart": "Add to Cart",
+    "more": "View More Best Products"
+  },
+  "categorySection": {
+    "title": "Categories",
+    "description": "Browse products by category"
+  },
+  "featuredSection": {
+    "features": {
+      "freeShipping": {
+        "title": "Free Shipping",
+        "description": "Free shipping on purchases over 50,000 KRW"
+      },
+      "securePayment": {
+        "title": "Secure Payment",
+        "description": "100% secure payment system"
+      },
+      "support": {
+        "title": "24/7 Support",
+        "description": "Contact us anytime"
+      },
+      "points": {
+        "title": "Reward Points",
+        "description": "Earn 1% back on every purchase"
+      }
+    },
+    "cta": {
+      "title": "Sign up now and get special benefits!",
+      "description": "New members receive a 10% discount coupon and free shipping",
+      "browse": "Browse Products"
+    }
+  },
+  "footer": {
+    "description": "An online store that puts customer satisfaction first.",
+    "customerService": "Customer Service",
+    "companyInfo": "Company Info",
+    "company": {
+      "name": "Company Name: Simple Mall",
+      "ceo": "CEO: John Doe",
+      "bizNumber": "Business Reg. No: 123-45-67890",
+      "license": "E-commerce License: 2024-Seoul-Gangnam-1234",
+      "address": "Address: 123 Teheran-ro, Gangnam-gu, Seoul",
+      "customerCenter": "Customer Center: 1588-1234"
+    }
+  },
+  "error": {
+    "title": "An error occurred",
+    "backToLogin": "Back to login page",
+    "goHome": "Go to home",
+    "messages": {
+      "default": "An unknown error has occurred.",
+      "expiredToken": "Your session has expired. Please log in again.",
+      "unauthorized": "You do not have permission to access this page."
+    }
+  },
+  "notFound": {
+    "title": "Page not found.",
+    "goHome": "Go to Home"
+  },
+  "login": {
+    "title": "Login",
+    "description": "Enter your email and password to log in",
+    "email": "Email",
+    "password": "Password",
+    "emailPlaceholder": "your@email.com",
+    "passwordPlaceholder": "Enter your password",
+    "submit": "Log In",
+    "noAccount": "Don't have an account?",
+    "signup": "Sign up",
+    "loginFail": "Login failed.",
+    "messages": {
+      "success": "Email verification is complete.",
+      "info": "Check your email to activate your account"
+    }
+  },
+  "signup": {
+    "title": "Sign Up",
+    "subtitle": "Create a new account to start shopping",
+    "name": "Name",
+    "placeholder": "John",
+    "email": "Email",
+    "password": "Password",
+    "confirmPassword": "Confirm Password",
+    "passwordPlaceholder": "Enter at least 8 characters",
+    "confirmPasswordPlaceholder": "Re-enter your password",
+    "submit": "Sign Up",
+    "alreadyHaveAccount": "Already have an account?",
+    "loginLink": "Log in"
+  },
+  "product": {
+    "reviews": "{count} reviews",
+    "discount": "{percent}% off",
+    "features": "Key Features",
+    "quantity": "Quantity:",
+    "stock": "(Stock: {count})",
+    "totalPrice": "Total Price: {price}",
+    "addToCart": "Add to Cart",
+    "buyNow": "Buy Now",
+    "freeShipping": "Free shipping on orders over ₩50,000",
+    "authentic": "100% Authentic Guarantee",
+    "return": "7-Day Free Return/Exchange",
+    "tabs": {
+      "description": "Description",
+      "reviews": "Reviews ({count})",
+      "qna": "Q&A"
+    },
+    "details": {
+      "title": "Product Details",
+      "brand": "Brand",
+      "stockStatus": "Stock Status",
+      "inStock": "In stock ({count} items)",
+      "soldOut": "Sold out"
+    },
+    "related": "Related Products"
+  },
+  "orders": {
+    "title": "Order History",
+    "searchPlaceholder": "Search by order number or product name...",
+    "sortLatest": "Latest",
+    "sortOldest": "Oldest",
+    "emptyAll": {
+      "title": "No orders found",
+      "description": "Start your first purchase now",
+      "button": "Start Shopping"
+    },
+    "empty": {
+      "shipping": "No orders in shipping",
+      "completed": "No completed orders",
+      "cancelled": "No cancelled orders"
+    },
+    "tabs": {
+      "all": "All ({count})",
+      "shipping": "Shipping ({count})",
+      "completed": "Completed ({count})",
+      "cancelled": "Cancelled ({count})"
+    },
+    "card": {
+      "deliveryAddress": "Delivery Address",
+      "trackingNumber": "Tracking Number",
+      "totalAmount": "Total {amount} KRW",
+      "buttons": {
+        "writeReview": "Write Review",
+        "reorder": "Reorder",
+        "trackDelivery": "Track Delivery",
+        "cancelOrder": "Cancel Order",
+        "viewDetails": "View Details"
+      }
+    },
+    "status": {
+      "주문완료": "Order Placed",
+      "배송준비": "Preparing for Shipment",
+      "배송중": "Shipping",
+      "배송완료": "Delivered",
+      "주문취소": "Cancelled",
+      "반품완료": "Returned"
+    }
+  },
+  "mypage": {
+    "title": "My Page",
+    "description": "Manage your account information and order history",
+    "profile": {
+      "title": "Profile Information",
+      "description": "You can view and edit your personal information",
+      "name": "Name",
+      "email": "Email",
+      "joined": "Joined",
+      "edit": "Edit Profile"
+    },
+    "orders": {
+      "title": "Order History",
+      "description": "Check your recent orders",
+      "totalAmount": "Total Payment",
+      "viewAll": "View All Orders",
+      "status": {
+        "배송완료": "Delivered",
+        "배송중": "Shipping",
+        "주문완료": "Order Placed"
+      }
+    },
+    "quickLinks": {
+      "title": "Quick Links"
+    }
+  },
+  "category": {
+    "count": "Total {count} products",
+    "filter": "Filter",
+    "price": "Price",
+    "sort": "Sort",
+    "all": "All",
+    "under-50000": "Under 50,000₩",
+    "50000-100000": "₩50,000 - ₩100,000",
+    "100000-500000": "₩100,000 - ₩500,000",
+    "over-500000": "Over ₩500,000",
+    "popular": "Most Popular",
+    "price-low": "Lowest Price",
+    "price-high": "Highest Price",
+    "rating": "Top Rated",
+    "newest": "Newest",
+    "viewDetail": "View Details",
+    "addToCart": "Add to Cart",
+    "empty": {
+      "title": "No products found in this category.",
+      "button": "Return to Home",
+      "backToParent": "Go back to parent category"
+    }
+  },
+  "cart": {
+    "title": "Shopping Cart",
+    "itemsCount": "{count} items",
+    "empty": {
+      "title": "Your cart is empty",
+      "description": "Add some products to your cart",
+      "continue": "Continue shopping"
+    },
+    "selectAll": "Select all ({selected}/{total})",
+    "deleteSelected": "Remove selected",
+    "summary": {
+      "title": "Order Summary",
+      "productPrice": "Product Price",
+      "discount": "Discount",
+      "shipping": "Shipping",
+      "freeShippingThreshold": "Add {amount} more for free shipping",
+      "total": "Total Price",
+      "order": "Order Now ({count})",
+      "continue": "Continue Shopping"
+    },
+    "price": "{price}₩",
+    "free": "Free"
+  }
+}
