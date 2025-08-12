@@ -21,6 +21,7 @@ import {
 import { useTranslations } from 'next-intl'
 import Link from 'next/link'
 import { useState } from 'react'
+import LanguageSwitch from './LanguageSwich'
 import LogoutButton from './LogoutButton'
 import MyPage from './MyPage'
 import UserInfo from './UserInfo'
@@ -35,7 +36,11 @@ type category = {
   }[]
 }
 
-const MobileMenus = ({ categories }: { categories: category[] }) => {
+type MobileMenusProps = {
+  categories: category[]
+}
+
+const MobileMenus = ({ categories }: MobileMenusProps) => {
   const t = useTranslations()
   const [isOpen, setIsOpen] = useState(false)
   const handleClose = () => {
@@ -62,6 +67,15 @@ const MobileMenus = ({ categories }: { categories: category[] }) => {
         </SheetHeader>
 
         <div className="flex flex-col h-full">
+          {/* 언어 전환 (모바일) */}
+          <div className="mt-4 p-3 bg-muted/50 rounded-lg">
+            <div className="flex items-center justify-between">
+              <span className="text-sm font-medium">
+                {t('common.language')}
+              </span>
+              <LanguageSwitch />
+            </div>
+          </div>
           {/* 사용자 정보 */}
           <UserInfo handleClose={handleClose} />
 
