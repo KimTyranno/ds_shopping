@@ -126,14 +126,10 @@ export default async function SubcategoryPage({
             </SelectTrigger>
             <SelectContent>
               <SelectItem value="popular">{t('popular')}</SelectItem>
-              <SelectItem value="price-low">
-                {t('price-low')}가격 낮은순
-              </SelectItem>
-              <SelectItem value="price-high">
-                {t('price-high')}가격 높은순
-              </SelectItem>
-              <SelectItem value="rating">{t('rating')}평점순</SelectItem>
-              <SelectItem value="newest">{t('newest')}최신순</SelectItem>
+              <SelectItem value="price-low">{t('price-low')}</SelectItem>
+              <SelectItem value="price-high">{t('price-high')}</SelectItem>
+              <SelectItem value="rating">{t('rating')}</SelectItem>
+              <SelectItem value="newest">{t('newest')}</SelectItem>
             </SelectContent>
           </Select>
         </div>
