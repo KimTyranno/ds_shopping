@@ -8,10 +8,10 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select'
+import { Link } from '@/i18n/navigation'
 import { Award, Filter, ShoppingCart, Star } from 'lucide-react'
 import { useTranslations } from 'next-intl'
 import Image from 'next/image'
-import Link from 'next/link'
 import { getBestProducts } from '../products/action'
 
 export default function BestPage() {

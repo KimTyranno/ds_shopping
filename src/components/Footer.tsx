@@ -1,6 +1,6 @@
+import { Link } from '@/i18n/navigation'
 import { Facebook, Instagram, Twitter, Youtube } from 'lucide-react'
 import { useTranslations } from 'next-intl'
-import Link from 'next/link'
 
 export default function Footer() {
   const tFooter = useTranslations('footer')

@@ -8,11 +8,11 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu'
+import { Link } from '@/i18n/navigation'
 import { createClient } from '@/lib/client'
 import useStore from '@/lib/store'
 import { LogOut, Settings, ShoppingBag, User } from 'lucide-react'
 import { useTranslations } from 'next-intl'
-import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 
 export default function AuthButton() {

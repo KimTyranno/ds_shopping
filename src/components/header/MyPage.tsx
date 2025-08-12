@@ -1,9 +1,9 @@
 'use client'
 
+import { Link } from '@/i18n/navigation'
 import useStore from '@/lib/store'
 import { Heart, Package, ShoppingCart, User } from 'lucide-react'
 import { useTranslations } from 'next-intl'
-import Link from 'next/link'
 
 const MyPage = () => {
   const t = useTranslations()

@@ -9,10 +9,10 @@ import {
 } from '@/components/ui/card'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
+import { Link } from '@/i18n/navigation'
 import { createClient } from '@/lib/server'
 import { Mail, Package, ShoppingBag, Truck, User } from 'lucide-react'
 import { getTranslations } from 'next-intl/server'
-import Link from 'next/link'
 import { redirect } from 'next/navigation'
 
 // 더미 주문 데이터

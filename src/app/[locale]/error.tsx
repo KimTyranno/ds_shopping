@@ -8,9 +8,9 @@ import {
   CardHeader,
   CardTitle,
 } from '@/components/ui/card'
+import { Link } from '@/i18n/navigation'
 import { AlertCircle } from 'lucide-react'
 import { useTranslations } from 'next-intl'
-import Link from 'next/link'
 
 export default function Error({
   searchParams,
@@ -28,7 +28,9 @@ export default function Error({
             </div>
             <CardTitle className="text-2xl">{t('title')}</CardTitle>
             <CardDescription>
-              {t(`messages.${searchParams?.message || t('default')}`)}
+              {searchParams?.message
+                ? t(`messages.${searchParams.message}`)
+                : t('messages.default')}
             </CardDescription>
           </CardHeader>
           <CardContent className="text-center">

@@ -9,9 +9,9 @@ import {
   NavigationMenuList,
   NavigationMenuTrigger,
 } from '@/components/ui/navigation-menu'
+import { Link } from '@/i18n/navigation'
 import { Search, ShoppingCart } from 'lucide-react'
 import { useLocale, useTranslations } from 'next-intl'
-import Link from 'next/link'
 import LanguageSwitch from './LanguageSwich'
 import ListItem from './ListItem'
 import MobileMenus from './MobileMenus'

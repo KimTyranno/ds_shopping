@@ -8,6 +8,7 @@ import {
   SheetTitle,
   SheetTrigger,
 } from '@/components/ui/sheet'
+import { Link } from '@/i18n/navigation'
 import { Separator } from '@radix-ui/react-separator'
 import {
   Award,
@@ -19,7 +20,6 @@ import {
   Tag,
 } from 'lucide-react'
 import { useTranslations } from 'next-intl'
-import Link from 'next/link'
 import { useState } from 'react'
 import LanguageSwitch from './LanguageSwich'
 import LogoutButton from './LogoutButton'

@@ -1,7 +1,7 @@
 import { Card, CardContent } from '@/components/ui/card'
+import { Link } from '@/i18n/navigation'
 import { Book, Dumbbell, Heart, Home, Shirt, Smartphone } from 'lucide-react'
 import { useTranslations } from 'next-intl'
-import Link from 'next/link'
 
 export default function Categories() {
   const t = useTranslations()
