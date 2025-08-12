@@ -1,3 +1,4 @@
+import { Alert, AlertDescription } from '@/components/ui/alert'
 import { Button } from '@/components/ui/button'
 import {
   Card,
@@ -9,16 +10,35 @@ import {
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { Separator } from '@/components/ui/separator'
-import { useTranslations } from 'next-intl'
-import Link from 'next/link'
+import { Link } from '@/i18n/navigation'
+import { cn } from '@/lib/utils'
+import { CircleAlert } from 'lucide-react'
+import { getTranslations } from 'next-intl/server'
 import { signupAction } from './actions'
 
-export default function SignupPage() {
-  const tSignup = useTranslations('signup')
-  const tCommon = useTranslations('common')
+export default async function SignupPage({
+  searchParams,
+  params,
+}: {
+  searchParams: Promise<{ error: string; message: string }>
+  params: Promise<{ locale: string }>
+}) {
+  const { error, message } = await searchParams
+  const tSignup = await getTranslations('signup')
+  const tCommon = await getTranslations('common')
+  const { locale } = await params
+
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-md w-full space-y-8">
+        {(error || message) && (
+          <Alert className={cn('text-white bg-red-500')}>
+            <CircleAlert />
+            <AlertDescription className="text-inherit">
+              {error ? tSignup(error) : message}
+            </AlertDescription>
+          </Alert>
+        )}
         <div className="text-center">
           <Link
             href="/"
@@ -41,6 +61,7 @@ export default function SignupPage() {
           </CardHeader>
           <CardContent>
             <form className="space-y-4">
+              <input type="hidden" name="locale" value={locale} />
               <div className="space-y-2">
                 <Label htmlFor="name">{tSignup('name')}</Label>
                 <Input

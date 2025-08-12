@@ -13,12 +13,11 @@ export async function signupAction(formData: FormData) {
   const email = formData.get('email') as string
   const password = formData.get('password') as string
   const confirmPassword = formData.get('confirmPassword') as string
+  const locale = (formData.get('locale') as string) || 'ko'
 
   // 비밀번호 확인
   if (password !== confirmPassword) {
-    redirect(
-      `/signup?error=${encodeURIComponent('비밀번호가 일치하지 않습니다')}`,
-    )
+    redirect(`/${locale}/signup?error=passwordMismatch`)
   }
 
   const { data, error } = await supabase.auth.signUp({
@@ -28,12 +27,12 @@ export async function signupAction(formData: FormData) {
       data: {
         name,
       },
-      emailRedirectTo: `${baseUrl}/login?messageType=success`,
+      emailRedirectTo: `${baseUrl}/${locale}/login?messageType=success`,
     },
   })
 
   if (error) {
-    redirect('/signup?error=' + encodeURIComponent(error.message))
+    redirect(`/${locale}/signup?message=` + encodeURIComponent(error.message))
   }
 
   if (data.user) {
@@ -44,5 +43,5 @@ export async function signupAction(formData: FormData) {
   }
 
   revalidatePath('/', 'layout')
-  redirect(`/login?messageType=info`)
+  redirect(`/${locale}/login?messageType=info`)
 }

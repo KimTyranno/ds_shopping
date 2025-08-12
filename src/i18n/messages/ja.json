@@ -204,7 +204,8 @@
     "confirmPasswordPlaceholder": "もう一度入力してください",
     "submit": "登録する",
     "alreadyHaveAccount": "すでにアカウントをお持ちですか？",
-    "loginLink": "ログインする"
+    "loginLink": "ログインする",
+    "passwordMismatch": "パスワードが一致しません"
   },
   "product": {
     "reviews": "{count}件のレビュー",
