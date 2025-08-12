@@ -349,11 +349,16 @@ export const getProductById = (id: string) => {
 }
 
 export const getBestProducts = () => {
-  return products.filter(product => product.badge === 'BEST').slice(0, 8)
+  return products
+    .filter(product => product.badge === 'BEST' || product.rating >= 4.7)
+    .slice(0, 12)
 }
 
 export const getNewProducts = () => {
-  return products.filter(product => product.badge === 'NEW').slice(0, 8)
+  return products
+    .filter(product => product.badge === 'NEW')
+    .concat(products.filter(product => product.badge !== 'NEW').slice(0, 8))
+    .slice(0, 12)
 }
 
 export const getSaleProducts = () => {
@@ -361,5 +366,5 @@ export const getSaleProducts = () => {
     .filter(
       product => product.originalPrice && product.originalPrice > product.price,
     )
-    .slice(0, 8)
+    .slice(0, 12)
 }

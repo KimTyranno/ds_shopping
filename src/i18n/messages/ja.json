@@ -2,7 +2,7 @@
   "common": {
     "logo": "シンプルモール",
     "support": "カスタマーサポート",
-    "currency": "円",
+    "currency": "KRW",
     "signup": "会員登録する",
     "faq": "よくある質問"
   },
@@ -16,6 +16,19 @@
     "best": "人気商品",
     "new": "新商品",
     "sale": "セール商品"
+  },
+  "new": {
+    "title": "新商品",
+    "description": "最新の新商品をいち早くチェックしましょう"
+  },
+  "sale": {
+    "title": "セール商品",
+    "description": "特別割引でお得にゲットしましょう",
+    "banner": {
+      "title": "特価セール実施中！",
+      "description": "最大{percent}%オフでご提供。数量限定のためお早めに！"
+    },
+    "saved": "{amount} KRWお得"
   },
   "user": {
     "loginPrompt": "ログインしてさらに多くの特典をゲット！",
@@ -101,6 +114,7 @@
   "bestProducts": {
     "title": "人気商品",
     "description": "お客様に最も選ばれた人気商品",
+    "pageDescription": "お客様に最も選ばれた人気商品をご覧ください",
     "details": "詳細を見る",
     "addToCart": "カートに追加",
     "more": "もっと見る"
@@ -113,7 +127,7 @@
     "features": {
       "freeShipping": {
         "title": "送料無料",
-        "description": "5万円以上のご購入で送料無料"
+        "description": "50,000 KRW 以上のご購入で送料無料"
       },
       "securePayment": {
         "title": "安全な決済",
@@ -200,7 +214,7 @@
     "totalPrice": "合計金額：{price}",
     "addToCart": "カートに追加",
     "buyNow": "今すぐ購入",
-    "freeShipping": "送料無料（5万円以上購入時）",
+    "freeShipping": "送料無料（50,000 KRW 以上購入時）",
     "authentic": "100% 正規品保証",
     "return": "7日以内の無料返品・交換",
     "tabs": {
@@ -241,13 +255,45 @@
     "card": {
       "deliveryAddress": "配送先",
       "trackingNumber": "追跡番号",
-      "totalAmount": "合計：{amount}円",
+      "totalAmount": "合計：{amount} KRW",
       "buttons": {
         "writeReview": "レビューを書く",
         "reorder": "再注文",
         "trackDelivery": "配送追跡",
         "cancelOrder": "注文キャンセル",
         "viewDetails": "詳細を見る"
+      }
+    },
+    "detail": {
+      "title": "注文詳細",
+      "orderNumber": "注文番号: {id}",
+      "statusTitle": "注文状況",
+      "orderDate": "注文日時",
+      "trackingNumber": "追跡番号",
+      "trackingButton": "配送状況を確認",
+      "itemsTitle": "注文商品 ({count}件)",
+      "deliveryInfo": "配送情報",
+      "recipient": "受取人",
+      "phone": "電話番号",
+      "address": "配送先住所",
+      "memo": "配送メモ",
+      "paymentInfo": "支払情報",
+      "subtotal": "商品合計",
+      "discount": "割引金額",
+      "deliveryFee": "配送料",
+      "deliveryFree": "無料",
+      "total": "合計金額",
+      "paymentMethod": "支払方法",
+      "paymentDate": "支払日時",
+      "ordererInfo": "注文者情報",
+      "name": "氏名",
+      "email": "メールアドレス",
+      "actions": {
+        "writeReview": "レビューを書く",
+        "reorder": "再注文",
+        "requestReturn": "返品・交換申請",
+        "cancelOrder": "注文をキャンセル",
+        "printReceipt": "領収書を印刷"
       }
     },
     "status": {
@@ -285,27 +331,61 @@
       "title": "クイックリンク"
     }
   },
+  "wishlist": {
+    "title": "お気に入り",
+    "count": "{count}件の商品",
+    "empty": {
+      "title": "お気に入りが空です",
+      "description": "気に入った商品を追加してみましょう",
+      "button": "ショッピングを始める"
+    },
+    "actions": {
+      "selectAll": "すべて選択（{selected}/{total}）",
+      "addToCart": "カートに追加",
+      "removeSelected": "選択した商品を削除",
+      "added": "{count}件の商品がカートに追加されました。"
+    },
+    "addedAt": "{date} に追加",
+    "detail": "詳細を見る",
+    "cart": "カート",
+    "discount": "{percent}% 割引"
+  },
   "category": {
     "count": "全{count}件の商品",
     "filter": "フィルター",
     "price": "価格",
     "sort": "並び替え",
     "all": "すべて",
-    "under-50000": "5万円以下",
-    "50000-100000": "5～10万円",
-    "100000-500000": "10～50万円",
-    "over-500000": "50万円以上",
+    "under-50000": "50,000₩ 以下",
+    "50000-100000": "₩50,000～₩100,000",
+    "100000-500000": "₩100,000～₩500,000",
+    "over-500000": "₩500,000 以上",
     "popular": "人気順",
     "price-low": "価格が安い順",
     "price-high": "価格が高い順",
     "rating": "評価順",
     "newest": "新着順",
+    "reviews": "レビュー数順",
+    "discount-high": "割引率が高い順",
+    "discount-low": "割引率が低い順",
     "viewDetail": "詳細を見る",
     "addToCart": "カートに追加",
+    "discount": "{percent}%割引",
     "empty": {
       "title": "このカテゴリーには商品がありません。",
+      "noBestProducts": "ベスト商品がありません。",
+      "noNewProducts": "新商品がありません。",
+      "noSaleProducts": "セール商品がありません。",
       "button": "ホームに戻る",
       "backToParent": "上位カテゴリーに戻る"
+    },
+    "categories": {
+      "electronics": "電子製品",
+      "fashion": "ファッション",
+      "home": "ホーム＆リビング",
+      "books": "書籍",
+      "sports": "スポーツ",
+      "beauty": "ビューティー"
     }
   },
   "cart": {
@@ -323,12 +403,12 @@
       "productPrice": "商品金額",
       "discount": "割引金額",
       "shipping": "送料",
-      "freeShippingThreshold": "あと{amount}円で送料無料",
+      "freeShippingThreshold": "あと{amount} KRWで送料無料",
       "total": "合計金額",
       "order": "注文する（{count}件）",
       "continue": "ショッピングを続ける"
     },
-    "price": "{price}円",
+    "price": "{price} KRW",
     "free": "無料"
   }
 }

@@ -8,46 +8,29 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select'
-import { Filter, ShoppingCart, Star } from 'lucide-react'
-import { getTranslations } from 'next-intl/server'
+import { Filter, ShoppingCart, Sparkles, Star } from 'lucide-react'
+import { useTranslations } from 'next-intl'
 import Image from 'next/image'
 import Link from 'next/link'
-import { notFound } from 'next/navigation'
-import { getProductsByCategory } from '../actions'
+import { getNewProducts } from '../products/action'
 
-const categoryNames: Record<string, string> = {
-  electronics: '전자제품',
-  fashion: '패션',
-  home: '홈&리빙',
-  books: '도서',
-  sports: '스포츠',
-  beauty: '뷰티',
-}
-
-export default async function CategoryPage({
-  params,
-}: {
-  params: Promise<{ category: string }>
-}) {
-  const { category } = await params
-  const t = await getTranslations('category')
-  const tCategories = await getTranslations('categories')
-  const tCommon = await getTranslations('common')
-
-  if (!categoryNames[category]) {
-    notFound()
-  }
-
-  const products = getProductsByCategory(category)
+export default function NewPage() {
+  const newProducts = getNewProducts()
+  const t = useTranslations('category')
+  const tNew = useTranslations('new')
+  const tCommon = useTranslations('common')
+  const tNav = useTranslations('navigation')
 
   return (
     <div className="container mx-auto px-4 py-8">
       <div className="mb-8">
-        <h1 className="text-3xl font-bold mb-2">
-          {tCategories(`${category}.title`)}
-        </h1>
-        <p className="text-muted-foreground">
-          {t('count', { count: products.length })}
+        <div className="flex items-center gap-3 mb-4">
+          <Sparkles className="h-8 w-8 text-primary" />
+          <h1 className="text-3xl font-bold">{tNew('title')}</h1>
+        </div>
+        <p className="text-muted-foreground">{tNew('description')}</p>
+        <p className="text-sm text-muted-foreground mt-1">
+          {t('count', { count: newProducts.length })}
         </p>
       </div>
 
@@ -58,6 +41,23 @@ export default async function CategoryPage({
           <span className="text-sm font-medium">{t('filter')}:</span>
         </div>
         <div className="flex flex-wrap gap-2">
+          <Select>
+            <SelectTrigger className="w-[120px]">
+              <SelectValue placeholder={tNav('categories')} />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectItem value="all">{t('all')}</SelectItem>
+              <SelectItem value="electronics">
+                {t('categories.electronics')}
+              </SelectItem>
+              <SelectItem value="fashion">{t('categories.fashion')}</SelectItem>
+              <SelectItem value="home">{t('categories.home')}</SelectItem>
+              <SelectItem value="books">{t('categories.books')}</SelectItem>
+              <SelectItem value="sports">{t('categories.sports')}</SelectItem>
+              <SelectItem value="beauty">{t('categories.beauty')}</SelectItem>
+            </SelectContent>
+          </Select>
+
           <Select>
             <SelectTrigger className="w-[120px]">
               <SelectValue placeholder={t('price')} />
@@ -78,19 +78,19 @@ export default async function CategoryPage({
               <SelectValue placeholder={t('sort')} />
             </SelectTrigger>
             <SelectContent>
+              <SelectItem value="newest">{t('newest')}</SelectItem>
               <SelectItem value="popular">{t('popular')}</SelectItem>
+              <SelectItem value="rating">{t('rating')}</SelectItem>
               <SelectItem value="price-low">{t('price-low')}</SelectItem>
               <SelectItem value="price-high">{t('price-high')}</SelectItem>
-              <SelectItem value="rating">{t('rating')}</SelectItem>
-              <SelectItem value="newest">{t('newest')}</SelectItem>
             </SelectContent>
           </Select>
         </div>
       </div>
 
-      {/* 상품 그리드 */}
+      {/* 신상품 그리드 */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-        {products.map(product => (
+        {newProducts.map(product => (
           <Card
             key={product.id}
             className="group hover:shadow-lg transition-shadow">
@@ -105,12 +105,12 @@ export default async function CategoryPage({
                     className="w-full h-64 object-cover rounded-t-lg group-hover:scale-105 transition-transform"
                   />
                 </Link>
+
                 {product.badge && (
                   <Badge
                     className="absolute top-3 left-3"
-                    variant={
-                      product.badge === 'BEST' ? 'default' : 'secondary'
-                    }>
+                    variant={product.badge === 'NEW' ? 'default' : 'secondary'}>
+                    <Sparkles className="w-3 h-3 mr-1" />
                     {product.badge}
                   </Badge>
                 )}
@@ -123,11 +123,15 @@ export default async function CategoryPage({
                   </h3>
                 </Link>
 
+                <p className="text-sm text-muted-foreground mb-2">
+                  {product.brand}
+                </p>
+
                 <div className="flex items-center mb-2">
                   <div className="flex items-center">
                     <Star className="w-4 h-4 fill-yellow-400 text-yellow-400" />
                     <span className="text-sm text-muted-foreground ml-1">
-                      {product.rating} ({product.reviews})
+                      {product.rating} ({product.reviews.toLocaleString()})
                     </span>
                   </div>
                 </div>
@@ -138,10 +142,21 @@ export default async function CategoryPage({
                       {product.price.toLocaleString() + tCommon('currency')}
                     </span>
                     {product.originalPrice && (
-                      <span className="text-sm text-muted-foreground line-through ml-2">
-                        {product.originalPrice.toLocaleString() +
-                          tCommon('currency')}
-                      </span>
+                      <div className="flex items-center gap-2">
+                        <span className="text-sm text-muted-foreground line-through">
+                          {product.originalPrice.toLocaleString() +
+                            tCommon('currency')}
+                        </span>
+                        <Badge variant="destructive" className="text-xs">
+                          {t('discount', {
+                            percent: Math.round(
+                              ((product.originalPrice - product.price) /
+                                product.originalPrice) *
+                                100,
+                            ),
+                          })}
+                        </Badge>
+                      </div>
                     )}
                   </div>
                 </div>
@@ -169,10 +184,11 @@ export default async function CategoryPage({
         ))}
       </div>
 
-      {products.length === 0 && (
+      {newProducts.length === 0 && (
         <div className="text-center py-16">
+          <Sparkles className="h-16 w-16 mx-auto text-muted-foreground mb-4" />
           <p className="text-lg text-muted-foreground mb-4">
-            {t('empty.title')}
+            {t('empty.noNewProducts')}
           </p>
           <Button asChild>
             <Link href="/">{t('empty.button')}</Link>
