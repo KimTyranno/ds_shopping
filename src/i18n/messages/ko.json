@@ -17,6 +17,19 @@
     "new": "신상품",
     "sale": "할인상품"
   },
+  "new": {
+    "title": "신상품",
+    "description": "따끈따끈한 신상품들을 가장 먼저 만나보세요"
+  },
+  "sale": {
+    "title": "할인상품",
+    "description": "특별한 할인 혜택으로 더욱 저렴하게 만나보세요",
+    "banner": {
+      "title": "특가 할인 진행중!",
+      "description": "최대 {percent}% 할인된 가격으로 만나보세요. 한정 수량이니 서둘러 주세요!"
+    },
+    "saved": "{amount}원 절약"
+  },
   "user": {
     "loginPrompt": "로그인하고 더 많은 혜택을 받아보세요",
     "login": "로그인",
@@ -101,6 +114,7 @@
   "bestProducts": {
     "title": "베스트 상품",
     "description": "고객들이 가장 많이 선택한 인기 상품들",
+    "pageDescription": "고객들이 가장 많이 선택한 인기 상품들을 만나보세요",
     "details": "상세보기",
     "addToCart": "장바구니",
     "more": "베스트 상품 더보기"
@@ -250,6 +264,38 @@
         "viewDetails": "상세보기"
       }
     },
+    "detail": {
+      "title": "주문 상세",
+      "orderNumber": "주문번호: {id}",
+      "statusTitle": "주문 상태",
+      "orderDate": "주문일시",
+      "trackingNumber": "운송장번호",
+      "trackingButton": "배송 조회",
+      "itemsTitle": "주문 상품 ({count}개)",
+      "deliveryInfo": "배송 정보",
+      "recipient": "받는 분",
+      "phone": "연락처",
+      "address": "배송 주소",
+      "memo": "배송 메모",
+      "paymentInfo": "결제 정보",
+      "subtotal": "상품금액",
+      "discount": "할인금액",
+      "deliveryFee": "배송비",
+      "deliveryFree": "무료",
+      "total": "총 결제금액",
+      "paymentMethod": "결제방법",
+      "paymentDate": "결제일시",
+      "ordererInfo": "주문자 정보",
+      "name": "이름",
+      "email": "이메일",
+      "actions": {
+        "writeReview": "리뷰 작성",
+        "reorder": "재주문",
+        "requestReturn": "반품/교환 신청",
+        "cancelOrder": "주문 취소",
+        "printReceipt": "영수증 출력"
+      }
+    },
     "status": {
       "주문완료": "주문완료",
       "배송준비": "배송준비",
@@ -285,6 +331,25 @@
       "title": "빠른 링크"
     }
   },
+  "wishlist": {
+    "title": "찜목록",
+    "count": "{count}개 상품",
+    "empty": {
+      "title": "찜목록이 비어있습니다",
+      "description": "마음에 드는 상품을 찜해보세요",
+      "button": "쇼핑하러 가기"
+    },
+    "actions": {
+      "selectAll": "전체 선택 ({selected}/{total})",
+      "addToCart": "장바구니 담기",
+      "removeSelected": "선택 삭제",
+      "added": "{count}개 상품이 장바구니에 추가되었습니다."
+    },
+    "addedAt": "{date} 추가",
+    "detail": "상세보기",
+    "cart": "장바구니",
+    "discount": "{percent}% 할인"
+  },
   "category": {
     "count": "총 {count}개의 상품",
     "filter": "필터",
@@ -300,12 +365,27 @@
     "price-high": "가격 높은순",
     "rating": "평점순",
     "newest": "최신순",
+    "reviews": "리뷰 많은순",
+    "discount-high": "할인율 높은순",
+    "discount-low": "할인율 낮은순",
     "viewDetail": "상세보기",
     "addToCart": "장바구니",
+    "discount": "{percent}% 할인",
     "empty": {
       "title": "해당 카테고리에 상품이 없습니다.",
+      "noBestProducts": "베스트 상품이 없습니다.",
+      "noNewProducts": "신상품이 없습니다.",
+      "noSaleProducts": "할인상품이 없습니다.",
       "button": "홈으로 돌아가기",
       "backToParent": "상위 카테고리로 돌아가기"
+    },
+    "categories": {
+      "electronics": "전자제품",
+      "fashion": "패션",
+      "home": "홈&리빙",
+      "books": "도서",
+      "sports": "스포츠",
+      "beauty": "뷰티"
     }
   },
   "cart": {

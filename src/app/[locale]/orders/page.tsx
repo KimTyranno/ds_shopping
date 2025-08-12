@@ -12,6 +12,7 @@ import {
   SelectValue,
 } from '@/components/ui/select'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
+import { useRouter } from '@/i18n/navigation'
 import {
   ArrowLeft,
   CheckCircle,
@@ -214,6 +215,7 @@ export default function OrdersPage() {
   const completedOrders = getFilteredOrders('배송완료')
   const shippingOrders = getFilteredOrders('배송중')
   const cancelledOrders = getFilteredOrders('주문취소')
+  const router = useRouter()
 
   const OrderCard = ({ order }: { order: Order }) => (
     <Card key={order.id} className="mb-4">
@@ -299,7 +301,11 @@ export default function OrdersPage() {
                 {t('card.buttons.cancelOrder')}
               </Button>
             )}
-            <Button variant="outline" size="sm" className="bg-transparent">
+            <Button
+              onClick={() => router.push(`/orders/${order.id}`)}
+              variant="outline"
+              size="sm"
+              className="bg-transparent cursor-pointer">
               {t('card.buttons.viewDetails')}
             </Button>
           </div>

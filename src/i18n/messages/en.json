@@ -2,7 +2,7 @@
   "common": {
     "logo": "Simple Mall",
     "support": "Support",
-    "currency": "WON",
+    "currency": "KRW",
     "signup": "Sign Up",
     "faq": "FAQ"
   },
@@ -16,6 +16,19 @@
     "best": "Best",
     "new": "New Arrivals",
     "sale": "On Sale"
+  },
+  "new": {
+    "title": "New Arrivals",
+    "description": "Be the first to explore our latest new products"
+  },
+  "sale": {
+    "title": "Sale Products",
+    "description": "Enjoy special discounts and save more",
+    "banner": {
+      "title": "Special Discounts Ongoing!",
+      "description": "Get up to {percent}% off. Limited stock available—hurry!"
+    },
+    "saved": "Save {amount} KRW"
   },
   "user": {
     "loginPrompt": "Log in to enjoy more benefits",
@@ -101,6 +114,7 @@
   "bestProducts": {
     "title": "Best Products",
     "description": "Most popular products chosen by our customers",
+    "pageDescription": "Check out our most popular products chosen by customers",
     "details": "View Details",
     "addToCart": "Add to Cart",
     "more": "View More Best Products"
@@ -250,6 +264,38 @@
         "viewDetails": "View Details"
       }
     },
+    "detail": {
+      "title": "Order Details",
+      "orderNumber": "Order ID: {id}",
+      "statusTitle": "Order Status",
+      "orderDate": "Order Date",
+      "trackingNumber": "Tracking Number",
+      "trackingButton": "Track Shipment",
+      "itemsTitle": "Ordered Items ({count})",
+      "deliveryInfo": "Delivery Information",
+      "recipient": "Recipient",
+      "phone": "Phone",
+      "address": "Shipping Address",
+      "memo": "Delivery Memo",
+      "paymentInfo": "Payment Information",
+      "subtotal": "Subtotal",
+      "discount": "Discount",
+      "deliveryFee": "Shipping Fee",
+      "deliveryFree": "Free",
+      "total": "Total Amount",
+      "paymentMethod": "Payment Method",
+      "paymentDate": "Payment Date",
+      "ordererInfo": "Orderer Information",
+      "name": "Name",
+      "email": "Email",
+      "actions": {
+        "writeReview": "Write Review",
+        "reorder": "Reorder",
+        "requestReturn": "Request Return/Exchange",
+        "cancelOrder": "Cancel Order",
+        "printReceipt": "Print Receipt"
+      }
+    },
     "status": {
       "주문완료": "Order Placed",
       "배송준비": "Preparing for Shipment",
@@ -285,6 +331,25 @@
       "title": "Quick Links"
     }
   },
+  "wishlist": {
+    "title": "Wishlist",
+    "count": "{count} items",
+    "empty": {
+      "title": "Your wishlist is empty",
+      "description": "Add products you love to your wishlist",
+      "button": "Start Shopping"
+    },
+    "actions": {
+      "selectAll": "Select All ({selected}/{total})",
+      "addToCart": "Add to Cart",
+      "removeSelected": "Remove Selected",
+      "added": "{count} items added to cart."
+    },
+    "addedAt": "Added on {date}",
+    "detail": "View Details",
+    "cart": "Cart",
+    "discount": "{percent}% OFF"
+  },
   "category": {
     "count": "Total {count} products",
     "filter": "Filter",
@@ -300,12 +365,27 @@
     "price-high": "Highest Price",
     "rating": "Top Rated",
     "newest": "Newest",
+    "reviews": "Most Reviewed",
+    "discount-high": "Highest Discount",
+    "discount-low": "Lowest Discount",
     "viewDetail": "View Details",
     "addToCart": "Add to Cart",
+    "discount": "{percent}% off",
     "empty": {
       "title": "No products found in this category.",
+      "noBestProducts": "No best products available.",
+      "noNewProducts": "No new products available.",
+      "noSaleProducts": "No sale products available.",
       "button": "Return to Home",
       "backToParent": "Go back to parent category"
+    },
+    "categories": {
+      "electronics": "Electronics",
+      "fashion": "Fashion",
+      "home": "Home & Living",
+      "books": "Books",
+      "sports": "Sports",
+      "beauty": "Beauty"
     }
   },
   "cart": {
