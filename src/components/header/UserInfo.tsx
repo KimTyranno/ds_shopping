@@ -1,8 +1,8 @@
 'use client'
 
+import { Link } from '@/i18n/navigation'
 import useStore from '@/lib/store'
 import { useTranslations } from 'next-intl'
-import Link from 'next/link'
 import { Avatar, AvatarFallback } from '../ui/avatar'
 import { Button } from '../ui/button'
 

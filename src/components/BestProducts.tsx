@@ -1,10 +1,10 @@
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardFooter } from '@/components/ui/card'
+import { Link } from '@/i18n/navigation'
 import { ShoppingCart, Star } from 'lucide-react'
 import { useTranslations } from 'next-intl'
 import Image from 'next/image'
-import Link from 'next/link'
 
 // 임시 베스트 상품 데이터
 const bestProducts = [

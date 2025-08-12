@@ -12,11 +12,11 @@ import {
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { Separator } from '@/components/ui/separator'
+import { Link } from '@/i18n/navigation'
 import useStore from '@/lib/store'
 import { cn } from '@/lib/utils'
 import { CircleAlert, MailCheck } from 'lucide-react'
-import { useTranslations } from 'next-intl'
-import Link from 'next/link'
+import { useLocale, useTranslations } from 'next-intl'
 import { useRouter, useSearchParams } from 'next/navigation'
 import { Suspense } from 'react'
 import { toast } from 'sonner'
@@ -48,12 +48,14 @@ export default function LoginPage() {
   const setUser = useStore(state => state.setUser)
   const tLogin = useTranslations('login')
   const tCommon = useTranslations('common')
+  const currentLocale = useLocale()
+
   const handleLogin = async (formData: FormData) => {
     try {
       const { user } = await login(formData)
       if (user) {
         setUser(user)
-        router.push('/')
+        router.push(`/${currentLocale}`)
       }
     } catch {
       toast(tLogin('loginFail'), {
