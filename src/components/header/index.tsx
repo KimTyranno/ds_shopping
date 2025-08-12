@@ -12,6 +12,7 @@ import {
 import { Search, ShoppingCart } from 'lucide-react'
 import { useTranslations } from 'next-intl'
 import Link from 'next/link'
+import LanguageSwitch from './LanguageSwich'
 import ListItem from './ListItem'
 import MobileMenus from './MobileMenus'
 import MobileSearchBar from './MobileSearchBar'
@@ -168,6 +169,9 @@ export default function Header() {
           <div className="flex items-center space-x-2">
             {/* 모바일 검색 */}
             <MobileSearchButton />
+
+            {/* 언어 전환 */}
+            <LanguageSwitch />
 
             {/* 장바구니 */}
             <Button variant="ghost" size="icon" asChild>
