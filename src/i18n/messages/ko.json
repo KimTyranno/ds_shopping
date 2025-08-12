@@ -204,7 +204,8 @@
     "confirmPasswordPlaceholder": "비밀번호를 다시 입력하세요",
     "submit": "회원가입",
     "alreadyHaveAccount": "이미 계정이 있으신가요?",
-    "loginLink": "로그인하기"
+    "loginLink": "로그인하기",
+    "passwordMismatch": "비밀번호가 일치하지 않습니다"
   },
   "product": {
     "reviews": "{count}개 리뷰",

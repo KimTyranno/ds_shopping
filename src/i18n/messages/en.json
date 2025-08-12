@@ -204,7 +204,8 @@
     "confirmPasswordPlaceholder": "Re-enter your password",
     "submit": "Sign Up",
     "alreadyHaveAccount": "Already have an account?",
-    "loginLink": "Log in"
+    "loginLink": "Log in",
+    "passwordMismatch": "Passwords do not match"
   },
   "product": {
     "reviews": "{count} reviews",
