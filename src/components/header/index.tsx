@@ -10,7 +10,7 @@ import {
   NavigationMenuTrigger,
 } from '@/components/ui/navigation-menu'
 import { Search, ShoppingCart } from 'lucide-react'
-import { useTranslations } from 'next-intl'
+import { useLocale, useTranslations } from 'next-intl'
 import Link from 'next/link'
 import LanguageSwitch from './LanguageSwich'
 import ListItem from './ListItem'
@@ -20,6 +20,7 @@ import MobileSearchButton from './MobileSearchButton'
 
 export default function Header() {
   const t = useTranslations()
+  const currentLocale = useLocale()
 
   const categories = [
     {
@@ -101,7 +102,9 @@ export default function Header() {
       <div className="container mx-auto px-4">
         <div className="flex h-16 items-center justify-between">
           {/* 로고 */}
-          <Link href="/" className="flex items-center space-x-2">
+          <Link
+            href={`/${currentLocale}`}
+            className="flex items-center space-x-2">
             <div className="h-8 w-8 bg-primary rounded-lg flex items-center justify-center">
               <span className="text-primary-foreground font-bold text-sm">
                 S
