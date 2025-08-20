@@ -7,7 +7,6 @@ import { getMessages } from 'next-intl/server'
 import { Inter } from 'next/font/google'
 import { notFound } from 'next/navigation'
 import type React from 'react'
-import AuthProvider from './AuthProvider'
 import './globals.css'
 
 export async function generateMetadata({
@@ -49,7 +48,7 @@ export default async function RootLayout({ children, params }: rootProps) {
     <html lang={locale}>
       <body className={inter.className}>
         <NextIntlClientProvider locale={locale} messages={messages}>
-          <AuthProvider />
+          {/* <AuthProvider /> */}
           <Toaster />
           <Header />
           <main className="min-h-screen">{children}</main>
