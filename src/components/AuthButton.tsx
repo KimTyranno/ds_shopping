@@ -1,29 +1,32 @@
-'use client'
-
 import { Button } from '@/components/ui/button'
 import {
   DropdownMenu,
   DropdownMenuContent,
-  DropdownMenuItem,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu'
-import { Link } from '@/i18n/navigation'
-import { createClient } from '@/lib/client'
-import useStore from '@/lib/store'
-import { LogOut, Settings, ShoppingBag, User } from 'lucide-react'
+import { Link, redirect } from '@/i18n/navigation'
+import { createClient } from '@/lib/server'
+import { User } from 'lucide-react'
 import { useTranslations } from 'next-intl'
-import { useRouter } from 'next/navigation'
+import { getLocale } from 'next-intl/server'
+import AuthMenu from './AuthMenu'
 
-export default function AuthButton() {
+export default async function AuthButton() {
   const t = useTranslations()
-  const user = useStore(state => state.user)
-  const router = useRouter()
+  const supabase = await createClient()
+  const currentLocale = await getLocale()
+
+  const {
+    data: { user },
+  } = await supabase.auth.getUser()
 
   const signOut = async () => {
-    const supabase = createClient()
+    'use server'
+
+    const supabase = await createClient()
     await supabase.auth.signOut()
-    router.push('/login')
+    redirect({ href: '/login', locale: currentLocale })
   }
 
   if (!user) {
@@ -55,27 +58,7 @@ export default function AuthButton() {
           </div>
         </div>
         <DropdownMenuSeparator />
-        <DropdownMenuItem asChild>
-          <Link href="/mypage" className="flex items-center">
-            <Settings className="mr-2 h-4 w-4" />
-            {t('user.mypage')}
-          </Link>
-        </DropdownMenuItem>
-        <DropdownMenuItem asChild>
-          <Link href="/orders" className="flex items-center">
-            <ShoppingBag className="mr-2 h-4 w-4" />
-            {t('user.orders')}
-          </Link>
-        </DropdownMenuItem>
-        <DropdownMenuSeparator />
-        <DropdownMenuItem asChild>
-          <form action={signOut}>
-            <button className="flex items-center">
-              <LogOut className="mr-2 h-4 w-4" />
-              {t('user.logout')}
-            </button>
-          </form>
-        </DropdownMenuItem>
+        <AuthMenu signOut={signOut} />
       </DropdownMenuContent>
     </DropdownMenu>
   )

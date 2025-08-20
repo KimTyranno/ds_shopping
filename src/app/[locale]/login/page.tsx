@@ -13,14 +13,13 @@ import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { Separator } from '@/components/ui/separator'
 import { Link } from '@/i18n/navigation'
-import useStore from '@/lib/store'
 import { cn } from '@/lib/utils'
 import { CircleAlert, MailCheck } from 'lucide-react'
 import { useLocale, useTranslations } from 'next-intl'
-import { useRouter, useSearchParams } from 'next/navigation'
-import { Suspense } from 'react'
+import { useSearchParams } from 'next/navigation'
+import { Suspense, useActionState, useEffect } from 'react'
 import { toast } from 'sonner'
-import { login } from '../../../components/auth/login'
+import { login } from './action'
 
 function LoginMessage() {
   const t = useTranslations('login.messages')
@@ -44,26 +43,20 @@ function LoginMessage() {
 }
 
 export default function LoginPage() {
-  const router = useRouter()
-  const setUser = useStore(state => state.setUser)
   const tLogin = useTranslations('login')
   const tCommon = useTranslations('common')
   const currentLocale = useLocale()
+  const [state, formAction] = useActionState(login, undefined)
 
-  const handleLogin = async (formData: FormData) => {
-    try {
-      const { user } = await login(formData)
-      if (user) {
-        setUser(user)
-        router.push(`/${currentLocale}`)
-      }
-    } catch {
+  useEffect(() => {
+    if (state?.error) {
       toast(tLogin('loginFail'), {
         position: 'top-center',
         style: { background: '#e25c5c', color: '#fff' },
       })
     }
-  }
+  }, [state?.error])
+
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-md w-full space-y-8">
@@ -91,7 +84,8 @@ export default function LoginPage() {
             </CardDescription>
           </CardHeader>
           <CardContent>
-            <form className="space-y-4" action={handleLogin}>
+            <form className="space-y-4">
+              <input type="hidden" name="locale" value={currentLocale} />
               <div className="space-y-2">
                 <Label htmlFor="email">{tLogin('email')}</Label>
                 <Input
@@ -113,7 +107,7 @@ export default function LoginPage() {
                 />
               </div>
               <div className="flex flex-col space-y-2">
-                <Button className="w-full" type="submit">
+                <Button formAction={formAction} className="w-full">
                   {tLogin('submit')}
                 </Button>
               </div>
