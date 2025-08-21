@@ -1,6 +1,7 @@
 import { locales } from '@/i18n/routing'
 import { createServerClient } from '@supabase/ssr'
 import { NextResponse, type NextRequest } from 'next/server'
+import { AuthPaths, PublicPaths } from './constants'
 
 export async function updateSession(
   request: NextRequest,
@@ -41,14 +42,17 @@ export async function updateSession(
   const pathname =
     request.nextUrl.pathname.replace(localePrefixPattern, '') || '/'
 
-  const isAuthPage =
-    pathname.startsWith('/login') || pathname.startsWith('/signup')
+  const isAuthPage = AuthPaths.some(path => pathname.startsWith(path))
 
   const isPublicPage =
-    pathname === '/' ||
-    pathname.startsWith('/products') ||
-    pathname.startsWith('/categories')
+    pathname === '/' || PublicPaths.some(path => pathname.startsWith(path))
 
+  // 이미 로그인한 유저가 로그인/회원가입 페이지로 접근할때 홈으로 돌려보냄
+  if (user && isAuthPage) {
+    return NextResponse.redirect(new URL('/', request.url))
+  }
+
+  // 로그인하지 않은 유저가 지정되지않은 페이지로 가려고할때 로그인페이지로 돌려보냄
   if (!user && !isAuthPage && !isPublicPage) {
     const loginUrl = request.nextUrl.clone()
     loginUrl.pathname = '/login'
