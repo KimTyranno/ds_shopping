@@ -1,6 +1,6 @@
-import { Button } from "@/components/ui/button"
-import Link from "next/link"
-import Image from "next/image"
+import { Button } from '@/components/ui/button'
+import Image from 'next/image'
+import Link from 'next/link'
 
 export default function Hero() {
   return (
@@ -13,7 +13,9 @@ export default function Hero() {
               <br />
               <span className="text-yellow-300">특별한 가격</span>으로
             </h1>
-            <p className="text-xl md:text-2xl text-blue-100">엄선된 상품들을 합리적인 가격에 만나보세요</p>
+            <p className="text-xl md:text-2xl text-blue-100">
+              엄선된 상품들을 합리적인 가격에 만나보세요
+            </p>
             <div className="flex flex-col sm:flex-row gap-4">
               <Button size="lg" variant="secondary" asChild>
                 <Link href="/products">쇼핑하기</Link>
@@ -22,15 +24,14 @@ export default function Hero() {
                 size="lg"
                 variant="outline"
                 className="text-white border-white hover:bg-white hover:text-blue-600 bg-transparent"
-                asChild
-              >
+                asChild>
                 <Link href="/best">베스트 상품 보기</Link>
               </Button>
             </div>
           </div>
           <div className="relative">
             <Image
-              src="/placeholder.svg?height=400&width=500"
+              src="https://picsum.photos/seed/shopping/500/400"
               alt="쇼핑 이미지"
               width={500}
               height={400}
