@@ -7,6 +7,11 @@ const nextConfig: NextConfig = {
   eslint: {
     ignoreDuringBuilds: true,
   },
+  // 외부 도메인 허용
+  images: {
+    // 이미지 때문에 임시로 허용
+    domains: ['picsum.photos'],
+  },
 }
 
 const withNextIntl = createNextIntlPlugin()
