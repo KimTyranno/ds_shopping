@@ -4,7 +4,7 @@ import { createClient } from '@/lib/server'
 import { revalidatePath } from 'next/cache'
 import { redirect } from 'next/navigation'
 
-const baseUrl = process.env.NEXT_PUBLIC_BASE_URL
+const baseUrl = process.env.BASE_URL
 
 export async function signupAction(formData: FormData) {
   const supabase = await createClient()
