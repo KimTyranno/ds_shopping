@@ -9,10 +9,10 @@ import {
 } from '@/components/ui/card'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
-import { Link } from '@/i18n/navigation'
+import { Link, redirect } from '@/i18n/navigation'
 import { getFullUser } from '@/lib/auth'
 import { Mail, Package, ShoppingBag, Truck, User } from 'lucide-react'
-import { getTranslations } from 'next-intl/server'
+import { getLocale, getTranslations } from 'next-intl/server'
 
 // 더미 주문 데이터
 const dummyOrders = [
@@ -70,6 +70,11 @@ export default async function MyPage() {
   const tCommon = await getTranslations('common')
   const tUser = await getTranslations('user')
   const user = await getFullUser()
+  const locale = await getLocale()
+
+  if (!user) {
+    return redirect({ href: '/login', locale })
+  }
 
   return (
     <div className="container mx-auto px-4 py-8">
