@@ -6,6 +6,7 @@ import {
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu'
 import { Link, redirect } from '@/i18n/navigation'
+import { getCurrentUser } from '@/lib/auth'
 import { createClient } from '@/lib/server'
 import { User } from 'lucide-react'
 import { useTranslations } from 'next-intl'
@@ -14,12 +15,9 @@ import AuthMenu from './AuthMenu'
 
 export default async function AuthButton() {
   const t = useTranslations()
-  const supabase = await createClient()
   const currentLocale = await getLocale()
 
-  const {
-    data: { user },
-  } = await supabase.auth.getUser()
+  const user = await getCurrentUser()
 
   const signOut = async () => {
     'use server'
@@ -51,9 +49,7 @@ export default async function AuthButton() {
       <DropdownMenuContent align="end" className="w-56">
         <div className="flex items-center justify-start gap-2 p-2">
           <div className="flex flex-col space-y-1 leading-none">
-            <p className="font-medium text-sm">
-              {user.user_metadata?.name || user.email}
-            </p>
+            <p className="font-medium text-sm">{user.name || user.email}</p>
             <p className="text-xs text-muted-foreground">{user.email}</p>
           </div>
         </div>

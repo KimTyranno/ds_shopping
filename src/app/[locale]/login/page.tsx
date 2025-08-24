@@ -12,7 +12,7 @@ import {
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { Separator } from '@/components/ui/separator'
-import { Link } from '@/i18n/navigation'
+import { Link, usePathname, useRouter } from '@/i18n/navigation'
 import { cn } from '@/lib/utils'
 import { CircleAlert, MailCheck } from 'lucide-react'
 import { useLocale, useTranslations } from 'next-intl'
@@ -47,6 +47,10 @@ export default function LoginPage() {
   const tCommon = useTranslations('common')
   const currentLocale = useLocale()
   const [state, formAction] = useActionState(login, undefined)
+  const searchParams = useSearchParams()
+  const message = searchParams.get('message')
+  const router = useRouter()
+  const pathname = usePathname()
 
   useEffect(() => {
     if (state?.error) {
@@ -57,6 +61,17 @@ export default function LoginPage() {
     }
   }, [state?.error])
 
+  useEffect(() => {
+    if (message) {
+      toast(tLogin(`messages.${message}`), {
+        position: 'top-center',
+        style: { background: '#e25c5c', color: '#fff' },
+      })
+      // 쿼리스트링이 없는 /login 경로로 다시 대체
+      router.replace(pathname)
+    }
+  }, [message])
+
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-md w-full space-y-8">
@@ -65,7 +80,7 @@ export default function LoginPage() {
         </Suspense>
         <div className="text-center">
           <Link
-            href="/"
+            href={`/${currentLocale}`}
             className="flex items-center justify-center space-x-2 mb-8">
             <div className="h-10 w-10 bg-primary rounded-lg flex items-center justify-center">
               <span className="text-primary-foreground font-bold">S</span>
@@ -118,7 +133,9 @@ export default function LoginPage() {
               <div className="text-center mt-4">
                 <p className="text-sm text-muted-foreground">
                   {tLogin('noAccount')}{' '}
-                  <Link href="/signup" className="text-primary hover:underline">
+                  <Link
+                    href={`/${currentLocale}/signup`}
+                    className="text-primary hover:underline">
                     {tLogin('signup')}
                   </Link>
                 </p>
