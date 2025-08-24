@@ -2,6 +2,7 @@
 
 import { createClient } from '@/lib/client'
 import useStore from '@/lib/store'
+import useLocalePath from '@/lib/useLocalePath'
 import { LogOut } from 'lucide-react'
 import { useTranslations } from 'next-intl'
 import { useRouter } from 'next/navigation'
@@ -14,6 +15,7 @@ const LogoutButton = (props: LogoutButtonProps) => {
   const t = useTranslations()
   const user = useStore(state => state.user)
   const router = useRouter()
+  const path = useLocalePath()
 
   if (!user) return null
 
@@ -21,7 +23,7 @@ const LogoutButton = (props: LogoutButtonProps) => {
     const supabase = createClient()
     await supabase.auth.signOut()
     props.handleClose()
-    router.push('/login')
+    router.push(path('/login'))
   }
 
   return (
