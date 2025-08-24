@@ -59,5 +59,5 @@ export async function updateSession(
     return NextResponse.redirect(loginUrl)
   }
 
-  return response
+  return supabaseResponse
 }
