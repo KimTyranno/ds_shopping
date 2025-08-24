@@ -11,15 +11,14 @@ import {
 } from '@/components/ui/navigation-menu'
 import { Link } from '@/i18n/navigation'
 import { Search, ShoppingCart } from 'lucide-react'
-import { useTranslations } from 'next-intl'
+import { getTranslations } from 'next-intl/server'
 import LanguageSwitch from './LanguageSwich'
-import ListItem from './ListItem'
 import MobileMenus from './MobileMenus'
 import MobileSearchBar from './MobileSearchBar'
 import MobileSearchButton from './MobileSearchButton'
 
-export default function Header() {
-  const t = useTranslations()
+export default async function Header() {
+  const t = await getTranslations()
 
   const categories = [
     {
@@ -118,16 +117,32 @@ export default function Header() {
                   {t('navigation.categories')}
                 </NavigationMenuTrigger>
                 <NavigationMenuContent>
-                  <ul className="grid w-[600px] gap-3 p-4 md:grid-cols-2 lg:grid-cols-3">
-                    {categories.map(category => (
-                      <ListItem
-                        key={category.key}
-                        title={t(`categories.${category.key}.title`)}
-                        href={category.href}>
-                        {t(`categories.${category.key}.description`)}
-                      </ListItem>
-                    ))}
-                  </ul>
+                  <div className="w-[800px] p-4">
+                    <div className="grid grid-cols-3 gap-6">
+                      {categories.map(category => (
+                        <div key={category.key} className="space-y-3">
+                          <Link
+                            href={category.href}
+                            className="flex items-center gap-2 font-semibold text-lg hover:text-primary transition-colors">
+                            <span className="text-xl">{category.icon}</span>
+                            {t(`categories.${category.key}.title`)}
+                          </Link>
+                          <div className="space-y-1">
+                            {category.items.map(item => (
+                              <Link
+                                key={item.key}
+                                href={item.href}
+                                className="block px-2 py-1 text-sm text-muted-foreground hover:text-primary hover:bg-accent rounded-md transition-colors">
+                                {t(
+                                  `categories.${category.key}.items.${item.key}`,
+                                )}
+                              </Link>
+                            ))}
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
                 </NavigationMenuContent>
               </NavigationMenuItem>
 
