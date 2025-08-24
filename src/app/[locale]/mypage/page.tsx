@@ -10,10 +10,9 @@ import {
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { Link } from '@/i18n/navigation'
-import { createClient } from '@/lib/server'
+import { getFullUser } from '@/lib/auth'
 import { Mail, Package, ShoppingBag, Truck, User } from 'lucide-react'
 import { getTranslations } from 'next-intl/server'
-import { redirect } from 'next/navigation'
 
 // 더미 주문 데이터
 const dummyOrders = [
@@ -66,23 +65,11 @@ const getStatusIcon = (status: string) => {
   }
 }
 
-type UserMetadata = {
-  name?: string
-}
-
 export default async function MyPage() {
-  const supabase = await createClient()
   const t = await getTranslations('mypage')
   const tCommon = await getTranslations('common')
   const tUser = await getTranslations('user')
-
-  const {
-    data: { user },
-  } = await supabase.auth.getUser()
-
-  if (!user) {
-    redirect('/login')
-  }
+  const user = await getFullUser()
 
   return (
     <div className="container mx-auto px-4 py-8">
@@ -106,11 +93,7 @@ export default async function MyPage() {
               <CardContent className="space-y-4">
                 <div className="space-y-2">
                   <Label htmlFor="name">{t('profile.name')}</Label>
-                  <Input
-                    id="name"
-                    value={(user.user_metadata as UserMetadata).name || ''}
-                    readOnly
-                  />
+                  <Input id="name" value={user.name || ''} readOnly />
                 </div>
                 <div className="space-y-2">
                   <Label htmlFor="email">{t('profile.email')}</Label>
@@ -127,7 +110,7 @@ export default async function MyPage() {
                   />
                 </div>
                 <Button className="w-full bg-transparent" variant="outline">
-                  {t('profile.edit')}
+                  <Link href="/profile/edit">{t('profile.edit')}</Link>
                 </Button>
               </CardContent>
             </Card>

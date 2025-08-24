@@ -189,7 +189,8 @@
     "loginFail": "ログインに失敗しました。",
     "messages": {
       "success": "メール認証が完了しました。",
-      "info": "メールを確認してアカウントを有効化してください。"
+      "info": "メールを確認してアカウントを有効化してください。",
+      "profileLoadFailed": "プロフィール情報の読み込みに失敗しました。"
     }
   },
   "signup": {
@@ -318,6 +319,67 @@
       "joined": "登録日",
       "edit": "プロフィール編集"
     },
+    "profileEdit": {
+      "title": "プロフィール編集",
+      "description": "個人情報を修正して更新してください",
+      "form": {
+        "error": {
+          "alert": "プロフィールの更新に失敗しました。",
+          "requiredName": "名前を入力してください",
+          "invalidZipCode": "正しい郵便番号形式ではありません（5桁の数字）",
+          "uploadError": "プロフィール写真の変更中にエラーが発生しました。",
+          "wrongPassword": "現在のパスワードが正しくありません。",
+          "passwordMismatch": "新しいパスワードが一致しません。",
+          "passwordUpdateError": "パスワードの変更中にエラーが発生しました。"
+        },
+        "avatar": {
+          "title": "プロフィール写真",
+          "description": "プロフィール写真を変更できます",
+          "change": "写真を変更",
+          "note": "JPG、PNGファイルのみアップロード可能です（最大{size}MB）"
+        },
+        "basic": {
+          "title": "基本情報",
+          "description": "基本的な個人情報を入力してください"
+        },
+        "name": {
+          "label": "名前 *",
+          "placeholder": "名前を入力してください"
+        },
+        "email": {
+          "label": "メールアドレス"
+        },
+        "password": {
+          "title": "パスワードの変更",
+          "description": "パスワードを変更したい場合は入力してください",
+          "current": "現在のパスワード",
+          "new": "新しいパスワード",
+          "confirm": "新しいパスワードの確認",
+          "placeholder": "パスワード",
+          "newPlaceholder": "新しいパスワード",
+          "confirmPlaceholder": "新しいパスワードを確認"
+        },
+        "address": {
+          "title": "住所情報",
+          "description": "配送先住所を入力してください",
+          "label": "住所",
+          "placeholder": "基本住所を入力してください"
+        },
+        "zipCode": {
+          "label": "郵便番号",
+          "placeholder": "12345"
+        },
+        "detailAddress": {
+          "label": "詳細住所",
+          "placeholder": "詳細住所を入力してください"
+        },
+        "button": {
+          "save": "保存する",
+          "saving": "保存中...",
+          "cancel": "キャンセル"
+        }
+      }
+    },
     "orders": {
       "title": "注文履歴",
       "description": "最近の注文履歴を確認できます",
@@ -331,6 +393,9 @@
     },
     "quickLinks": {
       "title": "クイックリンク"
+    },
+    "messages": {
+      "success": "プロフィールが正常に更新されました。"
     }
   },
   "wishlist": {

@@ -189,7 +189,8 @@
     "loginFail": "Login failed.",
     "messages": {
       "success": "Email verification is complete.",
-      "info": "Check your email to activate your account"
+      "info": "Check your email to activate your account",
+      "profileLoadFailed": "Failed to load profile information."
     }
   },
   "signup": {
@@ -318,6 +319,67 @@
       "joined": "Joined",
       "edit": "Edit Profile"
     },
+    "profileEdit": {
+      "title": "Edit Profile",
+      "description": "Modify and update your personal information",
+      "form": {
+        "error": {
+          "alert": "Failed to update profile.",
+          "requiredName": "Please enter your name",
+          "invalidZipCode": "Invalid zip code format (5 digits required)",
+          "uploadError": "An error occurred while changing the profile picture.",
+          "wrongPassword": "Current password is incorrect.",
+          "passwordMismatch": "New password does not match.",
+          "passwordUpdateError": "An error occurred while updating the password."
+        },
+        "avatar": {
+          "title": "Profile Photo",
+          "description": "You can change your profile photo",
+          "change": "Change Photo",
+          "note": "Only JPG and PNG files are allowed (max {size}MB)."
+        },
+        "basic": {
+          "title": "Basic Information",
+          "description": "Please enter your basic personal information"
+        },
+        "name": {
+          "label": "Name *",
+          "placeholder": "Enter your name"
+        },
+        "email": {
+          "label": "Email"
+        },
+        "password": {
+          "title": "Change Password",
+          "description": "Enter if you want to change your password",
+          "current": "Current Password",
+          "new": "New Password",
+          "confirm": "Confirm New Password",
+          "placeholder": "Password",
+          "newPlaceholder": "New Password",
+          "confirmPlaceholder": "Confirm New Password"
+        },
+        "address": {
+          "title": "Address Information",
+          "description": "Enter your address for delivery",
+          "label": "Address",
+          "placeholder": "Enter your main address"
+        },
+        "zipCode": {
+          "label": "Zip Code",
+          "placeholder": "12345"
+        },
+        "detailAddress": {
+          "label": "Detailed Address",
+          "placeholder": "Enter detailed address"
+        },
+        "button": {
+          "save": "Save",
+          "saving": "Saving...",
+          "cancel": "Cancel"
+        }
+      }
+    },
     "orders": {
       "title": "Order History",
       "description": "Check your recent orders",
@@ -331,6 +393,9 @@
     },
     "quickLinks": {
       "title": "Quick Links"
+    },
+    "messages": {
+      "success": "Your profile has been updated successfully."
     }
   },
   "wishlist": {

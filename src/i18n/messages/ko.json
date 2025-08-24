@@ -189,7 +189,8 @@
     "loginFail": "로그인에 실패했습니다.",
     "messages": {
       "success": "이메일 인증이 완료되었습니다.",
-      "info": "이메일을 확인하여 계정을 활성화하세요"
+      "info": "이메일을 확인하여 계정을 활성화하세요",
+      "profileLoadFailed": "프로필정보를 읽어오는데 실패했습니다."
     }
   },
   "signup": {
@@ -318,6 +319,67 @@
       "joined": "가입일",
       "edit": "프로필 수정"
     },
+    "profileEdit": {
+      "title": "프로필 수정",
+      "description": "개인 정보를 수정하고 업데이트하세요",
+      "form": {
+        "error": {
+          "alert": "프로필 변경에 실패하였습니다.",
+          "requiredName": "이름을 입력해주세요",
+          "invalidZipCode": "올바른 우편번호 형식이 아닙니다 (5자리 숫자)",
+          "uploadError": "프로필 사진 변경중 오류가 발생했습니다.",
+          "wrongPassword": "현재 비밀번호가 올바르지 않습니다.",
+          "passwordMismatch": "새로운 비밀번호와 일치하지 않습니다.",
+          "passwordUpdateError": "비밀번호 변경중 오류가 발생했습니다."
+        },
+        "avatar": {
+          "title": "프로필 사진",
+          "description": "프로필 사진을 변경할 수 있습니다",
+          "change": "사진 변경",
+          "note": "JPG, PNG 파일만 업로드 가능합니다. (최대 {size}MB)"
+        },
+        "basic": {
+          "title": "기본 정보",
+          "description": "기본적인 개인 정보를 입력해주세요"
+        },
+        "name": {
+          "label": "이름 *",
+          "placeholder": "이름을 입력하세요"
+        },
+        "email": {
+          "label": "이메일"
+        },
+        "password": {
+          "title": "비밀번호 변경",
+          "description": "비밀번호를 변경하고 싶은경우 입력해주세요",
+          "current": "현재 비밀번호",
+          "new": "새로운 비밀번호",
+          "confirm": "새로운 비밀번호 확인",
+          "placeholder": "비밀번호",
+          "newPlaceholder": "변경 비밀번호",
+          "confirmPlaceholder": "변경 비밀번호 확인"
+        },
+        "address": {
+          "title": "주소 정보",
+          "description": "배송을 위한 주소 정보를 입력해주세요",
+          "label": "주소",
+          "placeholder": "기본 주소를 입력하세요"
+        },
+        "zipCode": {
+          "label": "우편번호",
+          "placeholder": "12345"
+        },
+        "detailAddress": {
+          "label": "상세 주소",
+          "placeholder": "상세 주소를 입력하세요"
+        },
+        "button": {
+          "save": "저장하기",
+          "saving": "저장 중...",
+          "cancel": "취소"
+        }
+      }
+    },
     "orders": {
       "title": "주문 내역",
       "description": "최근 주문 내역을 확인하세요",
@@ -331,6 +393,9 @@
     },
     "quickLinks": {
       "title": "빠른 링크"
+    },
+    "messages": {
+      "success": "프로필이 성공적으로 업데이트되었습니다."
     }
   },
   "wishlist": {
