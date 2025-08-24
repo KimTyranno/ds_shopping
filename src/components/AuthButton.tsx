@@ -6,7 +6,7 @@ import {
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu'
 import { Link, redirect } from '@/i18n/navigation'
-import { getFullUser } from '@/lib/auth'
+import { getCurrentUser } from '@/lib/auth'
 import { createClient } from '@/lib/server'
 import { User } from 'lucide-react'
 import { useTranslations } from 'next-intl'
@@ -17,7 +17,7 @@ export default async function AuthButton() {
   const t = useTranslations()
   const currentLocale = await getLocale()
 
-  const user = await getFullUser()
+  const user = await getCurrentUser()
 
   const signOut = async () => {
     'use server'

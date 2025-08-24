@@ -29,6 +29,7 @@ export async function getProfile() {
     .single<Profile>()
 
   if (!profile) {
+    await supabase.auth.signOut()
     redirect(`/${currentLocale}/login?message=profileLoadFailed`)
   }
 
@@ -42,7 +43,7 @@ export async function getProfile() {
   return { ...profile, avatar }
 }
 
-export async function getFullUser(): Promise<User | null> {
+export async function getCurrentUser(): Promise<User | null> {
   const user = await getAuthUser()
   if (!user) return null
 

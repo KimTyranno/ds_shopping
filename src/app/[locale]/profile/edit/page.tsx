@@ -1,12 +1,12 @@
 import ProfileEditForm from '@/components/ProfileEditForm'
 import { Button } from '@/components/ui/button'
 import { Link, redirect } from '@/i18n/navigation'
-import { getFullUser } from '@/lib/auth'
+import { getCurrentUser } from '@/lib/auth'
 import { ArrowLeft } from 'lucide-react'
 import { getLocale, getTranslations } from 'next-intl/server'
 
 export default async function ProfileEditPage() {
-  const user = await getFullUser()
+  const user = await getCurrentUser()
   const t = await getTranslations('mypage.profileEdit')
   const locale = await getLocale()
 

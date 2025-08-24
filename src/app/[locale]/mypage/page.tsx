@@ -10,7 +10,7 @@ import {
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { Link, redirect } from '@/i18n/navigation'
-import { getFullUser } from '@/lib/auth'
+import { getCurrentUser } from '@/lib/auth'
 import { Mail, Package, ShoppingBag, Truck, User } from 'lucide-react'
 import { getLocale, getTranslations } from 'next-intl/server'
 
@@ -69,7 +69,7 @@ export default async function MyPage() {
   const t = await getTranslations('mypage')
   const tCommon = await getTranslations('common')
   const tUser = await getTranslations('user')
-  const user = await getFullUser()
+  const user = await getCurrentUser()
   const locale = await getLocale()
 
   if (!user) {
