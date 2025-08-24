@@ -1,8 +1,6 @@
 import { createClient } from '@/lib/server'
 import { Profile } from '@/types/tables'
 import type { User as AuthUser } from '@supabase/supabase-js'
-import { getLocale } from 'next-intl/server'
-import { redirect } from 'next/navigation'
 
 export type User = AuthUser & Profile
 
@@ -21,7 +19,6 @@ export async function getProfile() {
   if (!user) return null
 
   const supabase = await createClient()
-  const currentLocale = await getLocale()
   const { data: profile } = await supabase
     .from('profiles')
     .select('*')
@@ -30,7 +27,7 @@ export async function getProfile() {
 
   if (!profile) {
     await supabase.auth.signOut()
-    redirect(`/${currentLocale}/login?message=profileLoadFailed`)
+    return null
   }
 
   let avatar = ''
