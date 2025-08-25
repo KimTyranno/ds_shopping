@@ -224,7 +224,6 @@ export default async function SubcategoryPage({
           <Button asChild>
             <Link href={`/categories/${category}`}>
               {t('empty.backToParent')}
-              상위 카테고리로 돌아가기
             </Link>
           </Button>
         </div>
