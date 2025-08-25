@@ -1,50 +1,45 @@
 'use client'
 
+import { useRouter } from '@/i18n/navigation'
+import { User } from '@/lib/auth'
 import { createClient } from '@/lib/client'
 import useStore from '@/lib/store'
-import { Profile } from '@/types/tables'
+import useLocalePath from '@/lib/useLocalePath'
 import { useEffect } from 'react'
 
-export default function AuthProvider() {
+export default function AuthProvider({ user }: { user: User | null }) {
   const setUser = useStore(state => state.setUser)
   const clearUser = useStore(state => state.clearUser)
+  const router = useRouter()
+  const path = useLocalePath()
 
   useEffect(() => {
     const supabase = createClient()
 
-    // 유저정보를 상태관리에 갱신
-    supabase.auth
-      .getUser()
-      .then(async ({ data: { user } }) => {
-        if (user) {
-          const profile = await supabase
-            .from('profiles')
-            .select('*')
-            .eq('id', user.id)
-            .single<Profile>()
-
-          if (!profile.data) {
-            console.error('profile 정보없음')
-            return
-          }
-
-          setUser({ ...user, name: profile.data.name })
-        } else clearUser()
-      })
-      .catch(error => console.log(error))
+    if (user) {
+      setUser(user)
+    } else {
+      clearUser()
+    }
 
     // 로그인/로그아웃 감지
-    const { data: listener } = supabase.auth.onAuthStateChange(
-      (_event, session) => {
-        if (session?.user) setUser(session.user)
-        else clearUser()
-      },
-    )
+    const {
+      data: { subscription },
+    } = supabase.auth.onAuthStateChange((event, session) => {
+      // 세션 만료 or 로그아웃
+      console.log('리스너...')
+      if (!session || !session.user || event === 'SIGNED_OUT') {
+        console.log('만료')
+        clearUser()
+        router.push(path('/login?message=sessionExpired'))
+        return
+      }
+    })
 
     return () => {
-      listener.subscription.unsubscribe()
+      subscription.unsubscribe()
     }
-  })
+  }, [user])
 
   return null
 }

@@ -3,7 +3,7 @@
 import { Link } from '@/i18n/navigation'
 import useStore from '@/lib/store'
 import { useTranslations } from 'next-intl'
-import { Avatar, AvatarFallback } from '../ui/avatar'
+import { Avatar, AvatarFallback, AvatarImage } from '../ui/avatar'
 import { Button } from '../ui/button'
 
 type UserInfoProps = {
@@ -31,6 +31,7 @@ const UserInfo = (props: UserInfoProps) => {
   return (
     <div className="flex items-center gap-3 p-4 bg-muted/50 rounded-lg mt-6">
       <Avatar>
+        <AvatarImage src={user.avatar || ''} />
         <AvatarFallback className="bg-primary text-primary-foreground">
           {user.name?.slice(0, 2)}
         </AvatarFallback>
