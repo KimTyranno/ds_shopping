@@ -42,7 +42,33 @@
     "wishlist": "お気に入り"
   },
   "search": {
-    "placeholder": "商品を検索してください..."
+    "title": "商品の検索",
+    "placeholder": "商品を検索してください…",
+    "searchButton": "検索",
+    "back": "戻る",
+    "resultsHeader": "「{query}」の検索結果（{count}件）",
+    "Total": "全 ",
+    "productsFound": " 件の商品が見つかりました",
+    "noResults": {
+      "title": "検索結果がありません",
+      "withQuery": "「{query}」に一致する検索結果がありません。",
+      "prompt": "検索キーワードを入力してください。",
+      "suggestion": "別のキーワードをお試しください:"
+    },
+    "suggestions": {
+      "galaxy": "ギャラクシー",
+      "iphone": "アイフォン",
+      "laptop": "ノートパソコン",
+      "shirt": "シャツ",
+      "sneakers": "スニーカー"
+    },
+    "buttons": {
+      "viewDetails": "詳細を見る",
+      "addToCart": "カートに追加"
+    },
+    "filterSort": {
+      "label": "フィルター＆並べ替え："
+    }
   },
   "categories": {
     "electronics": {
@@ -434,6 +460,8 @@
     "rating": "評価順",
     "newest": "新着順",
     "reviews": "レビュー数順",
+    "relevance": "関連順",
+    "name": "名前順",
     "discount-high": "割引率が高い順",
     "discount-low": "割引率が低い順",
     "viewDetail": "詳細を見る",

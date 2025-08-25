@@ -42,7 +42,33 @@
     "wishlist": "Wishlist"
   },
   "search": {
-    "placeholder": "Search for products..."
+    "title": "Search Products",
+    "placeholder": "Search for products…",
+    "searchButton": "Search",
+    "back": "Back",
+    "resultsHeader": "\"{query}\" — {count} results",
+    "total": "Total ",
+    "productsFound": " products found",
+    "noResults": {
+      "title": "No results found",
+      "withQuery": "No results found for \"{query}\".",
+      "prompt": "Please enter a search term.",
+      "suggestion": "Try a different search:"
+    },
+    "suggestions": {
+      "galaxy": "Galaxy",
+      "iphone": "iPhone",
+      "laptop": "Laptop",
+      "shirt": "Shirt",
+      "sneakers": "Sneakers"
+    },
+    "buttons": {
+      "viewDetails": "View Details",
+      "addToCart": "Add to Cart"
+    },
+    "filterSort": {
+      "label": "Filter & Sort:"
+    }
   },
   "categories": {
     "electronics": {
@@ -434,6 +460,8 @@
     "rating": "Top Rated",
     "newest": "Newest",
     "reviews": "Most Reviewed",
+    "relevance": "Relevance",
+    "name": "Name",
     "discount-high": "Highest Discount",
     "discount-low": "Lowest Discount",
     "viewDetail": "View Details",

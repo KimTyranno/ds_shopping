@@ -368,3 +368,56 @@ export const getSaleProducts = () => {
     )
     .slice(0, 12)
 }
+
+// 파일 끝에 검색 함수들을 추가합니다:
+
+export const searchProducts = (query: string, category = 'all') => {
+  let filteredProducts = products
+
+  // 카테고리 필터
+  if (category !== 'all') {
+    filteredProducts = filteredProducts.filter(
+      product => product.category === category,
+    )
+  }
+
+  // 검색어 필터
+  if (query.trim()) {
+    const searchTerm = query.toLowerCase().trim()
+    filteredProducts = filteredProducts.filter(
+      product =>
+        product.name.toLowerCase().includes(searchTerm) ||
+        product.brand.toLowerCase().includes(searchTerm) ||
+        product.description.toLowerCase().includes(searchTerm) ||
+        product.features.some(feature =>
+          feature.toLowerCase().includes(searchTerm),
+        ),
+    )
+  }
+
+  return filteredProducts
+}
+
+export const getSearchSuggestions = (query: string) => {
+  if (!query.trim()) return []
+
+  const searchTerm = query.toLowerCase().trim()
+  const suggestions = new Set<string>()
+
+  products.forEach(product => {
+    // 상품명에서 매칭되는 단어들 추출
+    const words = product.name.toLowerCase().split(' ')
+    words.forEach(word => {
+      if (word.includes(searchTerm) && word !== searchTerm) {
+        suggestions.add(product.name)
+      }
+    })
+
+    // 브랜드명 매칭
+    if (product.brand.toLowerCase().includes(searchTerm)) {
+      suggestions.add(product.brand)
+    }
+  })
+
+  return Array.from(suggestions).slice(0, 5)
+}

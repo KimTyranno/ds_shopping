@@ -1,6 +1,5 @@
 import AuthButton from '@/components/AuthButton'
 import { Button } from '@/components/ui/button'
-import { Input } from '@/components/ui/input'
 import {
   NavigationMenu,
   NavigationMenuContent,
@@ -10,12 +9,13 @@ import {
   NavigationMenuTrigger,
 } from '@/components/ui/navigation-menu'
 import { Link } from '@/i18n/navigation'
-import { Search, ShoppingCart } from 'lucide-react'
+import { ShoppingCart } from 'lucide-react'
 import { getTranslations } from 'next-intl/server'
 import LanguageSwitch from './LanguageSwich'
 import MobileMenus from './MobileMenus'
 import MobileSearchBar from './MobileSearchBar'
 import MobileSearchButton from './MobileSearchButton'
+import PcSearchBar from './PcSearchBar'
 
 export default async function Header() {
   const t = await getTranslations()
@@ -173,12 +173,7 @@ export default async function Header() {
           </NavigationMenu>
 
           {/* 검색바 (데스크톱) */}
-          <div className="hidden md:flex items-center space-x-2 flex-1 max-w-sm mx-6">
-            <div className="relative flex-1">
-              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground h-4 w-4" />
-              <Input placeholder={t('search.placeholder')} className="pl-10" />
-            </div>
-          </div>
+          <PcSearchBar />
 
           {/* 우측 아이콘들 */}
           <div className="flex items-center space-x-2">
