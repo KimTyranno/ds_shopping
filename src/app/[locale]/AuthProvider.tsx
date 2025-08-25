@@ -27,9 +27,7 @@ export default function AuthProvider({ user }: { user: User | null }) {
       data: { subscription },
     } = supabase.auth.onAuthStateChange((event, session) => {
       // 세션 만료 or 로그아웃
-      console.log('리스너...')
       if (!session || !session.user || event === 'SIGNED_OUT') {
-        console.log('만료')
         clearUser()
         router.push(path('/login?message=sessionExpired'))
         return
