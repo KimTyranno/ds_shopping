@@ -190,7 +190,8 @@
     "messages": {
       "success": "이메일 인증이 완료되었습니다.",
       "info": "이메일을 확인하여 계정을 활성화하세요",
-      "profileLoadFailed": "프로필정보를 읽어오는데 실패했습니다."
+      "profileLoadFailed": "프로필정보를 읽어오는데 실패했습니다.",
+      "sessionExpired": "세션이 만료되었습니다. 다시 로그인해 주세요."
     }
   },
   "signup": {

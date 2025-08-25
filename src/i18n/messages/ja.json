@@ -190,7 +190,8 @@
     "messages": {
       "success": "メール認証が完了しました。",
       "info": "メールを確認してアカウントを有効化してください。",
-      "profileLoadFailed": "プロフィール情報の読み込みに失敗しました。"
+      "profileLoadFailed": "プロフィール情報の読み込みに失敗しました。",
+      "sessionExpired": "セッションの有効期限が切れました。もう一度ログインしてください。"
     }
   },
   "signup": {

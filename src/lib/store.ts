@@ -1,14 +1,11 @@
-import { Profile } from '@/types/tables'
-import type { User } from '@supabase/supabase-js'
+import { User } from '@/lib/auth'
 import { create } from 'zustand'
-
-type UserWithProfile = User & { name?: Profile['name'] }
 
 type Store = {
   isMobileSearchOpen: boolean
   toggleMobileSearch: () => void
-  user: UserWithProfile | null
-  setUser: (_user: UserWithProfile) => void
+  user: User | null
+  setUser: (_user: User) => void
   clearUser: () => void
 }
 

@@ -190,7 +190,8 @@
     "messages": {
       "success": "Email verification is complete.",
       "info": "Check your email to activate your account",
-      "profileLoadFailed": "Failed to load profile information."
+      "profileLoadFailed": "Failed to load profile information.",
+      "sessionExpired": "Your session has expired. Please log in again."
     }
   },
   "signup": {

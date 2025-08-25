@@ -2,11 +2,13 @@ import Footer from '@/components/Footer'
 import Header from '@/components/header'
 import { Toaster } from '@/components/ui/sonner'
 import { locales } from '@/i18n/routing'
+import { getCurrentUser } from '@/lib/auth'
 import { createTranslator, NextIntlClientProvider } from 'next-intl'
 import { getMessages } from 'next-intl/server'
 import { Inter } from 'next/font/google'
 import { notFound } from 'next/navigation'
 import type React from 'react'
+import AuthProvider from './AuthProvider'
 import './globals.css'
 
 export async function generateMetadata({
@@ -37,6 +39,7 @@ type rootProps = {
 const inter = Inter({ subsets: ['latin'] })
 
 export default async function RootLayout({ children, params }: rootProps) {
+  const user = await getCurrentUser()
   const { locale } = await params
   if (!locales.includes(locale as (typeof locales)[number])) {
     notFound()
@@ -48,7 +51,7 @@ export default async function RootLayout({ children, params }: rootProps) {
     <html lang={locale}>
       <body className={inter.className}>
         <NextIntlClientProvider locale={locale} messages={messages}>
-          {/* <AuthProvider /> */}
+          <AuthProvider user={user} />
           <Toaster />
           <Header />
           <main className="min-h-screen">{children}</main>
