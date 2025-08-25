@@ -42,7 +42,33 @@
     "wishlist": "찜목록"
   },
   "search": {
-    "placeholder": "상품을 검색해보세요..."
+    "title": "상품 검색",
+    "placeholder": "상품을 검색해보세요...",
+    "searchButton": "검색",
+    "back": "뒤로가기",
+    "resultsHeader": "\"{query}\" 검색 결과 ({count}개)",
+    "total": "총 ",
+    "productsFound": " 개의 상품을 찾았습니다",
+    "noResults": {
+      "title": "검색 결과가 없습니다",
+      "withQuery": "\"{query}\"에 대한 검색 결과가 없습니다.",
+      "prompt": "검색어를 입력해주세요.",
+      "suggestion": "다른 검색어를 시도해보세요:"
+    },
+    "suggestions": {
+      "galaxy": "갤럭시",
+      "iphone": "아이폰",
+      "laptop": "노트북",
+      "shirt": "셔츠",
+      "sneakers": "운동화"
+    },
+    "buttons": {
+      "viewDetails": "상세보기",
+      "addToCart": "장바구니"
+    },
+    "filterSort": {
+      "label": "필터 및 정렬:"
+    }
   },
   "categories": {
     "electronics": {
@@ -434,6 +460,8 @@
     "rating": "평점순",
     "newest": "최신순",
     "reviews": "리뷰 많은순",
+    "relevance": "관련도순",
+    "name": "이름순",
     "discount-high": "할인율 높은순",
     "discount-low": "할인율 낮은순",
     "viewDetail": "상세보기",
