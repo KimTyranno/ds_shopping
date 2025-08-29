@@ -195,7 +195,9 @@
     "messages": {
       "default": "不明なエラーが発生しました。",
       "expiredToken": "セッションが切れました。再度ログインしてください。",
-      "unauthorized": "アクセス権限がありません。"
+      "unauthorized": "アクセス権限がありません。",
+      "user_not_found": "ユーザー情報が見つかりません。",
+      "deletion_failed": "アカウントの削除中にエラーが発生しました。"
     }
   },
   "notFound": {
@@ -404,7 +406,72 @@
           "save": "保存する",
           "saving": "保存中...",
           "cancel": "キャンセル"
+        },
+        "delete": {
+          "title:": "アカウント削除",
+          "description:": "アカウントとすべてのデータが完全に削除されます。",
+          "button:": "アカウント削除"
         }
+      }
+    },
+    "profile_delete": {
+      "title": "アカウント削除",
+      "description": "アカウントを永久に削除します",
+      "warning_title": "警告:",
+      "warning_message": "アカウント削除は元に戻せません。すべてのデータが永久に削除されます。",
+      "info_title": "削除される情報",
+      "info_description": "以下の情報が永久に削除されます",
+      "info_personal": "個人情報（名前、メールアドレス、電話番号、住所）",
+      "info_orders": "注文履歴および配送情報",
+      "info_cart": "カートおよびウィッシュリスト",
+      "info_rewards": "ポイントおよびクーポン",
+      "info_reviews": "レビューおよびお問い合わせ履歴",
+      "reason_title": "退会理由",
+      "reason_description": "サービス改善のため、退会理由をお知らせください（任意）",
+      "reason_low_usage": "サービスの利用頻度が低い",
+      "reason_no_products": "欲しい商品がない",
+      "reason_expensive": "価格が高い",
+      "reason_delivery": "配送サービスに不満",
+      "reason_customer_service": "カスタマーサービスに不満",
+      "reason_privacy": "プライバシーへの懸念",
+      "reason_etc": "その他",
+      "agreement_title": "退会同意事項",
+      "agreement_description": "以下の内容を確認し、同意してください",
+      "agreement_data_delete": "個人情報および利用履歴がすべて削除されることに同意します。",
+      "agreement_order_history": "注文履歴および配送情報が削除され、後で確認できないことを理解します。",
+      "agreement_no_refund": "ポイントおよびクーポンは返金されず、退会後は復元できないことに同意します。",
+      "confirmation_title": "退会の確認",
+      "confirmation_description": "アカウント削除を確認するために、以下の入力欄に「DELETE」と正確に入力してください。",
+      "confirmation_input_label": "確認テキスト",
+      "confirmation_placeholder": "DELETE",
+      "confirmation_helper": "正確に「DELETE」と入力してください。",
+      "submit_processing": "削除処理中...",
+      "submit_button": "アカウントを削除する",
+      "cancel_button": "キャンセル",
+      "messages": {
+        "all_required": "すべての項目を確認し、同意してください。",
+        "text_mismatch": "確認テキストが一致しません。"
+      },
+      "success": {
+        "title": "アカウント削除完了",
+        "description": "アカウントが正常に削除されました",
+        "thankYou": "シンプルモールをご利用いただきありがとうございました。",
+        "data_deleted": "お客様の個人情報とデータは安全に削除されました。",
+        "summary_title": "処理完了内容",
+        "summary_personal": "個人情報の完全削除",
+        "summary_orders": "注文履歴の削除",
+        "summary_cart": "カートおよびウィッシュリストの削除",
+        "summary_rewards": "ポイントおよびクーポンの削除",
+        "rejoin_title": "再登録のご案内",
+        "rejoin_description_line1": "いつでも再登録いただけます。",
+        "rejoin_description_line2": "ただし、以前のデータは復元できません。",
+        "button_home": "ホームページへ",
+        "button_signup": "新しいアカウントで登録",
+        "support_ask": "ご不明な点がございましたら、お気軽にご連絡ください。",
+        "support_phone": "カスタマーセンター：1588-1234",
+        "support_hours": "平日 09:00 - 18:00（週末・祝日 休業）",
+        "goodbye_message": "「より良いサービスで再会できることを願っております」",
+        "goodbye_team": "- シンプルモール チームより -"
       }
     },
     "orders": {

@@ -195,7 +195,9 @@
     "messages": {
       "default": "알 수 없는 오류가 발생했습니다.",
       "expiredToken": "세션이 만료되었습니다. 다시 로그인해주세요.",
-      "unauthorized": "접근 권한이 없습니다."
+      "unauthorized": "접근 권한이 없습니다.",
+      "user_not_found": "사용자 정보를 찾을 수 없습니다",
+      "deletion_failed": "계정 삭제 중 오류가 발생했습니다"
     }
   },
   "notFound": {
@@ -404,7 +406,72 @@
           "save": "저장하기",
           "saving": "저장 중...",
           "cancel": "취소"
+        },
+        "delete": {
+          "title:": "계정 탈퇴",
+          "description:": "계정과 모든 데이터가 영구적으로 삭제됩니다.",
+          "button:": "계정 탈퇴"
         }
+      }
+    },
+    "profile_delete": {
+      "title": "계정 탈퇴",
+      "description": "계정을 영구적으로 삭제합니다",
+      "warning_title": "주의:",
+      "warning_message": "계정 탈퇴는 되돌릴 수 없습니다. 모든 데이터가 영구적으로 삭제됩니다.",
+      "info_title": "삭제될 정보",
+      "info_description": "다음 정보들이 영구적으로 삭제됩니다",
+      "info_personal": "개인정보 (이름, 이메일, 전화번호, 주소)",
+      "info_orders": "주문 내역 및 배송 정보",
+      "info_cart": "장바구니 및 찜목록",
+      "info_rewards": "적립금 및 쿠폰",
+      "info_reviews": "리뷰 및 문의 내역",
+      "reason_title": "탈퇴 사유",
+      "reason_description": "서비스 개선을 위해 탈퇴 사유를 알려주세요 (선택사항)",
+      "reason_low_usage": "서비스 이용 빈도가 낮음",
+      "reason_no_products": "원하는 상품이 없음",
+      "reason_expensive": "가격이 비쌈",
+      "reason_delivery": "배송 서비스 불만족",
+      "reason_customer_service": "고객 서비스 불만족",
+      "reason_privacy": "개인정보 보호 우려",
+      "reason_etc": "기타",
+      "agreement_title": "탈퇴 동의 사항",
+      "agreement_description": "아래 내용을 확인하고 동의해주세요",
+      "agreement_data_delete": "개인정보 및 서비스 이용 기록이 모두 삭제되는 것에 동의합니다.",
+      "agreement_order_history": "주문 내역 및 배송 정보가 삭제되어 추후 조회가 불가능함을 이해합니다.",
+      "agreement_no_refund": "적립금 및 쿠폰은 환불되지 않으며, 탈퇴 후 복구가 불가능함을 동의합니다.",
+      "confirmation_title": "탈퇴 확인",
+      "confirmation_description": "계정 탈퇴를 확인하기 위해 아래 입력란에 \"계정삭제\"를 정확히 입력해주세요.",
+      "confirmation_input_label": "확인 텍스트",
+      "confirmation_placeholder": "계정삭제",
+      "confirmation_helper": "정확히 \"계정삭제\"라고 입력해주세요.",
+      "submit_processing": "탈퇴 처리 중...",
+      "submit_button": "계정 탈퇴하기",
+      "cancel_button": "취소",
+      "messages": {
+        "all_required": "모든 항목을 확인하고 동의해주세요.",
+        "text_mismatch": "확인 텍스트가 일치하지 않습니다."
+      },
+      "success": {
+        "title": "계정 탈퇴 완료",
+        "description": "계정이 성공적으로 삭제되었습니다",
+        "thankYou": "심플몰을 이용해주셔서 감사했습니다.",
+        "data_deleted": "고객님의 모든 개인정보와 데이터가 안전하게 삭제되었습니다.",
+        "summary_title": "처리 완료 내역",
+        "summary_personal": "개인정보 완전 삭제",
+        "summary_orders": "주문 내역 삭제",
+        "summary_cart": "장바구니 및 찜목록 삭제",
+        "summary_rewards": "적립금 및 쿠폰 삭제",
+        "rejoin_title": "재가입 안내",
+        "rejoin_description_line1": "언제든지 다시 가입하실 수 있습니다.",
+        "rejoin_description_line2": "단, 기존 데이터는 복구되지 않습니다.",
+        "button_home": "홈페이지로 이동",
+        "button_signup": "새 계정으로 가입하기",
+        "support_ask": "문의사항이 있으시면 언제든지 연락해주세요",
+        "support_phone": "고객센터: 1588-1234",
+        "support_hours": "평일 09:00 - 18:00 (주말, 공휴일 휴무)",
+        "goodbye_message": "\"더 나은 서비스로 다시 만날 수 있기를 바랍니다\"",
+        "goodbye_team": "- 심플몰 팀 드림 -"
       }
     },
     "orders": {

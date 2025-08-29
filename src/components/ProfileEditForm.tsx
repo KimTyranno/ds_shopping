@@ -7,7 +7,15 @@ import {
 import { Label } from '@/components/ui/label'
 import { Link } from '@/i18n/navigation'
 import type { User as AuthUser } from '@supabase/supabase-js'
-import { AlertCircle, Camera, KeyRound, MapPin, Save, User } from 'lucide-react'
+import {
+  AlertCircle,
+  Camera,
+  KeyRound,
+  MapPin,
+  Save,
+  Trash2,
+  User,
+} from 'lucide-react'
 import { useTranslations } from 'next-intl'
 import { useActionState, useEffect, useRef, useState } from 'react'
 import { Alert, AlertDescription } from './ui/alert'
@@ -326,6 +334,24 @@ export default function ProfileEditForm({ user }: { user: UserProfile }) {
             <Link href="/mypage">{t('button.cancel')}</Link>
           </Button>
         </div>
+        <Card className="border-red-200">
+          <CardContent>
+            <div className="flex items-center justify-between">
+              <div>
+                <h3 className="font-medium">{t('delete.title')}</h3>
+                <p className="text-sm text-muted-foreground">
+                  {t('delete.description')}
+                </p>
+              </div>
+              <Button variant="destructive" asChild>
+                <Link href="/profile/delete">
+                  <Trash2 className="w-4 h-4 mr-2" />
+                  {t('delete.button')}
+                </Link>
+              </Button>
+            </div>
+          </CardContent>
+        </Card>
       </form>
     </>
   )

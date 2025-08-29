@@ -6,4 +6,5 @@ export const PublicPaths = [
   '/best',
   '/new',
   '/sale',
+  '/profile/delete/success',
 ]

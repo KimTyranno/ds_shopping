@@ -195,7 +195,9 @@
     "messages": {
       "default": "An unknown error has occurred.",
       "expiredToken": "Your session has expired. Please log in again.",
-      "unauthorized": "You do not have permission to access this page."
+      "unauthorized": "You do not have permission to access this page.",
+      "user_not_found": "User information could not be found.",
+      "deletion_failed": "An error occurred while deleting the account."
     }
   },
   "notFound": {
@@ -404,7 +406,72 @@
           "save": "Save",
           "saving": "Saving...",
           "cancel": "Cancel"
+        },
+        "delete": {
+          "title:": "Delete Account",
+          "description:": "Your account and all data will be permanently deleted.",
+          "button:": "Delete Account"
         }
+      }
+    },
+    "profile_delete": {
+      "title": "Delete Account",
+      "description": "Permanently delete your account",
+      "warning_title": "Warning:",
+      "warning_message": "Account deletion is irreversible. All data will be permanently deleted.",
+      "info_title": "Information to be Deleted",
+      "info_description": "The following information will be permanently deleted",
+      "info_personal": "Personal information (Name, Email, Phone number, Address)",
+      "info_orders": "Order history and shipping information",
+      "info_cart": "Cart and wishlist",
+      "info_rewards": "Rewards and coupons",
+      "info_reviews": "Reviews and inquiries",
+      "reason_title": "Reason for Leaving",
+      "reason_description": "Let us know why you're leaving (optional)",
+      "reason_low_usage": "Low usage frequency",
+      "reason_no_products": "No desired products",
+      "reason_expensive": "Too expensive",
+      "reason_delivery": "Dissatisfied with delivery service",
+      "reason_customer_service": "Dissatisfied with customer service",
+      "reason_privacy": "Privacy concerns",
+      "reason_etc": "Other",
+      "agreement_title": "Account Deletion Agreement",
+      "agreement_description": "Please review and agree to the following",
+      "agreement_data_delete": "I agree that all personal and usage data will be deleted.",
+      "agreement_order_history": "I understand that order and delivery history will be deleted and cannot be retrieved.",
+      "agreement_no_refund": "I agree that rewards and coupons will not be refunded and cannot be recovered after deletion.",
+      "confirmation_title": "Account Deletion Confirmation",
+      "confirmation_description": "To confirm account deletion, please type \"DELETE\" exactly below.",
+      "confirmation_input_label": "Confirmation Text",
+      "confirmation_placeholder": "DELETE",
+      "confirmation_helper": "Please enter \"DELETE\" exactly.",
+      "submit_processing": "Processing deletion...",
+      "submit_button": "Delete Account",
+      "cancel_button": "Cancel",
+      "messages": {
+        "all_required": "Please review and agree to all items.",
+        "text_mismatch": "Confirmation text does not match."
+      },
+      "success": {
+        "title": "Account Deletion Complete",
+        "description": "Your account has been successfully deleted",
+        "thankYou": "Thank you for using Simple Mall.",
+        "data_deleted": "All your personal data has been safely deleted.",
+        "summary_title": "Deletion Summary",
+        "summary_personal": "Personal data permanently deleted",
+        "summary_orders": "Order history deleted",
+        "summary_cart": "Cart and wishlist deleted",
+        "summary_rewards": "Rewards and coupons deleted",
+        "rejoin_title": "Rejoin Information",
+        "rejoin_description_line1": "You can rejoin at any time.",
+        "rejoin_description_line2": "However, previous data cannot be restored.",
+        "button_home": "Go to Homepage",
+        "button_signup": "Sign Up with a New Account",
+        "support_ask": "If you have any questions, feel free to contact us",
+        "support_phone": "Customer Service: 1588-1234",
+        "support_hours": "Weekdays 09:00 - 18:00 (Closed on weekends & holidays)",
+        "goodbye_message": "\"We hope to meet again with better service.\"",
+        "goodbye_team": "- From the Simple Mall Team -"
       }
     },
     "orders": {
