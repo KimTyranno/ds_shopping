@@ -3,7 +3,7 @@
 import {
   profileEditAction,
   ProfileEditState,
-} from '@/app/[locale]/profile/edit/actions'
+} from '@/app/[locale]/(protected)/profile/edit/actions'
 import { Label } from '@/components/ui/label'
 import { Link } from '@/i18n/navigation'
 import type { User as AuthUser } from '@supabase/supabase-js'

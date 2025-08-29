@@ -9,7 +9,7 @@ import { ArrowLeft, Heart, ShoppingCart, Star, Trash2 } from 'lucide-react'
 import { useTranslations } from 'next-intl'
 import Image from 'next/image'
 import { useEffect, useState } from 'react'
-import { products } from '../products/action'
+import { products } from '../../(public)/products/action'
 
 interface WishlistItem {
   id: string
