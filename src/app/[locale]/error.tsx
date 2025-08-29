@@ -12,11 +12,7 @@ import { Link } from '@/i18n/navigation'
 import { AlertCircle } from 'lucide-react'
 import { useTranslations } from 'next-intl'
 
-export default function Error({
-  searchParams,
-}: {
-  searchParams: { message?: string }
-}) {
+export default function Error({ error }: { error: Error }) {
   const t = useTranslations('error')
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
@@ -28,8 +24,11 @@ export default function Error({
             </div>
             <CardTitle className="text-2xl">{t('title')}</CardTitle>
             <CardDescription>
-              {searchParams?.message
-                ? t(`messages.${searchParams.message}`)
+              {/* NOTE: 국제화 하려면 "messages.키" 형식으로 보내야함*/}
+              {error.message
+                ? error.message.startsWith('messages.')
+                  ? t(error.message)
+                  : error.message
                 : t('messages.default')}
             </CardDescription>
           </CardHeader>
