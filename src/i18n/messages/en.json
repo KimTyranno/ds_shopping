@@ -408,9 +408,9 @@
           "cancel": "Cancel"
         },
         "delete": {
-          "title:": "Delete Account",
-          "description:": "Your account and all data will be permanently deleted.",
-          "button:": "Delete Account"
+          "title": "Delete Account",
+          "description": "Your account and all data will be permanently deleted.",
+          "button": "Delete Account"
         }
       }
     },
