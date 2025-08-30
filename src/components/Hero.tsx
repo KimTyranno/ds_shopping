@@ -17,7 +17,8 @@ export default async function Hero() {
           style={{
             backgroundImage: `url("data:image/svg+xml,%3csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3e%3cg fill='none' fillRule='evenodd'%3e%3cg fill='%23ffffff' fillOpacity='0.1'%3e%3ccircle cx='30' cy='30' r='2'/%3e%3c/g%3e%3c/g%3e%3c/svg%3e")`,
             backgroundSize: '60px 60px',
-          }}></div>
+          }}
+        />
       </div>
 
       {/* 그라데이션 오버레이 */}

@@ -31,6 +31,11 @@ export async function signupAction(formData: FormData) {
     },
   })
 
+  // 이미 가입된 이메일 (이메일 인증 미완료 상태)
+  if (data?.user && data.user.identities?.length === 0) {
+    redirect(`/${locale}/signup?error=email_already_registered`)
+  }
+
   if (error) {
     redirect(`/${locale}/signup?message=` + encodeURIComponent(error.message))
   }
