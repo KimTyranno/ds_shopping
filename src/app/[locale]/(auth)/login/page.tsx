@@ -71,7 +71,7 @@ export default function LoginPage() {
         </Suspense>
         <div className="text-center">
           <Link
-            href={`/${currentLocale}`}
+            href="/"
             className="flex items-center justify-center space-x-2 mb-8">
             <div className="h-10 w-10 bg-primary rounded-lg flex items-center justify-center">
               <span className="text-primary-foreground font-bold">S</span>
@@ -124,9 +124,7 @@ export default function LoginPage() {
               <div className="text-center mt-4">
                 <p className="text-sm text-muted-foreground">
                   {tLogin('no_account')}{' '}
-                  <Link
-                    href={`/${currentLocale}/signup`}
-                    className="text-primary hover:underline">
+                  <Link href="/signup" className="text-primary hover:underline">
                     {tLogin('signup')}
                   </Link>
                 </p>
