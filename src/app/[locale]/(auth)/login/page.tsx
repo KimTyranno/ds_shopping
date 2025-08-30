@@ -13,12 +13,12 @@ import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { Separator } from '@/components/ui/separator'
 import { Link, usePathname, useRouter } from '@/i18n/navigation'
+import Toast from '@/lib/toast'
 import { cn } from '@/lib/utils'
 import { CircleAlert, MailCheck } from 'lucide-react'
 import { useLocale, useTranslations } from 'next-intl'
 import { useSearchParams } from 'next/navigation'
-import { Suspense, useActionState, useEffect } from 'react'
-import { toast } from 'sonner'
+import { Suspense, useActionState } from 'react'
 import { login } from './action'
 
 function LoginMessage() {
@@ -52,28 +52,19 @@ export default function LoginPage() {
   const router = useRouter()
   const pathname = usePathname()
 
-  useEffect(() => {
-    if (state?.error) {
-      toast(tLogin(state.error), {
-        position: 'top-center',
-        style: { background: '#e25c5c', color: '#fff' },
-      })
-    }
-  }, [state?.error])
-
-  useEffect(() => {
-    if (message) {
-      toast(tLogin(`messages.${message}`), {
-        position: 'top-center',
-        style: { background: '#e25c5c', color: '#fff' },
-      })
-      // 쿼리스트링이 없는 /login 경로로 다시 대체
-      router.replace(pathname)
-    }
-  }, [message])
-
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
+      {state?.error && <Toast message={tLogin(state.error)} type="error" />}
+      {message && (
+        <Toast
+          message={tLogin(`messages.${message}`)}
+          type="error"
+          callback={() => {
+            // 쿼리스트링이 없는 /login 경로로 다시 대체
+            router.replace(pathname)
+          }}
+        />
+      )}
       <div className="max-w-md w-full space-y-8">
         <Suspense>
           <LoginMessage />

@@ -17,7 +17,7 @@ import { getBestProducts } from '../products/action'
 export default function BestPage() {
   const bestProducts = getBestProducts()
   const t = useTranslations('category')
-  const tBest = useTranslations('bestProducts')
+  const tBest = useTranslations('best_products')
   const tCommon = useTranslations('common')
   const tNav = useTranslations('navigation')
 

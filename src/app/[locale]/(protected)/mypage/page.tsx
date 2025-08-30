@@ -11,6 +11,8 @@ import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { Link, redirect } from '@/i18n/navigation'
 import { getCurrentUser } from '@/lib/auth'
+import ScrollToTop from '@/lib/scrollToTop'
+import Toast, { ToastTypes } from '@/lib/toast'
 import { Mail, Package, ShoppingBag, Truck, User } from 'lucide-react'
 import { getLocale, getTranslations } from 'next-intl/server'
 
@@ -65,12 +67,17 @@ const getStatusIcon = (status: string) => {
   }
 }
 
-export default async function MyPage() {
+export default async function MyPage({
+  searchParams,
+}: {
+  searchParams: Promise<{ messageType: ToastTypes }>
+}) {
   const t = await getTranslations('mypage')
   const tCommon = await getTranslations('common')
   const tUser = await getTranslations('user')
   const user = await getCurrentUser()
   const locale = await getLocale()
+  const { messageType } = await searchParams
 
   if (!user) {
     return redirect({ href: '/login', locale })
@@ -78,6 +85,10 @@ export default async function MyPage() {
 
   return (
     <div className="container mx-auto px-4 py-8">
+      <ScrollToTop />
+      {messageType && (
+        <Toast message={t(`messages.${messageType}`)} type={messageType} />
+      )}
       <div className="max-w-6xl mx-auto">
         <div className="mb-8">
           <h1 className="text-3xl font-bold mb-2">{t('title')}</h1>

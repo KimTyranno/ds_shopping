@@ -41,14 +41,16 @@ export type UserProfile = {
 } & AuthUser
 
 export default function ProfileEditForm({ user }: { user: UserProfile }) {
-  const [formData, setFormData] = useState<ProfileEditState>({
+  const initData = {
     name: user.name || '',
     avatar: user.avatar || '',
     email: user.email || '',
     address: user.address || '',
     detailAddress: user.detail_address || '',
     zipCode: user.zip_code || '',
-  })
+  }
+
+  const [formData, setFormData] = useState<ProfileEditState>(initData)
   const [_, setPreviewUrl] = useState(user.avatar || '')
 
   // 에러발생시 focus 하는용도
@@ -63,6 +65,14 @@ export default function ProfileEditForm({ user }: { user: UserProfile }) {
     profileEditAction,
     formData,
   )
+
+  // 수정된 항목이 있는지 확인 (없는경우 저장버튼 비활성화)
+  const isFormChanged = (
+    initial: Record<string, unknown>,
+    current: Record<string, unknown>,
+  ) => {
+    return Object.keys(initial).some(key => initial[key] !== current[key])
+  }
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { id, value } = e.target
@@ -312,8 +322,8 @@ export default function ProfileEditForm({ user }: { user: UserProfile }) {
         <div className="flex gap-3">
           <Button
             formAction={formAction}
-            disabled={isFending}
-            className="flex-1">
+            disabled={isFending || !isFormChanged(initData, formData)}
+            className="flex-1 cursor-pointer">
             {isFending ? (
               <>
                 <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin mr-2" />
