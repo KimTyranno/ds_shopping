@@ -80,7 +80,14 @@ export async function profileEditAction(
     // HEIF 혹은 HEIC → JPEG 변환
     if (isHeifOrHeic) {
       try {
-        uploadBuffer = await sharp(inputBuffer).jpeg().toBuffer()
+        uploadBuffer = await sharp(inputBuffer)
+          .resize({
+            width: 1024,
+            fit: 'inside',
+            withoutEnlargement: true, // 원본보다 작으면 그대로 둠
+          })
+          .jpeg()
+          .toBuffer()
         filename = filename.replace(/\.(heic|heif)$/i, '.jpg')
         contentType = 'image/jpeg'
       } catch (error) {
