@@ -5,6 +5,7 @@ import { logger } from '@/lib/logger'
 import { createClient } from '@/lib/server'
 import { Profile } from '@/types/tables'
 import { getLocale } from 'next-intl/server'
+import { cookies } from 'next/headers'
 
 export type ProfileDeleteState = {
   errors?: {
@@ -93,6 +94,13 @@ export async function profileDeleteAction(
       logger.error('User 삭제중 에러발생', deleteError ?? profileDeleteError)
       throw new Error('messages.deletion_failed')
     }
+
+    const cookieStore = await cookies()
+    cookieStore.set('canAccessDeleteSuccess', 'true', {
+      maxAge: 60, // 60초 동안 유효
+      httpOnly: true, // 클라이언트 측 접근을 차단함
+      secure: true, // HTTPS 연결을 통해서만 쿠키가 전송되도록함
+    })
 
     // 로그아웃 및 홈페이지로 리다이렉트
     await supabase.auth.signOut()
