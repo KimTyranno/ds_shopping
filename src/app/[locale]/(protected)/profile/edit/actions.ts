@@ -3,9 +3,9 @@
 import { logger } from '@/lib/logger'
 import { createClient } from '@/lib/server'
 import { Profile } from '@/types/tables'
-import { getTranslations } from 'next-intl/server'
 import { revalidatePath } from 'next/cache'
 import { redirect } from 'next/navigation'
+import sharp from 'sharp'
 import { v4 as uuidv4 } from 'uuid'
 
 export type ProfileEditState = {
@@ -41,8 +41,6 @@ export async function profileEditAction(
   const zipCode = formData.get('zipCode') as string
   const locale = (formData.get('locale') as string) || 'ko'
 
-  const t = await getTranslations('mypage.profile_edit.form.error')
-
   const {
     data: { user },
   } = await supabase.auth.getUser()
@@ -54,7 +52,7 @@ export async function profileEditAction(
   if (!name.trim()) {
     return {
       ...prevState,
-      errors: { name: t('required_name') },
+      errors: { name: 'required_name' },
     }
   }
 
@@ -62,19 +60,48 @@ export async function profileEditAction(
   if (zipCode && !/^\d{5}$/.test(zipCode)) {
     return {
       ...prevState,
-      errors: { zipCode: t('invalid_zip_code') },
+      errors: { zipCode: 'invalid_zip_code' },
     }
   }
 
   // 프로필 사진
   if (avatar && avatar.size > 0) {
     const bucket = 'avatars'
-    const filename = `${uuidv4()}-${avatar.name}`
+    let filename = `${uuidv4()}-${avatar.name}`
+    const inputBuffer = Buffer.from(await avatar.arrayBuffer())
+    let uploadBuffer: Buffer
+    let contentType = avatar.type
+
+    const extension = avatar.name.split('.').pop()?.toLowerCase()
+    const isHeifOrHeic =
+      ['image/heic', 'image/heif'].includes(avatar.type) ||
+      extension === 'heic' ||
+      extension === 'heif'
+
+    // HEIF 혹은 HEIC → JPEG 변환
+    if (isHeifOrHeic) {
+      try {
+        uploadBuffer = await sharp(inputBuffer).jpeg().toBuffer()
+        filename = filename.replace(/\.(heic|heif)$/i, '.jpg')
+        contentType = 'image/jpeg'
+      } catch (error) {
+        logger.error('HEIC to JPEG 변환 실패', error)
+        return {
+          ...prevState,
+          errors: {
+            avatar: 'upload_error',
+          },
+        }
+      }
+    } else {
+      uploadBuffer = inputBuffer
+    }
 
     // storage에 업로드
     const { data, error } = await supabase.storage
       .from(bucket)
-      .upload(filename, avatar, {
+      .upload(filename, uploadBuffer, {
+        contentType,
         upsert: true,
       })
 
@@ -83,7 +110,7 @@ export async function profileEditAction(
       return {
         ...prevState,
         errors: {
-          avatar: t('upload_error'),
+          avatar: 'upload_error',
         },
       }
     }
@@ -116,7 +143,7 @@ export async function profileEditAction(
     if (signInError || !signInData.user) {
       return {
         ...prevState,
-        errors: { password: t('wrong_password') },
+        errors: { password: 'wrong_password' },
       }
     }
 
@@ -124,7 +151,7 @@ export async function profileEditAction(
     if (newPassword !== confirmPassword) {
       return {
         ...prevState,
-        errors: { confirmPassword: t('password_mismatch') },
+        errors: { confirmPassword: 'password_mismatch' },
       }
     }
 
@@ -136,7 +163,7 @@ export async function profileEditAction(
       logger.error('유저 비밀번호 변경 실패', updateError)
       return {
         ...prevState,
-        errors: { password: t('password_update_error') },
+        errors: { password: 'password_update_error' },
       }
     }
   }
