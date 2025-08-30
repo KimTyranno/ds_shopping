@@ -124,13 +124,18 @@ export default function ProfileEditForm({ user }: { user: UserProfile }) {
       )}
       <form className="space-y-6">
         {/* 프로필 사진 */}
-        <Card>
+        <Card className={state.errors?.avatar ? 'border-red-500' : ''}>
           <CardHeader>
             <CardTitle className="flex items-center gap-2">
               <Camera className="h-5 w-5" />
               {t('avatar.title')}
             </CardTitle>
             <CardDescription>{t('avatar.description')}</CardDescription>
+            {state.errors?.avatar && (
+              <p className="text-sm text-red-500">
+                {t(`error.${state.errors.avatar}`)}
+              </p>
+            )}
           </CardHeader>
           <CardContent>
             <div className="flex items-center gap-6">
@@ -189,7 +194,9 @@ export default function ProfileEditForm({ user }: { user: UserProfile }) {
                 className={state.errors?.name ? 'border-red-500' : ''}
               />
               {state.errors?.name && (
-                <p className="text-sm text-red-500">{state.errors.name}</p>
+                <p className="text-sm text-red-500">
+                  {t(`error.${state.errors.name}`)}
+                </p>
               )}
             </div>
 
@@ -223,7 +230,9 @@ export default function ProfileEditForm({ user }: { user: UserProfile }) {
                 className={state.errors?.password ? 'border-red-500' : ''}
               />
               {state.errors?.password && (
-                <p className="text-sm text-red-500">{state.errors.password}</p>
+                <p className="text-sm text-red-500">
+                  {t(`error.${state.errors.password}`)}
+                </p>
               )}
             </div>
             <div className="space-y-2">
@@ -253,7 +262,7 @@ export default function ProfileEditForm({ user }: { user: UserProfile }) {
               />
               {state.errors?.confirmPassword && (
                 <p className="text-sm text-red-500">
-                  {state.errors.confirmPassword}
+                  {t(`error.${state.errors.confirmPassword}`)}
                 </p>
               )}
             </div>
@@ -283,7 +292,9 @@ export default function ProfileEditForm({ user }: { user: UserProfile }) {
                   className={state.errors?.zipCode ? 'border-red-500' : ''}
                 />
                 {state.errors?.zipCode && (
-                  <p className="text-sm text-red-500">{state.errors.zipCode}</p>
+                  <p className="text-sm text-red-500">
+                    {t(`error.${state.errors.zipCode}`)}
+                  </p>
                 )}
               </div>
               {/* <Button
