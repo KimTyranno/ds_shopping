@@ -81,8 +81,13 @@ export default function Footer() {
           </div>
         </div>
 
-        <div className="border-t border-gray-800 mt-8 pt-8 text-center text-gray-400 text-sm">
-          <p>&copy; 2024 심플몰. All rights reserved.</p>
+        <div className="border-t border-gray-800 mt-8 pt-8 text-center text-gray-400 text-sm space-y-1">
+          <p>&copy; 2025 심플몰. All rights reserved.</p>
+          <p>
+            <a href="https://storyset.com/business">
+              Business illustrations by Storyset
+            </a>
+          </p>
         </div>
       </div>
     </footer>
