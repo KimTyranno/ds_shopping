@@ -67,16 +67,15 @@ export async function profileEditAction(
   // 프로필 사진
   if (avatar && avatar.size > 0) {
     const bucket = 'avatars'
-    let filename = `${uuidv4()}-${avatar.name}`
+    const extension = avatar.name.split('.').pop()?.toLowerCase() || 'jpg'
+    let filename = `${uuidv4()}.${extension}`
     const inputBuffer = Buffer.from(await avatar.arrayBuffer())
     let uploadBuffer: Buffer
     let contentType = avatar.type
 
-    const extension = avatar.name.split('.').pop()?.toLowerCase()
     const isHeifOrHeic =
       ['image/heic', 'image/heif'].includes(avatar.type) ||
-      extension === 'heic' ||
-      extension === 'heif'
+      ['heic', 'heif'].includes(extension)
 
     // HEIF 혹은 HEIC → JPEG 변환
     if (isHeifOrHeic) {
@@ -94,6 +93,15 @@ export async function profileEditAction(
         }
       }
     } else {
+      const allowedExtensions = ['jpg', 'jpeg', 'png', 'webp']
+      if (!allowedExtensions.includes(extension)) {
+        return {
+          ...prevState,
+          errors: {
+            avatar: 'invalid_file_type',
+          },
+        }
+      }
       uploadBuffer = inputBuffer
     }
 

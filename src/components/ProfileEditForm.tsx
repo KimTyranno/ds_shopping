@@ -54,6 +54,7 @@ export default function ProfileEditForm({ user }: { user: UserProfile }) {
   const [_, setPreviewUrl] = useState(user.avatar || '')
 
   // 에러발생시 focus 하는용도
+  const avatarRef = useRef<HTMLInputElement>(null)
   const nameRef = useRef<HTMLInputElement>(null)
   const passwordRef = useRef<HTMLInputElement>(null)
   const confirmPasswordRef = useRef<HTMLInputElement>(null)
@@ -100,7 +101,9 @@ export default function ProfileEditForm({ user }: { user: UserProfile }) {
   useEffect(() => {
     if (!state.errors) return
 
-    if (state.errors.name && nameRef.current) {
+    if (state.errors.avatar && avatarRef.current) {
+      avatarRef.current.focus()
+    } else if (state.errors.name && nameRef.current) {
       nameRef.current.focus()
     } else if (state.errors.password && passwordRef.current) {
       passwordRef.current.focus()
@@ -147,6 +150,7 @@ export default function ProfileEditForm({ user }: { user: UserProfile }) {
               </Avatar>
               <div>
                 <input
+                  ref={avatarRef}
                   type="file"
                   id="avatar"
                   name="avatar"

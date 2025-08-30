@@ -380,13 +380,14 @@
           "upload_error": "プロフィール写真の変更中にエラーが発生しました。",
           "wrong_password": "現在のパスワードが正しくありません。",
           "password_mismatch": "新しいパスワードが一致しません。",
-          "password_update_error": "パスワードの変更中にエラーが発生しました。"
+          "password_update_error": "パスワードの変更中にエラーが発生しました。",
+          "invalid_file_type": "JPG、JPEG、PNG、WebPファイルのみアップロードしてください。"
         },
         "avatar": {
           "title": "プロフィール写真",
           "description": "プロフィール写真を変更できます",
           "change": "写真を変更",
-          "note": "JPG、PNGファイルのみアップロード可能です（最大{size}MB）"
+          "note": "JPG、JPEG、PNG、WebPファイルのみアップロード可能です。（最大{size}MB）"
         },
         "basic": {
           "title": "基本情報",
