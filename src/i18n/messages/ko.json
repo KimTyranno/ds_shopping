@@ -41,6 +41,24 @@
     "orders": "주문내역",
     "wishlist": "찜목록"
   },
+  "hero": {
+    "badge": "NEW ARRIVAL",
+    "satisfaction": "4.9/5 고객만족도",
+    "heading_line1": "트렌드를",
+    "heading_line2": "선도하는",
+    "heading_line3": "쇼핑몰",
+    "subheading": "최신 트렌드부터 클래식까지, 당신만의 스타일을 완성해보세요",
+    "cta_shop_now": "지금 쇼핑하기",
+    "cta_best_products": "베스트 상품",
+    "special_offer_title": "지금 가입하면 특별혜택!",
+    "offer_new_member": "신규회원 20% 할인쿠폰",
+    "offer_free_shipping": "무료배송 (5만원 이상)",
+    "offer_point": "구매금액 1% 적립",
+    "today_special": "오늘의 특가",
+    "today_discount": "최대 70% 할인",
+    "product_count_label": "다양한 상품",
+    "satisfied_customers": "만족한 고객들"
+  },
   "search": {
     "title": "상품 검색",
     "placeholder": "상품을 검색해보세요...",

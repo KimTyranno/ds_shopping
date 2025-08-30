@@ -41,6 +41,24 @@
     "orders": "Orders",
     "wishlist": "Wishlist"
   },
+  "hero": {
+    "badge": "NEW ARRIVAL",
+    "satisfaction": "4.9/5 Customer Satisfaction",
+    "heading_line1": "Leading",
+    "heading_line2": "the Trend",
+    "heading_line3": "Shopping Mall",
+    "subheading": "From the latest trends to classics, perfect your style.",
+    "cta_shop_now": "Shop Now",
+    "cta_best_products": "Best Products",
+    "special_offer_title": "Sign up now for special benefits!",
+    "offer_new_member": "20% off for new members",
+    "offer_free_shipping": "Free shipping (orders over ₩50,000)",
+    "offer_point": "1% back on purchase amount",
+    "today_special": "Today’s Special",
+    "today_discount": "Up to 70% off",
+    "product_count_label": "Products Available",
+    "satisfied_customers": "Satisfied Customers"
+  },
   "search": {
     "title": "Search Products",
     "placeholder": "Search for products…",
