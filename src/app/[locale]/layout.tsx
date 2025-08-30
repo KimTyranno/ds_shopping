@@ -3,6 +3,7 @@ import Header from '@/components/header'
 import { Toaster } from '@/components/ui/sonner'
 import { locales } from '@/i18n/routing'
 import { getCurrentUser } from '@/lib/auth'
+import ScrollToTop from '@/lib/scrollToTop'
 import { createTranslator, NextIntlClientProvider } from 'next-intl'
 import { getMessages } from 'next-intl/server'
 import { Inter } from 'next/font/google'
@@ -53,6 +54,7 @@ export default async function RootLayout({ children, params }: rootProps) {
         <NextIntlClientProvider locale={locale} messages={messages}>
           <AuthProvider user={user} />
           <Toaster />
+          <ScrollToTop />
           <Header />
           <main className="min-h-screen">{children}</main>
           <Footer />
