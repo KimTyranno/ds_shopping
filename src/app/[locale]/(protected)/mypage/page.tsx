@@ -168,7 +168,7 @@ export default async function MyPage() {
 
                       <div className="flex justify-between items-center mt-3 pt-3 border-t">
                         <span className="font-semibold">
-                          {t('orders.totalAmount')}
+                          {t('orders.total_amount')}
                         </span>
                         <span className="font-bold text-primary">
                           {order.total.toLocaleString() + tCommon('currency')}
@@ -191,7 +191,7 @@ export default async function MyPage() {
         {/* 빠른 링크 */}
         <div className="mt-8">
           <h2 className="text-xl font-semibold mb-4">
-            {t('quickLinks.title')}
+            {t('quick_links.title')}
           </h2>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
             <Button

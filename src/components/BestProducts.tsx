@@ -57,10 +57,10 @@ export default function BestProducts() {
       <div className="container mx-auto px-4">
         <div className="text-center mb-12">
           <h2 className="text-3xl md:text-4xl font-bold mb-4">
-            {t('bestProducts.title')}
+            {t('best_products.title')}
           </h2>
           <p className="text-lg text-muted-foreground">
-            {t('bestProducts.description')}
+            {t('best_products.description')}
           </p>
         </div>
 
@@ -125,12 +125,12 @@ export default function BestProducts() {
                     className="flex-1 bg-transparent"
                     asChild>
                     <Link href={`/products/${product.id}`}>
-                      {t('bestProducts.details')}
+                      {t('best_products.details')}
                     </Link>
                   </Button>
                   <Button size="sm" className="flex-1">
                     <ShoppingCart className="w-4 h-4 mr-2" />
-                    {t('bestProducts.addToCart')}
+                    {t('best_products.add_to_cart')}
                   </Button>
                 </div>
               </CardFooter>
@@ -140,7 +140,7 @@ export default function BestProducts() {
 
         <div className="text-center mt-12">
           <Button size="lg" variant="outline" asChild>
-            <Link href="/best">{t('bestProducts.more')}</Link>
+            <Link href="/best">{t('best_products.more')}</Link>
           </Button>
         </div>
       </div>

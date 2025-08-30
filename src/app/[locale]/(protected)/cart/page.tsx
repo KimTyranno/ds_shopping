@@ -131,7 +131,7 @@ export default function CartPage() {
           </Button>
           <h1 className="text-3xl font-bold">{t('title')}</h1>
           <span className="text-muted-foreground">
-            ({t('itemsCount', { count: cartItems.length })})
+            ({t('items_count', { count: cartItems.length })})
           </span>
         </div>
 
@@ -165,7 +165,7 @@ export default function CartPage() {
                         htmlFor="select-all"
                         className="font-medium cursor-pointer">
                         (
-                        {t('selectAll', {
+                        {t('select_all', {
                           selected: selectedItems.length,
                           total: cartItems.length,
                         })}
@@ -182,7 +182,7 @@ export default function CartPage() {
                         )
                       }}
                       disabled={selectedItems.length === 0}>
-                      {t('deleteSelected')}
+                      {t('delete_selected')}
                     </Button>
                   </div>
                 </CardContent>
@@ -293,7 +293,7 @@ export default function CartPage() {
                 <CardContent className="space-y-4">
                   <div className="space-y-2">
                     <div className="flex justify-between">
-                      <span>{t('summary.productPrice')}</span>
+                      <span>{t('summary.product_price')}</span>
                       <span>
                         {totalOriginalPrice.toLocaleString() +
                           tCommon('currency')}
@@ -329,7 +329,7 @@ export default function CartPage() {
 
                   {deliveryFee > 0 && (
                     <p className="text-sm text-muted-foreground">
-                      {t('summary.freeShippingThreshold', {
+                      {t('summary.free_shipping_threshold', {
                         amount: (50000 - totalPrice).toLocaleString(),
                       })}
                     </p>

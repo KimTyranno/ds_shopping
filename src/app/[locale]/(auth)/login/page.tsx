@@ -54,7 +54,7 @@ export default function LoginPage() {
 
   useEffect(() => {
     if (state?.error) {
-      toast(tLogin('loginFail'), {
+      toast(tLogin('login_fail'), {
         position: 'top-center',
         style: { background: '#e25c5c', color: '#fff' },
       })
@@ -117,7 +117,7 @@ export default function LoginPage() {
                   id="password"
                   name="password"
                   type="password"
-                  placeholder={tLogin('emailPlaceholder')}
+                  placeholder={tLogin('email_placeholder')}
                   required
                 />
               </div>
@@ -132,7 +132,7 @@ export default function LoginPage() {
               <Separator />
               <div className="text-center mt-4">
                 <p className="text-sm text-muted-foreground">
-                  {tLogin('noAccount')}{' '}
+                  {tLogin('no_account')}{' '}
                   <Link
                     href={`/${currentLocale}/signup`}
                     className="text-primary hover:underline">

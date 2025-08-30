@@ -17,7 +17,7 @@ export async function signupAction(formData: FormData) {
 
   // 비밀번호 확인
   if (password !== confirmPassword) {
-    redirect(`/${locale}/signup?error=passwordMismatch`)
+    redirect(`/${locale}/signup?error=password_mismatch`)
   }
 
   const { data, error } = await supabase.auth.signUp({

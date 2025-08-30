@@ -293,7 +293,7 @@ export default function OrderDetailPage({
           <div>
             <h1 className="text-3xl font-bold">{t('title')}</h1>
             <p className="text-muted-foreground">
-              {t('orderNumber', { id: order.id })}
+              {t('order_number', { id: order.id })}
             </p>
           </div>
         </div>
@@ -305,7 +305,7 @@ export default function OrderDetailPage({
               <div className="flex items-center justify-between">
                 <CardTitle className="flex items-center gap-2">
                   <Package className="h-5 w-5" />
-                  {t('statusTitle')}
+                  {t('status_title')}
                 </CardTitle>
                 <Badge className={getStatusColor(order.status)}>
                   {getStatusIcon(order.status)}
@@ -317,7 +317,7 @@ export default function OrderDetailPage({
               <div className="grid md:grid-cols-2 gap-4">
                 <div>
                   <p className="text-sm text-muted-foreground">
-                    {t('orderDate')}
+                    {t('order_date')}
                   </p>
                   <p className="font-medium">
                     {new Date(order.date).toLocaleDateString('ko-KR')}{' '}
@@ -327,7 +327,7 @@ export default function OrderDetailPage({
                 {order.trackingNumber && (
                   <div>
                     <p className="text-sm text-muted-foreground">
-                      {t('trackingNumber')}
+                      {t('tracking_number')}
                     </p>
                     <p className="font-medium">{order.trackingNumber}</p>
                   </div>
@@ -338,7 +338,7 @@ export default function OrderDetailPage({
                 <div className="mt-4">
                   <Button variant="outline" className="bg-transparent">
                     <Truck className="w-4 h-4 mr-2" />
-                    {t('trackingButton')}
+                    {t('tracking_button')}
                   </Button>
                 </div>
               )}
@@ -349,7 +349,7 @@ export default function OrderDetailPage({
           <Card>
             <CardHeader>
               <CardTitle>
-                {t('itemsTitle', { count: order.items.length })}
+                {t('items_title', { count: order.items.length })}
               </CardTitle>
             </CardHeader>
             <CardContent>
@@ -404,7 +404,7 @@ export default function OrderDetailPage({
             <CardHeader>
               <CardTitle className="flex items-center gap-2">
                 <MapPin className="h-5 w-5" />
-                {t('deliveryInfo')}
+                {t('delivery_info')}
               </CardTitle>
             </CardHeader>
             <CardContent>
@@ -446,7 +446,7 @@ export default function OrderDetailPage({
             <CardHeader>
               <CardTitle className="flex items-center gap-2">
                 <CreditCard className="h-5 w-5" />
-                {t('paymentInfo')}
+                {t('payment_info')}
               </CardTitle>
             </CardHeader>
             <CardContent>
@@ -466,10 +466,10 @@ export default function OrderDetailPage({
                   </div>
                 )}
                 <div className="flex justify-between">
-                  <span>{t('deliveryFee')}</span>
+                  <span>{t('delivery_fee')}</span>
                   <span>
                     {order.deliveryFee === 0
-                      ? t('deliveryFree')
+                      ? t('delivery_free')
                       : order.deliveryFee.toLocaleString() +
                         tCommon('currency')}
                   </span>
@@ -486,11 +486,11 @@ export default function OrderDetailPage({
 
                 <div className="pt-3 border-t">
                   <div className="flex justify-between text-sm">
-                    <span>{t('paymentMethod')}</span>
+                    <span>{t('payment_method')}</span>
                     <span>{order.paymentMethod}</span>
                   </div>
                   <div className="flex justify-between text-sm mt-1">
-                    <span>{t('paymentDate')}</span>
+                    <span>{t('payment_date')}</span>
                     <span>
                       {new Date(order.paymentDate).toLocaleString('ko-KR')}
                     </span>
@@ -505,7 +505,7 @@ export default function OrderDetailPage({
             <CardHeader>
               <CardTitle className="flex items-center gap-2">
                 <Phone className="h-5 w-5" />
-                {t('ordererInfo')}
+                {t('orderer_info')}
               </CardTitle>
             </CardHeader>
             <CardContent>
@@ -531,23 +531,23 @@ export default function OrderDetailPage({
             {order.status === '배송완료' && (
               <>
                 <Button variant="outline" className="bg-transparent">
-                  {t('actions.writeReview')}
+                  {t('actions.write_review')}
                 </Button>
                 <Button variant="outline" className="bg-transparent">
                   {t('actions.reorder')}
                 </Button>
                 <Button variant="outline" className="bg-transparent">
-                  {t('actions.requestReturn')}
+                  {t('actions.request_return')}
                 </Button>
               </>
             )}
             {order.status === '주문완료' && (
               <Button variant="outline" className="bg-transparent">
-                {t('actions.cancelOrder')}
+                {t('actions.cancel_order')}
               </Button>
             )}
             <Button variant="outline" className="bg-transparent">
-              {t('actions.printReceipt')}
+              {t('actions.print_receipt')}
             </Button>
           </div>
         </div>

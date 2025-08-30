@@ -26,7 +26,7 @@ export async function login(
 
   if (error) {
     return {
-      error: 'loginFail',
+      error: 'login_fail',
     }
   }
 

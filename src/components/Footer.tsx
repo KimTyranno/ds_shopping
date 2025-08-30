@@ -39,7 +39,7 @@ export default function Footer() {
           {/* 고객 서비스 */}
           <div>
             <h3 className="font-semibold text-lg mb-4">
-              {tFooter('customerService')}
+              {tFooter('customer_service')}
             </h3>
             <ul className="space-y-2 text-gray-400">
               <li>
@@ -68,15 +68,15 @@ export default function Footer() {
           {/* 회사 정보 */}
           <div>
             <h3 className="font-semibold text-lg mb-4">
-              {tFooter('companyInfo')}
+              {tFooter('company_info')}
             </h3>
             <ul className="space-y-2 text-gray-400 text-sm">
               <li>{tFooter('company.name')}</li>
               <li>{tFooter('company.ceo')}</li>
-              <li>{tFooter('company.bizNumber')}</li>
+              <li>{tFooter('company.biz_number')}</li>
               <li>{tFooter('company.license')}</li>
               <li>{tFooter('company.address')}</li>
-              <li>{tFooter('company.customerCenter')}</li>
+              <li>{tFooter('company.customer_center')}</li>
             </ul>
           </div>
         </div>

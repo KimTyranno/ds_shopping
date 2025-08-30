@@ -156,12 +156,12 @@ export default async function CategoryPage({
                   className="flex-1 bg-transparent"
                   asChild>
                   <Link href={`/products/${product.id}`}>
-                    {t('viewDetail')}
+                    {t('view_detail')}
                   </Link>
                 </Button>
                 <Button size="sm" className="flex-1">
                   <ShoppingCart className="w-4 h-4 mr-2" />
-                  {t('addToCart')}
+                  {t('add_to_cart')}
                 </Button>
               </div>
             </CardFooter>

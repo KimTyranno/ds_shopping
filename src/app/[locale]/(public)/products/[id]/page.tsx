@@ -207,7 +207,7 @@ export default function ProductDetailPage({
 
             {/* 총 가격 */}
             <div className="text-xl font-bold">
-              {t('product.totalPrice', {
+              {t('product.total_price', {
                 price: (product.price * quantity).toLocaleString(),
               }) + t('common.currency')}
             </div>
@@ -218,7 +218,7 @@ export default function ProductDetailPage({
             <div className="flex gap-3">
               <Button size="lg" className="flex-1">
                 <ShoppingCart className="w-5 h-5 mr-2" />
-                {t('product.addToCart')}
+                {t('product.add_to_cart')}
               </Button>
               <Button variant="outline" size="lg">
                 <Heart className="w-5 h-5" />
@@ -228,7 +228,7 @@ export default function ProductDetailPage({
               </Button>
             </div>
             <Button size="lg" variant="secondary" className="w-full">
-              {t('product.buyNow')}
+              {t('product.buy_now')}
             </Button>
           </div>
 
@@ -236,7 +236,7 @@ export default function ProductDetailPage({
           <div className="space-y-3 pt-6 border-t">
             <div className="flex items-center gap-3 text-sm">
               <Truck className="w-5 h-5 text-muted-foreground" />
-              <span>{t('product.freeShipping')}</span>
+              <span>{t('product.free_shipping')}</span>
             </div>
             <div className="flex items-center gap-3 text-sm">
               <Shield className="w-5 h-5 text-muted-foreground" />
@@ -281,14 +281,14 @@ export default function ProductDetailPage({
                   </div>
                   <div>
                     <h4 className="font-medium mb-2">
-                      {t('product.details.stockStatus')}
+                      {t('product.details.stock_status')}
                     </h4>
                     <p className="text-muted-foreground">
                       {product.inStock
-                        ? t('product.details.inStock', {
+                        ? t('product.details.in_stock', {
                             count: product.stockCount,
                           })
-                        : t('product.details.soldOut')}
+                        : t('product.details.sold_out')}
                     </p>
                   </div>
                 </div>

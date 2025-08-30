@@ -41,7 +41,7 @@ export async function profileEditAction(
   const zipCode = formData.get('zipCode') as string
   const locale = (formData.get('locale') as string) || 'ko'
 
-  const t = await getTranslations('mypage.profileEdit.form.error')
+  const t = await getTranslations('mypage.profile_edit.form.error')
 
   const {
     data: { user },
@@ -54,7 +54,7 @@ export async function profileEditAction(
   if (!name.trim()) {
     return {
       ...prevState,
-      errors: { name: t('requiredName') },
+      errors: { name: t('required_name') },
     }
   }
 
@@ -62,7 +62,7 @@ export async function profileEditAction(
   if (zipCode && !/^\d{5}$/.test(zipCode)) {
     return {
       ...prevState,
-      errors: { zipCode: t('invalidZipCode') },
+      errors: { zipCode: t('invalid_zip_code') },
     }
   }
 
@@ -83,7 +83,7 @@ export async function profileEditAction(
       return {
         ...prevState,
         errors: {
-          avatar: t('uploadError'),
+          avatar: t('upload_error'),
         },
       }
     }
@@ -116,7 +116,7 @@ export async function profileEditAction(
     if (signInError || !signInData.user) {
       return {
         ...prevState,
-        errors: { password: t('wrongPassword') },
+        errors: { password: t('wrong_password') },
       }
     }
 
@@ -124,7 +124,7 @@ export async function profileEditAction(
     if (newPassword !== confirmPassword) {
       return {
         ...prevState,
-        errors: { confirmPassword: t('passwordMismatch') },
+        errors: { confirmPassword: t('password_mismatch') },
       }
     }
 
@@ -136,7 +136,7 @@ export async function profileEditAction(
       logger.error('유저 비밀번호 변경 실패', updateError)
       return {
         ...prevState,
-        errors: { password: t('passwordUpdateError') },
+        errors: { password: t('password_update_error') },
       }
     }
   }

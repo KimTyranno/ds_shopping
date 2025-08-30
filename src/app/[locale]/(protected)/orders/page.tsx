@@ -264,11 +264,11 @@ export default function OrdersPage() {
         {/* 배송 정보 */}
         <div className="text-sm text-muted-foreground">
           <p>
-            {t('card.deliveryAddress')}: {order.deliveryAddress}
+            {t('card.delivery_address')}: {order.deliveryAddress}
           </p>
           {order.trackingNumber && (
             <p>
-              {t('card.trackingNumber')}: {order.trackingNumber}
+              {t('card.tracking_number')}: {order.trackingNumber}
             </p>
           )}
         </div>
@@ -276,14 +276,14 @@ export default function OrdersPage() {
         {/* 총 금액 및 액션 버튼 */}
         <div className="flex items-center justify-between pt-3 border-t">
           <span className="font-bold text-primary">
-            {t('card.totalAmount', { amount: order.total.toLocaleString() })}
+            {t('card.total_amount', { amount: order.total.toLocaleString() })}
           </span>
 
           <div className="flex gap-2">
             {order.status === '배송완료' && (
               <>
                 <Button variant="outline" size="sm" className="bg-transparent">
-                  {t('card.buttons.writeReview')}
+                  {t('card.buttons.write_review')}
                 </Button>
                 <Button variant="outline" size="sm" className="bg-transparent">
                   {t('card.buttons.reorder')}
@@ -292,12 +292,12 @@ export default function OrdersPage() {
             )}
             {order.status === '배송중' && order.trackingNumber && (
               <Button variant="outline" size="sm" className="bg-transparent">
-                {t('card.buttons.trackDelivery')}
+                {t('card.buttons.track_delivery')}
               </Button>
             )}
             {order.status === '주문완료' && (
               <Button variant="outline" size="sm" className="bg-transparent">
-                {t('card.buttons.cancelOrder')}
+                {t('card.buttons.cancel_order')}
               </Button>
             )}
             <Button
@@ -305,7 +305,7 @@ export default function OrdersPage() {
               variant="outline"
               size="sm"
               className="bg-transparent cursor-pointer">
-              {t('card.buttons.viewDetails')}
+              {t('card.buttons.view_details')}
             </Button>
           </div>
         </div>
@@ -331,7 +331,7 @@ export default function OrdersPage() {
           <div className="relative flex-1">
             <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground h-4 w-4" />
             <Input
-              placeholder={t('searchPlaceholder')}
+              placeholder={t('search_placeholder')}
               value={searchTerm}
               onChange={e => setSearchTerm(e.target.value)}
               className="pl-10"
@@ -342,8 +342,8 @@ export default function OrdersPage() {
               <SelectValue />
             </SelectTrigger>
             <SelectContent>
-              <SelectItem value="latest">{t('sortLatest')}</SelectItem>
-              <SelectItem value="oldest">{t('sortOldest')}</SelectItem>
+              <SelectItem value="latest">{t('sort_latest')}</SelectItem>
+              <SelectItem value="oldest">{t('sort_oldest')}</SelectItem>
             </SelectContent>
           </Select>
         </div>
@@ -370,13 +370,13 @@ export default function OrdersPage() {
               <div className="text-center py-16">
                 <Package className="h-16 w-16 mx-auto text-muted-foreground mb-4" />
                 <h2 className="text-xl font-semibold mb-2">
-                  {t('emptyAll.title')}
+                  {t('empty_all.title')}
                 </h2>
                 <p className="text-muted-foreground mb-6">
-                  {t('emptyAll.description')}
+                  {t('empty_all.description')}
                 </p>
                 <Button asChild>
-                  <Link href="/">{t('emptyAll.button')}</Link>
+                  <Link href="/">{t('empty_all.button')}</Link>
                 </Button>
               </div>
             ) : (

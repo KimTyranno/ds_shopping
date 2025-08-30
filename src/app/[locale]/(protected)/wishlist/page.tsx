@@ -131,7 +131,7 @@ export default function WishlistPage() {
                       <label
                         htmlFor="select-all"
                         className="font-medium cursor-pointer">
-                        {t('actions.selectAll', {
+                        {t('actions.select_all', {
                           selected: selectedItems.length,
                           total: wishlistProducts.length,
                         })}
@@ -147,7 +147,7 @@ export default function WishlistPage() {
                       disabled={selectedItems.length === 0}
                       className="bg-transparent">
                       <ShoppingCart className="w-4 h-4 mr-2" />
-                      {t('actions.addToCart')}
+                      {t('actions.add_to_cart')}
                     </Button>
                     <Button
                       variant="outline"
@@ -156,7 +156,7 @@ export default function WishlistPage() {
                       disabled={selectedItems.length === 0}
                       className="bg-transparent">
                       <Trash2 className="w-4 h-4 mr-2" />
-                      {t('actions.removeSelected')}
+                      {t('actions.remove_selected')}
                     </Button>
                   </div>
                 </div>
@@ -256,7 +256,7 @@ export default function WishlistPage() {
                       </div>
 
                       <p className="text-xs text-muted-foreground">
-                        {t('addedAt', {
+                        {t('added_at', {
                           date: new Date(product.addedAt).toLocaleDateString(
                             'ko-KR',
                           ),

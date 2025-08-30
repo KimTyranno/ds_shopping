@@ -18,7 +18,7 @@ const UserInfo = (props: UserInfoProps) => {
     return (
       <div className="p-4 bg-muted/50 rounded-lg mt-6">
         <p className="text-sm text-muted-foreground mb-3">
-          {t('user.loginPrompt')}
+          {t('user.login_prompt')}
         </p>
         <Button asChild className="w-full">
           <Link href="/login" onClick={props.handleClose}>

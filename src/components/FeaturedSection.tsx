@@ -5,19 +5,19 @@ import { Gift, Headphones, Shield, Truck } from 'lucide-react'
 import { useTranslations } from 'next-intl'
 
 export default function FeaturedSection() {
-  const tFeatcured = useTranslations('featuredSection')
+  const tFeatcured = useTranslations('featured_section')
   const tCommon = useTranslations('common')
 
   const features = [
     {
       icon: Truck,
-      title: tFeatcured('features.freeShipping.title'),
-      description: tFeatcured('features.freeShipping.description'),
+      title: tFeatcured('features.free_shipping.title'),
+      description: tFeatcured('features.free_shipping.description'),
     },
     {
       icon: Shield,
-      title: tFeatcured('features.securePayment.title'),
-      description: tFeatcured('features.securePayment.description'),
+      title: tFeatcured('features.secure_payment.title'),
+      description: tFeatcured('features.secure_payment.description'),
     },
     {
       icon: Headphones,

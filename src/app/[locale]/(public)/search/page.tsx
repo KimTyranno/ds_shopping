@@ -34,6 +34,7 @@ export default function SearchPage() {
   const initialCategory = searchParams.get('category') || 'all'
   const t = useTranslations('search')
   const tCategory = useTranslations('category')
+  const tCommon = useTranslations('common')
 
   const [searchQuery, setSearchQuery] = useState(initialQuery)
   const [executedQuery, setExecutedQuery] = useState(initialQuery)
@@ -181,12 +182,13 @@ export default function SearchPage() {
             className={`flex items-center justify-between ${isListView ? 'mb-0' : 'mb-4'}`}>
             <div>
               <span className="text-xl font-bold text-primary">
-                {product.price.toLocaleString()}원
+                {product.price.toLocaleString() + tCommon('currency')}
               </span>
               {product.originalPrice && (
                 <div className="flex items-center gap-2">
                   <span className="text-sm text-muted-foreground line-through">
-                    {product.originalPrice.toLocaleString()}원
+                    {product.originalPrice.toLocaleString() +
+                      tCommon('currency')}
                   </span>
                   <Badge variant="destructive" className="text-xs">
                     {Math.round(
@@ -194,7 +196,7 @@ export default function SearchPage() {
                         product.originalPrice) *
                         100,
                     )}
-                    % 할인
+                    {t('discount')}
                   </Badge>
                 </div>
               )}
@@ -208,11 +210,13 @@ export default function SearchPage() {
                 size="sm"
                 className="flex-1 bg-transparent"
                 asChild>
-                <Link href={`/products/${product.id}`}>상세보기</Link>
+                <Link href={`/products/${product.id}`}>
+                  {t('buttons.view_details')}
+                </Link>
               </Button>
               <Button size="sm" className="flex-1">
                 <ShoppingCart className="w-4 h-4 mr-2" />
-                장바구니
+                {t('buttons.add_to_cart')}
               </Button>
             </div>
           )}
@@ -227,11 +231,13 @@ export default function SearchPage() {
               size="sm"
               className="flex-1 bg-transparent"
               asChild>
-              <Link href={`/products/${product.id}`}>상세보기</Link>
+              <Link href={`/products/${product.id}`}>
+                {t('buttons.view_details')}
+              </Link>
             </Button>
             <Button size="sm" className="flex-1">
               <ShoppingCart className="w-4 h-4 mr-2" />
-              장바구니
+              {t('buttons.add_to_cart')}
             </Button>
           </div>
         </CardFooter>
@@ -253,7 +259,7 @@ export default function SearchPage() {
             <h1 className="text-3xl font-bold">{t('title')}</h1>
             {executedQuery && (
               <p className="text-muted-foreground">
-                {t('resultsHeader', {
+                {t('results_header', {
                   query: executedQuery,
                   count: sortedResults.length,
                 })}
@@ -276,7 +282,7 @@ export default function SearchPage() {
           </div>
           <Button onClick={() => handleSearch()}>
             <Search className="w-4 h-4 mr-2" />
-            {t('searchButton')}
+            {t('search_button')}
           </Button>
         </div>
 
@@ -318,7 +324,9 @@ export default function SearchPage() {
         <div className="flex flex-col lg:flex-row gap-4 mb-6 p-4 bg-muted/50 rounded-lg">
           <div className="flex items-center gap-2">
             <Filter className="h-4 w-4" />
-            <span className="text-sm font-medium">{t('filterSort.label')}</span>
+            <span className="text-sm font-medium">
+              {t('filter_sort.label')}
+            </span>
           </div>
 
           <div className="flex flex-wrap gap-2 flex-1">
@@ -432,7 +440,7 @@ export default function SearchPage() {
                 <span className="font-semibold text-foreground">
                   {sortedResults.length}
                 </span>
-                {t('productsFound')}
+                {t('products_found')}
                 {executedQuery && (
                   <>
                     {' '}

@@ -184,12 +184,12 @@ export default function SalePage() {
                     className="flex-1 bg-transparent"
                     asChild>
                     <Link href={`/products/${product.id}`}>
-                      {t('viewDetail')}
+                      {t('view_detail')}
                     </Link>
                   </Button>
                   <Button size="sm" className="flex-1">
                     <ShoppingCart className="w-4 h-4 mr-2" />
-                    {t('addToCart')}
+                    {t('add_to_cart')}
                   </Button>
                 </div>
               </CardFooter>
@@ -202,7 +202,7 @@ export default function SalePage() {
         <div className="text-center py-16">
           <Tag className="h-16 w-16 mx-auto text-muted-foreground mb-4" />
           <p className="text-lg text-muted-foreground mb-4">
-            {t('empty.noSaleProducts')}
+            {t('empty.no_sale_products')}
           </p>
           <Button asChild>
             <Link href="/">{t('empty.button')}</Link>

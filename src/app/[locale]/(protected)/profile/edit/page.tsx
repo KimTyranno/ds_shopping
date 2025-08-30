@@ -7,7 +7,7 @@ import { getLocale, getTranslations } from 'next-intl/server'
 
 export default async function ProfileEditPage() {
   const user = await getCurrentUser()
-  const t = await getTranslations('mypage.profileEdit')
+  const t = await getTranslations('mypage.profile_edit')
   const locale = await getLocale()
 
   if (!user) {

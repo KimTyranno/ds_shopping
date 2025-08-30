@@ -57,7 +57,7 @@ export default function ProfileEditForm({ user }: { user: UserProfile }) {
   const confirmPasswordRef = useRef<HTMLInputElement>(null)
   const zipCodeRef = useRef<HTMLInputElement>(null)
 
-  const t = useTranslations('mypage.profileEdit.form')
+  const t = useTranslations('mypage.profile_edit.form')
 
   const [state, formAction, isFending] = useActionState(
     profileEditAction,
@@ -223,7 +223,7 @@ export default function ProfileEditForm({ user }: { user: UserProfile }) {
                 name="newPassword"
                 type="password"
                 onChange={handleChange}
-                placeholder={t('password.newPlaceholder')}
+                placeholder={t('password.new_placeholder')}
                 minLength={8}
               />
             </div>
@@ -235,7 +235,7 @@ export default function ProfileEditForm({ user }: { user: UserProfile }) {
                 name="confirmPassword"
                 type="password"
                 onChange={handleChange}
-                placeholder={t('password.confirmPlaceholder')}
+                placeholder={t('password.confirm_placeholder')}
                 minLength={8}
                 className={
                   state.errors?.confirmPassword ? 'border-red-500' : ''
@@ -262,7 +262,7 @@ export default function ProfileEditForm({ user }: { user: UserProfile }) {
           <CardContent className="space-y-4">
             <div className="flex gap-2">
               <div className="space-y-2 flex-1">
-                <Label htmlFor="zipCode">{t('zipCode.label')}</Label>
+                <Label htmlFor="zipCode">{t('zip_code.label')}</Label>
                 <Input
                   ref={zipCodeRef}
                   id="zipCode"
@@ -296,13 +296,13 @@ export default function ProfileEditForm({ user }: { user: UserProfile }) {
             </div>
 
             <div className="space-y-2">
-              <Label htmlFor="detailAddress">{t('detailAddress.label')}</Label>
+              <Label htmlFor="detailAddress">{t('detail_address.label')}</Label>
               <Input
                 id="detailAddress"
                 name="detailAddress"
                 value={formData.detailAddress}
                 onChange={handleChange}
-                placeholder={t('detailAddress.placeholder')}
+                placeholder={t('detail_address.placeholder')}
               />
             </div>
           </CardContent>

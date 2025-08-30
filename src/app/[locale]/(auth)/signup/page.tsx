@@ -88,7 +88,7 @@ export default async function SignupPage({
                   id="password"
                   name="password"
                   type="password"
-                  placeholder={tSignup('passwordPlaceholder')}
+                  placeholder={tSignup('password_placeholder')}
                   required
                   minLength={8}
                 />
@@ -101,7 +101,7 @@ export default async function SignupPage({
                   id="confirmPassword"
                   name="confirmPassword"
                   type="password"
-                  placeholder={tSignup('confirmPasswordPlaceholder')}
+                  placeholder={tSignup('confirm_password_placeholder')}
                   required
                 />
               </div>
@@ -114,9 +114,9 @@ export default async function SignupPage({
               <Separator />
               <div className="text-center mt-4">
                 <p className="text-sm text-muted-foreground">
-                  {tSignup('alreadyHaveAccount')}{' '}
+                  {tSignup('already_have_account')}{' '}
                   <Link href="/login" className="text-primary hover:underline">
-                    {tSignup('loginLink')}
+                    {tSignup('login_link')}
                   </Link>
                 </p>
               </div>

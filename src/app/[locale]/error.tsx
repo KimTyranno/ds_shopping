@@ -35,13 +35,13 @@ export default function Error({ error }: { error: Error }) {
           <CardContent className="text-center">
             <div className="space-y-4">
               <Button asChild className="w-full">
-                <Link href="/login">{t('backToLogin')}</Link>
+                <Link href="/login">{t('back_to_login')}</Link>
               </Button>
               <Button
                 variant="outline"
                 asChild
                 className="w-full bg-transparent">
-                <Link href="/">{t('goHome')}</Link>
+                <Link href="/">{t('go_home')}</Link>
               </Button>
             </div>
           </CardContent>

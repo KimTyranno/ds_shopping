@@ -32,7 +32,7 @@
     "saved": "Save {amount} KRW"
   },
   "user": {
-    "loginPrompt": "Log in to enjoy more benefits",
+    "login_prompt": "Log in to enjoy more benefits",
     "login": "Login",
     "menu": "User Menu",
     "cart": "Cart",
@@ -44,11 +44,12 @@
   "search": {
     "title": "Search Products",
     "placeholder": "Search for products…",
-    "searchButton": "Search",
+    "search_button": "Search",
     "back": "Back",
-    "resultsHeader": "\"{query}\" — {count} results",
+    "results_header": "\"{query}\" — {count} results",
     "total": "Total ",
-    "productsFound": " products found",
+    "products_found": " products found",
+    "discount": "% OFF",
     "noResults": {
       "title": "No results found",
       "withQuery": "No results found for \"{query}\".",
@@ -63,10 +64,10 @@
       "sneakers": "Sneakers"
     },
     "buttons": {
-      "viewDetails": "View Details",
-      "addToCart": "Add to Cart"
+      "view_details": "View Details",
+      "add_to_cart": "Add to Cart"
     },
-    "filterSort": {
+    "filter_sort": {
       "label": "Filter & Sort:"
     }
   },
@@ -138,25 +139,25 @@
       }
     }
   },
-  "bestProducts": {
+  "best_products": {
     "title": "Best Products",
     "description": "Most popular products chosen by our customers",
     "pageDescription": "Check out our most popular products chosen by customers",
     "details": "View Details",
-    "addToCart": "Add to Cart",
+    "add_to_cart": "Add to Cart",
     "more": "View More Best Products"
   },
-  "categorySection": {
+  "category_section": {
     "title": "Categories",
     "description": "Browse products by category"
   },
-  "featuredSection": {
+  "featured_section": {
     "features": {
-      "freeShipping": {
+      "free_shipping": {
         "title": "Free Shipping",
         "description": "Free shipping on purchases over 50,000 KRW"
       },
-      "securePayment": {
+      "secure_payment": {
         "title": "Secure Payment",
         "description": "100% secure payment system"
       },
@@ -177,49 +178,49 @@
   },
   "footer": {
     "description": "An online store that puts customer satisfaction first.",
-    "customerService": "Customer Service",
-    "companyInfo": "Company Info",
+    "customer_service": "Customer Service",
+    "company_info": "Company Info",
     "company": {
       "name": "Company Name: Simple Mall",
       "ceo": "CEO: John Doe",
-      "bizNumber": "Business Reg. No: 123-45-67890",
+      "biz_number": "Business Reg. No: 123-45-67890",
       "license": "E-commerce License: 2024-Seoul-Gangnam-1234",
       "address": "Address: 123 Teheran-ro, Gangnam-gu, Seoul",
-      "customerCenter": "Customer Center: 1588-1234"
+      "customer_center": "Customer Center: 1588-1234"
     }
   },
   "error": {
     "title": "An error occurred",
-    "backToLogin": "Back to login page",
-    "goHome": "Go to home",
+    "back_to_login": "Back to login page",
+    "go_home": "Go to home",
     "messages": {
       "default": "An unknown error has occurred.",
-      "expiredToken": "Your session has expired. Please log in again.",
+      "expired_token": "Your session has expired. Please log in again.",
       "unauthorized": "You do not have permission to access this page.",
       "user_not_found": "User information could not be found.",
       "deletion_failed": "An error occurred while deleting the account."
     }
   },
-  "notFound": {
+  "not_found": {
     "title": "Page not found.",
-    "goHome": "Go to Home"
+    "go_home": "Go to Home"
   },
   "login": {
     "title": "Login",
     "description": "Enter your email and password to log in",
     "email": "Email",
     "password": "Password",
-    "emailPlaceholder": "your@email.com",
-    "passwordPlaceholder": "Enter your password",
+    "email_placeholder": "your@email.com",
+    "password_placeholder": "Enter your password",
     "submit": "Log In",
-    "noAccount": "Don't have an account?",
+    "no_account": "Don't have an account?",
     "signup": "Sign up",
-    "loginFail": "Login failed.",
+    "login_fail": "Login failed.",
     "messages": {
       "success": "Email verification is complete.",
       "info": "Check your email to activate your account",
-      "profileLoadFailed": "Failed to load profile information.",
-      "sessionExpired": "Your session has expired. Please log in again."
+      "profile_load_failed": "Failed to load profile information.",
+      "session_expired": "Your session has expired. Please log in again."
     }
   },
   "signup": {
@@ -230,12 +231,12 @@
     "email": "Email",
     "password": "Password",
     "confirmPassword": "Confirm Password",
-    "passwordPlaceholder": "Enter at least 8 characters",
-    "confirmPasswordPlaceholder": "Re-enter your password",
+    "password_placeholder": "Enter at least 8 characters",
+    "confirm_password_placeholder": "Re-enter your password",
     "submit": "Sign Up",
-    "alreadyHaveAccount": "Already have an account?",
-    "loginLink": "Log in",
-    "passwordMismatch": "Passwords do not match"
+    "already_have_account": "Already have an account?",
+    "login_link": "Log in",
+    "password_mismatch": "Passwords do not match"
   },
   "product": {
     "reviews": "{count} reviews",
@@ -243,10 +244,10 @@
     "features": "Key Features",
     "quantity": "Quantity:",
     "stock": "(Stock: {count})",
-    "totalPrice": "Total Price: {price}",
-    "addToCart": "Add to Cart",
-    "buyNow": "Buy Now",
-    "freeShipping": "Free shipping on orders over ₩50,000",
+    "total_price": "Total Price: {price}",
+    "add_to_cart": "Add to Cart",
+    "buy_now": "Buy Now",
+    "free_shipping": "Free shipping on orders over ₩50,000",
     "authentic": "100% Authentic Guarantee",
     "return": "7-Day Free Return/Exchange",
     "tabs": {
@@ -257,18 +258,18 @@
     "details": {
       "title": "Product Details",
       "brand": "Brand",
-      "stockStatus": "Stock Status",
-      "inStock": "In stock ({count} items)",
-      "soldOut": "Sold out"
+      "stock_status": "Stock Status",
+      "in_stock": "In stock ({count} items)",
+      "sold_out": "Sold out"
     },
     "related": "Related Products"
   },
   "orders": {
     "title": "Order History",
-    "searchPlaceholder": "Search by order number or product name...",
-    "sortLatest": "Latest",
-    "sortOldest": "Oldest",
-    "emptyAll": {
+    "search_placeholder": "Search by order number or product name...",
+    "sort_latest": "Latest",
+    "sort_oldest": "Oldest",
+    "empty_all": {
       "title": "No orders found",
       "description": "Start your first purchase now",
       "button": "Start Shopping"
@@ -285,47 +286,47 @@
       "cancelled": "Cancelled ({count})"
     },
     "card": {
-      "deliveryAddress": "Delivery Address",
-      "trackingNumber": "Tracking Number",
-      "totalAmount": "Total {amount} KRW",
+      "delivery_address": "Delivery Address",
+      "tracking_number": "Tracking Number",
+      "total_amount": "Total {amount} KRW",
       "buttons": {
-        "writeReview": "Write Review",
+        "write_review": "Write Review",
         "reorder": "Reorder",
-        "trackDelivery": "Track Delivery",
-        "cancelOrder": "Cancel Order",
-        "viewDetails": "View Details"
+        "track_delivery": "Track Delivery",
+        "cancel_order": "Cancel Order",
+        "view_details": "View Details"
       }
     },
     "detail": {
       "title": "Order Details",
-      "orderNumber": "Order ID: {id}",
-      "statusTitle": "Order Status",
-      "orderDate": "Order Date",
-      "trackingNumber": "Tracking Number",
-      "trackingButton": "Track Shipment",
-      "itemsTitle": "Ordered Items ({count})",
-      "deliveryInfo": "Delivery Information",
+      "order_number": "Order ID: {id}",
+      "status_title": "Order Status",
+      "order_date": "Order Date",
+      "tracking_number": "Tracking Number",
+      "tracking_button": "Track Shipment",
+      "items_title": "Ordered Items ({count})",
+      "delivery_info": "Delivery Information",
       "recipient": "Recipient",
       "phone": "Phone",
       "address": "Shipping Address",
       "memo": "Delivery Memo",
-      "paymentInfo": "Payment Information",
+      "payment_info": "Payment Information",
       "subtotal": "Subtotal",
       "discount": "Discount",
-      "deliveryFee": "Shipping Fee",
-      "deliveryFree": "Free",
+      "delivery_fee": "Shipping Fee",
+      "delivery_free": "Free",
       "total": "Total Amount",
-      "paymentMethod": "Payment Method",
-      "paymentDate": "Payment Date",
-      "ordererInfo": "Orderer Information",
+      "payment_method": "Payment Method",
+      "payment_date": "Payment Date",
+      "orderer_info": "Orderer Information",
       "name": "Name",
       "email": "Email",
       "actions": {
-        "writeReview": "Write Review",
+        "write_review": "Write Review",
         "reorder": "Reorder",
-        "requestReturn": "Request Return/Exchange",
-        "cancelOrder": "Cancel Order",
-        "printReceipt": "Print Receipt"
+        "request_return": "Request Return/Exchange",
+        "cancel_order": "Cancel Order",
+        "print_receipt": "Print Receipt"
       }
     },
     "status": {
@@ -348,18 +349,18 @@
       "joined": "Joined",
       "edit": "Edit Profile"
     },
-    "profileEdit": {
+    "profile_edit": {
       "title": "Edit Profile",
       "description": "Modify and update your personal information",
       "form": {
         "error": {
           "alert": "Failed to update profile.",
-          "requiredName": "Please enter your name",
-          "invalidZipCode": "Invalid zip code format (5 digits required)",
-          "uploadError": "An error occurred while changing the profile picture.",
-          "wrongPassword": "Current password is incorrect.",
-          "passwordMismatch": "New password does not match.",
-          "passwordUpdateError": "An error occurred while updating the password."
+          "required_name": "Please enter your name",
+          "invalid_zip_code": "Invalid zip code format (5 digits required)",
+          "upload_error": "An error occurred while changing the profile picture.",
+          "wrong_password": "Current password is incorrect.",
+          "password_mismatch": "New password does not match.",
+          "password_update_error": "An error occurred while updating the password."
         },
         "avatar": {
           "title": "Profile Photo",
@@ -385,8 +386,8 @@
           "new": "New Password",
           "confirm": "Confirm New Password",
           "placeholder": "Password",
-          "newPlaceholder": "New Password",
-          "confirmPlaceholder": "Confirm New Password"
+          "new_placeholder": "New Password",
+          "confirm_placeholder": "Confirm New Password"
         },
         "address": {
           "title": "Address Information",
@@ -394,11 +395,11 @@
           "label": "Address",
           "placeholder": "Enter your main address"
         },
-        "zipCode": {
+        "zip_code": {
           "label": "Zip Code",
           "placeholder": "12345"
         },
-        "detailAddress": {
+        "detail_address": {
           "label": "Detailed Address",
           "placeholder": "Enter detailed address"
         },
@@ -477,7 +478,7 @@
     "orders": {
       "title": "Order History",
       "description": "Check your recent orders",
-      "totalAmount": "Total Payment",
+      "total_amount": "Total Payment",
       "viewAll": "View All Orders",
       "status": {
         "배송완료": "Delivered",
@@ -485,7 +486,7 @@
         "주문완료": "Order Placed"
       }
     },
-    "quickLinks": {
+    "quick_links": {
       "title": "Quick Links"
     },
     "messages": {
@@ -501,12 +502,12 @@
       "button": "Start Shopping"
     },
     "actions": {
-      "selectAll": "Select All ({selected}/{total})",
-      "addToCart": "Add to Cart",
-      "removeSelected": "Remove Selected",
+      "select_all": "Select All ({selected}/{total})",
+      "add_to_cart": "Add to Cart",
+      "remove_selected": "Remove Selected",
       "added": "{count} items added to cart."
     },
-    "addedAt": "Added on {date}",
+    "added_at": "Added on {date}",
     "detail": "View Details",
     "cart": "Cart",
     "discount": "{percent}% OFF"
@@ -531,16 +532,16 @@
     "name": "Name",
     "discount-high": "Highest Discount",
     "discount-low": "Lowest Discount",
-    "viewDetail": "View Details",
-    "addToCart": "Add to Cart",
+    "view_detail": "View Details",
+    "add_to_cart": "Add to Cart",
     "discount": "{percent}% off",
     "empty": {
       "title": "No products found in this category.",
-      "noBestProducts": "No best products available.",
-      "noNewProducts": "No new products available.",
-      "noSaleProducts": "No sale products available.",
+      "nobest_products": "No best products available.",
+      "no_new_products": "No new products available.",
+      "no_sale_products": "No sale products available.",
       "button": "Return to Home",
-      "backToParent": "Go back to parent category"
+      "back_to_parent": "Go back to parent category"
     },
     "categories": {
       "electronics": "Electronics",
@@ -553,20 +554,20 @@
   },
   "cart": {
     "title": "Shopping Cart",
-    "itemsCount": "{count} items",
+    "items_count": "{count} items",
     "empty": {
       "title": "Your cart is empty",
       "description": "Add some products to your cart",
       "continue": "Continue shopping"
     },
-    "selectAll": "Select all ({selected}/{total})",
-    "deleteSelected": "Remove selected",
+    "select_all": "Select all ({selected}/{total})",
+    "delete_selected": "Remove selected",
     "summary": {
       "title": "Order Summary",
-      "productPrice": "Product Price",
+      "product_price": "Product Price",
       "discount": "Discount",
       "shipping": "Shipping",
-      "freeShippingThreshold": "Add {amount} more for free shipping",
+      "free_shipping_threshold": "Add {amount} more for free shipping",
       "total": "Total Price",
       "order": "Order Now ({count})",
       "continue": "Continue Shopping"
