@@ -1,6 +1,7 @@
 'use server'
 
 import { redirect } from '@/i18n/navigation'
+import { logger } from '@/lib/logger'
 import { createClient } from '@/lib/server'
 import { revalidatePath } from 'next/cache'
 
@@ -22,9 +23,17 @@ export async function login(
     password: formData.get('password') as string,
   }
 
-  const { error } = await supabase.auth.signInWithPassword(data)
+  try {
+    const { data: loginData, error } =
+      await supabase.auth.signInWithPassword(data)
 
-  if (error) {
+    if (error || !loginData.user || !loginData.session) {
+      return {
+        error: 'invalid_credentials',
+      }
+    }
+  } catch (error) {
+    logger.error('로그인 실패', error)
     return {
       error: 'login_fail',
     }

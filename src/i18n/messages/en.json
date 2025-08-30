@@ -216,6 +216,7 @@
     "no_account": "Don't have an account?",
     "signup": "Sign up",
     "login_fail": "Login failed.",
+    "invalid_credentials": "The username or password is incorrect.",
     "messages": {
       "success": "Email verification is complete.",
       "info": "Check your email to activate your account",

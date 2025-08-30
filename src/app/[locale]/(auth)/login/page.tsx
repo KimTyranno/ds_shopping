@@ -54,7 +54,7 @@ export default function LoginPage() {
 
   useEffect(() => {
     if (state?.error) {
-      toast(tLogin('login_fail'), {
+      toast(tLogin(state.error), {
         position: 'top-center',
         style: { background: '#e25c5c', color: '#fff' },
       })
