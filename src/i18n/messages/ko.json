@@ -255,7 +255,8 @@
     "submit": "회원가입",
     "already_have_account": "이미 계정이 있으신가요?",
     "login_link": "로그인하기",
-    "password_mismatch": "비밀번호가 일치하지 않습니다"
+    "password_mismatch": "비밀번호가 일치하지 않습니다",
+    "email_already_registered": "이미 가입된 이메일입니다."
   },
   "product": {
     "reviews": "{count}개 리뷰",

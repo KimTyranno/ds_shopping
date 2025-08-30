@@ -255,7 +255,8 @@
     "submit": "Sign Up",
     "already_have_account": "Already have an account?",
     "login_link": "Log in",
-    "password_mismatch": "Passwords do not match"
+    "password_mismatch": "Passwords do not match",
+    "email_already_registered": "This email is already registered."
   },
   "product": {
     "reviews": "{count} reviews",

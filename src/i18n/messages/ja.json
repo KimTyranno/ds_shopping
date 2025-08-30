@@ -255,7 +255,8 @@
     "submit": "登録する",
     "already_have_account": "すでにアカウントをお持ちですか？",
     "login_link": "ログインする",
-    "password_mismatch": "パスワードが一致しません"
+    "password_mismatch": "パスワードが一致しません",
+    "email_already_registered": "このメールアドレスは既に登録されています。"
   },
   "product": {
     "reviews": "{count}件のレビュー",

@@ -32,7 +32,7 @@ export default async function SignupPage({
     <div className="min-h-screen flex items-center justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-md w-full space-y-8">
         {(error || message) && (
-          <Alert className={cn('text-white bg-red-500')}>
+          <Alert className={cn('text-white bg-orange-500')}>
             <CircleAlert />
             <AlertDescription className="text-inherit">
               {error ? tSignup(error) : message}
