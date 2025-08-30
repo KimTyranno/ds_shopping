@@ -11,7 +11,6 @@ import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { Link, redirect } from '@/i18n/navigation'
 import { getCurrentUser } from '@/lib/auth'
-import ScrollToTop from '@/lib/scrollToTop'
 import Toast, { ToastTypes } from '@/lib/toast'
 import { Mail, Package, ShoppingBag, Truck, User } from 'lucide-react'
 import { getLocale, getTranslations } from 'next-intl/server'
@@ -85,7 +84,6 @@ export default async function MyPage({
 
   return (
     <div className="container mx-auto px-4 py-8">
-      <ScrollToTop />
       {messageType && (
         <Toast message={t(`messages.${messageType}`)} type={messageType} />
       )}

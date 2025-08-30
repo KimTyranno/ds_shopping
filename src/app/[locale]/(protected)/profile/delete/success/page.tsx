@@ -6,12 +6,21 @@ import {
   CardHeader,
   CardTitle,
 } from '@/components/ui/card'
-import { Link } from '@/i18n/navigation'
+import { Link, redirect } from '@/i18n/navigation'
 import { CheckCircle, Home, Mail, RefreshCw } from 'lucide-react'
-import { getTranslations } from 'next-intl/server'
+import { getLocale, getTranslations } from 'next-intl/server'
+import { cookies } from 'next/headers'
 
 export default async function DeleteSuccessPage() {
   const t = await getTranslations('mypage.profile_delete.success')
+  const locale = await getLocale()
+  const cookieStore = await cookies()
+  const cookie = cookieStore.get('canAccessDeleteSuccess')
+
+  if (!cookie || cookie.value !== 'true') {
+    redirect({ href: '/', locale })
+  }
+
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-md w-full space-y-8">
