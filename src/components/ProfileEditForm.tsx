@@ -1,15 +1,10 @@
 'use client'
 
-import {
-  profileEditAction,
-  ProfileEditState,
-} from '@/app/[locale]/(protected)/profile/edit/actions'
 import { Label } from '@/components/ui/label'
-import { Link } from '@/i18n/navigation'
+import { Link, useRouter } from '@/i18n/navigation'
 import { logger } from '@/lib/logger'
 import type { User as AuthUser } from '@supabase/supabase-js'
 import imageCompression from 'browser-image-compression'
-import heic2any from 'heic2any'
 import {
   AlertCircle,
   Camera,
@@ -20,7 +15,7 @@ import {
   User,
 } from 'lucide-react'
 import { useTranslations } from 'next-intl'
-import { useActionState, useEffect, useRef, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { Alert, AlertDescription } from './ui/alert'
 import { Avatar, AvatarFallback, AvatarImage } from './ui/avatar'
 import { Button } from './ui/button'
@@ -43,6 +38,28 @@ export type UserProfile = {
   zip_code?: string | null
 } & AuthUser
 
+type ProfileEditState = {
+  name: string
+  avatar: string
+  email: string
+  address: string
+  detailAddress: string
+  zipCode: string
+  errors?: {
+    name?: string
+    avatar?: string
+    password?: string
+    confirmPassword?: string
+    zipCode?: string
+  }
+}
+
+type ProfileEditResponse = {
+  success?: false
+  error?: string
+  errors?: Record<string, string>
+}
+
 export default function ProfileEditForm({ user }: { user: UserProfile }) {
   const initData = {
     name: user.name || '',
@@ -51,14 +68,22 @@ export default function ProfileEditForm({ user }: { user: UserProfile }) {
     address: user.address || '',
     detailAddress: user.detail_address || '',
     zipCode: user.zip_code || '',
+    password: '',
+    newPassword: '',
+    confirmPassword: '',
   }
 
+  const router = useRouter()
   const [formData, setFormData] = useState<ProfileEditState>(initData)
+  // 리사이징해서 실제 업로드할 파일
+  const [avatarFile, setAvatarFile] = useState<File | null>(null)
+  const [errors, setErrors] = useState<Record<string, string>>({})
   // 이미지 확장자 에러표시용도
   const [formatError, setFormatError] = useState<string | null>(null)
+  const [isFending, setIsFending] = useState(false)
 
   // 에러발생시 focus 하는용도
-  const avatarRef = useRef<HTMLInputElement>(null)
+  const avatarRef = useRef<HTMLDivElement>(null)
   const nameRef = useRef<HTMLInputElement>(null)
   const passwordRef = useRef<HTMLInputElement>(null)
   const confirmPasswordRef = useRef<HTMLInputElement>(null)
@@ -66,12 +91,50 @@ export default function ProfileEditForm({ user }: { user: UserProfile }) {
 
   const t = useTranslations('mypage.profile_edit.form')
 
-  const [state, formAction, isFending] = useActionState(
-    profileEditAction,
-    formData,
-  )
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault()
+    setIsFending(true)
 
-  // 수정된 항목이 있는지 확인 (없는경우 저장버튼 비활성화)
+    const formDataToSend = new FormData(e.currentTarget)
+
+    if (avatarFile) {
+      formDataToSend.set('avatar', avatarFile) // 기존 파일 덮어쓰기
+    }
+
+    try {
+      const res = await fetch('/api/profile/edit', {
+        method: 'POST',
+        body: formDataToSend,
+      })
+      const result = (await res.json()) as ProfileEditResponse
+
+      // status가 200~299가 아닌경우
+      if (!res.ok) {
+        switch (result.error) {
+          case 'session_expired':
+            router.push(`/login?message=${result.error}`)
+            break
+          default:
+            throw new Error('프로필 업데이트 실패')
+        }
+      }
+
+      // 에러설정
+      if (!result.success && result.errors) {
+        setErrors(result.errors)
+        return
+      }
+
+      router.push('/mypage?messageType=success')
+    } catch (error) {
+      console.error('에러 발생:', error)
+      throw error
+    } finally {
+      setIsFending(false)
+    }
+  }
+
+  /** 수정된 항목이 있는지 확인 (없는경우 저장버튼 비활성화) */
   const isFormChanged = (
     initial: Record<string, unknown>,
     current: Record<string, unknown>,
@@ -113,6 +176,7 @@ export default function ProfileEditForm({ user }: { user: UserProfile }) {
     // HEIF 혹은 HEIC → JPEG 변환
     if (isHeifOrHeic) {
       try {
+        const heic2any = (await import('heic2any')).default
         const blob = await heic2any({
           blob: file,
           toType: 'image/jpeg',
@@ -120,7 +184,7 @@ export default function ProfileEditForm({ user }: { user: UserProfile }) {
         })
         convertedFile = new File(
           [blob as BlobPart],
-          file.name.replace(/\.[^/.]+$/i, '.jpg'),
+          file.name.replace(/\.(heic|heif)$/i, '.jpg'),
           {
             type: 'image/jpeg',
           },
@@ -128,6 +192,12 @@ export default function ProfileEditForm({ user }: { user: UserProfile }) {
       } catch (error) {
         logger.error('HEIC 변환 실패:', error)
         setFormatError('upload_error')
+        return
+      }
+    } else {
+      const allowedExtensions = ['jpg', 'jpeg', 'png', 'webp']
+      if (!allowedExtensions.includes(extension || '')) {
+        setFormatError('invalid_file_type')
         return
       }
     }
@@ -140,10 +210,23 @@ export default function ProfileEditForm({ user }: { user: UserProfile }) {
       }
 
       // 이미지 리사이징 및 압축
-      const compressedFile = await imageCompression(convertedFile, options)
+      const compressedFile: File | Blob = await imageCompression(
+        convertedFile,
+        options,
+      )
 
       // 새 이미지 미리보기 URL 생성
       const objectUrl = URL.createObjectURL(compressedFile)
+
+      // 리사이징한 파일을 저장
+      if (!(compressedFile instanceof File)) {
+        const finalFile = new File([compressedFile], convertedFile.name, {
+          type: compressedFile.type,
+        })
+        setAvatarFile(finalFile)
+      } else {
+        setAvatarFile(compressedFile)
+      }
 
       setFormData(prev => ({
         ...prev,
@@ -155,38 +238,45 @@ export default function ProfileEditForm({ user }: { user: UserProfile }) {
   }
 
   useEffect(() => {
-    if (!state.errors) return
+    if (!errors) return
 
-    if (state.errors.avatar && avatarRef.current) {
-      avatarRef.current.focus()
-    } else if (state.errors.name && nameRef.current) {
+    if (errors.avatar && avatarRef.current) {
+      avatarRef.current.scrollIntoView({ behavior: 'smooth', block: 'center' })
+    } else if (errors.name && nameRef.current) {
+      nameRef.current.scrollIntoView({ behavior: 'smooth', block: 'center' })
       nameRef.current.focus()
-    } else if (state.errors.password && passwordRef.current) {
+    } else if (errors.password && passwordRef.current) {
+      passwordRef.current.scrollIntoView({
+        behavior: 'smooth',
+        block: 'center',
+      })
       passwordRef.current.focus()
-    } else if (state.errors.confirmPassword && confirmPasswordRef.current) {
+    } else if (errors.confirmPassword && confirmPasswordRef.current) {
+      confirmPasswordRef.current.scrollIntoView({
+        behavior: 'smooth',
+        block: 'center',
+      })
       confirmPasswordRef.current.focus()
-    } else if (state.errors.zipCode && zipCodeRef.current) {
+    } else if (errors.zipCode && zipCodeRef.current) {
+      zipCodeRef.current.scrollIntoView({ behavior: 'smooth', block: 'center' })
       zipCodeRef.current.focus()
     }
-  }, [state.errors])
+  }, [errors])
 
   return (
     <>
       {/* 알림 메시지 */}
-      {state.errors && Object.keys(state.errors).length > 0 && (
+      {errors && Object.keys(errors).length > 0 && (
         <Alert className="mb-6 border-red-200 bg-red-50">
           <AlertCircle className="h-4 w-4" />
           <AlertDescription className="text-red-800">
-            {t('error.alert')}
+            {t('error.fail')}
           </AlertDescription>
         </Alert>
       )}
-      <form className="space-y-6">
+      <form className="space-y-6" onSubmit={e => void handleSubmit(e)}>
         {/* 프로필 사진 */}
-        <Card
-          className={
-            state.errors?.avatar || formatError ? 'border-red-500' : ''
-          }>
+        <Card className={errors?.avatar || formatError ? 'border-red-500' : ''}>
           <CardHeader>
             <CardTitle className="flex items-center gap-2">
               <Camera className="h-5 w-5" />
@@ -194,9 +284,9 @@ export default function ProfileEditForm({ user }: { user: UserProfile }) {
             </CardTitle>
             <CardDescription>{t('avatar.description')}</CardDescription>
             {/* 서버에서 오는 에러메시지 */}
-            {state.errors?.avatar && (
+            {errors?.avatar && (
               <p className="text-sm text-red-500">
-                {t(`error.${state.errors.avatar}`)}
+                {t(`error.${errors.avatar}`)}
               </p>
             )}
             {/* 클라이언트에서 오는 에러메시지 */}
@@ -207,16 +297,15 @@ export default function ProfileEditForm({ user }: { user: UserProfile }) {
             )}
           </CardHeader>
           <CardContent>
-            <div className="flex items-center gap-6">
+            <div className="flex items-center gap-6" ref={avatarRef}>
               <Avatar className="w-24 h-24">
                 <AvatarImage src={formData.avatar || ''} />
                 <AvatarFallback className="text-2xl bg-primary text-primary-foreground">
-                  {state.name.charAt(0)}
+                  {formData.name.charAt(0)}
                 </AvatarFallback>
               </Avatar>
               <div>
                 <input
-                  ref={avatarRef}
                   type="file"
                   id="avatar"
                   name="avatar"
@@ -261,18 +350,18 @@ export default function ProfileEditForm({ user }: { user: UserProfile }) {
                 value={formData.name}
                 onChange={handleChange}
                 placeholder={t('name.placeholder')}
-                className={state.errors?.name ? 'border-red-500' : ''}
+                className={errors?.name ? 'border-red-500' : ''}
               />
-              {state.errors?.name && (
+              {errors?.name && (
                 <p className="text-sm text-red-500">
-                  {t(`error.${state.errors.name}`)}
+                  {t(`error.${errors.name}`)}
                 </p>
               )}
             </div>
 
             <div className="space-y-2">
               <Label htmlFor="email">{t('email.label')}</Label>
-              <Input id="email" name="email" value={state.email} readOnly />
+              <Input id="email" name="email" value={formData.email} readOnly />
             </div>
           </CardContent>
         </Card>
@@ -297,11 +386,11 @@ export default function ProfileEditForm({ user }: { user: UserProfile }) {
                 onChange={handleChange}
                 placeholder={t('password.placeholder')}
                 minLength={8}
-                className={state.errors?.password ? 'border-red-500' : ''}
+                className={errors?.password ? 'border-red-500' : ''}
               />
-              {state.errors?.password && (
+              {errors?.password && (
                 <p className="text-sm text-red-500">
-                  {t(`error.${state.errors.password}`)}
+                  {t(`error.${errors.password}`)}
                 </p>
               )}
             </div>
@@ -326,13 +415,11 @@ export default function ProfileEditForm({ user }: { user: UserProfile }) {
                 onChange={handleChange}
                 placeholder={t('password.confirm_placeholder')}
                 minLength={8}
-                className={
-                  state.errors?.confirmPassword ? 'border-red-500' : ''
-                }
+                className={errors?.confirmPassword ? 'border-red-500' : ''}
               />
-              {state.errors?.confirmPassword && (
+              {errors?.confirmPassword && (
                 <p className="text-sm text-red-500">
-                  {t(`error.${state.errors.confirmPassword}`)}
+                  {t(`error.${errors.confirmPassword}`)}
                 </p>
               )}
             </div>
@@ -359,11 +446,11 @@ export default function ProfileEditForm({ user }: { user: UserProfile }) {
                   value={formData.zipCode}
                   onChange={handleChange}
                   placeholder="12345"
-                  className={state.errors?.zipCode ? 'border-red-500' : ''}
+                  className={errors?.zipCode ? 'border-red-500' : ''}
                 />
-                {state.errors?.zipCode && (
+                {errors?.zipCode && (
                   <p className="text-sm text-red-500">
-                    {t(`error.${state.errors.zipCode}`)}
+                    {t(`error.${errors.zipCode}`)}
                   </p>
                 )}
               </div>
@@ -402,7 +489,7 @@ export default function ProfileEditForm({ user }: { user: UserProfile }) {
         {/* 저장 버튼 */}
         <div className="flex gap-3">
           <Button
-            formAction={formAction}
+            type="submit"
             disabled={isFending || !isFormChanged(initData, formData)}
             className="flex-1 cursor-pointer">
             {isFending ? (

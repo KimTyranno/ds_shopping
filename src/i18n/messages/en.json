@@ -374,7 +374,7 @@
       "description": "Modify and update your personal information",
       "form": {
         "error": {
-          "alert": "Failed to update profile.",
+          "fail": "Failed to update profile.",
           "required_name": "Please enter your name",
           "invalid_zip_code": "Invalid zip code format (5 digits required)",
           "upload_error": "An error occurred while changing the profile picture.",

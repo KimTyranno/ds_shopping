@@ -15,6 +15,7 @@ export async function login(
 ) {
   const supabase = await createClient()
   const locale = (formData.get('locale') as string) || 'ko'
+  logger.info(process.env.NEXT_RUNTIME)
 
   // type-casting here for convenience
   // in practice, you should validate your inputs
