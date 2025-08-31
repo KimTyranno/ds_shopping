@@ -6,7 +6,9 @@ import {
 } from '@/app/[locale]/(protected)/profile/edit/actions'
 import { Label } from '@/components/ui/label'
 import { Link } from '@/i18n/navigation'
+import { logger } from '@/lib/logger'
 import type { User as AuthUser } from '@supabase/supabase-js'
+import imageCompression from 'browser-image-compression'
 import {
   AlertCircle,
   Camera,
@@ -83,18 +85,36 @@ export default function ProfileEditForm({ user }: { user: UserProfile }) {
     }))
   }
 
-  // 이미지 미리보기용 핸들러
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    handleFileChangeAsync(e).catch(console.error)
+  }
+
+  const handleFileChangeAsync = async (
+    e: React.ChangeEvent<HTMLInputElement>,
+  ) => {
     const file = e.target.files?.[0]
-    if (file) {
+    if (!file) return
+
+    try {
+      // 리사이징 옵션 설정
+      const options = {
+        maxWidthOrHeight: 1024,
+        maxSizeMB: 2, // 업로드 제한
+      }
+
+      // 이미지 리사이징 및 압축
+      const compressedFile = await imageCompression(file, options)
+
       // 새 이미지 미리보기 URL 생성
-      const objectUrl = URL.createObjectURL(file)
+      const objectUrl = URL.createObjectURL(compressedFile)
       setPreviewUrl(objectUrl)
 
       setFormData(prev => ({
         ...prev,
         avatar: objectUrl,
       }))
+    } catch (error) {
+      logger.error('이미지 리사이징 중 에러', error)
     }
   }
 
