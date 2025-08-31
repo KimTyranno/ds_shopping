@@ -105,11 +105,14 @@ export default function ProfileEditForm({ user }: { user: UserProfile }) {
       return
     }
     const extension = file.name.split('.').pop()?.toLowerCase()
+    logger.info('extension -- ', extension)
     const isHeifOrHeic =
       ['image/heic', 'image/heif'].includes(file.type) ||
       extension === 'heic' ||
       extension === 'heif'
 
+    logger.info('file.type -- ', file.type)
+    logger.info('isHeifOrHeic -- ', isHeifOrHeic)
     // HEIF 혹은 HEIC → JPEG 변환
     if (isHeifOrHeic) {
       try {
@@ -118,6 +121,7 @@ export default function ProfileEditForm({ user }: { user: UserProfile }) {
           toType: 'image/jpeg',
           quality: 0.8,
         })
+        logger.info('heic2any 변환 성공', blob)
         convertedFile = new File(
           [blob as BlobPart],
           file.name.replace(/\.[^/.]+$/i, '.jpg'),
@@ -125,6 +129,7 @@ export default function ProfileEditForm({ user }: { user: UserProfile }) {
             type: 'image/jpeg',
           },
         )
+        logger.info('convertedFile 내용 --', convertedFile)
       } catch (error) {
         logger.error('HEIC 변환 실패:', error)
         setFormatError('upload_error')
@@ -141,6 +146,11 @@ export default function ProfileEditForm({ user }: { user: UserProfile }) {
 
       // 이미지 리사이징 및 압축
       const compressedFile = await imageCompression(convertedFile, options)
+      logger.info(
+        'compressedFile size:',
+        compressedFile.size / 1024 / 1024,
+        'MB',
+      )
 
       // 새 이미지 미리보기 URL 생성
       const objectUrl = URL.createObjectURL(compressedFile)
