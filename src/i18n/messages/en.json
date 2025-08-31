@@ -378,6 +378,7 @@
           "required_name": "Please enter your name",
           "invalid_zip_code": "Invalid zip code format (5 digits required)",
           "upload_error": "An error occurred while changing the profile picture.",
+          "extension_not_found": "File extension cannot be found.",
           "wrong_password": "Current password is incorrect.",
           "password_mismatch": "New password does not match.",
           "password_update_error": "An error occurred while updating the password.",

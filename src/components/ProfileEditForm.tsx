@@ -9,6 +9,7 @@ import { Link } from '@/i18n/navigation'
 import { logger } from '@/lib/logger'
 import type { User as AuthUser } from '@supabase/supabase-js'
 import imageCompression from 'browser-image-compression'
+import heic2any from 'heic2any'
 import {
   AlertCircle,
   Camera,
@@ -53,7 +54,8 @@ export default function ProfileEditForm({ user }: { user: UserProfile }) {
   }
 
   const [formData, setFormData] = useState<ProfileEditState>(initData)
-  const [_, setPreviewUrl] = useState(user.avatar || '')
+  // 이미지 확장자 에러표시용도
+  const [formatError, setFormatError] = useState<string | null>(null)
 
   // 에러발생시 focus 하는용도
   const avatarRef = useRef<HTMLInputElement>(null)
@@ -95,6 +97,41 @@ export default function ProfileEditForm({ user }: { user: UserProfile }) {
     const file = e.target.files?.[0]
     if (!file) return
 
+    setFormatError(null)
+    let convertedFile = file
+
+    if (!file.name.includes('.')) {
+      setFormatError('extension_not_found')
+      return
+    }
+    const extension = file.name.split('.').pop()?.toLowerCase()
+    const isHeifOrHeic =
+      ['image/heic', 'image/heif'].includes(file.type) ||
+      extension === 'heic' ||
+      extension === 'heif'
+
+    // HEIF 혹은 HEIC → JPEG 변환
+    if (isHeifOrHeic) {
+      try {
+        const blob = await heic2any({
+          blob: file,
+          toType: 'image/jpeg',
+          quality: 0.8,
+        })
+        convertedFile = new File(
+          [blob as BlobPart],
+          file.name.replace(/\.[^/.]+$/i, '.jpg'),
+          {
+            type: 'image/jpeg',
+          },
+        )
+      } catch (error) {
+        logger.error('HEIC 변환 실패:', error)
+        setFormatError('upload_error')
+        return
+      }
+    }
+
     try {
       // 리사이징 옵션 설정
       const options = {
@@ -103,11 +140,10 @@ export default function ProfileEditForm({ user }: { user: UserProfile }) {
       }
 
       // 이미지 리사이징 및 압축
-      const compressedFile = await imageCompression(file, options)
+      const compressedFile = await imageCompression(convertedFile, options)
 
       // 새 이미지 미리보기 URL 생성
       const objectUrl = URL.createObjectURL(compressedFile)
-      setPreviewUrl(objectUrl)
 
       setFormData(prev => ({
         ...prev,
@@ -147,16 +183,26 @@ export default function ProfileEditForm({ user }: { user: UserProfile }) {
       )}
       <form className="space-y-6">
         {/* 프로필 사진 */}
-        <Card className={state.errors?.avatar ? 'border-red-500' : ''}>
+        <Card
+          className={
+            state.errors?.avatar || formatError ? 'border-red-500' : ''
+          }>
           <CardHeader>
             <CardTitle className="flex items-center gap-2">
               <Camera className="h-5 w-5" />
               {t('avatar.title')}
             </CardTitle>
             <CardDescription>{t('avatar.description')}</CardDescription>
+            {/* 서버에서 오는 에러메시지 */}
             {state.errors?.avatar && (
               <p className="text-sm text-red-500">
                 {t(`error.${state.errors.avatar}`)}
+              </p>
+            )}
+            {/* 클라이언트에서 오는 에러메시지 */}
+            {formatError && (
+              <p className="text-sm text-red-500">
+                {t(`error.${formatError}`)}
               </p>
             )}
           </CardHeader>

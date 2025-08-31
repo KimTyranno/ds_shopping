@@ -378,6 +378,7 @@
           "required_name": "名前を入力してください",
           "invalid_zip_code": "正しい郵便番号形式ではありません（5桁の数字）",
           "upload_error": "プロフィール写真の変更中にエラーが発生しました。",
+          "extension_not_found": "ファイル拡張子が見つかりません。",
           "wrong_password": "現在のパスワードが正しくありません。",
           "password_mismatch": "新しいパスワードが一致しません。",
           "password_update_error": "パスワードの変更中にエラーが発生しました。",

@@ -378,6 +378,7 @@
           "required_name": "이름을 입력해주세요",
           "invalid_zip_code": "올바른 우편번호 형식이 아닙니다 (5자리 숫자)",
           "upload_error": "프로필 사진 변경중 오류가 발생했습니다.",
+          "extension_not_found": "파일 확장자를 확인할 수 없습니다.",
           "wrong_password": "현재 비밀번호가 올바르지 않습니다.",
           "password_mismatch": "새로운 비밀번호와 일치하지 않습니다.",
           "password_update_error": "비밀번호 변경중 오류가 발생했습니다.",

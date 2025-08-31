@@ -67,6 +67,15 @@ export async function profileEditAction(
   // 프로필 사진
   if (avatar && avatar.size > 0) {
     const bucket = 'avatars'
+
+    if (!avatar.name.includes('.')) {
+      return {
+        ...prevState,
+        errors: {
+          avatar: 'extension_not_found',
+        },
+      }
+    }
     const extension = avatar.name.split('.').pop()?.toLowerCase() || 'jpg'
     let filename = `${uuidv4()}.${extension}`
     const inputBuffer = Buffer.from(await avatar.arrayBuffer())
@@ -77,8 +86,8 @@ export async function profileEditAction(
       ['image/heic', 'image/heif'].includes(avatar.type) ||
       ['heic', 'heif'].includes(extension)
 
-    // HEIF 혹은 HEIC → JPEG 변환
-    if (isHeifOrHeic) {
+    // HEIF 혹은 HEIC → JPEG 변환 (2MB가 넘는것도 대상)
+    if (isHeifOrHeic || avatar.size > 2 * 1024 * 1024) {
       try {
         uploadBuffer = await sharp(inputBuffer)
           .resize({
