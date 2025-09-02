@@ -220,8 +220,29 @@
     }
   },
   "not_found": {
-    "title": "Page not found.",
-    "go_home": "Go to Home"
+    "title": "Page Not Found",
+    "description_1": "The page you requested does not exist or may have been moved.",
+    "description_2": "Please browse other pages or return to the homepage.",
+    "button": {
+      "home": "Go to Homepage",
+      "search": "Search Products"
+    },
+    "recommendation": {
+      "title": "How about these pages?",
+      "best_title": "Best Products",
+      "best_description": "View popular items",
+      "new_title": "New Arrivals",
+      "new_description": "See the latest products",
+      "sale_title": "On Sale",
+      "sale_description": "Browse discounted items",
+      "categories_title": "Categories",
+      "categories_description": "Shop by category"
+    },
+    "help_message": "If the issue persists, please contact ",
+    "help_link": "Customer Support",
+    "help_after": ".",
+    "search_prompt": "Try searching for the product you want",
+    "search_placeholder": "Enter product name..."
   },
   "login": {
     "title": "Login",

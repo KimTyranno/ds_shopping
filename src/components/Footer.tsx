@@ -86,7 +86,9 @@ export default function Footer() {
           <p>
             <a href="https://storyset.com/business">
               Business illustrations by Storyset
-            </a>
+            </a>{' '}
+            /{' '}
+            <a href="https://storyset.com/web">Web illustrations by Storyset</a>
           </p>
         </div>
       </div>
