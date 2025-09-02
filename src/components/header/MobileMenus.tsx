@@ -158,13 +158,14 @@ const MobileMenus = ({ categories }: MobileMenusProps) => {
             <Separator className="my-4" />
 
             {/* 마이페이지 메뉴 */}
-            <MyPage />
+            <MyPage handleClose={handleClose} />
           </div>
 
           {/* 하단 메뉴 */}
           <div className="border-t pt-4 mt-4">
             <Link
               href="/support"
+              onClick={handleClose}
               className="flex items-center gap-3 px-3 py-3 rounded-lg hover:bg-muted transition-colors">
               <Headphones className="h-5 w-5 text-muted-foreground" />
               <span className="font-medium">{t('common.support')}</span>
