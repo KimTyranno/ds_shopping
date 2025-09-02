@@ -11,9 +11,16 @@ import {
 import { Link } from '@/i18n/navigation'
 import { AlertCircle } from 'lucide-react'
 import { useTranslations } from 'next-intl'
+import { useEffect } from 'react'
 
 export default function Error({ error }: { error: Error }) {
   const t = useTranslations('error')
+
+  // 여기에는 pathname이 변경되지 않으므로 scrollToTop 사용못하고 따로 처리
+  useEffect(() => {
+    window.scrollTo(0, 0)
+  }, [])
+
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-md w-full">
