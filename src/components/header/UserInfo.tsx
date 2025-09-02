@@ -29,18 +29,20 @@ const UserInfo = (props: UserInfoProps) => {
     )
 
   return (
-    <div className="flex items-center gap-3 p-4 bg-muted/50 rounded-lg mt-6">
-      <Avatar>
-        <AvatarImage src={user.avatar || ''} />
-        <AvatarFallback className="bg-primary text-primary-foreground">
-          {user.name?.slice(0, 2)}
-        </AvatarFallback>
-      </Avatar>
-      <div className="flex-1">
-        <p className="font-medium text-sm">{user.name}</p>
-        <p className="text-xs text-muted-foreground">{user.email}</p>
+    <Link href="/mypage" onClick={props.handleClose}>
+      <div className="flex items-center gap-3 p-4 bg-muted/50 rounded-lg mt-6">
+        <Avatar>
+          <AvatarImage src={user.avatar || ''} />
+          <AvatarFallback className="bg-primary text-primary-foreground">
+            {user.name?.slice(0, 2)}
+          </AvatarFallback>
+        </Avatar>
+        <div className="flex-1">
+          <p className="font-medium text-sm">{user.name}</p>
+          <p className="text-xs text-muted-foreground">{user.email}</p>
+        </div>
       </div>
-    </div>
+    </Link>
   )
 }
 
