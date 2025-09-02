@@ -220,8 +220,29 @@
     }
   },
   "not_found": {
-    "title": "存在しないページです。",
-    "go_home": "ホームに戻る"
+    "title": "ページが見つかりません",
+    "description_1": "リクエストされたページは存在しないか、移動された可能性があります。",
+    "description_2": "別のページを閲覧するか、ホームに戻ってください。",
+    "button": {
+      "home": "ホームに戻る",
+      "search": "商品を検索する"
+    },
+    "recommendation": {
+      "title": "こちらのページはいかがですか？",
+      "best_title": "人気商品",
+      "best_description": "人気のある商品を見る",
+      "new_title": "新着商品",
+      "new_description": "最新の商品を見る",
+      "sale_title": "セール商品",
+      "sale_description": "お得な商品を見る",
+      "categories_title": "カテゴリ",
+      "categories_description": "カテゴリ別に商品を見る"
+    },
+    "help_message": "問題が続く場合は、",
+    "help_link": "カスタマーサポート",
+    "help_after": "までお問い合わせください。",
+    "search_prompt": "お探しの商品を検索してみましょう",
+    "search_placeholder": "商品名を入力してください..."
   },
   "login": {
     "title": "ログイン",
