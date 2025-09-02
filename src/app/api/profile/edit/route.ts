@@ -47,18 +47,18 @@ export async function POST(req: NextRequest) {
         password,
       })
 
-    const isSignIn = signInError || !signInData.user
-    const isConfirmPassword = newPassword === confirmPassword
-    if (!isSignIn) {
+    const isSignInError = signInError || !signInData.user
+    const isInValidConfirmPassword = newPassword !== confirmPassword
+    if (isSignInError) {
       errors.password = 'wrong_password'
     }
 
     // 새로운 비밀번호 확인
-    if (!isConfirmPassword) {
+    if (isInValidConfirmPassword) {
       errors.confirmPassword = 'password_mismatch'
     }
 
-    if (isSignIn && isConfirmPassword) {
+    if (!isSignInError && !isInValidConfirmPassword) {
       // 비밀번호 변경
       const { error: updateError } = await supabase.auth.updateUser({
         password: newPassword,
