@@ -5,7 +5,7 @@ import useStore from '@/lib/store'
 import { Heart, Package, ShoppingCart, User } from 'lucide-react'
 import { useTranslations } from 'next-intl'
 
-const MyPage = () => {
+const MyPage = ({ handleClose }: { handleClose: () => void }) => {
   const t = useTranslations()
   const user = useStore(state => state.user)
 
@@ -15,6 +15,7 @@ const MyPage = () => {
     <div className="space-y-1">
       <Link
         href="/mypage"
+        onClick={handleClose}
         className="flex items-center gap-3 px-3 py-3 rounded-lg hover:bg-muted transition-colors">
         <User className="h-5 w-5 text-muted-foreground" />
         <span className="font-medium">{t('user.mypage')}</span>
@@ -22,6 +23,7 @@ const MyPage = () => {
 
       <Link
         href="/orders"
+        onClick={handleClose}
         className="flex items-center gap-3 px-3 py-3 rounded-lg hover:bg-muted transition-colors">
         <Package className="h-5 w-5 text-muted-foreground" />
         <span className="font-medium">{t('user.orders')}</span>
@@ -29,6 +31,7 @@ const MyPage = () => {
 
       <Link
         href="/cart"
+        onClick={handleClose}
         className="flex items-center gap-3 px-3 py-3 rounded-lg hover:bg-muted transition-colors">
         <ShoppingCart className="h-5 w-5 text-muted-foreground" />
         <span className="font-medium">{t('user.cart')}</span>
@@ -36,6 +39,7 @@ const MyPage = () => {
 
       <Link
         href="/wishlist"
+        onClick={handleClose}
         className="flex items-center gap-3 px-3 py-3 rounded-lg hover:bg-muted transition-colors">
         <Heart className="h-5 w-5 text-muted-foreground" />
         <span className="font-medium">{t('user.wishlist')}</span>
