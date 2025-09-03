@@ -256,11 +256,13 @@
     "signup": "会員登録する",
     "login_fail": "ログインに失敗しました。",
     "invalid_credentials": "メールアドレスまたはパスワードが正しくありません。",
+    "forgot_password": "パスワードをお忘れですか？",
     "messages": {
       "success": "メール認証が完了しました。",
       "info": "メールを確認してアカウントを有効化してください。",
       "profile_load_failed": "プロフィール情報の読み込みに失敗しました。",
-      "session_expired": "セッションの有効期限が切れました。もう一度ログインしてください。"
+      "session_expired": "セッションの有効期限が切れました。もう一度ログインしてください。",
+      "password_reset_success": "パスワードが正常にリセットされました。\n新しいパスワードでログインしてください。"
     }
   },
   "signup": {

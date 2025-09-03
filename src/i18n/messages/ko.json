@@ -256,11 +256,13 @@
     "signup": "회원가입하기",
     "login_fail": "로그인에 실패했습니다.",
     "invalid_credentials": "이메일 또는 비밀번호가 잘못되었습니다.",
+    "forgot_password": "비밀번호를 잊으셨나요?",
     "messages": {
       "success": "이메일 인증이 완료되었습니다.",
       "info": "이메일을 확인하여 계정을 활성화하세요",
       "profile_load_failed": "프로필정보를 읽어오는데 실패했습니다.",
-      "session_expired": "세션이 만료되었습니다. 다시 로그인해 주세요."
+      "session_expired": "세션이 만료되었습니다. 다시 로그인해 주세요.",
+      "password_reset_success": "비밀번호가 성공적으로 재설정되었습니다.\n새 비밀번호로 로그인해주세요."
     }
   },
   "signup": {

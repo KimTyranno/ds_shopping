@@ -143,7 +143,7 @@ export default function ProfileEditForm({ user }: { user: UserProfile }) {
         return
       }
 
-      router.push('/mypage?messageType=success')
+      router.push('/mypage?message=success&messageType=success')
     } catch (error) {
       console.error('에러 발생:', error)
       throw error

@@ -256,11 +256,13 @@
     "signup": "Sign up",
     "login_fail": "Login failed.",
     "invalid_credentials": "The email or password is incorrect.",
+    "forgot_password": "Forgot your password?",
     "messages": {
       "success": "Email verification is complete.",
       "info": "Check your email to activate your account",
       "profile_load_failed": "Failed to load profile information.",
-      "session_expired": "Your session has expired. Please log in again."
+      "session_expired": "Your session has expired. Please log in again.",
+      "password_reset_success": "Your password has been successfully reset.\nPlease log in with your new password."
     }
   },
   "signup": {

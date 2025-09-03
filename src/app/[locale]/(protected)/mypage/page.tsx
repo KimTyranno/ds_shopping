@@ -69,14 +69,14 @@ const getStatusIcon = (status: string) => {
 export default async function MyPage({
   searchParams,
 }: {
-  searchParams: Promise<{ messageType: string }>
+  searchParams: Promise<{ message: string; messageType: string }>
 }) {
   const t = await getTranslations('mypage')
   const tCommon = await getTranslations('common')
   const tUser = await getTranslations('user')
   const user = await getCurrentUser()
   const locale = await getLocale()
-  const { messageType } = await searchParams
+  const { message, messageType } = await searchParams
 
   if (!user) {
     return redirect({ href: '/login', locale })
@@ -84,9 +84,9 @@ export default async function MyPage({
 
   return (
     <div className="container mx-auto px-4 py-8">
-      {messageType && (
+      {message && (
         <Toast
-          message={t(`messages.${messageType}`)}
+          message={t(`messages.${message}`)}
           type={getToastType(messageType)}
         />
       )}

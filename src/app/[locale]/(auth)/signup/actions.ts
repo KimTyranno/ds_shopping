@@ -27,7 +27,7 @@ export async function signupAction(formData: FormData) {
       data: {
         name,
       },
-      emailRedirectTo: `${baseUrl}/${locale}/login?messageType=success`,
+      emailRedirectTo: `${baseUrl}/${locale}/login?alertMessage=success&alertType=success`,
     },
   })
 
@@ -48,5 +48,5 @@ export async function signupAction(formData: FormData) {
   }
 
   revalidatePath('/', 'layout')
-  redirect(`/${locale}/login?messageType=info`)
+  redirect(`/${locale}/login?alertMessage=info&alertType=info`)
 }
