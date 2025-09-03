@@ -11,7 +11,7 @@ import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { Link, redirect } from '@/i18n/navigation'
 import { getCurrentUser } from '@/lib/auth'
-import Toast, { ToastTypes } from '@/lib/toast'
+import Toast, { getToastType } from '@/lib/toast'
 import { Mail, Package, ShoppingBag, Truck, User } from 'lucide-react'
 import { getLocale, getTranslations } from 'next-intl/server'
 
@@ -69,7 +69,7 @@ const getStatusIcon = (status: string) => {
 export default async function MyPage({
   searchParams,
 }: {
-  searchParams: Promise<{ messageType: ToastTypes }>
+  searchParams: Promise<{ messageType: string }>
 }) {
   const t = await getTranslations('mypage')
   const tCommon = await getTranslations('common')
@@ -85,7 +85,10 @@ export default async function MyPage({
   return (
     <div className="container mx-auto px-4 py-8">
       {messageType && (
-        <Toast message={t(`messages.${messageType}`)} type={messageType} />
+        <Toast
+          message={t(`messages.${messageType}`)}
+          type={getToastType(messageType)}
+        />
       )}
       <div className="max-w-6xl mx-auto">
         <div className="mb-8">

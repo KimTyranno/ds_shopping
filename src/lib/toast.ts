@@ -3,13 +3,29 @@
 import { useEffect, useMemo } from 'react'
 import { ExternalToast, toast } from 'sonner'
 
-export type ToastTypes =
-  | 'info'
-  | 'warning'
-  | 'success'
-  | 'error'
-  | 'loading'
-  | 'message'
+const toastTypeList = [
+  'info',
+  'success',
+  'error',
+  'warning',
+  'loading',
+  'message',
+] as const
+
+export type ToastTypes = (typeof toastTypeList)[number]
+
+/** Toast 타입체크 */
+function isToastType(type: string | null): type is ToastTypes {
+  return typeof type === 'string' && toastTypeList.includes(type as ToastTypes)
+}
+
+/** Toast 타입체크후에 해당 타입으로 반환 (없으면 info반환) */
+export function getToastType(
+  type: string | null,
+  fallback: ToastTypes = 'info',
+): ToastTypes {
+  return isToastType(type) ? type : fallback
+}
 
 type ToastProps = {
   message: string

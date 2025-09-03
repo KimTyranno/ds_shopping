@@ -13,7 +13,7 @@ import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { Separator } from '@/components/ui/separator'
 import { Link, usePathname, useRouter } from '@/i18n/navigation'
-import Toast from '@/lib/toast'
+import Toast, { getToastType } from '@/lib/toast'
 import { cn } from '@/lib/utils'
 import { CircleAlert, MailCheck } from 'lucide-react'
 import { useLocale, useTranslations } from 'next-intl'
@@ -49,6 +49,7 @@ export default function LoginPage() {
   const [state, formAction] = useActionState(login, undefined)
   const searchParams = useSearchParams()
   const message = searchParams.get('message')
+  const messageType = searchParams.get('messageType')
   const router = useRouter()
   const pathname = usePathname()
 
@@ -58,7 +59,7 @@ export default function LoginPage() {
       {message && (
         <Toast
           message={tLogin(`messages.${message}`)}
-          type="error"
+          type={getToastType(messageType)}
           callback={() => {
             // 쿼리스트링이 없는 /login 경로로 다시 대체
             router.replace(pathname)
@@ -126,6 +127,13 @@ export default function LoginPage() {
                   {tLogin('no_account')}{' '}
                   <Link href="/signup" className="text-primary hover:underline">
                     {tLogin('signup')}
+                  </Link>
+                </p>
+                <p className="text-sm text-muted-foreground mt-2">
+                  <Link
+                    href="/forgot-password"
+                    className="text-primary hover:underline">
+                    {tLogin('forgot_password')}
                   </Link>
                 </p>
               </div>
