@@ -430,7 +430,8 @@
           "confirm": "Confirm New Password",
           "placeholder": "Password",
           "new_placeholder": "New Password",
-          "confirm_placeholder": "Confirm New Password"
+          "confirm_placeholder": "Confirm New Password",
+          "password_match": "Passwords match"
         },
         "address": {
           "title": "Address Information",

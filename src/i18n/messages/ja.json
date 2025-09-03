@@ -430,7 +430,8 @@
           "confirm": "新しいパスワードの確認",
           "placeholder": "パスワード",
           "new_placeholder": "新しいパスワード",
-          "confirm_placeholder": "新しいパスワードを確認"
+          "confirm_placeholder": "新しいパスワードを確認",
+          "password_match": "パスワードが一致しています"
         },
         "address": {
           "title": "住所情報",

@@ -8,6 +8,8 @@ import imageCompression from 'browser-image-compression'
 import {
   AlertCircle,
   Camera,
+  Eye,
+  EyeOff,
   KeyRound,
   MapPin,
   Save,
@@ -15,7 +17,8 @@ import {
   User,
 } from 'lucide-react'
 import { useTranslations } from 'next-intl'
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useMemo, useRef, useState } from 'react'
+import PasswordStrength from './PasswordStrength'
 import { Alert, AlertDescription } from './ui/alert'
 import { Avatar, AvatarFallback, AvatarImage } from './ui/avatar'
 import { Button } from './ui/button'
@@ -45,6 +48,9 @@ type ProfileEditState = {
   address: string
   detailAddress: string
   zipCode: string
+  password: string
+  newPassword: string
+  confirmPassword: string
   errors?: {
     name?: string
     avatar?: string
@@ -81,6 +87,18 @@ export default function ProfileEditForm({ user }: { user: UserProfile }) {
   // 이미지 확장자 에러표시용도
   const [formatError, setFormatError] = useState<string | null>(null)
   const [isFending, setIsFending] = useState(false)
+  // 비밀번호 표시버튼
+  const [showPassword, setShowPassword] = useState(false)
+  const isPasswordOK = useMemo(() => {
+    const { password, newPassword, confirmPassword } = formData
+    const hasAny = password || newPassword || confirmPassword
+    // 셋 다 비어 있으면 OK (비밀번호 안 바꾸는 경우)
+    if (!hasAny) return true
+
+    const isPasswordMatch = newPassword === confirmPassword
+    // 하나라도 있고 나머지 중 하나라도 비어 있으면 false
+    return !!(password && newPassword && confirmPassword && isPasswordMatch)
+  }, [formData.password, formData.newPassword, formData.confirmPassword])
 
   // 에러발생시 focus 하는용도
   const avatarRef = useRef<HTMLDivElement>(null)
@@ -378,16 +396,30 @@ export default function ProfileEditForm({ user }: { user: UserProfile }) {
           <CardContent className="space-y-4">
             <div className="space-y-2">
               <Label htmlFor="password">{t('password.current')}</Label>
-              <Input
-                ref={passwordRef}
-                id="password"
-                name="password"
-                type="password"
-                onChange={handleChange}
-                placeholder={t('password.placeholder')}
-                minLength={8}
-                className={errors?.password ? 'border-red-500' : ''}
-              />
+              <div className="relative">
+                <Input
+                  ref={passwordRef}
+                  id="password"
+                  name="password"
+                  type={showPassword ? 'text' : 'password'}
+                  onChange={handleChange}
+                  placeholder={t('password.placeholder')}
+                  minLength={8}
+                  className={errors?.password ? 'border-red-500' : ''}
+                />
+                <Button
+                  type="button"
+                  variant="ghost"
+                  size="sm"
+                  className="absolute right-0 top-0 h-full px-3 py-2 hover:bg-transparent"
+                  onClick={() => setShowPassword(!showPassword)}>
+                  {showPassword ? (
+                    <EyeOff className="h-4 w-4" />
+                  ) : (
+                    <Eye className="h-4 w-4" />
+                  )}
+                </Button>
+              </div>
               {errors?.password && (
                 <p className="text-sm text-red-500">
                   {t(`error.${errors.password}`)}
@@ -396,27 +428,73 @@ export default function ProfileEditForm({ user }: { user: UserProfile }) {
             </div>
             <div className="space-y-2">
               <Label htmlFor="password">{t('password.new')}</Label>
-              <Input
-                id="newPassword"
-                name="newPassword"
-                type="password"
-                onChange={handleChange}
-                placeholder={t('password.new_placeholder')}
-                minLength={8}
-              />
+              <div className="relative">
+                <Input
+                  id="newPassword"
+                  name="newPassword"
+                  type={showPassword ? 'text' : 'password'}
+                  onChange={handleChange}
+                  placeholder={t('password.new_placeholder')}
+                  minLength={8}
+                />
+                <Button
+                  type="button"
+                  variant="ghost"
+                  size="sm"
+                  className="absolute right-0 top-0 h-full px-3 py-2 hover:bg-transparent"
+                  onClick={() => setShowPassword(!showPassword)}>
+                  {showPassword ? (
+                    <EyeOff className="h-4 w-4" />
+                  ) : (
+                    <Eye className="h-4 w-4" />
+                  )}
+                </Button>
+              </div>
+              {formData.newPassword && (
+                <PasswordStrength password={formData.newPassword} />
+              )}
             </div>
             <div className="space-y-2">
               <Label htmlFor="password">{t('password.confirm')}</Label>
-              <Input
-                ref={confirmPasswordRef}
-                id="confirmPassword"
-                name="confirmPassword"
-                type="password"
-                onChange={handleChange}
-                placeholder={t('password.confirm_placeholder')}
-                minLength={8}
-                className={errors?.confirmPassword ? 'border-red-500' : ''}
-              />
+              <div className="relative">
+                <Input
+                  ref={confirmPasswordRef}
+                  id="confirmPassword"
+                  name="confirmPassword"
+                  type={showPassword ? 'text' : 'password'}
+                  onChange={handleChange}
+                  placeholder={t('password.confirm_placeholder')}
+                  minLength={8}
+                  className={errors?.confirmPassword ? 'border-red-500' : ''}
+                />
+                <Button
+                  type="button"
+                  variant="ghost"
+                  size="sm"
+                  className="absolute right-0 top-0 h-full px-3 py-2 hover:bg-transparent"
+                  onClick={() => setShowPassword(!showPassword)}>
+                  {showPassword ? (
+                    <EyeOff className="h-4 w-4" />
+                  ) : (
+                    <Eye className="h-4 w-4" />
+                  )}
+                </Button>
+              </div>
+              {formData.confirmPassword && (
+                <PasswordStrength password={formData.confirmPassword} />
+              )}
+              {formData.confirmPassword &&
+                formData.newPassword !== formData.confirmPassword && (
+                  <p className="text-sm text-red-600">
+                    {t('error.password_mismatch')}
+                  </p>
+                )}
+              {formData.confirmPassword &&
+                formData.newPassword === formData.confirmPassword && (
+                  <p className="text-sm text-green-600">
+                    {t('password.password_match')}
+                  </p>
+                )}
               {errors?.confirmPassword && (
                 <p className="text-sm text-red-500">
                   {t(`error.${errors.confirmPassword}`)}
@@ -490,7 +568,9 @@ export default function ProfileEditForm({ user }: { user: UserProfile }) {
         <div className="flex gap-3">
           <Button
             type="submit"
-            disabled={isFending || !isFormChanged(initData, formData)}
+            disabled={
+              isFending || !isPasswordOK || !isFormChanged(initData, formData)
+            }
             className="flex-1 cursor-pointer">
             {isFending ? (
               <>

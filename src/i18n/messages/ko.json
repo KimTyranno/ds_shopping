@@ -430,7 +430,8 @@
           "confirm": "새로운 비밀번호 확인",
           "placeholder": "비밀번호",
           "new_placeholder": "변경 비밀번호",
-          "confirm_placeholder": "변경 비밀번호 확인"
+          "confirm_placeholder": "변경 비밀번호 확인",
+          "password_match": "비밀번호가 일치합니다"
         },
         "address": {
           "title": "주소 정보",
