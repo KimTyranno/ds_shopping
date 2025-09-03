@@ -15,29 +15,39 @@ export default function PasswordStrength({ password }: { password: string }) {
 
     strength = Object.values(checks).filter(Boolean).length
 
+    const strengthLevels = [
+      { label: '약함', color: 'text-red-600', barColor: 'bg-red-500' },
+      {
+        label: '보통',
+        color: 'text-yellow-600',
+        barColor: 'bg-yellow-500',
+      },
+      { label: '강함', color: 'text-blue-600', barColor: 'bg-blue-500' },
+      {
+        label: '매우 강함',
+        color: 'text-green-600',
+        barColor: 'bg-green-500',
+      },
+    ]
+
+    const index = Math.min(strength, 4) - 1
+    const level = strengthLevels[Math.max(index, 0)]
+
     return {
       strength,
       checks,
-      label:
-        strength < 2
-          ? '약함'
-          : strength < 4
-            ? '보통'
-            : strength === 4
-              ? '강함'
-              : '매우 강함',
-      color:
-        strength < 2
-          ? 'text-red-600'
-          : strength < 4
-            ? 'text-yellow-600'
-            : strength === 4
-              ? 'text-blue-600'
-              : 'text-green-600',
+      ...level,
     }
   }
 
   const passwordStrength = getPasswordStrength(password)
+
+  const checksList = [
+    { key: 'length', label: '8자 이상' },
+    { key: 'uppercase', label: '대문자 포함' },
+    { key: 'number', label: '숫자 포함' },
+    { key: 'special', label: '특수문자 포함' },
+  ]
 
   return (
     <div className="space-y-2">
@@ -49,34 +59,28 @@ export default function PasswordStrength({ password }: { password: string }) {
       </div>
       <div className="w-full bg-gray-200 rounded-full h-2">
         <div
-          className={`h-2 rounded-full transition-all duration-300 ${
-            passwordStrength.strength < 2
-              ? 'bg-red-500'
-              : passwordStrength.strength < 4
-                ? 'bg-yellow-500'
-                : passwordStrength.strength === 4
-                  ? 'bg-blue-500'
-                  : 'bg-green-500'
-          }`}
-          style={{
-            width: `${(passwordStrength.strength / 5) * 100}%`,
-          }}></div>
+          className={`h-2 rounded-full transition-all duration-300 ${passwordStrength.barColor}`}
+          style={{ width: `${(passwordStrength.strength / 5) * 100}%` }}></div>
       </div>
       <div className="text-xs text-muted-foreground space-y-1">
-        <div className={passwordStrength.checks.length ? 'text-green-600' : ''}>
-          ✓ 8자 이상 {passwordStrength.checks.length ? '✓' : '✗'}
-        </div>
-        <div
-          className={passwordStrength.checks.uppercase ? 'text-green-600' : ''}>
-          ✓ 대문자 포함 {passwordStrength.checks.uppercase ? '✓' : '✗'}
-        </div>
-        <div className={passwordStrength.checks.number ? 'text-green-600' : ''}>
-          ✓ 숫자 포함 {passwordStrength.checks.number ? '✓' : '✗'}
-        </div>
-        <div
-          className={passwordStrength.checks.special ? 'text-green-600' : ''}>
-          ✓ 특수문자 포함 {passwordStrength.checks.special ? '✓' : '✗'}
-        </div>
+        {checksList.map(({ key, label }) => (
+          <div
+            key={key}
+            className={
+              passwordStrength.checks[
+                key as keyof typeof passwordStrength.checks
+              ]
+                ? 'text-green-600'
+                : ''
+            }>
+            ✓ {label}{' '}
+            {passwordStrength.checks[
+              key as keyof typeof passwordStrength.checks
+            ]
+              ? '✓'
+              : '✗'}
+          </div>
+        ))}
       </div>
     </div>
   )
