@@ -1,7 +1,13 @@
 import { execSync } from 'child_process'
 import fs from 'fs'
 import path from 'path'
-import { fileURLToPath } from 'url'
+import { fileURLToPath, pathToFileURL } from 'url'
+
+type PathsFile = {
+  AUTH_PATHS: string[]
+  PUBLIC_PATHS: string[]
+  PROTECTED_PATHS: string[]
+}
 
 // ES Module 환경에서 __dirname 정의
 const __filename = fileURLToPath(import.meta.url)
@@ -27,29 +33,39 @@ try {
   process.exit(1)
 }
 
-// 2. 기존 파일과 새 파일 읽기
-const original = fs.existsSync(GENERATED_PATHS_FILE)
-  ? fs.readFileSync(GENERATED_PATHS_FILE, 'utf-8')
-  : ''
+// 2. paths.ts와 paths.temp.ts를 동적으로 import
+const importPathsFile = async (filePath: string): Promise<PathsFile> => {
+  const fileUrl = pathToFileURL(filePath).href
+  return (await import(fileUrl)) as PathsFile
+}
 
-const generated = fs.readFileSync(TEMP_PATHS_FILE, 'utf-8')
+const main = async () => {
+  const current = await importPathsFile(GENERATED_PATHS_FILE)
+  const temp = await importPathsFile(TEMP_PATHS_FILE)
 
-// 3. 비교
-if (original !== generated) {
-  console.error(`
-⚠️ 경로 정보가 최신이 아닙니다! 
+  // 3. 구조 비교
+  const isEqual = JSON.stringify(current) === JSON.stringify(temp)
+
+  if (!isEqual) {
+    console.error(`
+⚠️ 경로 정보가 최신이 아닙니다!
 - 아래 명령어를 실행해서 경로를 업데이트해주세요:
 
   yarn generate:paths
 
 그리고 변경 사항을 커밋 후 다시 시도하세요.
 `)
-  // fs.unlinkSync(TEMP_PATHS_FILE) // ❗에러여도 삭제
-  process.exit(1) // CI 실패 처리
+    // fs.unlinkSync(TEMP_PATHS_FILE) // ❗에러여도 삭제
+    process.exit(1) // CI 실패 처리
+  }
+
+  // 4. 비교 끝났으니 임시 파일 삭제
+  if (fs.existsSync(TEMP_PATHS_FILE)) {
+    fs.unlinkSync(TEMP_PATHS_FILE)
+  }
+
+  console.log('✅ 경로 정보가 최신 상태입니다.')
+  process.exit(0)
 }
 
-// 4. 비교 끝났으니 임시 파일 삭제
-fs.unlinkSync(TEMP_PATHS_FILE)
-
-console.log('✅ 경로 정보가 최신 상태입니다.')
-process.exit(0)
+void main()
