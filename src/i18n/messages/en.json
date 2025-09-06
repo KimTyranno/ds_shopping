@@ -216,8 +216,16 @@
       "expired_token": "Your session has expired. Please log in again.",
       "unauthorized": "You do not have permission to access this page.",
       "user_not_found": "User information could not be found.",
-      "deletion_failed": "An error occurred while deleting the account."
+      "deletion_failed": "An error occurred while deleting the account.",
+      "error_password_reset_exception": "An error occurred while resetting the password"
     }
+  },
+  "auth_code_error": {
+    "error_verification_title": "Verification Error",
+    "error_verification_description": "An error occurred during email verification.",
+    "error_verification_details": "The verification link has expired or is invalid. \nPlease try again.",
+    "button_back_to_login": "Back to Login Page",
+    "button_go_home": "Go to Home"
   },
   "not_found": {
     "title": "Page Not Found",
@@ -324,6 +332,31 @@
       "email_not_received": "Didn’t receive the email?",
       "contact_support": "Contact Support"
     }
+  },
+  "reset_password": {
+    "site_name": "SimpleMall",
+    "set_new_password_title": "Set New Password",
+    "set_new_password_description": "Choose a secure new password.",
+    "new_password_label": "New Password",
+    "new_password_placeholder": "Enter your new password",
+    "confirm_password_label": "Confirm Password",
+    "confirm_password_placeholder": "Re-enter your password",
+    "passwords_not_match": "Passwords do not match",
+    "passwords_match": "Passwords match",
+    "resetting_password": "Resetting password...",
+    "reset_password_button": "Reset Password",
+    "security_recommendations_title": "Security Recommendations",
+    "rec_use_complex_password": "• Use a complex password of at least 8 characters",
+    "rec_use_unique_password": "• Use a different password than on other sites",
+    "rec_change_password_regularly": "• Change your password regularly",
+    "messages": {
+      "error_fill_all_fields": "Please fill in all fields",
+      "error_passwords_do_not_match": "Passwords do not match",
+      "error_password_too_short": "Password must be at least 8 characters",
+      "error_password_reset_failed": "Failed to reset password",
+      "error_password_same_as_old": "New password should be different from the old password"
+    },
+    "loading": "Preparing the password reset page..."
   },
   "product": {
     "reviews": "{count} reviews",

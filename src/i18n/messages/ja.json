@@ -216,8 +216,16 @@
       "expired_token": "セッションが切れました。再度ログインしてください。",
       "unauthorized": "アクセス権限がありません。",
       "user_not_found": "ユーザー情報が見つかりません。",
-      "deletion_failed": "アカウントの削除中にエラーが発生しました。"
+      "deletion_failed": "アカウントの削除中にエラーが発生しました。",
+      "error_password_reset_exception": "パスワードリセット中にエラーが発生しました"
     }
+  },
+  "auth_code_error": {
+    "error_verification_title": "認証エラー",
+    "error_verification_description": "メール認証中にエラーが発生しました。",
+    "error_verification_details": "認証リンクの有効期限が切れているか、無効です。\nもう一度お試しください。",
+    "button_back_to_login": "ログインページに戻る",
+    "button_go_home": "ホームに戻る"
   },
   "not_found": {
     "title": "ページが見つかりません",
@@ -324,6 +332,31 @@
       "email_not_received": "メールが届いていませんか？",
       "contact_support": "サポートに問い合わせる"
     }
+  },
+  "reset_password": {
+    "site_name": "シンプルモール",
+    "set_new_password_title": "新しいパスワードを設定",
+    "set_new_password_description": "安全な新しいパスワードを設定してください。",
+    "new_password_label": "新しいパスワード",
+    "new_password_placeholder": "新しいパスワードを入力してください",
+    "confirm_password_label": "パスワード確認",
+    "confirm_password_placeholder": "もう一度パスワードを入力してください",
+    "passwords_not_match": "パスワードが一致しません",
+    "passwords_match": "パスワードが一致しています",
+    "resetting_password": "パスワードを再設定中...",
+    "reset_password_button": "パスワードを再設定する",
+    "security_recommendations_title": "セキュリティ推奨事項",
+    "rec_use_complex_password": "• 8文字以上の複雑なパスワードを使用してください",
+    "rec_use_unique_password": "• 他のサイトと異なるパスワードを使用してください",
+    "rec_change_password_regularly": "• 定期的にパスワードを変更してください",
+    "messages": {
+      "error_fill_all_fields": "すべての項目を入力してください",
+      "error_passwords_do_not_match": "パスワードが一致しません",
+      "error_password_too_short": "パスワードは8文字以上である必要があります",
+      "error_password_reset_failed": "パスワードのリセットに失敗しました",
+      "error_password_same_as_old": "新しいパスワードは以前のパスワードと異なる必要があります"
+    },
+    "loading": "パスワードリセットページを準備中です..."
   },
   "product": {
     "reviews": "{count}件のレビュー",
