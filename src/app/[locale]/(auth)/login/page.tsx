@@ -13,7 +13,7 @@ import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { Separator } from '@/components/ui/separator'
 import { Link, usePathname, useRouter } from '@/i18n/navigation'
-import Toast from '@/lib/toast'
+import Toast, { getToastType } from '@/lib/toast'
 import { cn } from '@/lib/utils'
 import { CircleAlert, MailCheck } from 'lucide-react'
 import { useLocale, useTranslations } from 'next-intl'
@@ -24,19 +24,20 @@ import { login } from './action'
 function LoginMessage() {
   const t = useTranslations('login.messages')
   const searchParams = useSearchParams()
-  const messageType = searchParams.get('messageType')
-  if (!messageType) return null
+  const alertMessage = searchParams.get('alertMessage')
+  const alertType = searchParams.get('alertType')
+  if (!alertMessage) return null
 
   return (
     <Alert
-      className={cn('text-white', {
-        'bg-yellow-600': messageType === 'info',
-        'bg-green-600': messageType === 'success',
+      className={cn('text-white bg-slate-600', {
+        'bg-yellow-600': alertType === 'info',
+        'bg-green-600': alertType === 'success',
       })}>
-      {messageType === 'success' && <MailCheck />}
-      {messageType === 'info' && <CircleAlert />}
+      {alertType === 'success' && <MailCheck />}
+      {alertType === 'info' && <CircleAlert />}
       <AlertDescription className="text-inherit">
-        {t(messageType)}
+        {t(alertMessage)}
       </AlertDescription>
     </Alert>
   )
@@ -49,6 +50,7 @@ export default function LoginPage() {
   const [state, formAction] = useActionState(login, undefined)
   const searchParams = useSearchParams()
   const message = searchParams.get('message')
+  const messageType = searchParams.get('messageType')
   const router = useRouter()
   const pathname = usePathname()
 
@@ -57,8 +59,9 @@ export default function LoginPage() {
       {state?.error && <Toast message={tLogin(state.error)} type="error" />}
       {message && (
         <Toast
+          className="whitespace-pre-line"
           message={tLogin(`messages.${message}`)}
-          type="error"
+          type={getToastType(messageType)}
           callback={() => {
             // 쿼리스트링이 없는 /login 경로로 다시 대체
             router.replace(pathname)
@@ -126,6 +129,13 @@ export default function LoginPage() {
                   {tLogin('no_account')}{' '}
                   <Link href="/signup" className="text-primary hover:underline">
                     {tLogin('signup')}
+                  </Link>
+                </p>
+                <p className="text-sm text-muted-foreground mt-2">
+                  <Link
+                    href="/forgot-password"
+                    className="text-primary hover:underline">
+                    {tLogin('forgot_password')}
                   </Link>
                 </p>
               </div>

@@ -216,8 +216,16 @@
       "expired_token": "Your session has expired. Please log in again.",
       "unauthorized": "You do not have permission to access this page.",
       "user_not_found": "User information could not be found.",
-      "deletion_failed": "An error occurred while deleting the account."
+      "deletion_failed": "An error occurred while deleting the account.",
+      "error_password_reset_exception": "An error occurred while resetting the password"
     }
+  },
+  "auth_code_error": {
+    "error_verification_title": "Verification Error",
+    "error_verification_description": "An error occurred during email verification.",
+    "error_verification_details": "The verification link has expired or is invalid. \nPlease try again.",
+    "button_back_to_login": "Back to Login Page",
+    "button_go_home": "Go to Home"
   },
   "not_found": {
     "title": "Page Not Found",
@@ -255,12 +263,14 @@
     "no_account": "Don't have an account?",
     "signup": "Sign up",
     "login_fail": "Login failed.",
-    "invalid_credentials": "The username or password is incorrect.",
+    "invalid_credentials": "The email or password is incorrect.",
+    "forgot_password": "Forgot your password?",
     "messages": {
       "success": "Email verification is complete.",
       "info": "Check your email to activate your account",
       "profile_load_failed": "Failed to load profile information.",
-      "session_expired": "Your session has expired. Please log in again."
+      "session_expired": "Your session has expired. Please log in again.",
+      "password_reset_success": "Your password has been successfully reset.\nPlease log in with your new password."
     }
   },
   "signup": {
@@ -278,6 +288,75 @@
     "login_link": "Log in",
     "password_mismatch": "Passwords do not match",
     "email_already_registered": "This email is already registered."
+  },
+  "forgot_password": {
+    "back_to_login": "Back to Login",
+    "site_name": "SimpleMall",
+    "forgot_password_title": "Forgot Password",
+    "forgot_password_description": "Enter your registered email address and we will send you a password reset link.",
+    "email_label": "Email Address",
+    "email_placeholder": "your@email.com",
+    "email_input_helper": "Please enter the email address you used when signing up.",
+    "send_reset_email_button": "Send Password Reset Email",
+    "info_title": "Information",
+    "info_check_spam": "• If the email doesn't arrive, check your spam folder.",
+    "info_link_expiry": "• The reset link is valid for 1 hour.",
+    "info_contact_support": "• If the issue persists, please contact support.",
+    "forgot_email_question": "Forgot your email?",
+    "contact_support_link": "Contact Support",
+    "no_account_question": "Don't have an account?",
+    "signup_link": "Sign Up",
+    "messages": {
+      "password_reset_email_failed": "Failed to send password reset email.",
+      "enter_email": "Please enter your email address.",
+      "invalid_email_format": "Invalid email format."
+    },
+    "sent": {
+      "site_name": "SimpleMall",
+      "email_sent_title": "Email Sent!",
+      "email_sent_description": "A password reset link has been sent.",
+      "email_sent_alert": "We’ve sent a password reset link.\nPlease check your inbox and click the link.",
+      "next_steps_title": "Next Steps:",
+      "step_check_email_title": "Check Email",
+      "step_check_email_desc": "Look for an email from SimpleMall in your inbox.",
+      "step_click_link_title": "Click the Link",
+      "step_click_link_desc": "Click the \"Reset Password\" button in the email.",
+      "step_set_new_password_title": "Set New Password",
+      "step_set_new_password_desc": "Choose a secure new password.",
+      "note_title": "Please Note",
+      "note_check_spam": "• If the email hasn’t arrived, check your spam folder.",
+      "note_link_expire": "• The reset link expires in 1 hours.",
+      "note_one_time_use": "• The link can only be used once.",
+      "back_to_login": "Return to Login Page",
+      "resend_email": "Resend Email",
+      "email_not_received": "Didn’t receive the email?",
+      "contact_support": "Contact Support"
+    }
+  },
+  "reset_password": {
+    "site_name": "SimpleMall",
+    "set_new_password_title": "Set New Password",
+    "set_new_password_description": "Choose a secure new password.",
+    "new_password_label": "New Password",
+    "new_password_placeholder": "Enter your new password",
+    "confirm_password_label": "Confirm Password",
+    "confirm_password_placeholder": "Re-enter your password",
+    "passwords_not_match": "Passwords do not match",
+    "passwords_match": "Passwords match",
+    "resetting_password": "Resetting password...",
+    "reset_password_button": "Reset Password",
+    "security_recommendations_title": "Security Recommendations",
+    "rec_use_complex_password": "• Use a complex password of at least 8 characters",
+    "rec_use_unique_password": "• Use a different password than on other sites",
+    "rec_change_password_regularly": "• Change your password regularly",
+    "messages": {
+      "error_fill_all_fields": "Please fill in all fields",
+      "error_passwords_do_not_match": "Passwords do not match",
+      "error_password_too_short": "Password must be at least 8 characters",
+      "error_password_reset_failed": "Failed to reset password",
+      "error_password_same_as_old": "New password should be different from the old password"
+    },
+    "loading": "Preparing the password reset page..."
   },
   "product": {
     "reviews": "{count} reviews",
@@ -430,7 +509,8 @@
           "confirm": "Confirm New Password",
           "placeholder": "Password",
           "new_placeholder": "New Password",
-          "confirm_placeholder": "Confirm New Password"
+          "confirm_placeholder": "Confirm New Password",
+          "password_match": "Passwords match"
         },
         "address": {
           "title": "Address Information",
