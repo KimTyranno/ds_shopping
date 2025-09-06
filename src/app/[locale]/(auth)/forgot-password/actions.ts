@@ -51,6 +51,9 @@ export async function sendPasswordResetEmailAction(
       secure: true, // HTTPS 연결을 통해서만 쿠키가 전송되도록함
     })
 
+    // NOTE: 다른 브라우저에서도 이메일 링크가 동작하도록 verifyOtp 사용해서 처리할거라 현재 브라우저에서 생성되는 인증쿠키는 삭제
+    await supabase.auth.signOut()
+
     // 성공시 확인 페이지로 리다이렉트
     redirect({
       href: `/forgot-password/sent?email=${encodeURIComponent(email)}`,
