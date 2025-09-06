@@ -39,3 +39,6 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# 임시 경로 비교 파일
+src/constants/paths.temp.ts

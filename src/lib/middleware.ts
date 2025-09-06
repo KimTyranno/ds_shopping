@@ -1,3 +1,4 @@
+import { AUTH_PATHS, PROTECTED_PATHS } from '@/constants/paths'
 import { locales } from '@/i18n/routing'
 import { createServerClient } from '@supabase/ssr'
 import { NextResponse, type NextRequest } from 'next/server'
@@ -17,7 +18,7 @@ export async function updateSession(
           return request.cookies.getAll()
         },
         setAll(cookiesToSet) {
-          cookiesToSet.forEach(({ name, value, options }) =>
+          cookiesToSet.forEach(({ name, value }) =>
             request.cookies.set(name, value),
           )
           supabaseResponse = NextResponse.next({
@@ -41,8 +42,8 @@ export async function updateSession(
   const pathname =
     request.nextUrl.pathname.replace(localePrefixPattern, '') || '/'
 
-  const isAuthPage = pathname.startsWith('/(auth)/')
-  const isProtectedPage = pathname.startsWith('/(protected)/')
+  const isAuthPage = AUTH_PATHS.includes(pathname)
+  const isProtectedPage = PROTECTED_PATHS.includes(pathname)
 
   // 이미 로그인한 유저가 로그인/회원가입 페이지로 접근할때 홈으로 돌려보냄
   if (user && isAuthPage) {
@@ -53,6 +54,7 @@ export async function updateSession(
   if (!user && isProtectedPage) {
     const loginUrl = request.nextUrl.clone()
     loginUrl.pathname = '/login'
+    loginUrl.search = '' // 쿼리스트링 비우기
     return NextResponse.redirect(loginUrl)
   }
 

@@ -1,4 +1,6 @@
+// eslint.config.mjs
 import js from '@eslint/js'
+import prettier from 'eslint-plugin-prettier'
 import * as tseslint from 'typescript-eslint'
 
 export default [
@@ -27,23 +29,21 @@ export default [
     },
     plugins: {
       '@typescript-eslint': tseslint.plugin,
+      prettier, // ✅ prettier 플러그인 등록
     },
     rules: {
       '@typescript-eslint/no-unused-vars': [
         'warn',
-        {
-          argsIgnorePattern: '^_',
-          varsIgnorePattern: '^_',
-        },
+        { argsIgnorePattern: '^_', varsIgnorePattern: '^_' },
       ],
       'no-unused-vars': [
         'warn',
-        {
-          argsIgnorePattern: '^_',
-          varsIgnorePattern: '^_',
-        },
+        { argsIgnorePattern: '^_', varsIgnorePattern: '^_' },
       ],
       '@typescript-eslint/no-redundant-type-constituents': 'off',
+
+      // ✅ prettier 포맷 적용 규칙 추가
+      'prettier/prettier': 'warn',
     },
   },
 
