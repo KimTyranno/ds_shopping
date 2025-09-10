@@ -6,23 +6,21 @@ import {
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu'
 import { Link, redirect } from '@/i18n/navigation'
-import { getCurrentUser } from '@/lib/auth'
-import { createClient } from '@/lib/server'
+import { createClient } from '@/lib/client'
+import useStore from '@/lib/store'
 import { User } from 'lucide-react'
-import { useTranslations } from 'next-intl'
-import { getLocale } from 'next-intl/server'
+import { useLocale, useTranslations } from 'next-intl'
 import AuthMenu from './AuthMenu'
 
-export default async function AuthButton() {
+export default function AuthButton() {
   const t = useTranslations()
-  const currentLocale = await getLocale()
-
-  const user = await getCurrentUser()
+  const currentLocale = useLocale()
+  const user = useStore(state => state.user)
 
   const signOut = async () => {
-    'use server'
+    // 'use server'
 
-    const supabase = await createClient()
+    const supabase = createClient()
     await supabase.auth.signOut()
     redirect({ href: '/login', locale: currentLocale })
   }
@@ -37,6 +35,8 @@ export default async function AuthButton() {
       </Button>
     )
   }
+
+  const isAdmin = user.user_role === 'admin'
 
   return (
     <DropdownMenu>
@@ -54,7 +54,7 @@ export default async function AuthButton() {
           </div>
         </div>
         <DropdownMenuSeparator />
-        <AuthMenu signOut={signOut} />
+        <AuthMenu signOut={signOut} isAdmin={isAdmin} />
       </DropdownMenuContent>
     </DropdownMenu>
   )

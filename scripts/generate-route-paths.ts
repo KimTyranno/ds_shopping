@@ -6,7 +6,7 @@ import { fileURLToPath } from 'url'
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
 
-const GROUPS = ['(auth)', '(public)', '(protected)'] as const
+const GROUPS = ['(auth)', '(public)', '(protected)', 'admin'] as const
 type Group = (typeof GROUPS)[number]
 
 // locale 경로 하위 폴더위치

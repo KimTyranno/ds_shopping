@@ -14,6 +14,29 @@ export type Database = {
   }
   public: {
     Tables: {
+      admin_users: {
+        Row: {
+          created_at: string
+          id: string
+        }
+        Insert: {
+          created_at?: string
+          id: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: 'admin_users_id_fkey'
+            columns: ['id']
+            isOneToOne: true
+            referencedRelation: 'profiles'
+            referencedColumns: ['id']
+          },
+        ]
+      }
       cart_items: {
         Row: {
           cart_id: string | null
@@ -197,7 +220,11 @@ export type Database = {
           created_at: string
           detail_address: string | null
           id: string
-          name: string | null
+          member_no: number
+          name: string
+          status: Database['public']['Enums']['user_status']
+          user_no: number
+          user_role: Database['public']['Enums']['user_role_enum'] | null
           zip_code: string | null
         }
         Insert: {
@@ -206,7 +233,11 @@ export type Database = {
           created_at?: string
           detail_address?: string | null
           id: string
-          name?: string | null
+          member_no?: number
+          name: string
+          status?: Database['public']['Enums']['user_status']
+          user_no?: number
+          user_role?: Database['public']['Enums']['user_role_enum'] | null
           zip_code?: string | null
         }
         Update: {
@@ -215,20 +246,37 @@ export type Database = {
           created_at?: string
           detail_address?: string | null
           id?: string
-          name?: string | null
+          member_no?: number
+          name?: string
+          status?: Database['public']['Enums']['user_status']
+          user_no?: number
+          user_role?: Database['public']['Enums']['user_role_enum'] | null
           zip_code?: string | null
         }
         Relationships: []
       }
     }
     Views: {
-      [_ in never]: never
+      admin_user_list: {
+        Row: {
+          avatar: string | null
+          created_at: string | null
+          email: string | null
+          last_sign_in_at: string | null
+          member_no: number | null
+          name: string | null
+          phone: string | null
+          status: Database['public']['Enums']['user_status'] | null
+        }
+        Relationships: []
+      }
     }
     Functions: {
       [_ in never]: never
     }
     Enums: {
-      [_ in never]: never
+      user_role_enum: 'admin' | 'seller' | 'customer'
+      user_status: 'active' | 'suspended' | 'deleted'
     }
     CompositeTypes: {
       [_ in never]: never
@@ -355,6 +403,9 @@ export type CompositeTypes<
 
 export const Constants = {
   public: {
-    Enums: {},
+    Enums: {
+      user_role_enum: ['admin', 'seller', 'customer'],
+      user_status: ['active', 'suspended', 'deleted'],
+    },
   },
 } as const

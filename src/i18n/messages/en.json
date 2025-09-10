@@ -37,6 +37,7 @@
     "menu": "User Menu",
     "cart": "Cart",
     "logout": "Logout",
+    "admin": "Admin Settings",
     "mypage": "My Page",
     "orders": "Orders",
     "wishlist": "Wishlist"

@@ -37,6 +37,7 @@
     "menu": "사용자 메뉴",
     "cart": "장바구니",
     "logout": "로그아웃",
+    "admin": "관리자 설정",
     "mypage": "마이페이지",
     "orders": "주문내역",
     "wishlist": "찜목록"

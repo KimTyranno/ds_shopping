@@ -10,14 +10,23 @@ import { useTranslations } from 'next-intl'
 
 type AuthMenuProps = {
   signOut: () => Promise<void>
+  isAdmin: boolean
 }
 
 // next-intl의 Link로 변경하니, 뭔가 호환성 이슈때문에 표시되지 않아서 따로 분리함
-export default function AuthMenu({ signOut }: AuthMenuProps) {
+export default function AuthMenu({ signOut, isAdmin }: AuthMenuProps) {
   const t = useTranslations()
 
   return (
     <>
+      {isAdmin && (
+        <DropdownMenuItem asChild>
+          <Link href="/admin" className="flex items-center">
+            <Settings className="mr-2 h-4 w-4" />
+            {t('user.admin')}
+          </Link>
+        </DropdownMenuItem>
+      )}
       <DropdownMenuItem asChild>
         <Link href="/mypage" className="flex items-center">
           <Settings className="mr-2 h-4 w-4" />
