@@ -29,12 +29,13 @@ export async function login(
       await supabase.auth.signInWithPassword(data)
 
     if (error || !loginData.user || !loginData.session) {
+      logger.error('로그인 실패', error)
       return {
         error: 'invalid_credentials',
       }
     }
   } catch (error) {
-    logger.error('로그인 실패', error)
+    logger.error('로그인시도중 에러', error)
     return {
       error: 'login_fail',
     }
