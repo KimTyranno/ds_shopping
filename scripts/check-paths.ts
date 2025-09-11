@@ -51,7 +51,7 @@ const main = async () => {
 ⚠️ 경로 정보가 최신이 아닙니다!
 - 아래 명령어를 실행해서 경로를 업데이트해주세요:
 
-  yarn generate:paths
+  yarn gen:paths
 
 그리고 변경 사항을 커밋 후 다시 시도하세요.
 `)
