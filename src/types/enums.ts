@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import { Database } from '@/types/supabase'
 
 export type USER_ROLE_TYPE = Database['public']['Enums']['user_role_enum']
@@ -14,3 +15,7 @@ export const USER_STATUS = {
   SUSPENDED: 'suspended',
   DELETED: 'deleted',
 } as const satisfies Record<string, USER_STATUS_TYPE>
+
+export enum BucketName {
+  Avatars = 'avatars',
+}
