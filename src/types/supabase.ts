@@ -264,6 +264,7 @@ export type Database = {
           phone: string | null
           status: Database['public']['Enums']['user_status'] | null
           user_no: number | null
+          user_role: Database['public']['Enums']['user_role_enum'] | null
         }
         Relationships: []
       }
