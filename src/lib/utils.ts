@@ -26,7 +26,7 @@ export type DatePattern = (typeof DateFormatPattern)[DatePatternKey]
  * 기본 포맷: yyyy-MM-dd HH:mm:ss
  */
 export function formatDate(
-  dateString: string | Date,
+  dateString: string | Date | null,
   pattern: DatePattern = 'yyyy-MM-dd HH:mm:ss',
 ): string {
   if (!dateString) return '-'

@@ -220,7 +220,6 @@ export type Database = {
           created_at: string
           detail_address: string | null
           id: string
-          member_no: number
           name: string
           status: Database['public']['Enums']['user_status']
           user_no: number
@@ -233,7 +232,6 @@ export type Database = {
           created_at?: string
           detail_address?: string | null
           id: string
-          member_no?: number
           name: string
           status?: Database['public']['Enums']['user_status']
           user_no?: number
@@ -246,7 +244,6 @@ export type Database = {
           created_at?: string
           detail_address?: string | null
           id?: string
-          member_no?: number
           name?: string
           status?: Database['public']['Enums']['user_status']
           user_no?: number
@@ -263,10 +260,10 @@ export type Database = {
           created_at: string | null
           email: string | null
           last_sign_in_at: string | null
-          member_no: number | null
           name: string | null
           phone: string | null
           status: Database['public']['Enums']['user_status'] | null
+          user_no: number | null
         }
         Relationships: []
       }

@@ -336,7 +336,7 @@ export default function ProfileEditForm({ user }: { user: UserProfile }) {
                   variant="outline"
                   asChild
                   className="bg-transparent">
-                  <label htmlFor="avatar" className="cursor-pointer">
+                  <label htmlFor="avatar">
                     <Camera className="w-4 h-4 mr-2" />
                     {t('avatar.change')}
                   </label>
@@ -571,7 +571,7 @@ export default function ProfileEditForm({ user }: { user: UserProfile }) {
             disabled={
               isFending || !isPasswordOK || !isFormChanged(initData, formData)
             }
-            className="flex-1 cursor-pointer">
+            className="flex-1">
             {isFending ? (
               <>
                 <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin mr-2" />

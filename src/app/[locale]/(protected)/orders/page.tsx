@@ -304,7 +304,7 @@ export default function OrdersPage() {
               onClick={() => router.push(`/orders/${order.id}`)}
               variant="outline"
               size="sm"
-              className="bg-transparent cursor-pointer">
+              className="bg-transparent">
               {t('card.buttons.view_details')}
             </Button>
           </div>

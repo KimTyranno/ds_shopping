@@ -242,7 +242,7 @@ export default function AdminSidebar() {
                           <Button
                             variant="ghost"
                             size="sm"
-                            className="h-8 w-8 p-0 ml-1 cursor-pointer">
+                            className="h-8 w-8 p-0 ml-1">
                             <ChevronRight
                               className={cn(
                                 'h-4 w-4 transition-transform',
