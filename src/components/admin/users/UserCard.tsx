@@ -10,13 +10,17 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu'
-import { Link } from '@/i18n/navigation'
-import { USER_ROLE } from '@/types/enums'
-import { Ban, Eye, MoreHorizontal } from 'lucide-react'
+import { Link, usePathname } from '@/i18n/navigation'
+import { USER_ROLE, USER_STATUS } from '@/types/enums'
+import { Ban, Check, Eye, MoreHorizontal } from 'lucide-react'
 import UserRoleBadge from './UserRoleBadge'
 import UserStatusBadge from './UserStatusBadge'
+import { AdminUserStatueChangeAction } from '@/app/[locale]/admin/users/[id]/actions'
+import { cn } from '@/lib/utils'
 
 export default function UserCard(user: UserProps) {
+  const pathname = usePathname()
+
   return (
     <Card key={user.userNo} className="p-4">
       <div className="flex items-start justify-between mb-3">
@@ -54,10 +58,41 @@ export default function UserCard(user: UserProps) {
               등급 변경
             </DropdownMenuItem> */}
             {user.userRole !== USER_ROLE.ADMIN && (
-              <DropdownMenuItem className="text-red-600">
-                <Ban className="mr-2 h-4 w-4" />
-                계정 정지
-              </DropdownMenuItem>
+              <form action={AdminUserStatueChangeAction}>
+                <input type="hidden" name="currentPath" value={pathname} />
+                <input type="hidden" name="userNo" value={user.userNo!} />
+                <input
+                  type="hidden"
+                  name="status"
+                  value={
+                    user.status === USER_STATUS.ACTIVE
+                      ? USER_STATUS.SUSPENDED
+                      : USER_STATUS.ACTIVE
+                  }
+                />
+                <DropdownMenuItem
+                  className={cn(
+                    user.status === USER_STATUS.ACTIVE
+                      ? 'text-red-600'
+                      : 'text-green-600',
+                  )}>
+                  <button
+                    type="submit"
+                    className="flex items-center gap-2 cursor-pointer">
+                    {user.status === USER_STATUS.ACTIVE ? (
+                      <>
+                        <Ban className="mr-2 h-4 w-4" />
+                        계정 정지
+                      </>
+                    ) : (
+                      <>
+                        <Check className="mr-2 h-4 w-4" />
+                        계정 활성
+                      </>
+                    )}
+                  </button>
+                </DropdownMenuItem>
+              </form>
             )}
           </DropdownMenuContent>
         </DropdownMenu>
