@@ -10,6 +10,7 @@ type TabsProps = {
   newCount: number
   suspendedCount: number
   deletedCount: number
+  handleFilterChange: () => void
 }
 
 export default function UserTabs({
@@ -19,9 +20,15 @@ export default function UserTabs({
   newCount,
   suspendedCount,
   deletedCount,
+  handleFilterChange,
 }: TabsProps) {
   return (
-    <Tabs value={activeTab} onValueChange={setActiveTab}>
+    <Tabs
+      value={activeTab}
+      onValueChange={value => {
+        setActiveTab(value)
+        handleFilterChange()
+      }}>
       <TabsList className="grid w-full grid-cols-4">
         <TabsTrigger value="all">전체 ({allCount})</TabsTrigger>
         <TabsTrigger value="new">신규 ({newCount})</TabsTrigger>

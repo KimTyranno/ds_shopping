@@ -20,6 +20,7 @@ type FilterProps = {
   setSelectedStatus: Dispatch<SetStateAction<string>>
   viewMode: string
   setViewMode: Dispatch<SetStateAction<'table' | 'card'>>
+  handleFilterChange: () => void
 }
 
 const statusOptions = ['전체', '활성', '정지', '탈퇴']
@@ -31,6 +32,7 @@ export default function UsersFilters({
   setSelectedStatus,
   viewMode,
   setViewMode,
+  handleFilterChange,
 }: FilterProps) {
   return (
     <Card>
@@ -42,13 +44,21 @@ export default function UsersFilters({
               <Input
                 placeholder="이름, 이메일, 전화번호로 검색..."
                 value={searchValue}
-                onChange={e => setSearchValue(e.target.value)}
+                onChange={e => {
+                  setSearchValue(e.target.value)
+                  handleFilterChange()
+                }}
                 className="pl-10"
               />
             </div>
           </div>
           <div className="flex flex-wrap gap-2">
-            <Select value={selectedStatus} onValueChange={setSelectedStatus}>
+            <Select
+              value={selectedStatus}
+              onValueChange={value => {
+                setSelectedStatus(value)
+                handleFilterChange()
+              }}>
               <SelectTrigger className="w-32">
                 <SelectValue placeholder="상태" />
               </SelectTrigger>

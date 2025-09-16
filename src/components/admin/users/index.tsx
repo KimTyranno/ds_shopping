@@ -16,6 +16,7 @@ export default function UsersPage({ userList }: UserPageProps) {
   const [selectedStatus, setSelectedStatus] = useState('전체')
   const [activeTab, setActiveTab] = useState('all')
   const [viewMode, setViewMode] = useState<'table' | 'card'>('table')
+  const [currentPage, setCurrentPage] = useState(1)
 
   const filteredUsers = userList.filter(user => {
     const matchesSearch =
@@ -60,6 +61,11 @@ export default function UsersPage({ userList }: UserPageProps) {
 
   const counts = getUserCounts()
 
+  // 페이지 변경 시 첫 페이지로 리셋
+  const handleFilterChange = () => {
+    setCurrentPage(1)
+  }
+
   return (
     <div className="space-y-6">
       {/* 페이지 헤더 */}
@@ -83,6 +89,7 @@ export default function UsersPage({ userList }: UserPageProps) {
           setSelectedStatus,
           viewMode,
           setViewMode,
+          handleFilterChange,
         }}
       />
 
@@ -97,6 +104,13 @@ export default function UsersPage({ userList }: UserPageProps) {
           deletedCount: counts.deleted,
           userList: filteredUsers,
           viewMode,
+          currentPage,
+          setCurrentPage,
+          handleFilterChange,
+          searchValue,
+          setSearchValue,
+          selectedStatus,
+          setSelectedStatus,
         }}
       />
     </div>
