@@ -20,4 +20,4 @@ export const PROTECTED_PATHS = [
   '/wishlist',
 ]
 
-export const ADMIN_PATHS = ['/']
+export const ADMIN_PATHS = ['/', '/users']
