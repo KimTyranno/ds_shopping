@@ -37,7 +37,7 @@ const navigation = [
     icon: Package,
     children: [
       { name: '상품 목록', href: '/admin/products/list' },
-      { name: '상품 등록', href: '/admin/products/new' },
+      { name: '상품 등록', href: '/admin/products/add' },
       { name: '재고 관리', href: '/admin/products/inventory' },
     ],
   },

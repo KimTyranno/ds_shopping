@@ -271,6 +271,7 @@
       "info": "Check your email to activate your account",
       "profile_load_failed": "Failed to load profile information.",
       "session_expired": "Your session has expired. Please log in again.",
+      "forbidden": "You do not have permission. Only administrators can access this.",
       "password_reset_success": "Your password has been successfully reset.\nPlease log in with your new password."
     }
   },
