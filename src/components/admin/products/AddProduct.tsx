@@ -199,7 +199,7 @@ export default function AddProductPage({ categories }: AddProductProps) {
         {/* 페이지 헤더 */}
         <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
           <div className="flex items-center gap-4">
-            <Link href="/admin/products">
+            <Link href="/admin/products/list">
               <Button variant="outline" size="sm">
                 <ArrowLeft className="h-4 w-4 mr-2" />
                 목록으로
