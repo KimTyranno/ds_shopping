@@ -431,6 +431,7 @@ export default function AddProductPage({ categories }: AddProductProps) {
                         <Button
                           variant="destructive"
                           size="sm"
+                          type="button"
                           className="absolute top-2 right-2 opacity-0 group-hover:opacity-100 transition-opacity"
                           onClick={() => removeImage(index)}>
                           <X className="h-4 w-4" />
