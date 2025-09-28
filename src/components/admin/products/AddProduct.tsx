@@ -525,6 +525,7 @@ export default function AddProductPage({ categories }: AddProductProps) {
                   <Label htmlFor="status">판매 상태</Label>
                   <Switch
                     id="status"
+                    name="status"
                     checked={isPublished}
                     onCheckedChange={setIsPublished}
                   />
@@ -550,8 +551,9 @@ export default function AddProductPage({ categories }: AddProductProps) {
                   <Label htmlFor="weight">무게 (kg)</Label>
                   <Input
                     id="weight"
+                    name="weight"
                     type="number"
-                    step="0.1"
+                    step="0.01"
                     placeholder="0.0"
                     min="0"
                   />
@@ -559,21 +561,40 @@ export default function AddProductPage({ categories }: AddProductProps) {
                 <div className="grid grid-cols-3 gap-2">
                   <div>
                     <Label htmlFor="length">길이</Label>
-                    <Input id="length" type="number" placeholder="0" min="0" />
+                    <Input
+                      id="length"
+                      name="length"
+                      type="number"
+                      placeholder="0"
+                      min="0"
+                    />
                   </div>
                   <div>
                     <Label htmlFor="width">너비</Label>
-                    <Input id="width" type="number" placeholder="0" min="0" />
+                    <Input
+                      id="width"
+                      name="width"
+                      type="number"
+                      placeholder="0"
+                      min="0"
+                    />
                   </div>
                   <div>
                     <Label htmlFor="height">높이</Label>
-                    <Input id="height" type="number" placeholder="0" min="0" />
+                    <Input
+                      id="height"
+                      name="height"
+                      type="number"
+                      placeholder="0"
+                      min="0"
+                    />
                   </div>
                 </div>
                 <div>
                   <Label htmlFor="shippingFee">배송비</Label>
                   <Input
                     id="shippingFee"
+                    name="shippingFee"
                     placeholder="0"
                     min="0"
                     value={shippingFee}

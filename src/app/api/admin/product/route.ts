@@ -150,12 +150,7 @@ export async function POST(req: NextRequest) {
           return NextResponse.json({ errors })
         }
 
-        // 업로드한 파일의 공개 URL 가져오기
-        const { data: publicUrlData } = supabase.storage
-          .from(bucket)
-          .getPublicUrl(filename)
-
-        uploadedImageUrls.push(publicUrlData.publicUrl)
+        uploadedImageUrls.push(filename)
       }
     }
 
