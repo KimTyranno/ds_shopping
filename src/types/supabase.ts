@@ -216,6 +216,7 @@ export type Database = {
           name: string | null
           original_price: number | null
           price: number | null
+          product_id: number
           seller_no: number
           shipping_fee: number | null
           sku: string
@@ -237,6 +238,7 @@ export type Database = {
           name?: string | null
           original_price?: number | null
           price?: number | null
+          product_id?: number
           seller_no: number
           shipping_fee?: number | null
           sku: string
@@ -258,6 +260,7 @@ export type Database = {
           name?: string | null
           original_price?: number | null
           price?: number | null
+          product_id?: number
           seller_no?: number
           shipping_fee?: number | null
           sku?: string
@@ -335,7 +338,28 @@ export type Database = {
       }
     }
     Functions: {
-      [_ in never]: never
+      get_products_count_stats: {
+        Args: Record<PropertyKey, never>
+        Returns: {
+          active_count: number
+          low_stock_count: number
+          sold_out_count: number
+          total_count: number
+        }[]
+      }
+      get_products_with_main_image_paginated: {
+        Args: { limit_count: number; offset_count: number }
+        Returns: {
+          category_name: string
+          main_img_url: string
+          name: string
+          original_price: number
+          price: number
+          product_id: string
+          status: string
+          stock: number
+        }[]
+      }
     }
     Enums: {
       product_status: 'active' | 'sold_out' | 'paused' | 'deleted'
