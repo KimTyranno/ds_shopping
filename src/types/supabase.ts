@@ -178,21 +178,21 @@ export type Database = {
           id: number
           img_order: number
           img_url: string
-          product_id: string
+          product_id: number
         }
         Insert: {
           created_at?: string
           id?: number
           img_order: number
           img_url: string
-          product_id?: string
+          product_id: number
         }
         Update: {
           created_at?: string
           id?: number
           img_order?: number
           img_url?: string
-          product_id?: string
+          product_id?: number
         }
         Relationships: [
           {
@@ -200,74 +200,77 @@ export type Database = {
             columns: ['product_id']
             isOneToOne: false
             referencedRelation: 'products'
-            referencedColumns: ['id']
+            referencedColumns: ['product_id']
           },
         ]
       }
       products: {
         Row: {
-          category_id: number | null
+          category_id: number
           created_at: string
           deleted_at: string | null
           description: string | null
           height: number | null
           id: string
           length: number | null
-          name: string | null
-          original_price: number | null
-          price: number | null
+          name: string
+          original_price: number
+          price: number
           product_id: number
           seller_no: number
-          shipping_fee: number | null
+          shipping_fee: number
           sku: string
-          sold_count: number | null
+          sold_count: number
           status: Database['public']['Enums']['product_status']
-          stock: number | null
-          views: number | null
+          stock: number
+          updated_at: string
+          views: number
           weight: number | null
           width: number | null
         }
         Insert: {
-          category_id?: number | null
+          category_id: number
           created_at?: string
           deleted_at?: string | null
           description?: string | null
           height?: number | null
           id?: string
           length?: number | null
-          name?: string | null
-          original_price?: number | null
-          price?: number | null
+          name: string
+          original_price: number
+          price?: number
           product_id?: number
           seller_no: number
-          shipping_fee?: number | null
+          shipping_fee?: number
           sku: string
-          sold_count?: number | null
+          sold_count?: number
           status: Database['public']['Enums']['product_status']
-          stock?: number | null
-          views?: number | null
+          stock?: number
+          updated_at: string
+          views?: number
           weight?: number | null
           width?: number | null
         }
         Update: {
-          category_id?: number | null
+          category_id?: number
           created_at?: string
           deleted_at?: string | null
           description?: string | null
           height?: number | null
           id?: string
           length?: number | null
-          name?: string | null
-          original_price?: number | null
-          price?: number | null
+          name?: string
+          original_price?: number
+          price?: number
           product_id?: number
           seller_no?: number
-          shipping_fee?: number | null
+          shipping_fee?: number
           sku?: string
-          sold_count?: number | null
+          sold_count?: number
           status?: Database['public']['Enums']['product_status']
-          stock?: number | null
-          views?: number | null
+          stock?: number
+          updated_at?: string
+          views?: number
           weight?: number | null
           width?: number | null
         }
@@ -278,6 +281,20 @@ export type Database = {
             isOneToOne: false
             referencedRelation: 'categories'
             referencedColumns: ['id']
+          },
+          {
+            foreignKeyName: 'products_seller_no_fkey'
+            columns: ['seller_no']
+            isOneToOne: false
+            referencedRelation: 'admin_user_list'
+            referencedColumns: ['user_no']
+          },
+          {
+            foreignKeyName: 'products_seller_no_fkey'
+            columns: ['seller_no']
+            isOneToOne: false
+            referencedRelation: 'profiles'
+            referencedColumns: ['user_no']
           },
         ]
       }
@@ -355,7 +372,7 @@ export type Database = {
           name: string
           original_price: number
           price: number
-          product_id: string
+          product_id: number
           status: string
           stock: number
         }[]
