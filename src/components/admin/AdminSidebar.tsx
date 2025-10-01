@@ -151,7 +151,7 @@ export default function AdminSidebar() {
       {/* 사이드바 */}
       <div
         className={cn(
-          'z-50 bg-white border-r border-gray-200 transition-all duration-300 w-48',
+          'h-screen z-50 bg-white border-r border-gray-200 transition-all duration-300 w-48',
           // 반응형 min-width
           'min-w-64 max-md:min-w-48',
           collapsed && 'min-w-16 lg:w-16',
@@ -161,7 +161,7 @@ export default function AdminSidebar() {
             : 'fixed inset-y-0 left-0 -translate-x-full lg:translate-x-0',
 
           // 데스크톱: 기본 static
-          'lg:static',
+          'lg:sticky lg:top-0',
 
           // 모바일: 슬라이드 애니메이션
           'transition-transform',
