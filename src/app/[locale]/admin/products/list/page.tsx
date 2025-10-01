@@ -2,7 +2,7 @@ import ProductsPage from '@/components/admin/products/list'
 import { logger } from '@/lib/logger'
 import { createClient } from '@/lib/server'
 import { getPublicUrlRecord } from '@/lib/storage/getPublicUrls'
-import { BucketName } from '@/types/enums'
+import { BucketName, PRODUCT_STATUS_TYPE } from '@/types/enums'
 import {
   FunctionProductsStatCountsReturns,
   FunctionProductsWithImageReturns,
@@ -17,7 +17,7 @@ export type ProductWithImage = {
   discountRate: number
   price: number
   stock: number
-  status: string
+  status: PRODUCT_STATUS_TYPE
   imgUrl: string | null
 }
 
@@ -84,13 +84,13 @@ export default async function AdminProductsPage() {
 
   const products: ProductWithImage[] =
     data?.map(product => ({
-      productId: product.product_id,
+      productId: String(product.product_id),
       name: product.name,
       categoryName: product.category_name,
       originalPrice: product.original_price,
       price: product.price,
       stock: product.stock,
-      status: product.status,
+      status: product.status as PRODUCT_STATUS_TYPE,
       imgUrl: product.main_img_url
         ? productMainImageUrlMap[product.main_img_url]
         : null,
