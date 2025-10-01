@@ -18,54 +18,10 @@ import {
 import { Switch } from '@/components/ui/switch'
 import { Textarea } from '@/components/ui/textarea'
 import { Link, useRouter } from '@/i18n/navigation'
+import { formatWithCommas } from '@/lib/utils'
 import { AlertCircle, ArrowLeft, Eye, ImageIcon, Save, X } from 'lucide-react'
 import Image from 'next/image'
 import { useState } from 'react'
-
-// const subCategories = {
-//   electronics: [
-//     { smartphones: '스마트폰' },
-//     { laptops: '노트북' },
-//     { tablets: '태블릿' },
-//     { earphones: '이어폰' },
-//     { smartwatch: '스마트워치' },
-//   ],
-//   fashion: [
-//     { mens: '남성의류' },
-//     { womens: '여성의류' },
-//     { shoes: '신발' },
-//     { bags: '이어가방폰' },
-//     { accessories: '액세서리' },
-//   ],
-//   home: [
-//     { furniture: '가구' },
-//     { interior: '인테리어' },
-//     { kitchen: '주방용품' },
-//     { living: '생활용품' },
-//     { bedding: '침구' },
-//   ],
-//   books: [
-//     { novel: '소설' },
-//     { 'self-help': '자기계발' },
-//     { computer: '컴퓨터' },
-//     { cooking: '요리' },
-//     { travel: '여행' },
-//   ],
-//   sports: [
-//     { sportswear: '운동복' },
-//     { sneakers: '운동화' },
-//     { fitness: '헬스용품' },
-//     { outdoor: '아웃도어' },
-//     { swimming: '수영용품' },
-//   ],
-//   beauty: [
-//     { skincare: '스킨케어' },
-//     { makeup: '메이크업' },
-//     { haircare: '헤어케어' },
-//     { perfume: '향수' },
-//     { mens: '남성화장품' },
-//   ],
-// }
 
 type ProductAddResponse = {
   success?: false
@@ -98,19 +54,9 @@ export default function AddProductPage({ categories }: AddProductProps) {
   //   formData.append('files', files[i]) // key 동일하게 넣기(배열 형식)
   // }
 
-  /** 콤마 포맷 함수 */
-  const formatWithCommas = (value: string) => {
-    // 숫자만 남게함
-    const number = value.replaceAll(',', '').replace(/\D/g, '')
-
-    // 세 자리마다 콤마
-    return number.replace(/\B(?=(\d{3})+(?!\d))/g, ',')
-  }
-
   const handleImageUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
     const files = e.target.files
     if (files) {
-      // 실제로는 파일을 서버에 업로드하고 URL을 받아와야 함
       const newImages = Array.from(files).map(file => URL.createObjectURL(file))
       setImages([...images, ...newImages])
     }
@@ -426,7 +372,7 @@ export default function AddProductPage({ categories }: AddProductProps) {
                           alt={`Product image ${index + 1}`}
                           width={150}
                           height={150}
-                          className="w-full h-32 object-cover rounded-lg border"
+                          className="object-cover rounded-lg border"
                         />
                         <Button
                           variant="destructive"

@@ -15,7 +15,7 @@ function generateSku(): string {
 }
 
 /** 고유한 sku 생성 (중복이 있으면 재시도) */
-async function generateUniqueSku(
+export async function generateUniqueSku(
   supabase: SupabaseClient,
   maxRetries = 5,
 ): Promise<string> {
@@ -118,42 +118,7 @@ export async function POST(req: NextRequest) {
   }
 
   // 이미지 업로드 처리
-  const uploadedImageUrls: string[] = []
-  const bucket = BucketName.ProductImages
   try {
-    for (const file of productImages) {
-      if (!file.name.includes('.')) {
-        errors.file = 'extension_not_found'
-      } else {
-        const extension = file.name.split('.').pop()?.toLowerCase() || 'jpg'
-        const filename = `${category}/${sku}/${uuidv4()}.${extension}`
-        const uploadBuffer = Buffer.from(await file.arrayBuffer())
-        const contentType = file.type
-
-        const allowedExtensions = ['jpg', 'jpeg', 'png', 'webp']
-        if (!allowedExtensions.includes(extension)) {
-          errors.file = 'invalid_file_type'
-          return NextResponse.json({ errors })
-        }
-
-        // storage에 업로드
-        const { error } = await supabase.storage
-          .from(bucket)
-          .upload(filename, uploadBuffer, {
-            contentType,
-            upsert: true,
-          })
-
-        if (error) {
-          logger.error('상품이미지 업로드 실패', error)
-          errors.file = 'upload_error'
-          return NextResponse.json({ errors })
-        }
-
-        uploadedImageUrls.push(filename)
-      }
-    }
-
     const { data: product, error: productError } = await supabase
       .from('products')
       .insert({
@@ -184,8 +149,43 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: '상품 등록 실패' }, { status: 500 })
     }
 
+    const uploadedImageUrls: string[] = []
+    const bucket = BucketName.ProductImages
+    for (const file of productImages) {
+      if (!file.name.includes('.')) {
+        errors.file = 'extension_not_found'
+      } else {
+        const extension = file.name.split('.').pop()?.toLowerCase() || 'jpg'
+        const filename = `${product.product_id}/${uuidv4()}.${extension}`
+        const uploadBuffer = Buffer.from(await file.arrayBuffer())
+        const contentType = file.type
+
+        const allowedExtensions = ['jpg', 'jpeg', 'png', 'webp']
+        if (!allowedExtensions.includes(extension)) {
+          errors.file = 'invalid_file_type'
+          return NextResponse.json({ errors })
+        }
+
+        // storage에 업로드
+        const { error } = await supabase.storage
+          .from(bucket)
+          .upload(filename, uploadBuffer, {
+            contentType,
+            upsert: true,
+          })
+
+        if (error) {
+          logger.error('상품이미지 업로드 실패', error)
+          errors.file = 'upload_error'
+          return NextResponse.json({ errors })
+        }
+
+        uploadedImageUrls.push(filename)
+      }
+    }
+
     const imageRecords = uploadedImageUrls.map((url, idx) => ({
-      product_id: product.id,
+      product_id: product.product_id,
       img_url: url,
       img_order: idx,
     }))
