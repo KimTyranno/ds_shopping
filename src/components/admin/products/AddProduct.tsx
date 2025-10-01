@@ -17,6 +17,7 @@ import {
 } from '@/components/ui/select'
 import { Switch } from '@/components/ui/switch'
 import { Textarea } from '@/components/ui/textarea'
+import { MAX_UPLOAD_IMAGES } from '@/constants'
 import { Link, useRouter } from '@/i18n/navigation'
 import { formatWithCommas } from '@/lib/utils'
 import { AlertCircle, ArrowLeft, Eye, ImageIcon, Save, X } from 'lucide-react'
@@ -48,6 +49,8 @@ export default function AddProductPage({ categories }: AddProductProps) {
   const [shippingFee, setShippingFee] = useState<string>('0')
   const [isFending, setIsFending] = useState(false)
   const [errors, setErrors] = useState<Record<string, string>>({})
+  /** 이미지가 최대 갯수내인지 확인 */
+  const isImageCountValid = MAX_UPLOAD_IMAGES > images.length
 
   // const formData = new FormData()
   // for (let i = 0; i < files.length; i++) {
@@ -57,8 +60,15 @@ export default function AddProductPage({ categories }: AddProductProps) {
   const handleImageUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
     const files = e.target.files
     if (files) {
-      const newImages = Array.from(files).map(file => URL.createObjectURL(file))
-      setImages([...images, ...newImages])
+      // 이미지 개수가 10개 초과할 경우 자르기
+      const availableSlots = MAX_UPLOAD_IMAGES - images.length
+      if (availableSlots <= 0) {
+        return
+      }
+      const newImages = Array.from(files)
+      const filesToAdd = newImages.slice(0, availableSlots)
+      const imageDate = filesToAdd.map(file => URL.createObjectURL(file))
+      setImages([...images, ...imageDate])
     }
   }
 
@@ -389,18 +399,22 @@ export default function AddProductPage({ categories }: AddProductProps) {
                         )}
                       </div>
                     ))}
-                    <label className="flex flex-col items-center justify-center w-full h-32 border-2 border-dashed border-gray-300 rounded-lg cursor-pointer hover:bg-gray-50">
-                      <ImageIcon className="h-8 w-8 text-gray-400 mb-2" />
-                      <span className="text-sm text-gray-500">이미지 추가</span>
-                      <input
-                        type="file"
-                        name="productImages"
-                        multiple
-                        accept="image/*"
-                        className="hidden"
-                        onChange={handleImageUpload}
-                      />
-                    </label>
+                    {isImageCountValid && (
+                      <label className="flex flex-col items-center justify-center w-full h-32 border-2 border-dashed border-gray-300 rounded-lg cursor-pointer hover:bg-gray-50">
+                        <ImageIcon className="h-8 w-8 text-gray-400 mb-2" />
+                        <span className="text-sm text-gray-500">
+                          이미지 추가
+                        </span>
+                        <input
+                          type="file"
+                          name="productImages"
+                          multiple
+                          accept="image/*"
+                          className="hidden"
+                          onChange={handleImageUpload}
+                        />
+                      </label>
+                    )}
                   </div>
                   <p className="text-sm text-gray-500">
                     첫 번째 이미지가 메인 이미지로 사용됩니다. 최대 10개까지
