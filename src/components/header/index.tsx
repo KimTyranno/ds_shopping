@@ -133,7 +133,7 @@ export default function Header() {
                             <span className="text-xl">{category.icon}</span>
                             {t(`categories.${category.key}.title`)}
                           </Link>
-                          <div className="space-y-1">
+                          {/* <div className="space-y-1">
                             {category.items.map(item => (
                               <Link
                                 key={item.key}
@@ -144,7 +144,7 @@ export default function Header() {
                                 )}
                               </Link>
                             ))}
-                          </div>
+                          </div> */}
                         </div>
                       ))}
                     </div>

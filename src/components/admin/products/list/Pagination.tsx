@@ -1,30 +1,29 @@
-import { UserProps } from '@/app/[locale]/admin/users/page'
+import { ProductWithImage } from '@/app/[locale]/admin/products/list/page'
+import { Button } from '@/components/ui/button'
 import { ChevronLeft, ChevronRight } from 'lucide-react'
 import { Dispatch, SetStateAction } from 'react'
-import { Button } from '../ui/button'
 
 type UserPaginationProps = {
   currentPage: number
   setCurrentPage: Dispatch<SetStateAction<number>>
-  startIndex: number
   endIndex: number
   totalPages: number
-  userList: UserProps[]
+  products: ProductWithImage[]
+  totalCount: number
 }
 
-export default function UserPagination({
+export default function ProductListPagination({
   currentPage,
   setCurrentPage,
-  startIndex,
   endIndex,
   totalPages,
-  userList,
+  products,
+  totalCount,
 }: UserPaginationProps) {
   return (
     <div className="flex items-center justify-between mt-6">
       <div className="text-sm text-gray-500">
-        총 {userList.length}명 중 {startIndex + 1}-
-        {Math.min(endIndex, userList.length)}명 표시
+        총 {totalCount}개의 상품 중 {Math.min(endIndex, products.length)}개 표시
       </div>
       <div className="flex items-center gap-2">
         <Button

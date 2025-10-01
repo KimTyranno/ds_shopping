@@ -43,16 +43,18 @@ export default function Toast({
 }: ToastProps) {
   const toastStyle = useMemo(
     () => ({
-      info: { backgroundColor: '#1e3a8a', color: '#93c5fd' },
-      warning: { backgroundColor: '#78350f', color: '#facc15' },
-      error: { backgroundColor: '#7f1d1d', color: '#fca5a5' },
-      success: { backgroundColor: '#14532d', color: '#86efac' },
+      info: { backgroundColor: '#2c7be5', color: '#ffffff' },
+      warning: { backgroundColor: '#f08c00ff', color: '#ffffff' },
+      error: { backgroundColor: '#d63333', color: '#ffffff' },
+      success: { backgroundColor: '#2b8a3e', color: '#ffffff' },
       loading: { backgroundColor: '#374151', color: '#d1d5db' },
-      message: { backgroundColor: '#334155', color: '#e5e7eb' },
+      message: { backgroundColor: '#3f3f46', color: '#e4e4e7' },
     }),
     [],
   )
   useEffect(() => {
+    // 이전에 뜬 로딩 토스트 제거
+    toast.dismiss() // 모든 토스트 제거
     // NOTE: 이렇게도 가능한데, 스타일을 따로 못줘서 포기
     // const show = {
     //   info: toast.info,

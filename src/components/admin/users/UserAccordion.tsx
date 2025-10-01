@@ -1,5 +1,6 @@
 'use client'
 
+import { AdminUserStatueChangeAction } from '@/app/[locale]/admin/users/[id]/actions'
 import { UserProps } from '@/app/[locale]/admin/users/page'
 import {
   Accordion,
@@ -8,20 +9,19 @@ import {
   AccordionTrigger,
 } from '@/components/ui/accordion'
 import { Avatar, AvatarFallback } from '@/components/ui/avatar'
-import UserStatusBadge from './UserStatusBadge'
 import { Button } from '@/components/ui/button'
-import { Link, usePathname } from '@/i18n/navigation'
-import { Ban, Check, Eye, Mail, MoreHorizontal, Star } from 'lucide-react'
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu'
-import UserRoleBadge from './UserRoleBadge'
-import { USER_ROLE, USER_STATUS } from '@/types/enums'
-import { AdminUserStatueChangeAction } from '@/app/[locale]/admin/users/[id]/actions'
+import { Link, usePathname } from '@/i18n/navigation'
 import { cn } from '@/lib/utils'
+import { USER_ROLE, USER_STATUS } from '@/types/enums'
+import { Ban, Check, Eye, MoreHorizontal } from 'lucide-react'
+import UserRoleBadge from './UserRoleBadge'
+import UserStatusBadge from './UserStatusBadge'
 
 type UserAccordionProps = {
   userList: UserProps[]
