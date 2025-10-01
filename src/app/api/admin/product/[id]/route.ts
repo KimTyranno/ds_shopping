@@ -1,10 +1,10 @@
+import { generateUniqueSku } from '@/lib/api/product'
 import { logger } from '@/lib/logger'
 import { createClient } from '@/lib/server'
 import { BucketName, PRODUCT_STATUS, USER_ROLE } from '@/types/enums'
 import { Products, Profile } from '@/types/tables'
 import { NextRequest, NextResponse } from 'next/server'
 import { v4 as uuidv4 } from 'uuid'
-import { generateUniqueSku } from '../route'
 
 export async function PATCH(
   req: NextRequest,
