@@ -1,10 +1,14 @@
 'use client'
 
-import { User } from '@/lib/auth'
+import { UserWithProfile } from '@/lib/auth'
 import useStore from '@/lib/store'
 import { useEffect } from 'react'
 
-export default function AuthProvider({ user }: { user: User | null }) {
+export default function AuthProvider({
+  user,
+}: {
+  user: UserWithProfile | null
+}) {
   const setUser = useStore(state => state.setUser)
   const clearUser = useStore(state => state.clearUser)
 

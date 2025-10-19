@@ -2,8 +2,8 @@
 
 import { Label } from '@/components/ui/label'
 import { Link, useRouter } from '@/i18n/navigation'
+import { UserWithProfile } from '@/lib/auth'
 import { logger } from '@/lib/logger'
-import type { User as AuthUser } from '@supabase/supabase-js'
 import imageCompression from 'browser-image-compression'
 import {
   AlertCircle,
@@ -31,16 +31,6 @@ import {
 } from './ui/card'
 import { Input } from './ui/input'
 
-export type UserProfile = {
-  id: string
-  email?: string
-  name?: string | null
-  avatar?: string | null
-  address?: string | null
-  detail_address?: string | null
-  zip_code?: string | null
-} & AuthUser
-
 type ProfileEditState = {
   name: string
   avatar: string
@@ -66,7 +56,7 @@ type ProfileEditResponse = {
   errors?: Record<string, string>
 }
 
-export default function ProfileEditForm({ user }: { user: UserProfile }) {
+export default function ProfileEditForm({ user }: { user: UserWithProfile }) {
   const initData = {
     name: user.name || '',
     avatar: user.avatar || '',
