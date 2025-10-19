@@ -12,7 +12,7 @@
     "gen:paths": "ts-node scripts/generate-route-paths.ts  && eslint src/constants/paths.ts --fix",
     "check:paths": "ts-node scripts/check-paths.ts",
     "prebuild": "npm run gen:paths",
-    "predev": "npm run gen:paths",
+    "predev": "ts-node scripts/generate-route-paths.ts && eslint src/constants/paths.ts --fix",
     "gen:supabase-types": "npx supabase gen types typescript --project-id jbrynriwmakxhwozvsja > src/types/supabase.ts && eslint --fix src/types/supabase.ts"
   },
   "lint-staged": {
