@@ -4,7 +4,7 @@ import { createClient } from '@/lib/server'
 import { getPublicUrls } from '@/lib/storage/getPublicUrls'
 import { formatDate } from '@/lib/utils'
 import { BucketName } from '@/types/enums'
-import { AdminUserListView, Profile } from '@/types/tables'
+import { Profile } from '@/types/tables'
 import { UserProps } from '../page'
 
 export type UserDetailType = {
@@ -22,19 +22,13 @@ export default async function AdminUserDetailPage({
   const supabase = await createClient()
 
   const { data: userData, error } = await supabase
-    .from('admin_user_list')
-    .select('*')
-    .eq('user_no', id)
-    .single<AdminUserListView>()
-
-  const { data: userDetail, error: profileError } = await supabase
     .from('profiles')
-    .select('zip_code, address, detail_address')
+    .select('*')
     .eq('user_no', id)
     .single<Profile>()
 
-  if (!userData || !userDetail || error || profileError) {
-    logger.error('관리자에서 유저정보 불러오기 실패', error ?? profileError)
+  if (!userData || error) {
+    logger.error('관리자에서 유저정보 불러오기 실패', error)
     throw new Error('유저정보 불러오기 실패')
   }
 
@@ -49,9 +43,9 @@ export default async function AdminUserDetailPage({
     userRole: userData.user_role,
     createdAt: formatDate(userData.created_at, 'yyyy-MM-dd'),
     lastLoginAt: formatDate(userData.last_sign_in_at, 'yyyy-MM-dd'),
-    zipCode: userDetail.zip_code,
-    address: userDetail.address,
-    detailAddress: userDetail.detail_address,
+    zipCode: userData.zip_code,
+    address: userData.address,
+    detailAddress: userData.detail_address,
     avatar: avatar[0],
   }
 

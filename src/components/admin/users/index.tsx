@@ -20,7 +20,7 @@ export default function UsersPage({ userList }: UserPageProps) {
 
   const filteredUsers = userList.filter(user => {
     const matchesSearch =
-      user.name!.toLowerCase().includes(searchValue.toLowerCase()) ||
+      user.name.toLowerCase().includes(searchValue.toLowerCase()) ||
       user.email!.toLowerCase().includes(searchValue.toLowerCase()) ||
       user.phone!.includes(searchValue)
     const matchesStatus =
