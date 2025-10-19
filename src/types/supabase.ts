@@ -286,13 +286,6 @@ export type Database = {
             foreignKeyName: 'products_seller_no_fkey'
             columns: ['seller_no']
             isOneToOne: false
-            referencedRelation: 'admin_user_list'
-            referencedColumns: ['user_no']
-          },
-          {
-            foreignKeyName: 'products_seller_no_fkey'
-            columns: ['seller_no']
-            isOneToOne: false
             referencedRelation: 'profiles'
             referencedColumns: ['user_no']
           },
@@ -304,8 +297,11 @@ export type Database = {
           avatar: string | null
           created_at: string
           detail_address: string | null
+          email: string | null
           id: string
+          last_sign_in_at: string | null
           name: string
+          phone: string | null
           status: Database['public']['Enums']['user_status']
           user_no: number
           user_role: Database['public']['Enums']['user_role_enum'] | null
@@ -316,8 +312,11 @@ export type Database = {
           avatar?: string | null
           created_at?: string
           detail_address?: string | null
+          email?: string | null
           id: string
+          last_sign_in_at?: string | null
           name: string
+          phone?: string | null
           status?: Database['public']['Enums']['user_status']
           user_no?: number
           user_role?: Database['public']['Enums']['user_role_enum'] | null
@@ -328,8 +327,11 @@ export type Database = {
           avatar?: string | null
           created_at?: string
           detail_address?: string | null
+          email?: string | null
           id?: string
+          last_sign_in_at?: string | null
           name?: string
+          phone?: string | null
           status?: Database['public']['Enums']['user_status']
           user_no?: number
           user_role?: Database['public']['Enums']['user_role_enum'] | null
@@ -339,20 +341,7 @@ export type Database = {
       }
     }
     Views: {
-      admin_user_list: {
-        Row: {
-          avatar: string | null
-          created_at: string | null
-          email: string | null
-          last_sign_in_at: string | null
-          name: string | null
-          phone: string | null
-          status: Database['public']['Enums']['user_status'] | null
-          user_no: number | null
-          user_role: Database['public']['Enums']['user_role_enum'] | null
-        }
-        Relationships: []
-      }
+      [_ in never]: never
     }
     Functions: {
       get_products_count_stats: {
