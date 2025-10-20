@@ -2,7 +2,11 @@ import { createClient } from '@/lib/server'
 import { Profile } from '@/types/tables'
 import type { User as AuthUser } from '@supabase/supabase-js'
 
-export type User = AuthUser & Profile
+export type UserWithProfile = Omit<
+  AuthUser,
+  'email' | 'phone' | 'last_sign_in_at'
+> &
+  Profile
 
 export async function getAuthUser() {
   const supabase = await createClient()
@@ -40,7 +44,7 @@ export async function getProfile() {
   return { ...profile, avatar }
 }
 
-export async function getCurrentUser(): Promise<User | null> {
+export async function getCurrentUser(): Promise<UserWithProfile | null> {
   const user = await getAuthUser()
   if (!user) return null
 

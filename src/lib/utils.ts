@@ -44,3 +44,12 @@ export function formatDate(
     return ''
   }
 }
+
+/** 콤마 포맷 함수 */
+export function formatWithCommas(value: string) {
+  // 숫자만 남게함
+  const number = value.replaceAll(',', '').replace(/\D/g, '')
+
+  // 세 자리마다 콤마
+  return number.replace(/\B(?=(\d{3})+(?!\d))/g, ',')
+}

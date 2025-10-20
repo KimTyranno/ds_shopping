@@ -1,4 +1,4 @@
-import { User } from '@/lib/auth'
+import { UserWithProfile } from '@/lib/auth'
 import { create } from 'zustand'
 
 type Store = {
@@ -6,8 +6,8 @@ type Store = {
   toggleMobileSearch: () => void
   isAdminSidebar: boolean
   setIsAdminSidebar: (_value: boolean) => void
-  user: User | null
-  setUser: (_user: User) => void
+  user: UserWithProfile | null
+  setUser: (_user: UserWithProfile) => void
   clearUser: () => void
 }
 
