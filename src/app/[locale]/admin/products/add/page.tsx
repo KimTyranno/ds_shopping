@@ -7,7 +7,9 @@ export default async function AdminAddProductPage() {
   const supabase = await createClient()
   const { data, error } = await supabase
     .from('categories')
-    .select('id, name, created_at')
+    .select('id, name, description, status, created_at')
+    .eq('status', true)
+    .order('id', { ascending: true })
 
   if (error) {
     logger.error('관리자페이지 카테고리 불러오기에서 에러발생', error)
