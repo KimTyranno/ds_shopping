@@ -2,8 +2,8 @@
 
 import { Label } from '@/components/ui/label'
 import { Link, useRouter } from '@/i18n/navigation'
+import { UserWithProfile } from '@/lib/auth'
 import { logger } from '@/lib/logger'
-import type { User as AuthUser } from '@supabase/supabase-js'
 import imageCompression from 'browser-image-compression'
 import {
   AlertCircle,
@@ -31,16 +31,6 @@ import {
 } from './ui/card'
 import { Input } from './ui/input'
 
-export type UserProfile = {
-  id: string
-  email?: string
-  name?: string | null
-  avatar?: string | null
-  address?: string | null
-  detail_address?: string | null
-  zip_code?: string | null
-} & AuthUser
-
 type ProfileEditState = {
   name: string
   avatar: string
@@ -66,7 +56,7 @@ type ProfileEditResponse = {
   errors?: Record<string, string>
 }
 
-export default function ProfileEditForm({ user }: { user: UserProfile }) {
+export default function ProfileEditForm({ user }: { user: UserWithProfile }) {
   const initData = {
     name: user.name || '',
     avatar: user.avatar || '',
@@ -336,7 +326,7 @@ export default function ProfileEditForm({ user }: { user: UserProfile }) {
                   variant="outline"
                   asChild
                   className="bg-transparent">
-                  <label htmlFor="avatar" className="cursor-pointer">
+                  <label htmlFor="avatar">
                     <Camera className="w-4 h-4 mr-2" />
                     {t('avatar.change')}
                   </label>
@@ -571,7 +561,7 @@ export default function ProfileEditForm({ user }: { user: UserProfile }) {
             disabled={
               isFending || !isPasswordOK || !isFormChanged(initData, formData)
             }
-            className="flex-1 cursor-pointer">
+            className="flex-1">
             {isFending ? (
               <>
                 <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin mr-2" />

@@ -140,7 +140,7 @@ const MobileMenus = ({ categories }: MobileMenusProps) => {
                   </Link>
 
                   {/* 서브카테고리 */}
-                  <div className="ml-8 mt-1 space-y-1">
+                  {/* <div className="ml-8 mt-1 space-y-1">
                     {category.items.map(item => (
                       <Link
                         key={item.key}
@@ -150,7 +150,7 @@ const MobileMenus = ({ categories }: MobileMenusProps) => {
                         {t(`categories.${category.key}.items.${item.key}`)}
                       </Link>
                     ))}
-                  </div>
+                  </div> */}
                 </div>
               ))}
             </div>

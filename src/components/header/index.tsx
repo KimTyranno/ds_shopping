@@ -1,3 +1,5 @@
+'use client'
+
 import AuthButton from '@/components/AuthButton'
 import { Button } from '@/components/ui/button'
 import {
@@ -10,15 +12,17 @@ import {
 } from '@/components/ui/navigation-menu'
 import { Link } from '@/i18n/navigation'
 import { ShoppingCart } from 'lucide-react'
-import { getTranslations } from 'next-intl/server'
+import { useTranslations } from 'next-intl'
+import { usePathname } from 'next/navigation'
 import LanguageSwitch from './LanguageSwich'
 import MobileMenus from './MobileMenus'
 import MobileSearchBar from './MobileSearchBar'
 import MobileSearchButton from './MobileSearchButton'
 import PcSearchBar from './PcSearchBar'
 
-export default async function Header() {
-  const t = await getTranslations()
+export default function Header() {
+  const t = useTranslations()
+  const pathname = usePathname()
 
   const categories = [
     {
@@ -95,6 +99,8 @@ export default async function Header() {
       ],
     },
   ]
+
+  if (pathname.includes('/admin')) return null
   return (
     <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
       <div className="container mx-auto px-4">
@@ -127,7 +133,7 @@ export default async function Header() {
                             <span className="text-xl">{category.icon}</span>
                             {t(`categories.${category.key}.title`)}
                           </Link>
-                          <div className="space-y-1">
+                          {/* <div className="space-y-1">
                             {category.items.map(item => (
                               <Link
                                 key={item.key}
@@ -138,7 +144,7 @@ export default async function Header() {
                                 )}
                               </Link>
                             ))}
-                          </div>
+                          </div> */}
                         </div>
                       ))}
                     </div>

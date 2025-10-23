@@ -19,3 +19,5 @@ export const PROTECTED_PATHS = [
   '/reset-password',
   '/wishlist',
 ]
+
+export const ADMIN_PATHS = ['/', '/users']

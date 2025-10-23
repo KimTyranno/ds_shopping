@@ -1,10 +1,16 @@
+'use client'
+
 import { Link } from '@/i18n/navigation'
 import { Facebook, Instagram, Twitter, Youtube } from 'lucide-react'
 import { useTranslations } from 'next-intl'
+import { usePathname } from 'next/navigation'
 
 export default function Footer() {
   const tFooter = useTranslations('footer')
   const t = useTranslations()
+  const pathname = usePathname()
+
+  if (pathname.includes('/admin')) return null
   return (
     <footer className="bg-gray-900 text-white">
       <div className="container mx-auto px-4 py-12">

@@ -14,11 +14,35 @@ export type Database = {
   }
   public: {
     Tables: {
+      admin_users: {
+        Row: {
+          created_at: string
+          id: string
+        }
+        Insert: {
+          created_at?: string
+          id: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: 'admin_users_id_fkey'
+            columns: ['id']
+            isOneToOne: true
+            referencedRelation: 'profiles'
+            referencedColumns: ['id']
+          },
+        ]
+      }
       cart_items: {
         Row: {
           cart_id: string | null
           created_at: string
           id: string
+          price: number
           product_id: string | null
           quantity: number | null
         }
@@ -26,6 +50,7 @@ export type Database = {
           cart_id?: string | null
           created_at?: string
           id?: string
+          price: number
           product_id?: string | null
           quantity?: number | null
         }
@@ -33,6 +58,7 @@ export type Database = {
           cart_id?: string | null
           created_at?: string
           id?: string
+          price?: number
           product_id?: string | null
           quantity?: number | null
         }
@@ -74,18 +100,24 @@ export type Database = {
       categories: {
         Row: {
           created_at: string
-          id: string
-          name: string | null
+          description: string | null
+          id: number
+          name: string
+          status: boolean
         }
         Insert: {
           created_at?: string
-          id?: string
-          name?: string | null
+          description?: string | null
+          id?: number
+          name: string
+          status?: boolean
         }
         Update: {
           created_at?: string
-          id?: string
-          name?: string | null
+          description?: string | null
+          id?: number
+          name?: string
+          status?: boolean
         }
         Relationships: []
       }
@@ -93,7 +125,7 @@ export type Database = {
         Row: {
           created_at: string
           id: string
-          order_id: string | null
+          order_no: number
           price: number | null
           product_id: string | null
           quantity: number | null
@@ -101,7 +133,7 @@ export type Database = {
         Insert: {
           created_at?: string
           id?: string
-          order_id?: string | null
+          order_no: number
           price?: number | null
           product_id?: string | null
           quantity?: number | null
@@ -109,18 +141,18 @@ export type Database = {
         Update: {
           created_at?: string
           id?: string
-          order_id?: string | null
+          order_no?: number
           price?: number | null
           product_id?: string | null
           quantity?: number | null
         }
         Relationships: [
           {
-            foreignKeyName: 'order_items_order_id_fkey'
-            columns: ['order_id']
+            foreignKeyName: 'order_items_order_no_fkey'
+            columns: ['order_no']
             isOneToOne: false
             referencedRelation: 'orders'
-            referencedColumns: ['id']
+            referencedColumns: ['order_no']
           },
           {
             foreignKeyName: 'order_items_product_id_fkey'
@@ -133,60 +165,177 @@ export type Database = {
       }
       orders: {
         Row: {
+          cancelled_at: string | null
           created_at: string
+          delivered_at: string | null
           id: string
+          memo: string | null
+          order_no: number
+          payment_method: string
+          payment_status: Database['public']['Enums']['payment_status']
+          shipped_at: string | null
+          shipping_address: string
+          shipping_fee: number
+          status: Database['public']['Enums']['order_status']
+          total_price: number
+          tracking_no: string | null
           user_id: string | null
+          zip_code: string
         }
         Insert: {
+          cancelled_at?: string | null
           created_at?: string
+          delivered_at?: string | null
           id?: string
+          memo?: string | null
+          order_no?: number
+          payment_method: string
+          payment_status?: Database['public']['Enums']['payment_status']
+          shipped_at?: string | null
+          shipping_address: string
+          shipping_fee: number
+          status: Database['public']['Enums']['order_status']
+          total_price: number
+          tracking_no?: string | null
           user_id?: string | null
+          zip_code: string
         }
         Update: {
+          cancelled_at?: string | null
           created_at?: string
+          delivered_at?: string | null
           id?: string
+          memo?: string | null
+          order_no?: number
+          payment_method?: string
+          payment_status?: Database['public']['Enums']['payment_status']
+          shipped_at?: string | null
+          shipping_address?: string
+          shipping_fee?: number
+          status?: Database['public']['Enums']['order_status']
+          total_price?: number
+          tracking_no?: string | null
           user_id?: string | null
+          zip_code?: string
         }
         Relationships: []
       }
-      products: {
+      product_images: {
         Row: {
-          category_id: string | null
           created_at: string
-          description: string | null
-          id: string
+          id: number
+          img_order: number
           img_url: string
-          name: string | null
-          price: number | null
-          stock: number | null
+          product_id: number
         }
         Insert: {
-          category_id?: string | null
           created_at?: string
-          description?: string | null
-          id?: string
+          id?: number
+          img_order: number
           img_url: string
-          name?: string | null
-          price?: number | null
-          stock?: number | null
+          product_id: number
         }
         Update: {
-          category_id?: string | null
           created_at?: string
-          description?: string | null
-          id?: string
+          id?: number
+          img_order?: number
           img_url?: string
-          name?: string | null
-          price?: number | null
-          stock?: number | null
+          product_id?: number
         }
         Relationships: [
           {
-            foreignKeyName: 'product_category_id_fkey'
+            foreignKeyName: 'product_images_product_id_fkey'
+            columns: ['product_id']
+            isOneToOne: false
+            referencedRelation: 'products'
+            referencedColumns: ['product_id']
+          },
+        ]
+      }
+      products: {
+        Row: {
+          category_id: number
+          created_at: string
+          deleted_at: string | null
+          description: string | null
+          height: number | null
+          id: string
+          length: number | null
+          name: string
+          original_price: number
+          price: number
+          product_id: number
+          seller_no: number
+          shipping_fee: number
+          sku: string
+          sold_count: number
+          status: Database['public']['Enums']['product_status']
+          stock: number
+          updated_at: string
+          views: number
+          weight: number | null
+          width: number | null
+        }
+        Insert: {
+          category_id: number
+          created_at?: string
+          deleted_at?: string | null
+          description?: string | null
+          height?: number | null
+          id?: string
+          length?: number | null
+          name: string
+          original_price: number
+          price?: number
+          product_id?: number
+          seller_no: number
+          shipping_fee?: number
+          sku: string
+          sold_count?: number
+          status: Database['public']['Enums']['product_status']
+          stock?: number
+          updated_at: string
+          views?: number
+          weight?: number | null
+          width?: number | null
+        }
+        Update: {
+          category_id?: number
+          created_at?: string
+          deleted_at?: string | null
+          description?: string | null
+          height?: number | null
+          id?: string
+          length?: number | null
+          name?: string
+          original_price?: number
+          price?: number
+          product_id?: number
+          seller_no?: number
+          shipping_fee?: number
+          sku?: string
+          sold_count?: number
+          status?: Database['public']['Enums']['product_status']
+          stock?: number
+          updated_at?: string
+          views?: number
+          weight?: number | null
+          width?: number | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: 'products_category_id_fkey'
             columns: ['category_id']
             isOneToOne: false
             referencedRelation: 'categories'
             referencedColumns: ['id']
+          },
+          {
+            foreignKeyName: 'products_seller_no_fkey'
+            columns: ['seller_no']
+            isOneToOne: false
+            referencedRelation: 'profiles'
+            referencedColumns: ['user_no']
           },
         ]
       }
@@ -196,8 +345,14 @@ export type Database = {
           avatar: string | null
           created_at: string
           detail_address: string | null
+          email: string | null
           id: string
-          name: string | null
+          last_sign_in_at: string | null
+          name: string
+          phone: string | null
+          status: Database['public']['Enums']['user_status']
+          user_no: number
+          user_role: Database['public']['Enums']['user_role_enum'] | null
           zip_code: string | null
         }
         Insert: {
@@ -205,8 +360,14 @@ export type Database = {
           avatar?: string | null
           created_at?: string
           detail_address?: string | null
+          email?: string | null
           id: string
-          name?: string | null
+          last_sign_in_at?: string | null
+          name: string
+          phone?: string | null
+          status?: Database['public']['Enums']['user_status']
+          user_no?: number
+          user_role?: Database['public']['Enums']['user_role_enum'] | null
           zip_code?: string | null
         }
         Update: {
@@ -214,8 +375,14 @@ export type Database = {
           avatar?: string | null
           created_at?: string
           detail_address?: string | null
+          email?: string | null
           id?: string
-          name?: string | null
+          last_sign_in_at?: string | null
+          name?: string
+          phone?: string | null
+          status?: Database['public']['Enums']['user_status']
+          user_no?: number
+          user_role?: Database['public']['Enums']['user_role_enum'] | null
           zip_code?: string | null
         }
         Relationships: []
@@ -225,10 +392,41 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
-      [_ in never]: never
+      get_products_count_stats: {
+        Args: never
+        Returns: {
+          active_count: number
+          low_stock_count: number
+          sold_out_count: number
+          total_count: number
+        }[]
+      }
+      get_products_with_main_image_paginated: {
+        Args: { limit_count: number; offset_count: number }
+        Returns: {
+          category_name: string
+          main_img_url: string
+          name: string
+          original_price: number
+          price: number
+          product_id: number
+          status: string
+          stock: number
+        }[]
+      }
     }
     Enums: {
-      [_ in never]: never
+      order_status:
+        | 'ordered'
+        | 'cancelled'
+        | 'ready'
+        | 'shipping'
+        | 'delivered'
+        | 'returned'
+      payment_status: 'unpaid' | 'paid' | 'failed' | 'refunded'
+      product_status: 'active' | 'sold_out' | 'paused' | 'deleted'
+      user_role_enum: 'admin' | 'seller' | 'customer'
+      user_status: 'active' | 'suspended' | 'deleted'
     }
     CompositeTypes: {
       [_ in never]: never
@@ -355,6 +553,19 @@ export type CompositeTypes<
 
 export const Constants = {
   public: {
-    Enums: {},
+    Enums: {
+      order_status: [
+        'ordered',
+        'cancelled',
+        'ready',
+        'shipping',
+        'delivered',
+        'returned',
+      ],
+      payment_status: ['unpaid', 'paid', 'failed', 'refunded'],
+      product_status: ['active', 'sold_out', 'paused', 'deleted'],
+      user_role_enum: ['admin', 'seller', 'customer'],
+      user_status: ['active', 'suspended', 'deleted'],
+    },
   },
 } as const
