@@ -271,7 +271,7 @@ export type Database = {
           sold_count: number
           status: Database['public']['Enums']['product_status']
           stock: number
-          updated_at: string
+          updated_at: string | null
           views: number
           weight: number | null
           width: number | null
@@ -294,7 +294,7 @@ export type Database = {
           sold_count?: number
           status: Database['public']['Enums']['product_status']
           stock?: number
-          updated_at: string
+          updated_at?: string | null
           views?: number
           weight?: number | null
           width?: number | null
@@ -317,7 +317,7 @@ export type Database = {
           sold_count?: number
           status?: Database['public']['Enums']['product_status']
           stock?: number
-          updated_at?: string
+          updated_at?: string | null
           views?: number
           weight?: number | null
           width?: number | null
@@ -352,7 +352,7 @@ export type Database = {
           phone: string | null
           status: Database['public']['Enums']['user_status']
           user_no: number
-          user_role: Database['public']['Enums']['user_role_enum'] | null
+          user_role: Database['public']['Enums']['user_role_enum']
           zip_code: string | null
         }
         Insert: {
@@ -367,7 +367,7 @@ export type Database = {
           phone?: string | null
           status?: Database['public']['Enums']['user_status']
           user_no?: number
-          user_role?: Database['public']['Enums']['user_role_enum'] | null
+          user_role?: Database['public']['Enums']['user_role_enum']
           zip_code?: string | null
         }
         Update: {
@@ -382,7 +382,7 @@ export type Database = {
           phone?: string | null
           status?: Database['public']['Enums']['user_status']
           user_no?: number
-          user_role?: Database['public']['Enums']['user_role_enum'] | null
+          user_role?: Database['public']['Enums']['user_role_enum']
           zip_code?: string | null
         }
         Relationships: []

@@ -1,5 +1,6 @@
 'use client'
 
+import { AdminUserStatueChangeAction } from '@/app/[locale]/admin/users/[id]/actions'
 import { UserProps } from '@/app/[locale]/admin/users/page'
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
 import { Button } from '@/components/ui/button'
@@ -11,12 +12,11 @@ import {
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu'
 import { Link, usePathname } from '@/i18n/navigation'
+import { cn } from '@/lib/utils'
 import { USER_ROLE, USER_STATUS } from '@/types/enums'
 import { Ban, Check, Eye, MoreHorizontal } from 'lucide-react'
 import UserRoleBadge from './UserRoleBadge'
 import UserStatusBadge from './UserStatusBadge'
-import { AdminUserStatueChangeAction } from '@/app/[locale]/admin/users/[id]/actions'
-import { cn } from '@/lib/utils'
 
 export default function UserCard(user: UserProps) {
   const pathname = usePathname()
@@ -27,7 +27,7 @@ export default function UserCard(user: UserProps) {
         <div className="flex items-center gap-3">
           <Avatar>
             <AvatarImage src={user.avatar || ''} />
-            <AvatarFallback>{user.name!.charAt(0)}</AvatarFallback>
+            <AvatarFallback>{user.name.charAt(0)}</AvatarFallback>
           </Avatar>
           <div>
             <div className="font-medium">{user.name}</div>
@@ -60,7 +60,7 @@ export default function UserCard(user: UserProps) {
             {user.userRole !== USER_ROLE.ADMIN && (
               <form action={AdminUserStatueChangeAction}>
                 <input type="hidden" name="currentPath" value={pathname} />
-                <input type="hidden" name="userNo" value={user.userNo!} />
+                <input type="hidden" name="userNo" value={user.userNo} />
                 <input
                   type="hidden"
                   name="status"
@@ -105,11 +105,11 @@ export default function UserCard(user: UserProps) {
         </div>
         <div className="flex items-center justify-between">
           <span className="text-sm text-gray-500">상태</span>
-          <UserStatusBadge status={user.status!} />
+          <UserStatusBadge status={user.status} />
         </div>
         <div className="flex items-center justify-between">
           <span className="text-sm text-gray-500">역할</span>
-          <UserRoleBadge role={user.userRole!} />
+          <UserRoleBadge role={user.userRole} />
         </div>
         <div className="flex items-center justify-between">
           <span className="text-sm text-gray-500">가입일</span>

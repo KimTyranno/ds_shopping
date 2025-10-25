@@ -37,7 +37,7 @@ export default function UserAccordion({ userList }: UserAccordionProps) {
             <div className="flex items-center gap-3 w-full">
               <Avatar className="h-8 w-8">
                 <AvatarFallback className="text-xs">
-                  {user.name!.charAt(0)}
+                  {user.name.charAt(0)}
                 </AvatarFallback>
               </Avatar>
               <div className="flex-1 text-left">
@@ -45,7 +45,7 @@ export default function UserAccordion({ userList }: UserAccordionProps) {
                 <div className="text-xs text-gray-500">{user.email}</div>
               </div>
               <div className="flex items-center gap-2">
-                <UserStatusBadge status={user.status!} />
+                <UserStatusBadge status={user.status} />
               </div>
             </div>
           </AccordionTrigger>
@@ -59,13 +59,13 @@ export default function UserAccordion({ userList }: UserAccordionProps) {
                 <div className="text-gray-500">
                   <span className="font-medium">상태</span>
                   <div className="font-medium">
-                    <UserStatusBadge status={user.status!} />
+                    <UserStatusBadge status={user.status} />
                   </div>
                 </div>
                 <div className="text-gray-500">
                   <span className="font-medium">역할</span>
                   <div className="font-medium">
-                    <UserRoleBadge role={user.userRole!} />
+                    <UserRoleBadge role={user.userRole} />
                   </div>
                 </div>
                 <div>
@@ -116,7 +116,7 @@ export default function UserAccordion({ userList }: UserAccordionProps) {
                         <input
                           type="hidden"
                           name="userNo"
-                          value={user.userNo!}
+                          value={user.userNo}
                         />
                         <input
                           type="hidden"

@@ -50,7 +50,7 @@ export default function UserTable({ userList }: { userList: UserProps[] }) {
                 <div className="flex items-center gap-3">
                   <Avatar>
                     <AvatarImage src={user.avatar || ''} />
-                    <AvatarFallback>{user.name!.charAt(0)}</AvatarFallback>
+                    <AvatarFallback>{user.name.charAt(0)}</AvatarFallback>
                   </Avatar>
                   <div>
                     <div className="font-medium">{user.name}</div>
@@ -62,11 +62,11 @@ export default function UserTable({ userList }: { userList: UserProps[] }) {
               <TableCell>{user.phone}</TableCell>
               {/* 상태 */}
               <TableCell>
-                <UserStatusBadge status={user.status!} />
+                <UserStatusBadge status={user.status} />
               </TableCell>
               {/* 역할 */}
               <TableCell>
-                <UserRoleBadge role={user.userRole!} />
+                <UserRoleBadge role={user.userRole} />
               </TableCell>
               {/* 가입일 */}
               <TableCell className="hidden lg:table-cell">
@@ -111,7 +111,7 @@ export default function UserTable({ userList }: { userList: UserProps[] }) {
                         <input
                           type="hidden"
                           name="userNo"
-                          value={user.userNo!}
+                          value={user.userNo}
                         />
                         <input
                           type="hidden"

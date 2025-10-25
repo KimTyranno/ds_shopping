@@ -75,14 +75,14 @@ export default function UserDetailCard({
             <Avatar className="h-12 w-12">
               <AvatarImage src={user.avatar || ''} />
               <AvatarFallback className="text-lg">
-                {user.name!.charAt(0)}
+                {user.name.charAt(0)}
               </AvatarFallback>
             </Avatar>
             <div>
               {isEditing ? (
                 <Input
                   id="name"
-                  value={editedUser.name!}
+                  value={editedUser.name}
                   onChange={handleInputChange}
                   className="text-lg font-semibold h-8 mb-2"
                   placeholder="이름을 입력하세요"
@@ -92,15 +92,15 @@ export default function UserDetailCard({
               )}
               <div className="flex items-center gap-2 mt-1">
                 {/* {getGradeBadge(user.grade)} */}
-                <UserStatusBadge status={user.status!} />
-                <UserRoleBadge role={user.userRole!} />
+                <UserStatusBadge status={user.status} />
+                <UserRoleBadge role={user.userRole} />
               </div>
             </div>
           </CardTitle>
         </CardHeader>
         <CardContent className="space-y-4">
           <form ref={formRef} action={formAction}>
-            <input type="hidden" name="userNo" value={user.userNo!} />
+            <input type="hidden" name="userNo" value={user.userNo} />
             <input type="hidden" name="name" value={editedUser.name || ''} />
             <div className="space-y-3">
               {/* 이메일 */}
@@ -273,7 +273,7 @@ export default function UserDetailCard({
                     action={AdminUserStatueChangeAction}
                     className="space-y-4">
                     <input type="hidden" name="currentPath" value={pathname} />
-                    <input type="hidden" name="userNo" value={user.userNo!} />
+                    <input type="hidden" name="userNo" value={user.userNo} />
                     <input type="hidden" name="status" value={selectedStatus} />
                     <DialogHeader>
                       <DialogTitle>회원 상태 변경</DialogTitle>
@@ -282,7 +282,7 @@ export default function UserDetailCard({
                       <div>
                         <Label>현재 상태</Label>
                         <div className="mt-1">
-                          <UserStatusBadge status={user.status!} />
+                          <UserStatusBadge status={user.status} />
                         </div>
                       </div>
                       <div>
