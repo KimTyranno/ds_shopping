@@ -1,3 +1,5 @@
+'use client'
+
 import { Button } from '@/components/ui/button'
 import {
   DropdownMenu,
@@ -5,16 +7,16 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu'
-import { Link, redirect } from '@/i18n/navigation'
+import { Link, useRouter } from '@/i18n/navigation'
 import { createClient } from '@/lib/client'
 import useStore from '@/lib/store'
 import { User } from 'lucide-react'
-import { useLocale, useTranslations } from 'next-intl'
+import { useTranslations } from 'next-intl'
 import AuthMenu from './AuthMenu'
 
 export default function AuthButton() {
   const t = useTranslations()
-  const currentLocale = useLocale()
+  const router = useRouter()
   const user = useStore(state => state.user)
 
   const signOut = async () => {
@@ -22,7 +24,7 @@ export default function AuthButton() {
 
     const supabase = createClient()
     await supabase.auth.signOut()
-    redirect({ href: '/login', locale: currentLocale })
+    router.push('/login')
   }
 
   if (!user) {
