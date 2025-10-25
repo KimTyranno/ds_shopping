@@ -9,6 +9,7 @@ import {
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu'
 import { Input } from '@/components/ui/input'
+import { Link } from '@/i18n/navigation'
 import useStore from '@/lib/store'
 import {
   Bell,
@@ -126,8 +127,10 @@ export default function AdminHeader() {
               설정
             </DropdownMenuItem>
             <DropdownMenuItem>
-              <Shield className="mr-2 h-4 w-4" />
-              사이트로 이동
+              <Link href="/" className="flex items-center gap-2">
+                <Shield className="mr-2 h-4 w-4" />
+                사이트로 이동
+              </Link>
             </DropdownMenuItem>
             <DropdownMenuItem className="text-red-600">
               <LogOut className="mr-2 h-4 w-4" />
