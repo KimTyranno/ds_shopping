@@ -5,7 +5,7 @@ import {
   DropdownMenuSeparator,
 } from '@/components/ui/dropdown-menu'
 import { Link } from '@/i18n/navigation'
-import { LogOut, Settings, ShoppingBag } from 'lucide-react'
+import { LogOut, Settings, ShieldUser, ShoppingBag } from 'lucide-react'
 import { useTranslations } from 'next-intl'
 
 type AuthMenuProps = {
@@ -22,7 +22,7 @@ export default function AuthMenu({ signOut, isAdmin }: AuthMenuProps) {
       {isAdmin && (
         <DropdownMenuItem asChild>
           <Link href="/admin" className="flex items-center">
-            <Settings className="mr-2 h-4 w-4" />
+            <ShieldUser className="mr-2 h-4 w-4" />
             {t('user.admin')}
           </Link>
         </DropdownMenuItem>
