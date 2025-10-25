@@ -2,8 +2,8 @@
 
 import type React from 'react'
 
+import ImagesEditor from '@/components/ImagesEditor'
 import { Alert, AlertDescription } from '@/components/ui/alert'
-import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Input } from '@/components/ui/input'
@@ -20,8 +20,7 @@ import { Textarea } from '@/components/ui/textarea'
 import { MAX_UPLOAD_IMAGES } from '@/constants'
 import { Link, useRouter } from '@/i18n/navigation'
 import { formatWithCommas } from '@/lib/utils'
-import { AlertCircle, ArrowLeft, Eye, ImageIcon, Save, X } from 'lucide-react'
-import Image from 'next/image'
+import { AlertCircle, ArrowLeft, Eye, Save } from 'lucide-react'
 import { useState } from 'react'
 
 type ProductAddResponse = {
@@ -37,6 +36,7 @@ type AddProductProps = {
 export default function AddProductPage({ categories }: AddProductProps) {
   const router = useRouter()
   const [images, setImages] = useState<string[]>([])
+  const [uploadedFiles, setUploadedFiles] = useState<File[]>([])
   // const [tags, setTags] = useState<string[]>([])
   // const [newTag, setNewTag] = useState('')
   const [isPublished, setIsPublished] = useState(true)
@@ -52,11 +52,6 @@ export default function AddProductPage({ categories }: AddProductProps) {
   /** 이미지가 최대 갯수내인지 확인 */
   const isImageCountValid = MAX_UPLOAD_IMAGES > images.length
 
-  // const formData = new FormData()
-  // for (let i = 0; i < files.length; i++) {
-  //   formData.append('files', files[i]) // key 동일하게 넣기(배열 형식)
-  // }
-
   const handleImageUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
     const files = e.target.files
     if (files) {
@@ -68,12 +63,11 @@ export default function AddProductPage({ categories }: AddProductProps) {
       const newImages = Array.from(files)
       const filesToAdd = newImages.slice(0, availableSlots)
       const imageDate = filesToAdd.map(file => URL.createObjectURL(file))
+      // 미리보기용 URL
       setImages([...images, ...imageDate])
+      // 업로드시 실질적으로 필요한 파일데이터
+      setUploadedFiles(prev => [...prev, ...filesToAdd])
     }
-  }
-
-  const removeImage = (index: number) => {
-    setImages(images.filter((_, i) => i !== index))
   }
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -81,6 +75,11 @@ export default function AddProductPage({ categories }: AddProductProps) {
     setIsFending(true)
 
     const formDataToSend = new FormData(e.currentTarget)
+
+    // 이미지들 formData에 추가
+    uploadedFiles.forEach(file => {
+      formDataToSend.append('productImages', file)
+    })
 
     const fieldsToParse = ['originalPrice', 'price', 'shippingFee']
     fieldsToParse.forEach(field => {
@@ -90,10 +89,6 @@ export default function AddProductPage({ categories }: AddProductProps) {
         formDataToSend.set(field, cleaned) // 다시 세팅
       }
     })
-
-    // if (avatarFile) {
-    //   formDataToSend.set('avatar', avatarFile) // 기존 파일 덮어쓰기
-    // }
 
     try {
       const res = await fetch('/api/admin/product', {
@@ -374,47 +369,16 @@ export default function AddProductPage({ categories }: AddProductProps) {
               </CardHeader>
               <CardContent>
                 <div className="space-y-4">
-                  <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
-                    {images.map((image, index) => (
-                      <div key={index} className="relative group">
-                        <Image
-                          src={image || '/placeholder.svg'}
-                          alt={`Product image ${index + 1}`}
-                          width={150}
-                          height={150}
-                          className="object-cover rounded-lg border"
-                        />
-                        <Button
-                          variant="destructive"
-                          size="sm"
-                          type="button"
-                          className="absolute top-2 right-2 opacity-0 group-hover:opacity-100 transition-opacity"
-                          onClick={() => removeImage(index)}>
-                          <X className="h-4 w-4" />
-                        </Button>
-                        {index === 0 && (
-                          <Badge className="absolute bottom-2 left-2 text-xs">
-                            메인
-                          </Badge>
-                        )}
-                      </div>
-                    ))}
-                    {isImageCountValid && (
-                      <label className="flex flex-col items-center justify-center w-full h-32 border-2 border-dashed border-gray-300 rounded-lg cursor-pointer hover:bg-gray-50">
-                        <ImageIcon className="h-8 w-8 text-gray-400 mb-2" />
-                        <span className="text-sm text-gray-500">
-                          이미지 추가
-                        </span>
-                        <input
-                          type="file"
-                          name="productImages"
-                          multiple
-                          accept="image/*"
-                          className="hidden"
-                          onChange={handleImageUpload}
-                        />
-                      </label>
-                    )}
+                  <div className="grid grid-2 sm:grid-3 lg:grid-4 gap-4">
+                    <ImagesEditor
+                      {...{
+                        images,
+                        setImages,
+                        IsShowAddImageButton: isImageCountValid,
+                        onImageUpload: handleImageUpload,
+                        size: 'md',
+                      }}
+                    />
                   </div>
                   <p className="text-sm text-gray-500">
                     첫 번째 이미지가 메인 이미지로 사용됩니다. 최대 10개까지

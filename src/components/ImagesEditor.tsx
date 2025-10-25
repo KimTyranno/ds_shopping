@@ -21,6 +21,21 @@ import { Expand, Plus, X } from 'lucide-react'
 import Image from 'next/image'
 import { Dispatch, SetStateAction, useState } from 'react'
 
+const SIZE_MAP = {
+  sm: {
+    box: 'w-20 h-20',
+    buttonBox: 'w-4 h-4',
+    buttonIcon: 11,
+    text: 'text-[10px]',
+  },
+  md: {
+    box: 'w-40 h-40',
+    buttonBox: 'w-6 h-6',
+    buttonIcon: 14,
+    text: 'text-[14px]',
+  },
+} as const
+
 function SortableImage({
   id,
   src,
@@ -28,6 +43,7 @@ function SortableImage({
   activeImageIndex,
   onClick,
   onRemove,
+  size,
 }: {
   id: string
   src: string
@@ -36,6 +52,7 @@ function SortableImage({
   setActiveImageIndex: (_index: number) => void
   onClick: (_index: number) => void
   onRemove: () => void
+  size: 'sm' | 'md'
 }) {
   const { attributes, listeners, setNodeRef, transform, transition } =
     useSortable({ id })
@@ -45,6 +62,8 @@ function SortableImage({
     transition,
   }
 
+  const s = SIZE_MAP[size]
+
   return (
     <div
       ref={setNodeRef}
@@ -52,14 +71,14 @@ function SortableImage({
       {...attributes}
       // ❌ listeners 제거
       onClick={() => onClick(index)}
-      className={`relative group flex-shrink-0 w-20 h-20 rounded-md overflow-hidden border-2 ${
+      className={`relative group flex-shrink-0 ${s.box} rounded-md overflow-hidden border-2 ${
         activeImageIndex === index ? 'border-blue-500' : 'border-gray-200'
       }`}>
       {/* 드래그 핸들 아이콘 영역 (예: 오른쪽 하단에) */}
       <div
         {...listeners}
-        className="absolute bottom-1 right-1 w-4 h-4 bg-gray-700 rounded cursor-move z-10 justify-items-center content-center">
-        <Expand size={11} className="rotate-45 text-white" />
+        className={`absolute bottom-1 right-1 ${s.buttonBox} bg-gray-700 rounded cursor-move z-10 justify-items-center content-center`}>
+        <Expand size={s.buttonIcon} className="rotate-45 text-white" />
       </div>
       <Image
         src={src}
@@ -72,7 +91,7 @@ function SortableImage({
         type="button"
         variant="destructive"
         size="icon"
-        className="absolute top-1 right-1 w-4 h-4 opacity-0 group-hover:opacity-100 transition"
+        className={`absolute top-1 right-1 ${s.buttonBox} opacity-0 group-hover:opacity-100 transition`}
         onClick={e => {
           e.stopPropagation() // 이벤트 버블링 방지(부모요소의 onClick호출방지)
           onRemove()
@@ -80,7 +99,8 @@ function SortableImage({
         <X size={10} />
       </Button>
       {index === 0 && (
-        <div className="absolute bottom-1 left-1 px-1.5 py-0.5 rounded bg-blue-600 text-[10px] font-medium text-white shadow-sm">
+        <div
+          className={`absolute bottom-1 left-1 px-1.5 py-0.5 rounded bg-blue-600 ${s.text} font-medium text-white shadow-sm`}>
           메인
         </div>
       )}
@@ -96,6 +116,7 @@ export default function ImagesEditor({
   IsShowAddImageButton = true,
   onImageUpload,
   className,
+  size = 'sm',
 }: {
   images: string[]
   setImages: Dispatch<SetStateAction<string[]>>
@@ -104,9 +125,11 @@ export default function ImagesEditor({
   IsShowAddImageButton?: boolean
   onImageUpload?: (_e: React.ChangeEvent<HTMLInputElement>) => void
   className?: string
+  size?: 'sm' | 'md'
 }) {
   const sensors = useSensors(useSensor(PointerSensor))
   const [activeImageIndex, setActiveImageIndex] = useState(0)
+  const s = SIZE_MAP[size]
 
   const handleDragEnd = (event: DragEndEvent) => {
     const { active, over } = event
@@ -171,10 +194,12 @@ export default function ImagesEditor({
               setActiveImageIndex={setActiveImageIndex}
               onClick={handleSetActiveImageIndex}
               onRemove={() => handleRemove(index)}
+              size={size}
             />
           ))}
           {IsShowAddImageButton && (
-            <label className="relative group flex-shrink-0 w-20 h-20 rounded-md overflow-hidden border-2 border-dashed border-gray-300 flex items-center justify-center hover:border-gray-400 cursor-pointer">
+            <label
+              className={`relative group flex-shrink-0 ${s.box} rounded-md overflow-hidden border-2 border-dashed border-gray-300 flex items-center justify-center hover:border-gray-400 hover:bg-gray-50 cursor-pointer`}>
               <input
                 type="file"
                 multiple
