@@ -19,7 +19,6 @@ import {
 import { Link } from '@/i18n/navigation'
 import {
   AlertTriangle,
-  Edit,
   Eye,
   ImageOff,
   MoreHorizontal,
@@ -30,9 +29,13 @@ import ProductStatusBadge from './StatusBadge'
 
 type ProductListTableProps = {
   products: ProductWithImage[]
+  onDeleteProduct: (_id: number) => Promise<void>
 }
 
-export default function ProductListTable({ products }: ProductListTableProps) {
+export default function ProductListTable({
+  products,
+  onDeleteProduct,
+}: ProductListTableProps) {
   return (
     <Table>
       <TableHeader>
@@ -117,11 +120,11 @@ export default function ProductListTable({ products }: ProductListTableProps) {
                       상세보기
                     </DropdownMenuItem>
                   </Link>
-                  <DropdownMenuItem className="cursor-pointer">
-                    <Edit className="mr-2 h-4 w-4" />
-                    수정
-                  </DropdownMenuItem>
-                  <DropdownMenuItem className="text-red-600 cursor-pointer">
+                  <DropdownMenuItem
+                    className="text-red-600 cursor-pointer"
+                    onClick={() =>
+                      void onDeleteProduct(Number(product.productId))
+                    }>
                     <Trash2 className="mr-2 h-4 w-4" />
                     삭제
                   </DropdownMenuItem>

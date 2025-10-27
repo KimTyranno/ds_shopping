@@ -2,6 +2,7 @@
 
 import { logger } from '@/lib/logger'
 import { createClient } from '@/lib/server'
+import { BucketName } from '@/types/enums'
 import { revalidatePath } from 'next/cache'
 
 export async function ChangeProductStatusAction(
@@ -32,4 +33,25 @@ export async function ChangeProductStatusAction(
   }
 
   revalidatePath(`/admin/products/list/${productId}`)
+}
+
+/** 상품 물리삭제 */
+export async function DeleteProduct(id: number) {
+  const supabase = await createClient()
+  const bucket = BucketName.ProductImages
+
+  const { data: existingImages } = (await supabase
+    .from('product_images')
+    .select('img_url')
+    .eq('product_id', id)) as {
+    data: { img_url: string }[]
+  }
+
+  const deleteUrls = existingImages.map(img => img.img_url)
+
+  // storage에서 삭제
+  await supabase.storage.from(bucket).remove(deleteUrls)
+
+  // 상품 삭제 (product_images는 cascade에 의해 삭제됨)
+  await supabase.from('products').delete().eq('product_id', id)
 }

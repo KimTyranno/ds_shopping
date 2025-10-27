@@ -24,6 +24,7 @@ type ProductListManagementProps = {
   setSelectedStatus: Dispatch<SetStateAction<string>>
   products?: ProductWithImage[]
   productsCounts: ProductsStatCounts
+  onDeleteProduct: (_id: number) => Promise<void>
 }
 
 // TODO: constants에서 가져와야함
@@ -41,6 +42,7 @@ export default function ProductListManagement({
   setSelectedStatus,
   products,
   productsCounts: { totalCount },
+  onDeleteProduct,
 }: ProductListManagementProps) {
   // 페이지네이션 계산
   const totalPages = Math.max(1, Math.ceil(totalCount / ITEMS_PER_PAGE))
@@ -80,7 +82,9 @@ export default function ProductListManagement({
               )}
             </div>
           ) : (
-            <ProductListTable {...{ products: currentProducts }} />
+            <ProductListTable
+              {...{ products: currentProducts, onDeleteProduct }}
+            />
           )}
         </div>
 

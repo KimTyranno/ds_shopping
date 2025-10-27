@@ -1,9 +1,12 @@
 'use client'
 
+import { DeleteProduct } from '@/app/[locale]/admin/products/list/[id]/actions'
 import {
   ProductsStatCounts,
   ProductWithImage,
 } from '@/app/[locale]/admin/products/list/page'
+import { logger } from '@/lib/logger'
+import Toast, { ToastTypes } from '@/lib/toast'
 import { useState } from 'react'
 import ProductListFilters from './Filters'
 import ProductListHeader from './Header'
@@ -24,6 +27,10 @@ export default function ProductsPage({
   const [selectedStatus, setSelectedStatus] = useState('all')
   const [activeTab, setActiveTab] = useState('all')
   const [currentPage, setCurrentPage] = useState(1)
+  const [toast, setToast] = useState<{
+    message: string
+    type: ToastTypes
+  } | null>(null)
 
   // 페이지 변경 시 첫 페이지로 리셋
   const handleFilterChange = () => {
@@ -53,8 +60,33 @@ export default function ProductsPage({
     return matchesSearch && matchesCategory && matchesStatus
   })
 
+  /** 상품 물리삭제 */
+  const handleDeleteProduct = async (id: number) => {
+    if (!confirm('해당 상품은 완전히 삭제됩니다.')) return
+    try {
+      await DeleteProduct(id)
+      setToast({
+        message: `상품이 삭제되었습니다.`,
+        type: 'success',
+      })
+    } catch (error) {
+      logger.error('상품 삭제 중 요류발생', error)
+      setToast({
+        message: `상품 삭제 중 오류가 발생했습니다.`,
+        type: 'error',
+      })
+    }
+  }
+
   return (
     <div className="space-y-6">
+      {toast?.message && toast?.type && (
+        <Toast
+          message={toast.message}
+          type={toast.type}
+          callback={() => setToast(null)}
+        />
+      )}
       {/* 페이지 헤더 */}
       <ProductListHeader />
 
@@ -88,6 +120,7 @@ export default function ProductsPage({
           setSelectedStatus,
           products: filteredProducts,
           productsCounts,
+          onDeleteProduct: handleDeleteProduct,
         }}
       />
     </div>
