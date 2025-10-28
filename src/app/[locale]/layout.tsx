@@ -2,6 +2,7 @@ import Footer from '@/components/Footer'
 import Header from '@/components/header'
 import { Toaster } from '@/components/ui/sonner'
 import { locales } from '@/i18n/routing'
+import { getCategories } from '@/lib/api/category'
 import { getCurrentUser } from '@/lib/auth'
 import ScrollToTop from '@/lib/scrollToTop'
 import { createTranslator, NextIntlClientProvider } from 'next-intl'
@@ -47,6 +48,7 @@ export default async function RootLayout({ children, params }: rootProps) {
   }
 
   const messages = await getMessages({ locale })
+  const categories = await getCategories()
 
   return (
     <html lang={locale}>
@@ -55,7 +57,7 @@ export default async function RootLayout({ children, params }: rootProps) {
           <AuthProvider user={user} />
           <Toaster />
           <ScrollToTop />
-          <Header />
+          <Header categories={categories} />
           <main className="min-h-screen">{children}</main>
           <Footer />
         </NextIntlClientProvider>

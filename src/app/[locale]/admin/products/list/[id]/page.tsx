@@ -3,8 +3,9 @@ import { logger } from '@/lib/logger'
 import { createClient } from '@/lib/server'
 import { getPublicUrls } from '@/lib/storage/getPublicUrls'
 import { BucketName, PRODUCT_STATUS_TYPE } from '@/types/enums'
-import { Categories, ProductImages, Products } from '@/types/tables'
+import { ProductImages, Products } from '@/types/tables'
 import { PostgrestError } from '@supabase/supabase-js'
+import { CategoryName } from '../../add/page'
 
 type ProductDetailReturnType = Products & {
   product_images: Pick<ProductImages, 'img_url' | 'img_order'>[]
@@ -74,8 +75,8 @@ export default async function AdminProductDetailPage({
 
   const { data: categoryData, error: categoryError } = (await supabase
     .from('categories')
-    .select('id, name')) as {
-    data: Categories[]
+    .select('id, name_ko')) as {
+    data: CategoryName[]
     error: PostgrestError | null
   }
 
@@ -107,8 +108,8 @@ export default async function AdminProductDetailPage({
     productId: data.product_id,
     categoryId: data.category_id,
     categoryName:
-      categoryData.find(category => category.id === data.category_id)?.name ||
-      '',
+      categoryData.find(category => category.id === data.category_id)
+        ?.name_ko || '',
     createdAt: data.created_at,
     deletedAt: data.deleted_at,
     description: data.description,

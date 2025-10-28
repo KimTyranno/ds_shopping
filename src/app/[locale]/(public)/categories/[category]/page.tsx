@@ -1,4 +1,3 @@
-import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardFooter } from '@/components/ui/card'
 import {
@@ -9,11 +8,12 @@ import {
   SelectValue,
 } from '@/components/ui/select'
 import { Link } from '@/i18n/navigation'
+import { createClient } from '@/lib/server'
+import { Products } from '@/types/tables'
+import { PostgrestError } from '@supabase/supabase-js'
 import { Filter, ShoppingCart, Star } from 'lucide-react'
-import { getTranslations } from 'next-intl/server'
-import Image from 'next/image'
+import { getLocale, getTranslations } from 'next-intl/server'
 import { notFound } from 'next/navigation'
-import { getProductsByCategory } from '../actions'
 
 const categoryNames: Record<string, string> = {
   electronics: '전자제품',
@@ -31,21 +31,36 @@ export default async function CategoryPage({
 }) {
   const { category } = await params
   const t = await getTranslations('category')
-  const tCategories = await getTranslations('categories')
   const tCommon = await getTranslations('common')
+  const locale = await getLocale()
 
   if (!categoryNames[category]) {
     notFound()
   }
 
-  const products = getProductsByCategory(category)
+  const supabase = await createClient()
+
+  const { data: categoryData, error: categoryError } = await supabase
+    .from('categories')
+    .select(`name_${locale}`)
+    .eq('slug', category)
+    .single<{ [key: string]: string }>()
+  if (categoryError) throw categoryError
+
+  const { data: products, error } = (await supabase
+    .from('products')
+    .select('*, categories!inner(slug)')
+    .eq('categories.slug', category)) as {
+    data: Products[]
+    error: PostgrestError | null
+  }
+  if (error) throw error
+  const categoryName = categoryData[`name_${locale}`]
 
   return (
     <div className="container mx-auto px-4 py-8">
       <div className="mb-8">
-        <h1 className="text-3xl font-bold mb-2">
-          {tCategories(`${category}.title`)}
-        </h1>
+        <h1 className="text-3xl font-bold mb-2">{categoryName}</h1>
         <p className="text-muted-foreground">
           {t('count', { count: products.length })}
         </p>
@@ -96,16 +111,16 @@ export default async function CategoryPage({
             className="group hover:shadow-lg transition-shadow">
             <CardContent className="p-0">
               <div className="relative">
-                <Link href={`/products/${product.id}`}>
-                  <Image
+                <Link href={`/products/${product.product_id}`}>
+                  {/* <Image
                     src={product.image || '/placeholder.svg'}
                     alt={product.name}
                     width={300}
                     height={300}
                     className="w-full h-64 object-cover rounded-t-lg group-hover:scale-105 transition-transform"
-                  />
+                  /> */}
                 </Link>
-                {product.badge && (
+                {/* {product.badge && (
                   <Badge
                     className="absolute top-3 left-3"
                     variant={
@@ -113,7 +128,7 @@ export default async function CategoryPage({
                     }>
                     {product.badge}
                   </Badge>
-                )}
+                )} */}
               </div>
 
               <div className="p-4">
@@ -127,7 +142,8 @@ export default async function CategoryPage({
                   <div className="flex items-center">
                     <Star className="w-4 h-4 fill-yellow-400 text-yellow-400" />
                     <span className="text-sm text-muted-foreground ml-1">
-                      {product.rating} ({product.reviews})
+                      1000
+                      {/* {product.rating} ({product.reviews}) */}
                     </span>
                   </div>
                 </div>
@@ -137,9 +153,9 @@ export default async function CategoryPage({
                     <span className="text-xl font-bold text-primary">
                       {product.price.toLocaleString() + tCommon('currency')}
                     </span>
-                    {product.originalPrice && (
+                    {product.original_price && (
                       <span className="text-sm text-muted-foreground line-through ml-2">
-                        {product.originalPrice.toLocaleString() +
+                        {product.original_price.toLocaleString() +
                           tCommon('currency')}
                       </span>
                     )}
