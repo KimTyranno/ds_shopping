@@ -1,9 +1,6 @@
 'use client'
 
-import {
-  Category,
-  CategoryWithProductsCount,
-} from '@/app/[locale]/admin/categories/page'
+import { CategoryWithProductsCount } from '@/app/[locale]/admin/categories/page'
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
@@ -21,11 +18,12 @@ import {
   TableHeader,
   TableRow,
 } from '@/components/ui/table'
+import { Categories } from '@/types/tables'
 import { Edit, MoreHorizontal, Trash2, TrendingUp } from 'lucide-react'
 
 type CategoriesTableProps = {
   categories: CategoryWithProductsCount[]
-  onEdit: (_category: Category) => void
+  onEdit: (_category: Categories) => void
   onDelete: (_id: number, _name: string) => Promise<void>
 }
 
@@ -50,8 +48,10 @@ export default function CategoriesTable({
           <Table>
             <TableHeader>
               <TableRow>
-                <TableHead>카테고리명</TableHead>
-                <TableHead className="hidden sm:table-cell">설명</TableHead>
+                <TableHead>카테고리명(한국어)</TableHead>
+                <TableHead>카테고리명(영어)</TableHead>
+                <TableHead>카테고리명(일본어)</TableHead>
+                <TableHead>슬러그</TableHead>
                 <TableHead>상품 수</TableHead>
                 {/* <TableHead className="hidden lg:table-cell">슬러그</TableHead> */}
                 <TableHead>상태</TableHead>
@@ -81,13 +81,23 @@ export default function CategoriesTable({
                                 />
                               </Button>
                             )} */}
-                        <span className="font-medium">{category.name}</span>
+                        <span>{category.name_ko}</span>
                       </div>
                     </div>
                   </TableCell>
-                  <TableCell className="hidden sm:table-cell">
-                    <div className="max-w-xs truncate text-sm text-gray-600">
-                      {category.description}
+                  <TableCell>
+                    <div className="flex items-center gap-2">
+                      <span>{category.name_en}</span>
+                    </div>
+                  </TableCell>
+                  <TableCell>
+                    <div className="flex items-center gap-2">
+                      <span>{category.name_ja}</span>
+                    </div>
+                  </TableCell>
+                  <TableCell>
+                    <div className="flex items-center gap-2">
+                      <span className="font-text-sm">/{category.slug}</span>
                     </div>
                   </TableCell>
                   <TableCell>
@@ -118,7 +128,7 @@ export default function CategoriesTable({
                         </DropdownMenuItem>
                         <DropdownMenuItem
                           onClick={() =>
-                            void onDelete(category.id, category.name)
+                            void onDelete(category.id, category.name_ko)
                           }
                           className="text-red-600">
                           <Trash2 className="mr-2 h-4 w-4" />

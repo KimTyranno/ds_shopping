@@ -11,6 +11,7 @@ import {
   NavigationMenuTrigger,
 } from '@/components/ui/navigation-menu'
 import { Link } from '@/i18n/navigation'
+import { CategoryItem } from '@/lib/api/category'
 import { ShoppingCart } from 'lucide-react'
 import { useTranslations } from 'next-intl'
 import { usePathname } from 'next/navigation'
@@ -20,85 +21,13 @@ import MobileSearchBar from './MobileSearchBar'
 import MobileSearchButton from './MobileSearchButton'
 import PcSearchBar from './PcSearchBar'
 
-export default function Header() {
+type HeaderProps = {
+  categories: CategoryItem[]
+}
+
+export default function Header({ categories }: HeaderProps) {
   const t = useTranslations()
   const pathname = usePathname()
-
-  const categories = [
-    {
-      key: 'electronics',
-      href: '/categories/electronics',
-      description: '스마트폰, 노트북, 태블릿 등',
-      icon: '📱',
-      items: [
-        { key: 'smartphones', href: '/categories/electronics/smartphones' },
-        { key: 'laptops', href: '/categories/electronics/laptops' },
-        { key: 'tablets', href: '/categories/electronics/tablets' },
-        { key: 'earphones', href: '/categories/electronics/earphones' },
-        { key: 'smartwatch', href: '/categories/electronics/smartwatch' },
-      ],
-    },
-    {
-      key: 'fashion',
-      href: '/categories/fashion',
-      icon: '👕',
-      items: [
-        { key: 'mens', href: '/categories/fashion/mens' },
-        { key: 'womens', href: '/categories/fashion/womens' },
-        { key: 'shoes', href: '/categories/fashion/shoes' },
-        { key: 'bags', href: '/categories/fashion/bags' },
-        { key: 'accessories', href: '/categories/fashion/accessories' },
-      ],
-    },
-    {
-      key: 'home',
-      href: '/categories/home',
-      icon: '🏠',
-      items: [
-        { key: 'furniture', href: '/categories/home/furniture' },
-        { key: 'interior', href: '/categories/home/interior' },
-        { key: 'kitchen', href: '/categories/home/kitchen' },
-        { key: 'living', href: '/categories/home/living' },
-        { key: 'bedding', href: '/categories/home/bedding' },
-      ],
-    },
-    {
-      key: 'books',
-      href: '/categories/books',
-      icon: '📚',
-      items: [
-        { key: 'novel', href: '/categories/books/novel' },
-        { key: 'self-help', href: '/categories/books/self-help' },
-        { key: 'computer', href: '/categories/books/computer' },
-        { key: 'cooking', href: '/categories/books/cooking' },
-        { key: 'travel', href: '/categories/books/travel' },
-      ],
-    },
-    {
-      key: 'sports',
-      href: '/categories/sports',
-      icon: '⚽',
-      items: [
-        { key: 'sportswear', href: '/categories/sports/sportswear' },
-        { key: 'sneakers', href: '/categories/sports/sneakers' },
-        { key: 'fitness', href: '/categories/sports/fitness' },
-        { key: 'outdoor', href: '/categories/sports/outdoor' },
-        { key: 'swimming', href: '/categories/sports/swimming' },
-      ],
-    },
-    {
-      key: 'beauty',
-      href: '/categories/beauty',
-      icon: '💄',
-      items: [
-        { key: 'skincare', href: '/categories/beauty/skincare' },
-        { key: 'makeup', href: '/categories/beauty/makeup' },
-        { key: 'haircare', href: '/categories/beauty/haircare' },
-        { key: 'perfume', href: '/categories/beauty/perfume' },
-        { key: 'mens', href: '/categories/beauty/mens' },
-      ],
-    },
-  ]
 
   if (pathname.includes('/admin')) return null
   return (
@@ -126,12 +55,12 @@ export default function Header() {
                   <div className="w-[800px] p-4">
                     <div className="grid grid-cols-3 gap-6">
                       {categories.map(category => (
-                        <div key={category.key} className="space-y-3">
+                        <div key={category.id} className="space-y-3">
                           <Link
-                            href={category.href}
+                            href={`/categories/${category.slug}`}
                             className="flex items-center gap-2 font-semibold text-lg hover:text-primary transition-colors">
-                            <span className="text-xl">{category.icon}</span>
-                            {t(`categories.${category.key}.title`)}
+                            {/* <span className="text-xl">{category.icon}</span> */}
+                            {category.name}
                           </Link>
                           {/* <div className="space-y-1">
                             {category.items.map(item => (

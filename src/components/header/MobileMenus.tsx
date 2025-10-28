@@ -9,6 +9,7 @@ import {
   SheetTrigger,
 } from '@/components/ui/sheet'
 import { Link } from '@/i18n/navigation'
+import { CategoryItem } from '@/lib/api/category'
 import { Separator } from '@radix-ui/react-separator'
 import {
   Award,
@@ -26,18 +27,8 @@ import LogoutButton from './LogoutButton'
 import MyPage from './MyPage'
 import UserInfo from './UserInfo'
 
-type category = {
-  key: string
-  href: string
-  icon: string
-  items: {
-    key: string
-    href: string
-  }[]
-}
-
 type MobileMenusProps = {
-  categories: category[]
+  categories: CategoryItem[]
 }
 
 const MobileMenus = ({ categories }: MobileMenusProps) => {
@@ -123,18 +114,16 @@ const MobileMenus = ({ categories }: MobileMenusProps) => {
               </div>
 
               {categories.map(category => (
-                <div key={category.key} className="ml-2">
+                <div key={category.id} className="ml-2">
                   <Link
-                    href={category.href}
+                    href={`/categories/${category.slug}`}
                     onClick={handleClose}
                     className="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-muted transition-colors">
-                    <span className="text-lg">{category.icon}</span>
+                    {/* <span className="text-lg">{category.icon}</span> */}
                     <div className="flex-1">
-                      <p className="font-medium text-sm">
-                        {t(`categories.${category.key}.title`)}
-                      </p>
+                      <p className="font-medium text-sm">{category.name}</p>
                       <p className="text-xs text-muted-foreground">
-                        {t(`categories.${category.key}.description`)}
+                        {category.description}
                       </p>
                     </div>
                   </Link>

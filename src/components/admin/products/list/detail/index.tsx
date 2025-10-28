@@ -1,5 +1,6 @@
 'use client'
 
+import { CategoryName } from '@/app/[locale]/admin/products/add/page'
 import { ChangeProductStatusAction } from '@/app/[locale]/admin/products/list/[id]/actions'
 import { ProductDetailType } from '@/app/[locale]/admin/products/list/[id]/page'
 import { Button } from '@/components/ui/button'
@@ -21,7 +22,6 @@ import { logger } from '@/lib/logger'
 import Toast, { ToastTypes } from '@/lib/toast'
 import { formatWithCommas } from '@/lib/utils'
 import { PRODUCT_STATUS } from '@/types/enums'
-import { Categories } from '@/types/tables'
 import {
   AlertTriangle,
   ArrowLeft,
@@ -99,7 +99,7 @@ export default function ProductDetailPage({
   categories,
 }: {
   product: ProductDetailType
-  categories: Categories[]
+  categories: Omit<CategoryName, 'status'>[]
 }) {
   const router = useRouter()
   const [isEditing, setIsEditing] = useState(false)
@@ -557,7 +557,7 @@ export default function ProductDetailPage({
                                 <SelectItem
                                   key={category.id}
                                   value={String(category.id)}>
-                                  {category.name}
+                                  {category.name_ko}
                                 </SelectItem>
                               ))}
                             </SelectContent>

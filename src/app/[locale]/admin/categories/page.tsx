@@ -1,15 +1,10 @@
 import CategoriesPage from '@/components/admin/categories'
 import { logger } from '@/lib/logger'
 import { createClient } from '@/lib/server'
+import { Categories } from '@/types/tables'
+import { PostgrestError } from '@supabase/supabase-js'
 
-export type Category = {
-  id: number
-  name: string
-  description: string
-  status: boolean
-}
-
-export type CategoryWithProductsCount = Category & {
+export type CategoryWithProductsCount = Categories & {
   products: {
     count: number
   }[]
@@ -17,17 +12,18 @@ export type CategoryWithProductsCount = Category & {
 
 export default async function AdminCategoriesPage() {
   const supabase = await createClient()
-  const { data, error } = await supabase
+  const { data: categories, error } = (await supabase
     .from('categories')
-    .select('id, name, description, status, products(count)')
-    .order('id', { ascending: true })
+    .select('*, products(count)')
+    .order('id', { ascending: true })) as {
+    data: CategoryWithProductsCount[]
+    error: PostgrestError | null
+  }
 
   if (error) {
     logger.error('관리자페이지 카테고리목록 불러오기에서 에러발생', error)
     throw error
   }
-
-  const categories: CategoryWithProductsCount[] = data ?? []
 
   return <CategoriesPage categories={categories} />
 }

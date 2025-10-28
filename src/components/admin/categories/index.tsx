@@ -4,12 +4,10 @@ import {
   deleteCategoryAction,
   saveCategoryAction,
 } from '@/app/[locale]/admin/categories/actions'
-import {
-  Category,
-  CategoryWithProductsCount,
-} from '@/app/[locale]/admin/categories/page'
+import { CategoryWithProductsCount } from '@/app/[locale]/admin/categories/page'
 import { usePathname } from '@/i18n/navigation'
 import Toast, { ToastTypes } from '@/lib/toast'
+import { Categories } from '@/types/tables'
 import { useActionState, useEffect, useState } from 'react'
 import CategoriesDialog from './Dialog'
 import CategoriesHeader from './Header'
@@ -23,15 +21,20 @@ type CategoriesListProps = {
 export default function CategoriesPage({ categories }: CategoriesListProps) {
   const pathname = usePathname()
   const [dialogOpen, setDialogOpen] = useState(false)
-  const [editingCategory, setEditingCategory] = useState<Category | null>(null)
+  const [editingCategory, setEditingCategory] = useState<Categories | null>(
+    null,
+  )
   const [state, formAction] = useActionState(saveCategoryAction, {
     success: false,
     errors: {
+      slug: '',
       name: '',
     },
   })
   // state.errors.name이 있을때 dialog를 닫았다 다시 열어도 남아있어서 에러를 별도 state로 관리
-  const [error, setError] = useState('')
+  const [error, setError] = useState<{ slug?: string; name?: string } | null>(
+    null,
+  )
   const [toast, setToast] = useState<{
     message: string
     type: ToastTypes
@@ -45,7 +48,7 @@ export default function CategoriesPage({ categories }: CategoriesListProps) {
   //   )
   // }
 
-  const handleEdit = (category: Category) => {
+  const handleEdit = (category: Categories) => {
     // focus trap과 드롭다운 컴포넌트의 unmount 타이밍 충돌방지 (setTimeout 으로도 해결가능)
     requestAnimationFrame(() => {
       setEditingCategory(category)
@@ -60,7 +63,7 @@ export default function CategoriesPage({ categories }: CategoriesListProps) {
 
   const handleCancel = () => {
     setDialogOpen(false)
-    setError('')
+    setError(null)
   }
 
   const handleDelete = async (id: number, name: string) => {
@@ -94,14 +97,14 @@ export default function CategoriesPage({ categories }: CategoriesListProps) {
 
   useEffect(() => {
     // 서버액션에서 ...prevState 안하고 그냥 이렇게함
-    if (state && 'errors' in state && state.errors?.name) {
-      setError(state.errors.name)
+    if (state && 'errors' in state) {
+      setError({ name: state.errors.name, slug: state.errors.slug })
     }
 
     if (state.success) {
       // 문제가 없으면 다이얼로그 닫음
       setDialogOpen(false)
-      setError('')
+      setError(null)
     }
   }, [state])
 

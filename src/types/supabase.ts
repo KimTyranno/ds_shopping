@@ -100,23 +100,38 @@ export type Database = {
       categories: {
         Row: {
           created_at: string
-          description: string | null
+          description_en: string | null
+          description_ja: string | null
+          description_ko: string | null
           id: number
-          name: string
+          name_en: string | null
+          name_ja: string | null
+          name_ko: string
+          slug: string
           status: boolean
         }
         Insert: {
           created_at?: string
-          description?: string | null
+          description_en?: string | null
+          description_ja?: string | null
+          description_ko?: string | null
           id?: number
-          name: string
+          name_en?: string | null
+          name_ja?: string | null
+          name_ko: string
+          slug?: string
           status?: boolean
         }
         Update: {
           created_at?: string
-          description?: string | null
+          description_en?: string | null
+          description_ja?: string | null
+          description_ko?: string | null
           id?: number
-          name?: string
+          name_en?: string | null
+          name_ja?: string | null
+          name_ko?: string
+          slug?: string
           status?: boolean
         }
         Relationships: []
