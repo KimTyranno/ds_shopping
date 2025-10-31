@@ -4,8 +4,8 @@ import { createClient } from '@/lib/server'
 import { getPublicUrlRecord } from '@/lib/storage/getPublicUrls'
 import { BucketName, PRODUCT_STATUS_TYPE } from '@/types/enums'
 import {
-  FunctionProductsStatCountsReturns,
-  FunctionProductsWithImageReturns,
+  ProductsStatCountsResult,
+  ProductsWithImageResult,
 } from '@/types/functions'
 import { PostgrestError } from '@supabase/supabase-js'
 
@@ -45,7 +45,7 @@ export default async function AdminProductsPage() {
       limit_count: pageSize,
       offset_count: (page - 1) * pageSize,
     },
-  )) as RpcResponse<FunctionProductsWithImageReturns>
+  )) as RpcResponse<ProductsWithImageResult>
 
   if (error) {
     logger.error('관리자페이지 상품목록 불러오기에서 에러발생', error)
@@ -54,7 +54,7 @@ export default async function AdminProductsPage() {
 
   const { data: counts, error: countError } = (await supabase.rpc(
     'get_products_count_stats',
-  )) as RpcResponse<FunctionProductsStatCountsReturns>
+  )) as RpcResponse<ProductsStatCountsResult>
 
   if (countError) {
     logger.error(
