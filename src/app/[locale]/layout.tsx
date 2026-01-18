@@ -30,6 +30,21 @@ export async function generateMetadata({
   return {
     title: t('title'),
     description: t('description'),
+
+    // iOS 대응
+    appleWebApp: {
+      capable: true,
+      statusBarStyle: 'default',
+      title: t('title'),
+    },
+  }
+}
+
+// PWA 설정
+export function generateViewport() {
+  return {
+    viewport: 'width=device-width, initial-scale=1',
+    themeColor: '#000000',
   }
 }
 
@@ -51,7 +66,14 @@ export default async function RootLayout({ children, params }: rootProps) {
   const categories = await getCategories()
 
   return (
-    <html lang={locale}>
+    // hydration warning 방지
+    <html lang={locale} suppressHydrationWarning>
+      <head>
+        {/* PWA Manifest */}
+        <link rel="manifest" href="/manifest.json" />
+        {/* Apple 홈화면 아이콘 */}
+        <link rel="apple-touch-icon" href="/icons/192.png" />
+      </head>
       <body className={inter.className}>
         <NextIntlClientProvider locale={locale} messages={messages}>
           <AuthProvider user={user} />
