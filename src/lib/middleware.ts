@@ -36,6 +36,16 @@ export async function updateSession(
     data: { user },
   } = await supabase.auth.getUser()
 
+  const isPublicFile =
+    request.nextUrl.pathname.startsWith('/manifest.json') ||
+    request.nextUrl.pathname.startsWith('/favicon.ico') ||
+    request.nextUrl.pathname.startsWith('/icons/')
+
+  if (isPublicFile) {
+    // 미들웨어 통과, 리다이렉트 하지 않음
+    return NextResponse.next()
+  }
+
   // locale을 제거한 경로 추출
   const localePrefixPattern = new RegExp(`^/(${locales.join('|')})`)
   // locale만 있는 경로(/en, /ko)라면 빈문자열이 되니까 루트경로(/)로 대체
