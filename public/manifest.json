@@ -1,7 +1,7 @@
 {
   "name": "DS Shopping",
   "short_name": "DSShop",
-  "start_url": "/",
+  "start_url": "/ko",
   "display": "standalone",
   "background_color": "#ffffff",
   "theme_color": "#000000",
