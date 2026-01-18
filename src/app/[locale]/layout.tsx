@@ -68,6 +68,14 @@ export default async function RootLayout({ children, params }: rootProps) {
   return (
     // hydration warning 방지
     <html lang={locale} suppressHydrationWarning>
+      <head>
+        {/* 절대경로 /manifest.json */}
+        {/* PWA Manifest */}
+        <link rel="manifest" href="/manifest.webmanifest" />
+        <meta name="theme-color" content="#000000" />
+        {/* Apple 홈화면 아이콘 */}
+        <link rel="apple-touch-icon" href="/icons/192.png" />
+      </head>
       <body className={inter.className}>
         <NextIntlClientProvider locale={locale} messages={messages}>
           <AuthProvider user={user} />
