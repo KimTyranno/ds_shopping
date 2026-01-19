@@ -35,7 +35,7 @@ export function PWAInstallButton() {
     await deferredPrompt.prompt()
     const { outcome } = await deferredPrompt.userChoice
 
-    // 필요하면 분석용 로그
+    // 분석용 로그
     console.log('PWA install outcome:', outcome)
 
     deferredPrompt = null
@@ -44,5 +44,5 @@ export function PWAInstallButton() {
 
   if (!canInstall) return null
 
-  return <button onClick={void install()}>앱 설치</button>
+  return <button onClick={() => void install()}>앱 설치</button>
 }

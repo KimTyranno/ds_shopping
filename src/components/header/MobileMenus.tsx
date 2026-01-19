@@ -22,6 +22,7 @@ import {
 } from 'lucide-react'
 import { useTranslations } from 'next-intl'
 import { useState } from 'react'
+import { PWAInstallButton } from '../PWAInstallButton'
 import LanguageSwitch from './LanguageSwich'
 import LogoutButton from './LogoutButton'
 import MyPage from './MyPage'
@@ -159,6 +160,7 @@ const MobileMenus = ({ categories }: MobileMenusProps) => {
               <Headphones className="h-5 w-5 text-muted-foreground" />
               <span className="font-medium">{t('common.support')}</span>
             </Link>
+            <PWAInstallButton />
 
             <LogoutButton handleClose={handleClose} />
           </div>
