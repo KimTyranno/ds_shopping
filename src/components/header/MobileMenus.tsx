@@ -153,6 +153,7 @@ const MobileMenus = ({ categories }: MobileMenusProps) => {
 
           {/* 하단 메뉴 */}
           <div className="border-t pt-4 mt-4">
+            <PWAInstallButton />
             <Link
               href="/support"
               onClick={handleClose}
@@ -160,7 +161,6 @@ const MobileMenus = ({ categories }: MobileMenusProps) => {
               <Headphones className="h-5 w-5 text-muted-foreground" />
               <span className="font-medium">{t('common.support')}</span>
             </Link>
-            <PWAInstallButton />
 
             <LogoutButton handleClose={handleClose} />
           </div>
