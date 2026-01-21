@@ -12,6 +12,7 @@ import { notFound } from 'next/navigation'
 import type React from 'react'
 import AuthProvider from './AuthProvider'
 import './globals.css'
+import { PWAListener } from './PWAProvider'
 
 export async function generateMetadata({
   params,
@@ -77,12 +78,14 @@ export default async function RootLayout({ children, params }: rootProps) {
       </head>
       <body className={inter.className}>
         <NextIntlClientProvider locale={locale} messages={messages}>
-          <AuthProvider user={user} />
-          <Toaster />
-          <ScrollToTop />
-          <Header categories={categories} />
-          <main className="min-h-screen">{children}</main>
-          <Footer />
+          <PWAListener>
+            <AuthProvider user={user} />
+            <Toaster />
+            <ScrollToTop />
+            <Header categories={categories} />
+            <main className="min-h-screen">{children}</main>
+            <Footer />
+          </PWAListener>
         </NextIntlClientProvider>
       </body>
     </html>

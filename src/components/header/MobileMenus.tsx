@@ -59,6 +59,8 @@ const MobileMenus = ({ categories }: MobileMenusProps) => {
         </SheetHeader>
 
         <div className="flex flex-col h-full">
+          <PWAInstallButton />
+
           {/* 언어 전환 (모바일) */}
           <div className="mt-4 p-3 bg-muted/50 rounded-lg">
             <div className="flex items-center justify-between">
@@ -153,7 +155,6 @@ const MobileMenus = ({ categories }: MobileMenusProps) => {
 
           {/* 하단 메뉴 */}
           <div className="border-t pt-4 mt-4">
-            <PWAInstallButton />
             <Link
               href="/support"
               onClick={handleClose}

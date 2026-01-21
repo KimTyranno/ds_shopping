@@ -1,48 +1,26 @@
 'use client'
 
-import { useEffect, useState } from 'react'
-
-let deferredPrompt: BeforeInstallPromptEvent | null = null
-
-interface BeforeInstallPromptEvent extends Event {
-  prompt: () => Promise<void>
-  userChoice: Promise<{
-    outcome: 'accepted' | 'dismissed'
-    platform: string
-  }>
-}
+import { usePWAStore } from '@/lib/pwaStore'
 
 export function PWAInstallButton() {
-  const [canInstall, setCanInstall] = useState(false)
+  const deferredPrompt = usePWAStore(state => state.deferredPrompt)
+  const setDeferredPrompt = usePWAStore(state => state.setDeferredPrompt)
 
-  useEffect(() => {
-    const handler = (e: Event) => {
-      e.preventDefault()
-      deferredPrompt = e as BeforeInstallPromptEvent
-      setCanInstall(true)
-    }
-
-    window.addEventListener('beforeinstallprompt', handler)
-
-    return () => {
-      window.removeEventListener('beforeinstallprompt', handler)
-    }
-  }, [])
+  if (!deferredPrompt) return null
 
   const install = async () => {
-    if (!deferredPrompt) return
-
     await deferredPrompt.prompt()
     const { outcome } = await deferredPrompt.userChoice
 
     // 분석용 로그
     console.log('PWA install outcome:', outcome)
 
-    deferredPrompt = null
-    setCanInstall(false)
+    setDeferredPrompt(null)
   }
 
-  if (!canInstall) return null
-
-  return <button onClick={() => void install()}>앱 설치</button>
+  return (
+    <button className="cursor-pointer" onClick={() => void install()}>
+      앱 설치
+    </button>
+  )
 }
