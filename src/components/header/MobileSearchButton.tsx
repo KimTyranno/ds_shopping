@@ -1,6 +1,6 @@
 'use client'
 
-import useStore from '@/lib/store'
+import { useStore } from '@/lib/store'
 import { Search } from 'lucide-react'
 import { Button } from '../ui/button'
 

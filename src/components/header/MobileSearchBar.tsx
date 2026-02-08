@@ -1,7 +1,7 @@
 'use client'
 
 import { useRouter } from '@/i18n/navigation'
-import useStore from '@/lib/store'
+import { useStore } from '@/lib/store'
 import { Search } from 'lucide-react'
 import { useTranslations } from 'next-intl'
 import { Input } from '../ui/input'

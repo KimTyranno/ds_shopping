@@ -9,7 +9,7 @@ import {
 } from '@/components/ui/dropdown-menu'
 import { Link, useRouter } from '@/i18n/navigation'
 import { createClient } from '@/lib/client'
-import useStore from '@/lib/store'
+import { useProductsStore, useStore } from '@/lib/store'
 import { User } from 'lucide-react'
 import { useTranslations } from 'next-intl'
 import AuthMenu from './AuthMenu'
@@ -18,10 +18,12 @@ export default function AuthButton() {
   const t = useTranslations()
   const router = useRouter()
   const user = useStore(state => state.user)
+  const { clearAllCache } = useProductsStore()
 
   const signOut = async () => {
     // 'use server'
 
+    clearAllCache()
     const supabase = createClient()
     await supabase.auth.signOut()
     router.push('/login')

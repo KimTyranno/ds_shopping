@@ -416,6 +416,16 @@ export type Database = {
           total_count: number
         }[]
       }
+      get_products_with_main_image_cursor: {
+        Args: { category_id?: number; last_id?: number; limit_count?: number }
+        Returns: {
+          main_img_url: string
+          name: string
+          original_price: number
+          price: number
+          product_id: number
+        }[]
+      }
       get_products_with_main_image_paginated: {
         Args: { limit_count: number; offset_count: number }
         Returns: {

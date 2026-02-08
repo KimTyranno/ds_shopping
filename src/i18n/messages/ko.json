@@ -592,6 +592,8 @@
     "view_detail": "상세보기",
     "add_to_cart": "장바구니",
     "discount": "{percent}% 할인",
+    "loading": "불러오는 중...",
+    "noMoreProducts": "더 이상 상품이 없습니다.",
     "empty": {
       "title": "해당 카테고리에 상품이 없습니다.",
       "nobest_products": "베스트 상품이 없습니다.",

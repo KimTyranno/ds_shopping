@@ -592,6 +592,8 @@
     "view_detail": "View Details",
     "add_to_cart": "Add to Cart",
     "discount": "{percent}% off",
+    "loading": "Loading...",
+    "noMoreProducts": "There are no more products.",
     "empty": {
       "title": "No products found in this category.",
       "nobest_products": "No best products available.",

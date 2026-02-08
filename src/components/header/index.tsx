@@ -15,7 +15,6 @@ import { CategoryItem } from '@/lib/api/category'
 import { ShoppingCart } from 'lucide-react'
 import { useTranslations } from 'next-intl'
 import { usePathname } from 'next/navigation'
-import { PWAInstallButton } from '../PWAInstallButton'
 import LanguageSwitch from './LanguageSwich'
 import MobileMenus from './MobileMenus'
 import MobileSearchBar from './MobileSearchBar'
@@ -44,7 +43,6 @@ export default function Header({ categories }: HeaderProps) {
             </div>
             <span className="font-bold text-xl">{t('common.logo')}</span>
           </Link>
-          <PWAInstallButton />
 
           {/* 데스크톱 네비게이션 */}
           <NavigationMenu className="hidden md:flex">

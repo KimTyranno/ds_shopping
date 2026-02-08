@@ -2,7 +2,7 @@
 
 import { UserWithProfile } from '@/lib/auth'
 import { createClient } from '@/lib/client'
-import useStore from '@/lib/store'
+import { useStore } from '@/lib/store'
 import { useEffect } from 'react'
 
 export default function AuthProvider({

@@ -10,7 +10,7 @@ import {
 } from '@/components/ui/dropdown-menu'
 import { Input } from '@/components/ui/input'
 import { Link } from '@/i18n/navigation'
-import useStore from '@/lib/store'
+import { useStore } from '@/lib/store'
 import {
   Bell,
   LogOut,

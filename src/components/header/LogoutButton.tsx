@@ -1,7 +1,7 @@
 'use client'
 
 import { createClient } from '@/lib/client'
-import useStore from '@/lib/store'
+import { useProductsStore, useStore } from '@/lib/store'
 import useLocalePath from '@/lib/useLocalePath'
 import { LogOut } from 'lucide-react'
 import { useTranslations } from 'next-intl'
@@ -14,6 +14,7 @@ type LogoutButtonProps = {
 const LogoutButton = (props: LogoutButtonProps) => {
   const t = useTranslations()
   const user = useStore(state => state.user)
+  const { clearAllCache } = useProductsStore()
   const router = useRouter()
   const path = useLocalePath()
 
@@ -21,8 +22,15 @@ const LogoutButton = (props: LogoutButtonProps) => {
 
   const signOut = async () => {
     const supabase = createClient()
+
+    // 캐시 초기화
+    clearAllCache()
+
+    // 2. supabase 로그아웃
     await supabase.auth.signOut()
     props.handleClose()
+
+    // 로그인 페이지로 이동
     router.push(path('/login'))
   }
 

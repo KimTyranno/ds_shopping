@@ -3,7 +3,7 @@
 import { Button } from '@/components/ui/button'
 import { ScrollArea } from '@/components/ui/scroll-area'
 import { Link } from '@/i18n/navigation'
-import useStore from '@/lib/store'
+import { useStore } from '@/lib/store'
 import { cn } from '@/lib/utils'
 import {
   BarChart3,
