@@ -13,6 +13,7 @@ import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { Separator } from '@/components/ui/separator'
 import { Link, usePathname, useRouter } from '@/i18n/navigation'
+import { createClient } from '@/lib/client'
 import Toast, { getToastType } from '@/lib/toast'
 import { cn } from '@/lib/utils'
 import { CircleAlert, MailCheck } from 'lucide-react'
@@ -53,6 +54,19 @@ export default function LoginPage() {
   const messageType = searchParams.get('messageType')
   const router = useRouter()
   const pathname = usePathname()
+  const supabase = createClient()
+
+  /** 카카오 로그인 */
+  const loginWithKakao = async () => {
+    const { error } = await supabase.auth.signInWithOAuth({
+      provider: 'kakao',
+      options: {
+        redirectTo: `${process.env.NEXT_PUBLIC_BASE_URL}/auth/callback`,
+      },
+    })
+
+    if (error) console.error(error)
+  }
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
@@ -138,6 +152,20 @@ export default function LoginPage() {
                     {tLogin('forgot_password')}
                   </Link>
                 </p>
+              </div>
+
+              {/* Kakao 로그인 버튼 추가 */}
+              <div className="mt-6 flex justify-center items-center">
+                <Button
+                  onClick={() => void loginWithKakao()}
+                  className="p-0 bg-transparent" // 이미지 크기 맞추고 스타일 없애기
+                >
+                  <img
+                    src="/icons/kakao_login_medium_wide_ko.png"
+                    alt="kakao_login_button"
+                    className="w-full h-auto"
+                  />
+                </Button>
               </div>
             </div>
           </CardContent>
